@@ -7,25 +7,21 @@ import ssr.gameObjs.ObjHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SoulTab extends CreativeTabs 
-{
+public class SoulTab extends CreativeTabs {
 
-	public SoulTab() 
-	{
+	public SoulTab() {
 		super("Soul Shards Reborn");
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ItemStack getIconItemStack() 
-	{
+	public ItemStack getIconItemStack() {
 		return new ItemStack(ObjHandler.sShard, 1, 6);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem() 
-	{
+	public Item getTabIconItem() {
 		return null;
 	}
 }

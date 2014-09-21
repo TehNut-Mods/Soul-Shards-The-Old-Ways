@@ -1,9 +1,8 @@
 package ssr;
 
+import static ssr.SSRCore.MODID;
 import java.io.File;
-
 import org.apache.logging.log4j.Logger;
-
 import ssr.config.MobBlackList;
 import ssr.config.SoulConfig;
 import ssr.events.SoulEvents;
@@ -20,49 +19,41 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = SSRCore.ID, name = SSRCore.Name, version = SSRCore.Version)
-
-public class SSRCore 
-{
+@Mod(modid = SSRCore.MODID, name = SSRCore.MOD_NAME, version = SSRCore.MOD_VERSION, guiFactory = "ssr.guiFactory")
+public class SSRCore {
 	@Instance("SSR")
 	public static SSRCore instance;
-	
-	public static final String ID = "SSR";
-	public static final String Name = "Soul Shards: Reborn";
-	public static final String Version = "Alpha 0.9e";
-	
+	public static final String MODID = "SSR";
+	public static final String MOD_NAME = "Soul Shards: Reborn";
+	public static final String MOD_VERSION = "Alpha 0.9e";
 	public static Logger SoulLog = FMLLog.getLogger();
-	
-	String configDir;
-	
+
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
-		configDir = event.getModConfigurationDirectory() + "/Soul Shards Reborn/";
-		SoulConfig.init(new File(configDir + "Main.cfg"));
+	public void preInit(FMLPreInitializationEvent event) {
+		SoulConfig.load(event);
 		TierHandling.init();
 		ObjHandler.init();
 		SoulEvents.init();
 	}
-	
+
 	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
+	public void init(FMLInitializationEvent event) {
+
 	}
-	
+
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event)
-	{	
+	public void postInit(FMLPostInitializationEvent event) {
 		SoulLog.info("SSR: Mod Loaded!");
 	}
-	
+
 	@EventHandler
-	public void loadWorld(FMLServerStartingEvent event)
-	{
+	public void loadWorld(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandKillMobs());
 		DynamicMobMapping.init(event.getServer().getEntityWorld());
-		SSRCore.SoulLog.info("SSR: Mapped a total of " + DynamicMobMapping.entityList.size() + " entities.");
-		MobBlackList.init(new File(configDir + "Entity Blacklist.cfg"));
+		SSRCore.SoulLog.info("SSR: Mapped a total of "
+				+ DynamicMobMapping.entityList.size() + " entities.");
+		MobBlackList.init(new File(SoulConfig.configDirectory
+				+ "/Entity Blacklist.cfg"));
 		ssr.utils.Utils.hideItems();
 	}
 }
