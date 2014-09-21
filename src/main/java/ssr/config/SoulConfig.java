@@ -1,6 +1,8 @@
 package ssr.config;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -33,6 +35,43 @@ public class SoulConfig {
 
 	public static File configDirectory;
 
+	public static class Section {
+		public final String name;
+
+		public Section(String name, String lang) {
+			this.name = name;
+			register();
+		}
+
+		private void register() {
+			sections.add(this);
+		}
+
+		public String lc() {
+			return name.toLowerCase();
+		}
+	}
+
+	public static final List<Section> sections;
+	static {
+		sections = new ArrayList<Section>();
+	}
+
+	public static final Section sectionEnchant = new Section("Enchantments",
+			"Enchantment IDs");
+	public static final Section sectionMisc = new Section("General Settings",
+			"General Settings");
+	public static final Section sectionTier1 = new Section("Tier 1 Settings",
+			"Tier 1 Settings");
+	public static final Section sectionTier2 = new Section("Tier 2 Settings",
+			"Tier 2 Settings");
+	public static final Section sectionTier3 = new Section("Tier 3 Settings",
+			"Tier 3 Settings");
+	public static final Section sectionTier4 = new Section("Tier 4 Settings",
+			"Tier 4 Settings");
+	public static final Section sectionTier5 = new Section("Tier 5 Settings",
+			"Tier 5 Settings");
+
 	public static void load(FMLPreInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new SoulConfig());
 		configDirectory = new File(event.getModConfigurationDirectory()
@@ -40,7 +79,7 @@ public class SoulConfig {
 		if (!configDirectory.exists()) {
 			configDirectory.mkdir();
 		}
-		File configFile = new File(configDirectory, "SSR.cfg");
+		File configFile = new File(configDirectory, SSRCore.MOD_NAME.replace(":", "") + ".cfg");
 		config = new Configuration(configFile);
 		syncConfig();
 	}
@@ -55,25 +94,27 @@ public class SoulConfig {
 
 	public static void syncConfig() {
 		try {
-			disallowMobs = config.get("Misc", "Peaceful Mobs only?", false)
-					.getBoolean(false);
-			canAbsorbSpawners = config.get("Misc", "Absorb Spawners?", true)
-					.getBoolean(true);
-			easyVanillaAbsorb = config
-					.get("Misc", "Absorb any spawner?", false)
-					.getBoolean(false);
-			requireOwnerOnline = config.get("Misc", "Player online?", false)
-					.getBoolean(false);
-			vanillaBonus = config.get("Misc", "Spawner Bonus", 200).getInt(200);
-			exceedMaxNumSpawns = config.get("Misc", "Spawn over maximum?",
-					false).getBoolean(false);
-			maxNumSpawns = config.get("Misc", "Maximum Alive Spawns?", 80)
-					.getInt(80);
-			soulStealerID = config.get("IDs", "Soul Stealer enchant ID", 95)
-					.getInt();
-			soulStealerWeight = config.get("Misc",
+
+			soulStealerID = config.get("Enchantments",
+					"Soul Stealer enchant ID", 95).getInt();
+			soulStealerWeight = config.get("Enchantments",
 					"The probability of the Soul Stealer enchant", 5).getInt(5);
-			enableEndStoneRecipe = config.get("Misc",
+
+			disallowMobs = config.get("General Settings",
+					"Peaceful Mobs only?", false).getBoolean(false);
+			canAbsorbSpawners = config.get("General Settings",
+					"Absorb Spawners?", true).getBoolean(true);
+			easyVanillaAbsorb = config.get("General Settings",
+					"Absorb any spawner?", false).getBoolean(false);
+			requireOwnerOnline = config.get("General Settings",
+					"Player online?", false).getBoolean(false);
+			vanillaBonus = config.get("General Settings", "Spawner Bonus", 200)
+					.getInt(200);
+			exceedMaxNumSpawns = config.get("General Settings",
+					"Spawn over maximum?", false).getBoolean(false);
+			maxNumSpawns = config.get("General Settings",
+					"Maximum Alive Spawns?", 80).getInt(80);
+			enableEndStoneRecipe = config.get("General Settings",
 					"Enable End Stone Recipe", false).getBoolean(false);
 
 			coolDown[0] = config.get("Tier 1 Settings",
@@ -150,30 +191,6 @@ public class SoulConfig {
 					"Correct dimension?", false).getBoolean(false);
 			killReq[4] = config.get("Tier 5 Settings",
 					"Klls required (Greater than Tier 4)", 1024).getInt(1024);
-
-			if (maxNumSpawns > 150)
-				maxNumSpawns = 80;
-
-			for (int i = 0; i < coolDown.length; i++) {
-				if (coolDown[i] < 2)
-					coolDown[i] = 2;
-				if (coolDown[i] > 60)
-					coolDown[i] = 60;
-			}
-
-			for (int i = 0; i < numMobs.length; i++) {
-				if (numMobs[i] < 1)
-					numMobs[i] = 1;
-
-				if (exceedMaxNumSpawns)
-					if (numMobs[i] > maxNumSpawns)
-						numMobs[i] = maxNumSpawns;
-					else if (numMobs[i] > 6)
-						numMobs[i] = 6;
-			}
-
-			if (soulStealerWeight > 10 || soulStealerWeight < 1)
-				soulStealerWeight = 5;
 
 			SSRCore.SoulLog.info("SSR: Loaded Main configuration file.");
 

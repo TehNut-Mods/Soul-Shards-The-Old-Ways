@@ -25,12 +25,38 @@ public class SSRCore {
 	public static SSRCore instance;
 	public static final String MODID = "SSR";
 	public static final String MOD_NAME = "Soul Shards: Reborn";
-	public static final String MOD_VERSION = "Alpha 0.9e";
+	public static final String MOD_VERSION = "Alpha 1.0";
 	public static Logger SoulLog = FMLLog.getLogger();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		SoulConfig.load(event);
+
+		if (SoulConfig.maxNumSpawns > 150)
+			SoulConfig.maxNumSpawns = 80;
+
+		for (int i = 0; i < SoulConfig.coolDown.length; i++) {
+			if (SoulConfig.coolDown[i] < 2)
+				SoulConfig.coolDown[i] = 2;
+			if (SoulConfig.coolDown[i] > 60)
+				SoulConfig.coolDown[i] = 60;
+		}
+
+		for (int i = 0; i < SoulConfig.numMobs.length; i++) {
+			if (SoulConfig.numMobs[i] < 1)
+				SoulConfig.numMobs[i] = 1;
+
+			if (SoulConfig.exceedMaxNumSpawns)
+				if (SoulConfig.numMobs[i] > SoulConfig.maxNumSpawns)
+					SoulConfig.numMobs[i] = SoulConfig.maxNumSpawns;
+				else if (SoulConfig.numMobs[i] > 6)
+					SoulConfig.numMobs[i] = 6;
+		}
+
+		if (SoulConfig.soulStealerWeight > 10
+				|| SoulConfig.soulStealerWeight < 1)
+			SoulConfig.soulStealerWeight = 5;
+
 		TierHandling.init();
 		ObjHandler.init();
 		SoulEvents.init();
