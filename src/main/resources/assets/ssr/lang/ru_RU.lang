@@ -1,0 +1,15 @@
+empty_sc.name=Пустая клетка для душ
+inactive_sc.name=Неактивная клетка для душ
+active_sc.name=Активная клетка для душ
+
+unboundSS.name=Непривязанный осколок души
+tier0.name=Осколок души 
+tier1.name=Осколок души 
+tier2.name=Осколок души 
+tier3.name=Осколок души 
+tier4.name=Осколок души 
+tier5.name=Осколок души 
+
+enchantment.Soul Stealer=Похититель душ
+
+itemGroup.Soul Shards Reborn=Soul Shards Reborn
