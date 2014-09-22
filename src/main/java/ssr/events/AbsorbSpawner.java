@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import ssr.SSRCore;
-import ssr.config.SoulConfig;
+import ssr.config.Config;
 import ssr.gameObjs.ObjHandler;
 import ssr.utils.TierHandling;
 import ssr.utils.Utils;
@@ -23,7 +23,7 @@ public class AbsorbSpawner {
 		EntityPlayer player = event.entityPlayer;
 		World world = player.worldObj;
 
-		if (!world.isRemote && SoulConfig.canAbsorbSpawners && player != null)
+		if (!world.isRemote && Config.canAbsorbSpawners && player != null)
 			if (player.getHeldItem() != null
 					&& player.getHeldItem().getItem() == ObjHandler.sShard) {
 				ItemStack stack = player.getHeldItem();
@@ -40,7 +40,7 @@ public class AbsorbSpawner {
 					String translate = ent.getCommandSenderName();
 
 					if (Utils.isEntityAccepted(translate)
-							&& !SoulConfig.easyVanillaAbsorb) {
+							&& !Config.easyVanillaAbsorb) {
 						if (!stack.hasTagCompound()) {
 							stack.setTagCompound(new NBTTagCompound());
 							stack.stackTagCompound.setString("EntityType",
@@ -77,7 +77,7 @@ public class AbsorbSpawner {
 							}
 							world.setBlockToAir(event.x, event.y, event.z);
 						}
-					} else if (SoulConfig.easyVanillaAbsorb) {
+					} else if (Config.easyVanillaAbsorb) {
 						if (!stack.hasTagCompound()) {
 							stack.setTagCompound(new NBTTagCompound());
 							stack.stackTagCompound.setString("EntityType",
@@ -102,7 +102,7 @@ public class AbsorbSpawner {
 							}
 						}
 						if (nbtKills < TierHandling.getMax(5)) {
-							nbtKills += SoulConfig.vanillaBonus;
+							nbtKills += Config.vanillaBonus;
 							nbtKills = nbtKills > TierHandling.getMax(5) ? TierHandling
 									.getMax(5) : nbtKills;
 							nbt.setInteger("KillCount", nbtKills);

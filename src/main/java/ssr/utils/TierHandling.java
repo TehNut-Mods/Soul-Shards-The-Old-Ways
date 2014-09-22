@@ -1,7 +1,7 @@
 package ssr.utils;
 
 import ssr.SSRCore;
-import ssr.config.SoulConfig;
+import ssr.config.Config;
 
 public class TierHandling {
 	private final static int[] defaultMin = { 0, 64, 128, 256, 512, 1024 };
@@ -14,7 +14,7 @@ public class TierHandling {
 		min[0] = 0;
 
 		for (int i = 1; i < min.length; i++) {
-			min[i] = SoulConfig.killReq[i - 1];
+			min[i] = Config.killReq[i - 1];
 
 			if (min[i] <= min[i - 1]) {
 				fault = true;

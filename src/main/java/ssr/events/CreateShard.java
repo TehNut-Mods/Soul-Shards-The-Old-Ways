@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import ssr.SSRCore;
-import ssr.config.SoulConfig;
+import ssr.config.Config;
 import ssr.gameObjs.ObjHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -36,7 +36,7 @@ public class CreateShard {
 				world.spawnEntityInWorld(new EntityItem(world, event.x,
 						event.y, event.z, new ItemStack(ObjHandler.sShard)));
 
-				if (SoulConfig.enableEndStoneRecipe) {
+				if (Config.enableEndStoneRecipe) {
 					if (isFormedVertically(world, event.x, event.y, event.z)) {
 						world.setBlockToAir(event.x, event.y + 2, event.z);
 						world.setBlockToAir(event.x, event.y - 2, event.z);

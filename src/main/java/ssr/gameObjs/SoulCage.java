@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import ssr.config.SoulConfig;
+import ssr.config.Config;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -74,7 +74,7 @@ public class SoulCage extends Block implements ITileEntityProvider {
 				if (tier == 0 || entName.isEmpty() || entName.equals("empty"))
 					return false;
 				tile.setInventorySlotContents(0, stack);
-				if (SoulConfig.requireOwnerOnline)
+				if (Config.requireOwnerOnline)
 					tile.owner = player.getCommandSenderName();
 				if (!player.capabilities.isCreativeMode)
 					stack.stackSize--;
@@ -114,7 +114,7 @@ public class SoulCage extends Block implements ITileEntityProvider {
 			CageTile tile = (CageTile) world.getTileEntity(x, y, z);
 
 			if (tile != null
-					&& (tile.tier != 0 && SoulConfig.enableRS[tile.tier - 1]))
+					&& (tile.tier != 0 && Config.enableRS[tile.tier - 1]))
 				tile.isPowered = world.isBlockIndirectlyGettingPowered(x, y, z);
 		}
 	}

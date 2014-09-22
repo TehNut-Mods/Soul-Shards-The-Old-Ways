@@ -4,7 +4,7 @@ import static ssr.SSRCore.MODID;
 import java.io.File;
 import org.apache.logging.log4j.Logger;
 import ssr.config.MobBlackList;
-import ssr.config.SoulConfig;
+import ssr.config.Config;
 import ssr.events.SoulEvents;
 import ssr.gameObjs.ObjHandler;
 import ssr.utils.CommandKillMobs;
@@ -19,7 +19,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = SSRCore.MODID, name = SSRCore.MOD_NAME, version = SSRCore.MOD_VERSION, guiFactory = "ssr.guiFactory")
+@Mod(modid = SSRCore.MODID, name = SSRCore.MOD_NAME, version = SSRCore.MOD_VERSION, guiFactory = "ssr.config.guiFactory")
 public class SSRCore {
 	@Instance("SSR")
 	public static SSRCore instance;
@@ -30,32 +30,32 @@ public class SSRCore {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		SoulConfig.load(event);
+		Config.load(event);
 
-		if (SoulConfig.maxNumSpawns > 150)
-			SoulConfig.maxNumSpawns = 80;
+		if (Config.maxNumSpawns > 150)
+			Config.maxNumSpawns = 80;
 
-		for (int i = 0; i < SoulConfig.coolDown.length; i++) {
-			if (SoulConfig.coolDown[i] < 2)
-				SoulConfig.coolDown[i] = 2;
-			if (SoulConfig.coolDown[i] > 60)
-				SoulConfig.coolDown[i] = 60;
+		for (int i = 0; i < Config.coolDown.length; i++) {
+			if (Config.coolDown[i] < 2)
+				Config.coolDown[i] = 2;
+			if (Config.coolDown[i] > 60)
+				Config.coolDown[i] = 60;
 		}
 
-		for (int i = 0; i < SoulConfig.numMobs.length; i++) {
-			if (SoulConfig.numMobs[i] < 1)
-				SoulConfig.numMobs[i] = 1;
+		for (int i = 0; i < Config.numMobs.length; i++) {
+			if (Config.numMobs[i] < 1)
+				Config.numMobs[i] = 1;
 
-			if (SoulConfig.exceedMaxNumSpawns)
-				if (SoulConfig.numMobs[i] > SoulConfig.maxNumSpawns)
-					SoulConfig.numMobs[i] = SoulConfig.maxNumSpawns;
-				else if (SoulConfig.numMobs[i] > 6)
-					SoulConfig.numMobs[i] = 6;
+			if (Config.exceedMaxNumSpawns)
+				if (Config.numMobs[i] > Config.maxNumSpawns)
+					Config.numMobs[i] = Config.maxNumSpawns;
+				else if (Config.numMobs[i] > 6)
+					Config.numMobs[i] = 6;
 		}
 
-		if (SoulConfig.soulStealerWeight > 10
-				|| SoulConfig.soulStealerWeight < 1)
-			SoulConfig.soulStealerWeight = 5;
+		if (Config.soulStealerWeight > 10
+				|| Config.soulStealerWeight < 1)
+			Config.soulStealerWeight = 5;
 
 		TierHandling.init();
 		ObjHandler.init();
@@ -78,7 +78,7 @@ public class SSRCore {
 		DynamicMobMapping.init(event.getServer().getEntityWorld());
 		SSRCore.SoulLog.info("SSR: Mapped a total of "
 				+ DynamicMobMapping.entityList.size() + " entities.");
-		MobBlackList.init(new File(SoulConfig.configDirectory
+		MobBlackList.init(new File(Config.configDirectory
 				+ "/Entity Blacklist.cfg"));
 		ssr.utils.Utils.hideItems();
 	}

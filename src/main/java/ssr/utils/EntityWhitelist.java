@@ -5,7 +5,7 @@ import java.util.List;
 
 import ssr.SSRCore;
 import ssr.config.MobBlackList;
-import ssr.config.SoulConfig;
+import ssr.config.Config;
 
 public class EntityWhitelist {
 	public static List<String> peacefuls = new ArrayList();
@@ -42,7 +42,7 @@ public class EntityWhitelist {
 		if (peacefuls.contains(entName)
 				&& !MobBlackList.bList.contains(entName))
 			return true;
-		else if (!SoulConfig.disallowMobs && mobs.contains(entName)
+		else if (!Config.disallowMobs && mobs.contains(entName)
 				&& !MobBlackList.bList.contains(entName))
 			return true;
 		else

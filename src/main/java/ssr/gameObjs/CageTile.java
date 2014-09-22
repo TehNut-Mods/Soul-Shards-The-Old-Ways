@@ -29,7 +29,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import ssr.SSRCore;
-import ssr.config.SoulConfig;
+import ssr.config.Config;
 import ssr.utils.Utils;
 
 public class CageTile extends TileEntity implements IInventory {
@@ -128,8 +128,8 @@ public class CageTile extends TileEntity implements IInventory {
 				hasFailed = true;
 				return;
 			} else {
-				maxMobs = SoulConfig.numMobs[tier - 1];
-				timerEnd = SecToTick(SoulConfig.coolDown[tier - 1]);
+				maxMobs = Config.numMobs[tier - 1];
+				timerEnd = SecToTick(Config.coolDown[tier - 1]);
 			}
 			adjustMetadata(metadata, 1);
 		}
@@ -137,7 +137,7 @@ public class CageTile extends TileEntity implements IInventory {
 		if (timer == 20) {
 			timer = 0;
 
-			if (SoulConfig.requireOwnerOnline && owner != null
+			if (Config.requireOwnerOnline && owner != null
 					&& !owner.isEmpty() && !isOwnerOnline()) {
 				flag = false;
 				adjustMetadata(metadata, 1);
@@ -155,21 +155,21 @@ public class CageTile extends TileEntity implements IInventory {
 						worldObj);
 
 			if (tempEnt != null) {
-				if (SoulConfig.enableRS[tier - 1])
+				if (Config.enableRS[tier - 1])
 					flag = isPowered;
 				else
 					flag = true;
 
 				if (flag) {
-					flag = (!hasReachedSpawnLimit(tempEnt) || SoulConfig.maxNumSpawns == 0);
+					flag = (!hasReachedSpawnLimit(tempEnt) || Config.maxNumSpawns == 0);
 
-					if (SoulConfig.needPlayer[tier - 1] && flag)
+					if (Config.needPlayer[tier - 1] && flag)
 						flag = isPlayerClose(xCoord, yCoord, zCoord);
 
-					if (SoulConfig.checkLight[tier - 1] && flag)
+					if (Config.checkLight[tier - 1] && flag)
 						flag = canSpawnInLight(tempEnt, xCoord, yCoord, zCoord);
 
-					if (SoulConfig.otherWorlds[tier - 1] && flag)
+					if (Config.otherWorlds[tier - 1] && flag)
 						flag = canSpawnInWorld(tempEnt);
 				}
 
@@ -367,7 +367,7 @@ public class CageTile extends TileEntity implements IInventory {
 				mobCount += 1;
 		}
 
-		return (mobCount > SoulConfig.maxNumSpawns);
+		return (mobCount > Config.maxNumSpawns);
 	}
 
 	private int SecToTick(int seconds) {
