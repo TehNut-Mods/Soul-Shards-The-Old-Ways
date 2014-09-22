@@ -1,0 +1,15 @@
+empty_sc.name=灵魂之笼(空)
+inactive_sc.name=灵魂之笼(关闭)
+active_sc.name=灵魂之笼(激活)
+
+unboundSS.name=未绑定灵魂碎片
+tier0.name=灵魂碎片
+tier1.name=灵魂碎片
+tier2.name=灵魂碎片
+tier3.name=灵魂碎片
+tier4.name=灵魂碎片
+tier5.name=灵魂碎片
+
+enchantment.Soul Stealer=窃魂
+
+itemGroup.Soul Shards Reborn=灵魂碎片
