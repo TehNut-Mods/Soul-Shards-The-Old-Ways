@@ -19,13 +19,14 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
+
 @Mod(modid = SSRCore.MODID, name = SSRCore.MOD_NAME, version = SSRCore.MOD_VERSION, guiFactory = "ssr.config.guiFactory")
 public class SSRCore {
 	@Instance("SSR")
 	public static SSRCore instance;
 	public static final String MODID = "SSR";
 	public static final String MOD_NAME = "Soul Shards: Reborn";
-	public static final String MOD_VERSION = "Alpha 1.0";
+	public static final String MOD_VERSION = "Alpha 1.1";
 	public static Logger SoulLog = FMLLog.getLogger();
 
 	@EventHandler

@@ -56,9 +56,11 @@ public class AbsorbSpawner {
 								.equals(nbtName))
 								&& (nbtKills != TierHandling.getMax(5) || nbtName
 										.equals("empty"))) {
-							int totalKills = nbtKills + 200;
+							int totalKills = nbtKills + Config.vanillaBonus;
 							totalKills = totalKills > TierHandling.getMax(5) ? TierHandling
 									.getMax(5) : totalKills;
+									if (stack.getItemDamage() == 0)
+										stack.setItemDamage(1);
 							nbt.setInteger("KillCount", totalKills);
 							if (nbtName.equals("empty")) {
 								nbt.setString("EntityType", translate);

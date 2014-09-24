@@ -20,7 +20,7 @@ public class SSRScreenGUI extends GuiConfig {
 						.getAbridgedConfigPath("/Soul Shards Reborn/"));
 	}
 
-	private static List<IConfigElement> getConfigElements(GuiScreen parent) {
+	private static List<IConfigElement> getConfigElements(GuiScreen parentScreen) {
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
 
 		for (Section section : Config.sections) {
