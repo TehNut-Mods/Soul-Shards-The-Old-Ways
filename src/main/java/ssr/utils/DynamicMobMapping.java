@@ -57,9 +57,16 @@ public class DynamicMobMapping {
 			return null;
 		Entity entity = null;
 		try {
-			Constructor c = entClass.getConstructor(World.class);
-			entity = (EntityLiving) c.newInstance(worldObj);
-		} catch (Exception e) {
+			try {
+				Constructor c = entClass.getConstructor(World.class);
+				entity = (EntityLiving) c.newInstance(worldObj);
+			} catch (Exception e) {
+				SSRCore.SoulLog.fatal("SSR: Skipping entity mapping for: "
+						+ name);
+				SSRCore.SoulLog.fatal("Please report this to dev: "
+						+ e.toString());
+			}
+		} catch (Error e) {
 			SSRCore.SoulLog.fatal("SSR: Skipping entity mapping for: " + name);
 			SSRCore.SoulLog.fatal("Please report this to dev: " + e.toString());
 		}

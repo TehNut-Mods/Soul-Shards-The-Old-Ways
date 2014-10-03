@@ -26,7 +26,7 @@ public class SSRCore {
 	public static SSRCore instance;
 	public static final String MODID = "SSR";
 	public static final String MOD_NAME = "Soul Shards: Reborn";
-	public static final String MOD_VERSION = "Alpha 1.1";
+	public static final String MOD_VERSION = "Alpha 1.2";
 	public static Logger SoulLog = FMLLog.getLogger();
 
 	@EventHandler
