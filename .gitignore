@@ -1,36 +1,20 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must ends with two \r.
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
+# MinecraftForge Stuff
+*.iml
+*.ipr
+*.iws
+CREDITS-fml*
+forge-*-changelog.txt
+gradlew*
+LICENSE-fml*
+MinecraftForge-Credits.txt
+MinecraftForge-License.txt
+build/
+.gradle/
+eclipse/
+gradle/
+libs/
+<<<<<<< HEAD
+out/
+=======
+out/
+>>>>>>> 23853e2979d696b27de6f9bf3b9a3a9635120b1a
