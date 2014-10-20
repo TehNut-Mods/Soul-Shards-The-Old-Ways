@@ -137,8 +137,8 @@ public class CageTile extends TileEntity implements IInventory {
 		if (timer == 20) {
 			timer = 0;
 
-			if (Config.requireOwnerOnline && owner != null
-					&& !owner.isEmpty() && !isOwnerOnline()) {
+			if (Config.requireOwnerOnline && owner != null && !owner.isEmpty()
+					&& !isOwnerOnline()) {
 				flag = false;
 				adjustMetadata(metadata, 1);
 				return;
@@ -215,43 +215,46 @@ public class CageTile extends TileEntity implements IInventory {
 
 						if (HeldItem != null)
 							entity[i].setCurrentItemOrArmor(0, HeldItem);
-
-						switch (Utils.getEntityID(entId)) {
-						case 0:
-							SSRCore.SoulLog.info("SSR: Horse spawned");
-							EntityHorse entityhorse = new EntityHorse(worldObj);
-							entityhorse.setHorseType(random.nextInt(3));
-							entityhorse.setHorseVariant(random.nextInt(7)
-									| random.nextInt(5) << 8);
-							entity[i] = entityhorse;
-							break;
-						case 1:
-							SSRCore.SoulLog.info("SSR: Sheep spawned");
-							EntitySheep entitysheep = new EntitySheep(worldObj);
-							// entitysheep.setFleeceColor(random.nextInt(16));
-							entitysheep.setFleeceColor(6);
-							entity[i] = entitysheep;
-							break;
-						case 2:
-							SSRCore.SoulLog.info("SSR: Villager spawned");
-							EntityVillager entityvillager = new EntityVillager(
-									worldObj);
-							entityvillager.setProfession(random.nextInt(5));
-							entity[i] = entityvillager;
-							break;
-						case 3:
-							SSRCore.SoulLog.info("SSR: Zombie spawned");
-							EntityZombie entityzombie = new EntityZombie(
-									worldObj);
-							entityzombie
-									.setVillager(random.nextInt(2) == 0 ? true
-											: false);
-							entity[i] = entityzombie;
-							break;
-						default:
-							SSRCore.SoulLog.info("SSR: " + entId + " spawned");
+						if (Config.enableDebug == true) {
+							switch (Utils.getEntityID(entId)) {
+							case 0:
+								SSRCore.SoulLog.info("SSR: Horse spawned");
+								EntityHorse entityhorse = new EntityHorse(
+										worldObj);
+								entityhorse.setHorseType(random.nextInt(3));
+								entityhorse.setHorseVariant(random.nextInt(7)
+										| random.nextInt(5) << 8);
+								entity[i] = entityhorse;
+								break;
+							case 1:
+								SSRCore.SoulLog.info("SSR: Sheep spawned");
+								EntitySheep entitysheep = new EntitySheep(
+										worldObj);
+								// entitysheep.setFleeceColor(random.nextInt(16));
+								entitysheep.setFleeceColor(6);
+								entity[i] = entitysheep;
+								break;
+							case 2:
+								SSRCore.SoulLog.info("SSR: Villager spawned");
+								EntityVillager entityvillager = new EntityVillager(
+										worldObj);
+								entityvillager.setProfession(random.nextInt(5));
+								entity[i] = entityvillager;
+								break;
+							case 3:
+								SSRCore.SoulLog.info("SSR: Zombie spawned");
+								EntityZombie entityzombie = new EntityZombie(
+										worldObj);
+								entityzombie
+										.setVillager(random.nextInt(2) == 0 ? true
+												: false);
+								entity[i] = entityzombie;
+								break;
+							default:
+								SSRCore.SoulLog.info("SSR: " + entId
+										+ " spawned");
+							}
 						}
-
 						worldObj.spawnEntityInWorld(entity[i]);
 					}
 				}

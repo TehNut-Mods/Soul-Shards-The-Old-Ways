@@ -19,6 +19,7 @@ public class Config {
 	public static boolean requireOwnerOnline;
 	public static boolean exceedMaxNumSpawns;
 	public static boolean enableEndStoneRecipe;
+	public static boolean enableDebug;
 	public static int vanillaBonus;
 	public static int soulStealerID;
 	public static int soulStealerWeight;
@@ -116,6 +117,8 @@ public class Config {
 					"Maximum Alive Spawns?", 80).getInt(80);
 			enableEndStoneRecipe = config.get("General Settings",
 					"Enable End Stone Recipe", false).getBoolean(false);
+			enableDebug = config.get("General Settings",
+					"Enable Debug Logging", false).getBoolean(false);
 
 			coolDown[0] = config.get("Tier 1 Settings",
 					"Cool-down (in seconds)", 20).getInt(20);
