@@ -1,15 +1,10 @@
-empty_sc.name=Empty Soul Cage
-inactive_sc.name=Inactive Soul Cage
-active_sc.name=Active Soul Cage
+item.ssr.shard_unbound.name=Unbound Soul Shard
+item.ssr.shard.name=Soul Shard
 
-unboundSS.name=Unbound Soul Shard
-tier0.name=Soul Shard 
-tier1.name=Soul Shard 
-tier2.name=Soul Shard 
-tier3.name=Soul Shard 
-tier4.name=Soul Shard 
-tier5.name=Soul Shard 
+tile.ssr.soul_cage_0.name=Empty Soul Cage
+tile.ssr.soul_cage_1.name=Inactive Soul Cage
+tile.ssr.soul_cage_2.name=Active Soul Cage
 
-enchantment.Soul Stealer=Soul Stealer
+enchantment.soul_stealer=Soul Stealer
 
-itemGroup.Soul Shards Reborn=Soul Shards Reborn
+itemGroup.soul_shards_reborn=Soul Shards Reborn

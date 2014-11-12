@@ -1,4 +1,4 @@
-package ssr.config;
+package moze_intel.ssr.utils;
 
 import cpw.mods.fml.client.IModGuiFactory;
 import net.minecraft.client.Minecraft;
@@ -14,7 +14,7 @@ public class guiFactory implements IModGuiFactory {
 
 	@Override
 	public Class<? extends GuiScreen> mainConfigGuiClass() {
-		return SSRScreenGUI.class;
+		return screenGUI.class;
 	}
 
 	@Override
