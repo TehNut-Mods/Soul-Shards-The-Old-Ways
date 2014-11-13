@@ -8,3 +8,24 @@ tile.ssr.soul_cage_2.name=Active Soul Cage
 enchantment.soul_stealer=Soul Stealer
 
 itemGroup.soul_shards_reborn=Soul Shards Reborn
+
+achievement.createShard=Create a Soul Shard
+achievement.createShard.desc=Created your first Soul Shard
+
+achievement.tier1Shard=
+achievement.tier1Shard.desc=
+
+achievement.tier2Shard=
+achievement.tier2Shard.desc=
+
+achievement.tier3Shard=
+achievement.tier3Shard.desc=
+
+achievement.tier4Shard=
+achievement.tier4Shard.desc=
+
+achievement.tier5Shard=
+achievement.tier5Shard.desc=
+
+achievement.createCage=These are the Soul Cages
+achievement.createCage.desc=Where is the goat?
