@@ -2,6 +2,7 @@ package moze_intel.ssr;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
+import net.minecraft.stats.AchievementList;
 import net.minecraftforge.common.AchievementPage;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -26,6 +27,8 @@ public class SSRCore {
 	public static final String NAME = "Soul Shards Reborn";
 	public static final String VERSION = "RC2.1";
 
+	public static Achievement achievementCage;
+
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		SSRConfig.load(event);
@@ -34,7 +37,15 @@ public class SSRCore {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		ObjHandler.registerObjs();
-		SSRAchievement.Get();
+		// SSRAchievement.Get();
+
+		achievementCage = new Achievement("achievement.createCage",
+				"createCage", -2, 0, ObjHandler.SOUL_CAGE, AchievementList.buildWorkBench)
+				.initIndependentStat().registerStat();
+
+		AchievementPage.registerAchievementPage(new AchievementPage(
+				"Soul Shards: Reborn", new Achievement[] { achievementCage }));
+		
 		MinecraftForge.EVENT_BUS.register(new ShardPickup());
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());

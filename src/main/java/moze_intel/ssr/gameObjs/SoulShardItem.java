@@ -2,6 +2,7 @@ package moze_intel.ssr.gameObjs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import moze_intel.ssr.events.SSRAchievement;
 import moze_intel.ssr.utils.EntityMapper;
 import moze_intel.ssr.utils.SSRConfig;
 import moze_intel.ssr.utils.TierHandler;
@@ -15,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.Achievement;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.IIcon;

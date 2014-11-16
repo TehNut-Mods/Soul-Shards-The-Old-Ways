@@ -12,20 +12,20 @@ itemGroup.soul_shards_reborn=Soul Shards Reborn
 achievement.createShard=Create a Soul Shard
 achievement.createShard.desc=Created your first Soul Shard
 
-achievement.tier1Shard=
-achievement.tier1Shard.desc=
+achievement.tier1Shard=Level 1
+achievement.tier1Shard.desc=You killed a lot of monsters
 
-achievement.tier2Shard=
-achievement.tier2Shard.desc=
+achievement.tier2Shard=Level 2
+achievement.tier2Shard.desc=You killed a lot of monsters
 
-achievement.tier3Shard=
-achievement.tier3Shard.desc=
+achievement.tier3Shard=Level 3
+achievement.tier3Shard.desc=You killed a lot of monsters
 
-achievement.tier4Shard=
-achievement.tier4Shard.desc=
+achievement.tier4Shard=Level 4
+achievement.tier4Shard.desc=You killed a lot of monsters
 
-achievement.tier5Shard=
-achievement.tier5Shard.desc=
+achievement.tier5Shard=Level 5
+achievement.tier5Shard.desc=You killed a lot of monsters
 
 achievement.createCage=These are the Soul Cages
 achievement.createCage.desc=Where is the goat?
