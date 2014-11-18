@@ -95,6 +95,7 @@ public class SoulShardItem extends Item {
 				if (Utils.getShardBoundEnt(stack).equals(name)) {
 					Utils.increaseShardKillCount(stack,
 							(short) SSRConfig.SPAWNER_ABSORB_BONUS);
+					Utils.checkForAchievements(player, stack);
 					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ,
 							false);
 				}

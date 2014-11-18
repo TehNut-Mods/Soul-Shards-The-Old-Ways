@@ -60,20 +60,15 @@ public final class Utils {
 		}
 	}
 
-	public static void hideItems() {
-		Iterator modsIT = Loader.instance().getModList().iterator();
-		ModContainer modc;
-		while (modsIT.hasNext()) {
-			modc = (ModContainer) modsIT.next();
-			if ("Not Enough Items".equals(modc.getName().trim())) {
-				ItemStack stack = new ItemStack(ObjHandler.SOUL_CAGE, 0, 1);
-				codechicken.nei.api.API.hideItem(stack);
-				stack.setItemDamage(2);
-				codechicken.nei.api.API.hideItem(stack);
-			}
-		}
-	}
-
+	/*
+	 * public static void hideItems() { Iterator modsIT =
+	 * Loader.instance().getModList().iterator(); ModContainer modc; while
+	 * (modsIT.hasNext()) { modc = (ModContainer) modsIT.next(); if
+	 * ("Not Enough Items".equals(modc.getName().trim())) { ItemStack stack =
+	 * new ItemStack(ObjHandler.SOUL_CAGE, 0, 1);
+	 * codechicken.nei.api.API.hideItem(stack); stack.setItemDamage(2);
+	 * codechicken.nei.api.API.hideItem(stack); } } }
+	 */
 	public static short getShardKillCount(ItemStack shard) {
 		if (!shard.hasTagCompound()) {
 			return 0;
