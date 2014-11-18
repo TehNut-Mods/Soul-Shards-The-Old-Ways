@@ -1,12 +1,12 @@
 package moze_intel.ssr.gameObjs;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import moze_intel.ssr.utils.TierHandler;
 import moze_intel.ssr.utils.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SSRCreativeTab extends CreativeTabs {
 

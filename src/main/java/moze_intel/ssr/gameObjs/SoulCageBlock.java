@@ -1,7 +1,8 @@
 package moze_intel.ssr.gameObjs;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+import java.util.Random;
+
 import moze_intel.ssr.utils.SSRLogger;
 import moze_intel.ssr.utils.Utils;
 import net.minecraft.block.Block;
@@ -19,9 +20,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.List;
-import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SoulCageBlock extends Block implements ITileEntityProvider {
 	@SideOnly(Side.CLIENT)

@@ -1,12 +1,11 @@
 package moze_intel.ssr.utils;
 
-import moze_intel.ssr.SSRCore;
-import net.minecraftforge.common.config.Configuration;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import moze_intel.ssr.SSRCore;
+import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

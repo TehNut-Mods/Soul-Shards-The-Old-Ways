@@ -1,31 +1,28 @@
 package moze_intel.ssr;
 
-import net.minecraft.item.ItemStack;
+import moze_intel.ssr.commands.KillCMD;
+import moze_intel.ssr.events.CreateCageEvent;
+import moze_intel.ssr.events.CreateShardEvent;
+import moze_intel.ssr.events.PickupShardEvent;
+import moze_intel.ssr.events.PlayerKillEntityEvent;
+import moze_intel.ssr.events.SSRAchievement;
+import moze_intel.ssr.gameObjs.ObjHandler;
+import moze_intel.ssr.utils.EntityMapper;
+import moze_intel.ssr.utils.SSRConfig;
 import net.minecraft.stats.Achievement;
-import net.minecraft.stats.AchievementList;
-import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import moze_intel.ssr.commands.KillCMD;
-import moze_intel.ssr.events.CreateShardEvent;
-import moze_intel.ssr.events.PlayerKillEntityEvent;
-import moze_intel.ssr.events.SSRAchievement;
-import moze_intel.ssr.events.ShardPickup;
-import moze_intel.ssr.gameObjs.ObjHandler;
-import moze_intel.ssr.utils.EntityMapper;
-import moze_intel.ssr.utils.SSRConfig;
-import net.minecraftforge.common.MinecraftForge;
-
-import java.io.File;
 
 @Mod(modid = SSRCore.ID, name = SSRCore.NAME, version = SSRCore.VERSION, guiFactory = "moze_intel.ssr.utils.guiFactory")
 public class SSRCore {
 	public static final String ID = "SSR";
 	public static final String NAME = "Soul Shards Reborn";
-	public static final String VERSION = "RC2.1";
+	public static final String VERSION = "RC2.2";
 
 	public static Achievement achievementCage;
 
@@ -37,18 +34,13 @@ public class SSRCore {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		ObjHandler.registerObjs();
-		// SSRAchievement.Get();
 
-		achievementCage = new Achievement("achievement.createCage",
-				"createCage", -2, 0, ObjHandler.SOUL_CAGE, AchievementList.buildWorkBench)
-				.initIndependentStat().registerStat();
+		SSRAchievement.Get();
 
-		AchievementPage.registerAchievementPage(new AchievementPage(
-				"Soul Shards: Reborn", new Achievement[] { achievementCage }));
-		
-		MinecraftForge.EVENT_BUS.register(new ShardPickup());
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
+		FMLCommonHandler.instance().bus().register(new CreateCageEvent());
+		FMLCommonHandler.instance().bus().register(new PickupShardEvent());
 	}
 
 	@Mod.EventHandler

@@ -1,12 +1,12 @@
 package moze_intel.ssr.commands;
 
+import java.util.List;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-
-import java.util.List;
 
 public class KillCMD extends CommandBase {
 	@Override

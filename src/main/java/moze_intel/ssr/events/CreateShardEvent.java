@@ -1,8 +1,6 @@
 package moze_intel.ssr.events;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import moze_intel.ssr.gameObjs.ObjHandler;
-import moze_intel.ssr.utils.SSRConfig;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -10,8 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CreateShardEvent {
+
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent event) {
 		if (event.world.isRemote

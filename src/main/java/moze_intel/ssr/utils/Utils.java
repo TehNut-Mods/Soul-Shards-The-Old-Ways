@@ -2,8 +2,6 @@ package moze_intel.ssr.utils;
 
 import java.util.Iterator;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
 import moze_intel.ssr.gameObjs.ObjHandler;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -13,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
 
 public final class Utils {
 	public static ItemStack getShardFromInv(EntityPlayer player, String entity) {

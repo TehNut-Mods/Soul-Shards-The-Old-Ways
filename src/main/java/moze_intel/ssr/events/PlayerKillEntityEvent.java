@@ -1,6 +1,5 @@
 package moze_intel.ssr.events;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import moze_intel.ssr.gameObjs.ObjHandler;
 import moze_intel.ssr.utils.EntityMapper;
 import moze_intel.ssr.utils.SSRConfig;
@@ -14,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerKillEntityEvent {
 	@SubscribeEvent
