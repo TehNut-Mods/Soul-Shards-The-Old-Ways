@@ -8,7 +8,6 @@ import net.minecraftforge.common.AchievementPage;
 public class SSRAchievement {
 	public static Achievement achievementCage;
 	public static Achievement achievementShard;
-
 	public static Achievement achievementTier1;
 	public static Achievement achievementTier2;
 	public static Achievement achievementTier3;
@@ -25,7 +24,7 @@ public class SSRAchievement {
 				.initIndependentStat().registerStat();
 
 		achievementTier1 = new Achievement("achievement.tier1Shard",
-				"tier1Shard", 2, 0, new ItemStack(ObjHandler.SOUL_SHARD),
+				"tier1Shard", 2, 0, new ItemStack(ObjHandler.SOUL_SHARD, 1),
 				achievementShard).registerStat();
 
 		achievementTier2 = new Achievement("achievement.tier2Shard",

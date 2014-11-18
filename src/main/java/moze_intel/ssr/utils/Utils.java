@@ -2,6 +2,7 @@ package moze_intel.ssr.utils;
 
 import java.util.Iterator;
 
+import moze_intel.ssr.events.SSRAchievement;
 import moze_intel.ssr.gameObjs.ObjHandler;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -32,6 +33,31 @@ public final class Utils {
 		}
 
 		return lastResort;
+	}
+
+	public static void checkForAchievements(EntityPlayer player, ItemStack shard) {
+		int tier = (int) getShardTier(shard);
+		switch (tier) {
+		case 0:
+			break;
+		case 1:
+			player.addStat(SSRAchievement.achievementTier1, 1);
+			break;
+		case 2:
+			player.addStat(SSRAchievement.achievementTier2, 1);
+			break;
+		case 3:
+			player.addStat(SSRAchievement.achievementTier3, 1);
+			break;
+		case 4:
+			player.addStat(SSRAchievement.achievementTier4, 1);
+			break;
+		case 5:
+			player.addStat(SSRAchievement.achievementTier5, 1);
+			break;
+		default:
+			break;
+		}
 	}
 
 	public static void hideItems() {

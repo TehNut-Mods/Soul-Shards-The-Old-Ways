@@ -3,7 +3,7 @@ package moze_intel.ssr.utils;
 import net.minecraft.item.ItemStack;
 
 public final class TierHandler {
-	private static short[] MIN_KILLS = { 0, 64, 128, 256, 512, 1024 };
+	public static short[] MIN_KILLS = { 0, 64, 128, 256, 512, 1024 };
 	private static short[] MAX_KILLS = { 63, 127, 255, 511, 1023, 1024 };
 	private static boolean[] NEEDS_PLAYER = { true, true, false, false, false };
 	private static boolean[] CHECKS_LIGHT = { true, true, true, true, false };
