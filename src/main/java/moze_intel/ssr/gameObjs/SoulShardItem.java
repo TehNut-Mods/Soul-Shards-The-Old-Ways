@@ -32,7 +32,7 @@ public class SoulShardItem extends Item {
 	public SoulShardItem() {
 		this.setUnlocalizedName("soul_shard");
 		this.setCreativeTab(ObjHandler.CREATIVE_TAB);
-		this.setMaxStackSize(1);
+		this.setMaxStackSize(64);
 		this.setMaxDamage(0);
 	}
 

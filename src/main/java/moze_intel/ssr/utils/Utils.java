@@ -16,6 +16,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 
 public final class Utils {
+
 	public static ItemStack getShardFromInv(EntityPlayer player, String entity) {
 		ItemStack lastResort = null;
 
