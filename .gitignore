@@ -2,12 +2,17 @@
 *.iml
 *.ipr
 *.iws
+.classpath
+.project
+.settings/org.eclipse.jdt.core.prefs
+
 CREDITS-fml*
 forge-*-changelog.txt
 gradlew*
 LICENSE-fml*
 MinecraftForge-Credits.txt
 MinecraftForge-License.txt
+README.txt
 build/
 .gradle/
 eclipse/
@@ -18,3 +23,4 @@ out/
 =======
 out/
 >>>>>>> 23853e2979d696b27de6f9bf3b9a3a9635120b1a
+/bin/

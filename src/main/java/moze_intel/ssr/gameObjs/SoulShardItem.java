@@ -37,8 +37,7 @@ public class SoulShardItem extends Item {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int slot,
-			boolean isHeld) {
+	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isHeld) {
 		if (world.isRemote) {
 			return;
 		}

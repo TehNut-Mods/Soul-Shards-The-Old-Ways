@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
@@ -32,6 +33,10 @@ public class SoulCageBlock extends Block implements ITileEntityProvider {
 		this.blockResistance = 3.0F;
 	}
 
+	@Override
+	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side){
+		return true;
+	}
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int side, float f1, float f2, float f3) {

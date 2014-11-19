@@ -24,16 +24,12 @@ public final class ObjHandler {
 		GameRegistry.registerItem(VILE_DUST, "ssr_vile_dust");
 		GameRegistry.registerItem(CORRUPTED_ESSENCE, "ssr_corrupted_essence");
 		GameRegistry.registerItem(SOUL_SHARD, "ssr_soul_shard");
-		GameRegistry.registerBlock(SOUL_CAGE, SoulCageItem.class,
-				"ssr_soul_cage");
-
-		GameRegistry.registerBlock(SOUL_FORGE, "ssr_soul_forge");
-
-		GameRegistry.registerTileEntity(SoulCageTile.class,
-				"ssr_soul_cage_tile");
-
-		// GameRegistry.registerTileEntity(SoulForgeTile.class,
-		// "ssr_soul_forge_tile");
+		
+		GameRegistry.registerBlock(SOUL_CAGE, SoulCageItem.class,"ssr_soul_cage");
+		GameRegistry.registerBlock(SOUL_FORGE, "ssr_forge_block");
+		
+		GameRegistry.registerTileEntity(SoulCageTile.class, "ssr_soul_cage_tile");
+		GameRegistry.registerTileEntity(SoulForgeTile.class, "ssr_soul_forge_tile");
 
 		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
 				"III", "IXI", "III", 'I', Blocks.iron_bars);

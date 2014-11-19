@@ -110,19 +110,11 @@ public class SoulCageTile extends TileEntity implements IInventory {
 	}
 
 	public void checkRedstone() {
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			int x = this.xCoord + dir.offsetX;
-			int y = this.yCoord + dir.offsetY;
-			int z = this.zCoord + dir.offsetZ;
-
-			if (worldObj.getBlock(x, y, z).isProvidingWeakPower(worldObj, x, y,
-					z, dir.getOpposite().ordinal()) == 15) {
+			if (worldObj.isBlockIndirectlyGettingPowered(this.xCoord, this.yCoord, this.zCoord)){
 				redstoneActive = true;
-				return;
-			}
-		}
-
-		redstoneActive = false;
+			}else{
+				redstoneActive = false;
+			}	
 	}
 
 	private void setMetadata(int meta) {
