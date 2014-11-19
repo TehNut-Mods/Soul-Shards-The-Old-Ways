@@ -12,6 +12,7 @@ gradlew*
 LICENSE-fml*
 MinecraftForge-Credits.txt
 MinecraftForge-License.txt
+Thumbs.db
 README.txt
 build/
 .gradle/
