@@ -1,6 +1,9 @@
 item.ssr.shard_unbound.name=Unbound Soul Shard
 item.ssr.shard.name=Soul Shard
-item.ssr.vile_dust=Vile Dust
+item.ssr.vile_dust.name=Vile Dust
+item.ssr.corrupted_essence.name=Corrupted Essence
+tile.ssr.ssr_forge_block.name=Soul Forge
+tile.ssr.ssr_forge_block.name=Soul Forge
 
 tile.ssr.soul_cage_0.name=Empty Soul Cage
 tile.ssr.soul_cage_1.name=Inactive Soul Cage

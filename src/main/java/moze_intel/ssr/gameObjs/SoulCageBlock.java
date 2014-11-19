@@ -1,6 +1,5 @@
 package moze_intel.ssr.gameObjs;
 
-import java.util.List;
 import java.util.Random;
 
 import moze_intel.ssr.utils.SSRLogger;
@@ -9,11 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -133,15 +130,6 @@ public class SoulCageBlock extends Block implements ITileEntityProvider {
 	@Override
 	public int damageDropped(int par1) {
 		return 0;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs,
-			List par3List) {
-		for (int i = 0; i < 3; i++) {
-			par3List.add(new ItemStack(item, 1, i));
-		}
 	}
 
 	@Override
