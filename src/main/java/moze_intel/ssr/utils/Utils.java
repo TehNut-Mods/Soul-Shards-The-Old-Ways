@@ -1,10 +1,13 @@
 package moze_intel.ssr.utils;
 
-import java.util.Iterator;
+import java.util.Random;
 
 import moze_intel.ssr.events.SSRAchievement;
 import moze_intel.ssr.gameObjs.ObjHandler;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,8 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
 
 public final class Utils {
 
@@ -23,8 +24,7 @@ public final class Utils {
 		for (int i = 0; i <= 8; i++) {
 			ItemStack stack = player.inventory.getStackInSlot(i);
 
-			if (stack != null && stack.getItem() == ObjHandler.SOUL_SHARD
-					&& !hasMaxedKills(stack)) {
+			if (stack != null && stack.getItem() == ObjHandler.SOUL_SHARD && !hasMaxedKills(stack)) {
 				if (!isShardBound(stack) && lastResort == null) {
 					lastResort = stack;
 				} else if (getShardBoundEnt(stack).equals(entity)) {
@@ -32,7 +32,41 @@ public final class Utils {
 				}
 			}
 		}
+		
+		if(lastResort.stackSize>1){
+			boolean emptySpot=false;
+			int counter=0;
+			
+			ItemStack newShard = new ItemStack(ObjHandler.SOUL_SHARD,1);
+			while(!emptySpot && counter<36){
+				ItemStack inventoryStack = player.inventory.getStackInSlot(counter);
+				if(inventoryStack==null){
+					--lastResort.stackSize;
+					player.inventory.addItemStackToInventory(newShard);
+					emptySpot=true;
+					return player.inventory.getStackInSlot(counter);
+				}
+				counter++;
+			}
+			
+			if(!emptySpot ){
+				
+				--lastResort.stackSize;
+				if (!Utils.isShardBound(newShard)) {
+					Utils.setShardBoundEnt(newShard, entity);
+					Utils.writeEntityHeldItem(newShard, (EntityLiving) EntityList.createEntityByName(entity, player.worldObj));
+				}
+				
+				int soulStealer = EnchantmentHelper.getEnchantmentLevel(ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());
+				soulStealer *= SSRConfig.ENCHANT_KILL_BONUS;
+				Utils.increaseShardKillCount(newShard, (short) (1 + soulStealer));
+				Utils.checkForAchievements(player, newShard);
+				player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj,player.posX,player.posY,player.posZ,newShard));
+				return null;
 
+			}
+			
+		}
 		return lastResort;
 	}
 
@@ -140,6 +174,7 @@ public final class Utils {
 	public static void setShardBoundEnt(ItemStack shard, String value) {
 		if (!shard.hasTagCompound()) {
 			shard.setTagCompound(new NBTTagCompound());
+			shard.stackTagCompound.setDouble("antiStack", new Random().nextDouble());
 		}
 
 		shard.stackTagCompound.setString("Entity", value);
