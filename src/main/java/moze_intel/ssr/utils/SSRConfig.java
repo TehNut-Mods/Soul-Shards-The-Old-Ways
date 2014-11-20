@@ -111,7 +111,7 @@ public final class SSRConfig {
 			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "Misc", 80, 1, 200, "Max number of Entities soul cages can spawn in an area");
 			//ENABLE_ENDSTONE_RECIPE = config.getBoolean("Enable Endstone Recipe", "Misc", false, "This will make Endstone craftable");
 			ENABLE_DEBUG = config.getBoolean("Enable Debug", "Misc", false, "This will enable debug mode, where the console will inform you when a mob is spawned");
-			THEOLDWAYS = config.getBoolean("Enable The Old Ways", "Misc", false, "This will enable the 1.4.7 method of creating soul shards");
+			THEOLDWAYS = config.getBoolean("Enable The Old Ways", "Misc", false, "RESTART REQUIRED, This will enable the old ways of creating a soul shard");
 	
 			short[] minKills = new short[5];
 
