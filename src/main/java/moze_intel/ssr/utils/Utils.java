@@ -24,7 +24,8 @@ public final class Utils {
 		for (int i = 0; i <= 8; i++) {
 			ItemStack stack = player.inventory.getStackInSlot(i);
 
-			if (stack != null && stack.getItem() == ObjHandler.SOUL_SHARD && !hasMaxedKills(stack)) {
+			if (stack != null && stack.getItem() == ObjHandler.SOUL_SHARD
+					&& !hasMaxedKills(stack)) {
 				if (!isShardBound(stack) && lastResort == null) {
 					lastResort = stack;
 				} else if (getShardBoundEnt(stack).equals(entity)) {
@@ -32,40 +33,47 @@ public final class Utils {
 				}
 			}
 		}
-		
-		if(lastResort.stackSize>1){
-			boolean emptySpot=false;
-			int counter=0;
-			
-			ItemStack newShard = new ItemStack(ObjHandler.SOUL_SHARD,1);
-			while(!emptySpot && counter<36){
-				ItemStack inventoryStack = player.inventory.getStackInSlot(counter);
-				if(inventoryStack==null){
+
+		if (lastResort.stackSize > 1) {
+			boolean emptySpot = false;
+			int counter = 0;
+
+			ItemStack newShard = new ItemStack(ObjHandler.SOUL_SHARD, 1);
+			while (!emptySpot && counter < 36) {
+				ItemStack inventoryStack = player.inventory
+						.getStackInSlot(counter);
+				if (inventoryStack == null) {
 					--lastResort.stackSize;
 					player.inventory.addItemStackToInventory(newShard);
-					emptySpot=true;
+					emptySpot = true;
 					return player.inventory.getStackInSlot(counter);
 				}
 				counter++;
 			}
-			
-			if(!emptySpot ){
-				
+
+			if (!emptySpot) {
+
 				--lastResort.stackSize;
 				if (!Utils.isShardBound(newShard)) {
 					Utils.setShardBoundEnt(newShard, entity);
-					Utils.writeEntityHeldItem(newShard, (EntityLiving) EntityList.createEntityByName(entity, player.worldObj));
+					Utils.writeEntityHeldItem(newShard,
+							(EntityLiving) EntityList.createEntityByName(
+									entity, player.worldObj));
 				}
-				
-				int soulStealer = EnchantmentHelper.getEnchantmentLevel(ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());
+
+				int soulStealer = EnchantmentHelper.getEnchantmentLevel(
+						ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());
 				soulStealer *= SSRConfig.ENCHANT_KILL_BONUS;
-				Utils.increaseShardKillCount(newShard, (short) (1 + soulStealer));
+				Utils.increaseShardKillCount(newShard,
+						(short) (1 + soulStealer));
 				Utils.checkForAchievements(player, newShard);
-				player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj,player.posX,player.posY,player.posZ,newShard));
+				player.worldObj.spawnEntityInWorld(new EntityItem(
+						player.worldObj, player.posX, player.posY, player.posZ,
+						newShard));
 				return null;
 
 			}
-			
+
 		}
 		return lastResort;
 	}
@@ -95,15 +103,6 @@ public final class Utils {
 		}
 	}
 
-	/*
-	 * public static void hideItems() { Iterator modsIT =
-	 * Loader.instance().getModList().iterator(); ModContainer modc; while
-	 * (modsIT.hasNext()) { modc = (ModContainer) modsIT.next(); if
-	 * ("Not Enough Items".equals(modc.getName().trim())) { ItemStack stack =
-	 * new ItemStack(ObjHandler.SOUL_CAGE, 0, 1);
-	 * codechicken.nei.api.API.hideItem(stack); stack.setItemDamage(2);
-	 * codechicken.nei.api.API.hideItem(stack); } } }
-	 */
 	public static short getShardKillCount(ItemStack shard) {
 		if (!shard.hasTagCompound()) {
 			return 0;
@@ -174,7 +173,8 @@ public final class Utils {
 	public static void setShardBoundEnt(ItemStack shard, String value) {
 		if (!shard.hasTagCompound()) {
 			shard.setTagCompound(new NBTTagCompound());
-			shard.stackTagCompound.setDouble("antiStack", new Random().nextDouble());
+			shard.stackTagCompound.setDouble("antiStack",
+					new Random().nextDouble());
 		}
 
 		shard.stackTagCompound.setString("Entity", value);

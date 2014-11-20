@@ -1,6 +1,7 @@
 package moze_intel.ssr.events;
 
 import moze_intel.ssr.gameObjs.ObjHandler;
+import moze_intel.ssr.utils.SSRConfig;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -14,52 +15,41 @@ public class CreateShardEvent {
 
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent event) {
-		if (event.world.isRemote
-				|| event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
-			return;
-		}
+		if (SSRConfig.THEOLDWAYS == false) {
 
-		if (event.entityPlayer.getHeldItem() == null
-				|| event.entityPlayer.getHeldItem().getItem() != Items.diamond) {
-			return;
-		}
-
-		if (event.world.getBlock(event.x, event.y, event.z) != Blocks.glowstone) {
-			return;
-		}
-		// if (SSRConfig.ENABLE_ENDSTONE_RECIPE) {
-		if (checkHorizontal(event.world, event.x, event.y, event.z)
-				|| checkVertical(event.world, event.x, event.y, event.z)) {
-			if (!event.entityPlayer.capabilities.isCreativeMode) {
-				event.entityPlayer.getHeldItem().stackSize--;
+			if (event.world.isRemote
+					|| event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+				return;
 			}
 
-			// Break Block Event?
-			event.world.func_147480_a(event.x, event.y, event.z, false);
-			/*
-			 * event.world.func_147480_a(event.x - 1, event.y, event.z, false);
-			 * event.world.func_147480_a(event.x + 1, event.y, event.z, false);
-			 * event.world.func_147480_a(event.x, event.y, event.z + 1, false);
-			 * event.world.func_147480_a(event.x, event.y, event.z - 1, false);
-			 * event.world.func_147480_a(event.x - 2, event.y, event.z, false);
-			 * event.world.func_147480_a(event.x + 2, event.y, event.z, false);
-			 * event.world.func_147480_a(event.x, event.y, event.z + 2, false);
-			 * event.world.func_147480_a(event.x, event.y, event.z - 2, false);
-			 * event.world.func_147480_a(event.x + 1, event.y, event.z + 1,
-			 * false); event.world.func_147480_a(event.x - 1, event.y, event.z -
-			 * 1, false); event.world.func_147480_a(event.x + 1, event.y,
-			 * event.z - 1, false); event.world.func_147480_a(event.x - 1,
-			 * event.y, event.z + 1, false);
-			 */
+			if (event.entityPlayer.getHeldItem() == null
+					|| event.entityPlayer.getHeldItem().getItem() != Items.diamond) {
+				return;
+			}
 
-			ForgeDirection dir = ForgeDirection.getOrientation(event.face);
+			if (event.world.getBlock(event.x, event.y, event.z) != Blocks.glowstone) {
+				return;
+			}
+			// if (SSRConfig.ENABLE_ENDSTONE_RECIPE) {
+			if (checkHorizontal(event.world, event.x, event.y, event.z)
+					|| checkVertical(event.world, event.x, event.y, event.z)) {
+				if (!event.entityPlayer.capabilities.isCreativeMode) {
+					event.entityPlayer.getHeldItem().stackSize--;
+				}
 
-			event.world.spawnEntityInWorld(new EntityItem(event.world, event.x
-					+ (dir.offsetX * 1.75D), event.y + (dir.offsetY * 1.75D)
-					+ 0.5D, event.z + (dir.offsetZ * 1.75D), new ItemStack(
-					ObjHandler.SOUL_SHARD)));
+				// Break Block Event?
+				event.world.func_147480_a(event.x, event.y, event.z, false);
+
+				ForgeDirection dir = ForgeDirection.getOrientation(event.face);
+
+				event.world.spawnEntityInWorld(new EntityItem(event.world,
+						event.x + (dir.offsetX * 1.75D), event.y
+								+ (dir.offsetY * 1.75D) + 0.5D, event.z
+								+ (dir.offsetZ * 1.75D), new ItemStack(
+								ObjHandler.SOUL_SHARD)));
+			}
+			// }
 		}
-		// }
 	}
 
 	private boolean checkHorizontal(World world, int x, int y, int z) {
