@@ -1,9 +1,8 @@
 package moze_intel.ssr;
 
 import moze_intel.ssr.commands.KillCMD;
-import moze_intel.ssr.events.CreateCageEvent;
+import moze_intel.ssr.events.AchievementEvents;
 import moze_intel.ssr.events.CreateShardEvent;
-import moze_intel.ssr.events.PickupShardEvent;
 import moze_intel.ssr.events.PlayerKillEntityEvent;
 import moze_intel.ssr.events.SSRAchievement;
 import moze_intel.ssr.gameObjs.ObjHandler;
@@ -19,7 +18,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = SSRCore.ID, name = SSRCore.NAME, version = SSRCore.VERSION, guiFactory = "moze_intel.ssr.utils.guiFactory")
 public class SSRCore {
-
 
 	public static final String ID = "SSR";
 	public static final String NAME = "Soul Shards Reborn";
@@ -38,8 +36,7 @@ public class SSRCore {
 
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
-		FMLCommonHandler.instance().bus().register(new CreateCageEvent());
-		FMLCommonHandler.instance().bus().register(new PickupShardEvent());
+		FMLCommonHandler.instance().bus().register(new AchievementEvents());
 
 	}
 
