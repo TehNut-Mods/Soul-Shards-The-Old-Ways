@@ -106,15 +106,15 @@ public class SSRAchievement {
 					.registerStat();
 
 			achievementTier3 = new Achievement("achievement.tier3Shard",
-					"tier3Shard", -3, 4, shard3, achievementTier2)
+					"tier3Shard", -1, 4, shard3, achievementTier2)
 					.registerStat();
 
 			achievementTier4 = new Achievement("achievement.tier4Shard",
-					"tier4Shard", -5, 4, shard4, achievementTier3)
+					"tier4Shard", -3, 4, shard4, achievementTier3)
 					.registerStat();
 
 			achievementTier5 = new Achievement("achievement.tier5Shard",
-					"tier5Shard", -7, 4, shard5, achievementTier4).setSpecial()
+					"tier5Shard", -5, 4, shard5, achievementTier4).setSpecial()
 					.registerStat();
 
 			AchievementPage.registerAchievementPage(new AchievementPage(

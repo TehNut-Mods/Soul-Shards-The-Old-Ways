@@ -2,9 +2,10 @@ item.ssr.shard_unbound.name=Unbound Soul Shard
 item.ssr.shard.name=Soul Shard
 item.ssr.vile_dust.name=Vile Dust
 item.ssr.corrupted_essence.name=Corrupted Essence
+item.ssr.soulium_ingot.name=Soulium Ingot
 
-tile.ssr_forge_block.name=Soul Forge
-
+tile.ssr.soulium_block.name=Block of Soulium
+tile.ssr.soul_forge.name=Soul Forge
 tile.ssr.soul_cage_0.name=Empty Soul Cage
 tile.ssr.soul_cage_1.name=Inactive Soul Cage
 tile.ssr.soul_cage_2.name=Active Soul Cage
@@ -16,20 +17,29 @@ itemGroup.soul_shards_reborn=Soul Shards Reborn
 achievement.createShard=Create a Soul Shard
 achievement.createShard.desc=Created your first Soul Shard
 
-achievement.tier1Shard=Level 1
-achievement.tier1Shard.desc=You killed a lot of monsters
+achievement.tier1Shard=Whoops
+achievement.tier1Shard.desc=You have blood on your hands
 
-achievement.tier2Shard=Level 2
-achievement.tier2Shard.desc=You killed a lot of monsters
+achievement.tier2Shard=Murderer
+achievement.tier2Shard.desc=Your soul is stained
 
-achievement.tier3Shard=Level 3
-achievement.tier3Shard.desc=You killed a lot of monsters
+achievement.tier3Shard=Serial Killer
+achievement.tier3Shard.desc=You've become the monster
 
-achievement.tier4Shard=Level 4
-achievement.tier4Shard.desc=You killed a lot of monsters
+achievement.tier4Shard=Psychopath
+achievement.tier4Shard.desc=What is wrong with you?
 
-achievement.tier5Shard=Level 5
-achievement.tier5Shard.desc=You killed a lot of monsters
+achievement.tier5Shard=Genocidal Maniac
+achievement.tier5Shard.desc=You have no soul
 
 achievement.createCage=These are the Soul Cages
 achievement.createCage.desc=Where is the goat?
+
+achievement.vile_dust=Vile Smelting
+achievement.vile_dust.desc=
+
+achievement.corrupted_essence=
+achievement.corrupted_essence.desc=
+
+achievement.soulForge=Forge Of Souls
+achievement.soulForge.desc=

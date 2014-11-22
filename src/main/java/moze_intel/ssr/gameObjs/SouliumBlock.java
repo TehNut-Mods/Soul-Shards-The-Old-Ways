@@ -17,14 +17,12 @@ public class SouliumBlock extends Block {
 		this.setCreativeTab(ObjHandler.CREATIVE_TAB);
 		this.blockHardness = 3.0F;
 		this.blockResistance = 3.0F;
-
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		return blockIcon;
-
 	}
 
 	@Override

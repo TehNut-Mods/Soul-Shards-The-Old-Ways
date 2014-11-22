@@ -1,6 +1,7 @@
 package moze_intel.ssr.events;
 
 import moze_intel.ssr.gameObjs.ObjHandler;
+import moze_intel.ssr.utils.SSRConfig;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
@@ -40,9 +41,21 @@ public class AchievementEvents {
 
 	@SubscribeEvent
 	public void ShardPickUp(ItemPickupEvent event) {
-		if (event.pickedUp.getEntityItem().getItem()
-				.equals(ObjHandler.SOUL_SHARD)) {
-			event.player.addStat(SSRAchievement.achievementShard, 1);
+		if (!SSRConfig.THEOLDWAYS) {
+			if (event.pickedUp.getEntityItem().getItem()
+					.equals(ObjHandler.SOUL_SHARD)) {
+				event.player.addStat(SSRAchievement.achievementShard, 1);
+			}
+		} else {
+		}
+	}
+
+	public void ShardPickUp(ItemSmeltedEvent event) {
+		if (SSRConfig.THEOLDWAYS) {
+			if (event.smelting.getItem().equals(ObjHandler.SOUL_SHARD)) {
+				event.player.addStat(SSRAchievement.achievementShard, 1);
+			}
+		} else {
 		}
 	}
 
