@@ -16,8 +16,10 @@ public final class ObjHandler {
 	public static final Item VILE_DUST = new VileDustItem();
 	public static final Item CORRUPTED_ESSENCE = new CorruptedEssenceItem();
 	public static final Item SOUL_SHARD = new SoulShardItem();
+	public static final Item SOULIUM_INGOT = new SouliumIngot();
 	public static final Block SOUL_CAGE = new SoulCageBlock();
 	public static final Block SOUL_FORGE = new SoulForgeBlock();
+	public static final Block SOULIUM_BLOCK = new SouliumBlock();
 
 	public static void registerObjs() {
 
@@ -25,9 +27,11 @@ public final class ObjHandler {
 			GameRegistry.registerItem(VILE_DUST, "ssr_vile_dust");
 			GameRegistry.registerItem(CORRUPTED_ESSENCE,
 					"ssr_corrupted_essence");
+			GameRegistry.registerItem(SOULIUM_INGOT, "ssr_soulium_ingot");
 			GameRegistry.registerBlock(SOUL_FORGE, "ssr_forge_block");
 			GameRegistry.registerTileEntity(SoulForgeTile.class,
 					"ssr_soul_forge_tile");
+			GameRegistry.registerBlock(SOULIUM_BLOCK, "ssr_soulium_block");
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.CORRUPTED_ESSENCE, 1), Items.glowstone_dust,
 					ObjHandler.VILE_DUST);
@@ -36,6 +40,11 @@ public final class ObjHandler {
 					ObjHandler.CORRUPTED_ESSENCE, 'O', Blocks.obsidian);
 			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
 					ObjHandler.VILE_DUST), 0.35F);
+			GameRegistry.addShapedRecipe(
+					new ItemStack(ObjHandler.SOULIUM_BLOCK), "AAA", "AAA",
+					"AAA", 'A', ObjHandler.SOULIUM_INGOT);
+			GameRegistry.addShapelessRecipe(new ItemStack(
+					ObjHandler.SOULIUM_INGOT, 9), ObjHandler.SOULIUM_BLOCK);
 		}
 
 		GameRegistry.registerItem(SOUL_SHARD, "ssr_soul_shard");
