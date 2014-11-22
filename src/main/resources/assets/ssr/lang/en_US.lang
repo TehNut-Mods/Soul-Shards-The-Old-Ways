@@ -6,9 +6,12 @@ item.ssr.soulium_ingot.name=Soulium Ingot
 
 tile.ssr.soulium_block.name=Block of Soulium
 tile.ssr.soul_forge.name=Soul Forge
-tile.ssr.soul_cage_0.name=Empty Soul Cage
-tile.ssr.soul_cage_1.name=Inactive Soul Cage
-tile.ssr.soul_cage_2.name=Active Soul Cage
+tile.ssr_cage_block.name=Soul Cage
+ssr.waila.soulcage.mob=Entity: 
+ssr.waila.soulcage.tier=Tier: 
+ssr.waila.soulcage.activated=Status: Activated
+ssr.waila.soulcage.deactivated=Status: Deactivated
+ssr.waila.soulcage.empty=Status: Empty
 
 enchantment.soul_stealer=Soul Stealer
 
@@ -43,3 +46,6 @@ achievement.corrupted_essence.desc=
 
 achievement.soulForge=Forge Of Souls
 achievement.soulForge.desc=
+
+
+

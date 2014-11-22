@@ -68,8 +68,7 @@ public final class ObjHandler {
 
 		GameRegistry.registerItem(SOUL_SHARD, "ssr_soul_shard");
 
-		GameRegistry.registerBlock(SOUL_CAGE, SoulCageItem.class,
-				"ssr_soul_cage");
+		GameRegistry.registerBlock(SOUL_CAGE, "ssr_soul_cage");
 
 		GameRegistry.registerTileEntity(SoulCageTile.class,
 				"ssr_soul_cage_tile");

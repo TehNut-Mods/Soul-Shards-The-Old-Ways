@@ -17,8 +17,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class SoulForgeBlock extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	private IIcon forgeicon_top;
-	private IIcon forgeicon_1;
-	private IIcon forgeicon_0;
+	private IIcon forgeicon_on;
+	private IIcon forgeicon_off;
 
 	public SoulForgeBlock() {
 		super(Material.rock);
@@ -97,8 +97,8 @@ public class SoulForgeBlock extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		this.blockIcon = iconRegister.registerIcon("furnace_side");
-		this.forgeicon_1 = iconRegister.registerIcon("ssr:forge_1");
-		this.forgeicon_0 = iconRegister.registerIcon("ssr:forge_0");
+		this.forgeicon_on = iconRegister.registerIcon("ssr:forge_on");
+		this.forgeicon_off = iconRegister.registerIcon("ssr:forge_off");
 		this.forgeicon_top = iconRegister.registerIcon("furnace_top");
 	}
 
@@ -110,9 +110,9 @@ public class SoulForgeBlock extends BlockContainer {
 		} else if (side == 0) {
 			return this.forgeicon_top;
 		} else if (meta == 1) {
-			return this.forgeicon_1;
+			return this.forgeicon_on;
 		} else {
-			return this.forgeicon_0;
+			return this.forgeicon_off;
 
 		}
 	}

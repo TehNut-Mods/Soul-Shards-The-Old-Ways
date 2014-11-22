@@ -12,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -37,7 +38,7 @@ public class SSRCore {
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
-
+		FMLInterModComms.sendMessage("Waila", "register", "moze_intel.ssr.utils.SSRWailaProvider.callbackRegister");
 	}
 
 	@Mod.EventHandler
