@@ -1,6 +1,6 @@
 package moze_intel.ssr;
 
-import moze_intel.ssr.commands.KillCMD;
+import moze_intel.ssr.commands.SSRCMD;
 import moze_intel.ssr.events.AchievementEvents;
 import moze_intel.ssr.events.CreateShardEvent;
 import moze_intel.ssr.events.PlayerKillEntityEvent;
@@ -48,6 +48,6 @@ public class SSRCore {
 
 	@Mod.EventHandler
 	public void serverStart(FMLServerStartingEvent eventt) {
-		eventt.registerServerCommand(new KillCMD());
+		eventt.registerServerCommand(new SSRCMD());
 	}
 }
