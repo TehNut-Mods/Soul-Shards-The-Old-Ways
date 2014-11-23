@@ -34,7 +34,7 @@ public final class Utils {
 			}
 		}
 
-		if (lastResort.stackSize > 1) {
+		if (lastResort!=null && lastResort.stackSize > 1) {
 			boolean emptySpot = false;
 			int counter = 0;
 
