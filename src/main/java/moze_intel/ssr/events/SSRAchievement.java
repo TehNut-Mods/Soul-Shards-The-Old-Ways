@@ -73,7 +73,7 @@ public class SSRAchievement {
 							achievementShard, achievementTier1,
 							achievementTier2, achievementTier3,
 							achievementTier4, achievementTier5 }));
-			
+
 		} else if (SSRConfig.THEOLDWAYS) {
 
 			achievementCage = new Achievement("achievement.createCage",

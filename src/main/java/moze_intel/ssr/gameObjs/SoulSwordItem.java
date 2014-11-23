@@ -1,10 +1,10 @@
 package moze_intel.ssr.gameObjs;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class SoulSwordItem extends ItemSword {
 
@@ -16,7 +16,7 @@ public class SoulSwordItem extends ItemSword {
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.ssr.corrupted_essence";
+		return "item.ssr.soul_sword";
 	}
 
 	@SideOnly(Side.CLIENT)

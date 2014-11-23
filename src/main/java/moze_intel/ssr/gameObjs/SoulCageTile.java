@@ -35,12 +35,13 @@ public class SoulCageTile extends TileEntity implements IInventory {
 	private boolean redstoneActive;
 	private boolean initChecks;
 	private boolean active;
+
 	public SoulCageTile() {
 		counter = 0;
 		updateCounter = 0;
 		redstoneActive = false;
 		initChecks = false;
-		active=false;
+		active = false;
 	}
 
 	@Override
@@ -67,10 +68,10 @@ public class SoulCageTile extends TileEntity implements IInventory {
 
 			if (canEntitySpawn(ent)) {
 				setMetadata(2);
-				active=true;
+				active = true;
 			} else {
 				setMetadata(1);
-				active=false;
+				active = false;
 			}
 			updateCounter = 0;
 		} else {
@@ -256,7 +257,7 @@ public class SoulCageTile extends TileEntity implements IInventory {
 			tier = Utils.getShardTier(inventory);
 			entName = Utils.getShardBoundEnt(inventory);
 		}
-		active=nbt.getBoolean("active");
+		active = nbt.getBoolean("active");
 	}
 
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -333,15 +334,14 @@ public class SoulCageTile extends TileEntity implements IInventory {
 	public void closeInventory() {
 	}
 
-	public int getTier()
-	{
+	public int getTier() {
 		return tier;
 	}
-	
-	public String getEntityName()
-	{
+
+	public String getEntityName() {
 		return entName;
 	}
+
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		return stack != null && stack.getItem() == ObjHandler.SOUL_SHARD

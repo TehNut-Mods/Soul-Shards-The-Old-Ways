@@ -21,7 +21,7 @@ public final class SSRConfig {
 	public static boolean ALLOW_SPAWNER_ABSORB;
 	public static boolean INVERT_REDSTONE;
 	public static boolean ENABLE_FLOOD_PREVENTION;
-	//public static boolean ENABLE_ENDSTONE_RECIPE;
+	// public static boolean ENABLE_ENDSTONE_RECIPE;
 	public static boolean ENABLE_DEBUG;
 	public static boolean THEOLDWAYS;
 
@@ -36,7 +36,7 @@ public final class SSRConfig {
 			false, false };
 	private static final boolean[] DEFAULT_CHECKS_REDSTONE = { false, false,
 			false, false, true };
-	
+
 	public static Configuration config;
 
 	public static File configDirectory;
@@ -63,10 +63,9 @@ public final class SSRConfig {
 		sections = new ArrayList<Section>();
 	}
 
-	public static final Section sectionEnchant = new Section("Soul Stealer Enchant",
-			"Soul Stealer Enchant");
-	public static final Section sectionMisc = new Section("Misc",
-			"Misc");
+	public static final Section sectionEnchant = new Section(
+			"Soul Stealer Enchant", "Soul Stealer Enchant");
+	public static final Section sectionMisc = new Section("Misc", "Misc");
 	public static final Section sectionTier1 = new Section("Tier 1 Settings",
 			"Tier 1 Settings");
 	public static final Section sectionTier2 = new Section("Tier 2 Settings",
@@ -90,7 +89,7 @@ public final class SSRConfig {
 		config = new Configuration(configFile);
 		syncConfig();
 	}
-	
+
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event) {
 		if (event.modID.equals(SSRCore.ID)) {
@@ -101,18 +100,40 @@ public final class SSRConfig {
 
 	public static void syncConfig() {
 		try {
-			ENCHANT_ID = config.getInt("ID", "Soul Stealer Enchant", 86, 1, 128, "Soul-Stealer enchant id");
-			ENCHANT_WEIGHT = config.getInt("Weight", "Soul Stealer Enchant", 8, 1, 10, "Soul-Stealer enchant probability");
-			ENCHANT_KILL_BONUS = config.getInt("Kill Bonus", "Soul Stealer Enchant", 1, 1, 10, "Soul-Stealer kill bonus");
-			SPAWNER_ABSORB_BONUS = config.getInt("Vanilla Spawner Bonus", "Misc", 200, 1, 400, "Amount of kills added to the shard when right-clicking a spawner");
-			ALLOW_SPAWNER_ABSORB = config.getBoolean("Vanilla Spawner Absorbing", "Misc", true, "Allow absorbing of vanilla spawners for a kill bonus");
-			INVERT_REDSTONE = config.getBoolean("Invert Redstone", "Misc", false, "Active redstone stops a soul cage");
-			ENABLE_FLOOD_PREVENTION = config.getBoolean("Flood Prevention", "Misc", true, "Soul cages will stop when too many entities have been spawned");
-			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "Misc", 80, 1, 200, "Max number of Entities soul cages can spawn in an area");
-			//ENABLE_ENDSTONE_RECIPE = config.getBoolean("Enable Endstone Recipe", "Misc", false, "This will make Endstone craftable");
-			ENABLE_DEBUG = config.getBoolean("Enable Debug", "Misc", false, "This will enable debug mode, where the console will inform you when a mob is spawned");
-			THEOLDWAYS = config.getBoolean("Enable The Old Ways", "Misc", false, "RESTART REQUIRED, This will enable the old ways of creating a soul shard");
-	
+			ENCHANT_ID = config.getInt("ID", "Soul Stealer Enchant", 86, 1,
+					128, "Soul-Stealer enchant id");
+			ENCHANT_WEIGHT = config.getInt("Weight", "Soul Stealer Enchant", 8,
+					1, 10, "Soul-Stealer enchant probability");
+			ENCHANT_KILL_BONUS = config
+					.getInt("Kill Bonus", "Soul Stealer Enchant", 1, 1, 10,
+							"Soul-Stealer kill bonus");
+			SPAWNER_ABSORB_BONUS = config
+					.getInt("Vanilla Spawner Bonus", "Misc", 200, 1, 400,
+							"Amount of kills added to the shard when right-clicking a spawner");
+			ALLOW_SPAWNER_ABSORB = config.getBoolean(
+					"Vanilla Spawner Absorbing", "Misc", true,
+					"Allow absorbing of vanilla spawners for a kill bonus");
+			INVERT_REDSTONE = config.getBoolean("Invert Redstone", "Misc",
+					false, "Active redstone stops a soul cage");
+			ENABLE_FLOOD_PREVENTION = config
+					.getBoolean("Flood Prevention", "Misc", true,
+							"Soul cages will stop when too many entities have been spawned");
+			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "Misc",
+					80, 1, 200,
+					"Max number of Entities soul cages can spawn in an area");
+			// ENABLE_ENDSTONE_RECIPE =
+			// config.getBoolean("Enable Endstone Recipe", "Misc", false,
+			// "This will make Endstone craftable");
+			ENABLE_DEBUG = config
+					.getBoolean(
+							"Enable Debug",
+							"Misc",
+							false,
+							"This will enable debug mode, where the console will inform you when a mob is spawned");
+			THEOLDWAYS = config
+					.getBoolean("Enable The Old Ways", "Misc", false,
+							"RESTART REQUIRED, This will enable the old ways of creating a soul shard");
+
 			short[] minKills = new short[5];
 
 			for (int i = 0; i < 5; i++) {

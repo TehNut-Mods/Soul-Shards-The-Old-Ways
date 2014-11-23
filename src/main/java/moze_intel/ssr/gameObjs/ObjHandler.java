@@ -38,14 +38,10 @@ public final class ObjHandler {
 
 			GameRegistry.registerItem(SOUL_SWORD, "soul_sword");
 
-			GameRegistry.registerBlock(SOUL_FORGE, SoulForgeItem.class,
-					"ssr_forge_block");
+			GameRegistry.registerBlock(SOUL_FORGE, "ssr_forge_block");
 
 			GameRegistry.registerTileEntity(SoulForgeTile.class,
 					"ssr_soul_forge_tile");
-
-			GameRegistry.registerBlock(SOULIUM_BLOCK, SouliumBlockItem.class,
-					"ssr_soulium_block");
 
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.CORRUPTED_ESSENCE, 1), Items.glowstone_dust,

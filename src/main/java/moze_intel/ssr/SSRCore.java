@@ -22,7 +22,7 @@ public class SSRCore {
 
 	public static final String ID = "SSR";
 	public static final String NAME = "Soul Shards Reborn";
-	public static final String VERSION = "RC2.2";
+	public static final String VERSION = "RC3.1";
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -38,7 +38,8 @@ public class SSRCore {
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
-		FMLInterModComms.sendMessage("Waila", "register", "moze_intel.ssr.utils.SSRWailaProvider.callbackRegister");
+		FMLInterModComms.sendMessage("Waila", "register",
+				"moze_intel.ssr.utils.SSRWailaProvider.callbackRegister");
 	}
 
 	@Mod.EventHandler

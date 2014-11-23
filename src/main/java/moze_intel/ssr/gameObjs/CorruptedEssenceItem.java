@@ -1,6 +1,5 @@
 package moze_intel.ssr.gameObjs;
 
-import moze_intel.ssr.SSRCore;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

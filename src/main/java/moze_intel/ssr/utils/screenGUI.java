@@ -21,7 +21,8 @@ public class screenGUI extends GuiConfig {
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
 
 		for (Section section : SSRConfig.sections) {
-			list.add(new ConfigElement<ConfigCategory>(SSRConfig.config.getCategory(section.lc())));
+			list.add(new ConfigElement<ConfigCategory>(SSRConfig.config
+					.getCategory(section.lc())));
 		}
 		return list;
 	}
