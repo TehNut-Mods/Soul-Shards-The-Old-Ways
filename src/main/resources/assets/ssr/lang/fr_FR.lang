@@ -3,12 +3,15 @@ item.ssr.shard.name=Fragment d'âme
 item.ssr.vile_dust.name=Poussière infâme
 item.ssr.corrupted_essence.name=Essence corrompue
 item.ssr.soulium_ingot.name=Lingot d'âmium (soulium)
-tile.ssr.soulium_block.name=Bloc d'âmium (soulium)
 
+tile.ssr.soulium_block.name=Bloc d'âmium (soulium)
 tile.ssr_forge_block.name=Forge d'âme
-tile.ssr.soul_cage_0.name=Cage d'âme vide
-tile.ssr.soul_cage_1.name=Cage d'âme inactive
-tile.ssr.soul_cage_2.name=Cage d'âme active
+tile.ssr_cage_block.name=Cage d'âme
+ssr.waila.soulcage.mob=Entity:
+ssr.waila.soulcage.tier=Tier:
+ssr.waila.soulcage.activated=Status: Activée
+ssr.waila.soulcage.deactivated=Status: Desactivée
+ssr.waila.soulcage.empty=Status: Vide
 
 enchantment.soul_stealer=Voleur d'âme
 
