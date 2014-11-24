@@ -3,6 +3,7 @@ package moze_intel.ssr.commands;
 import java.util.List;
 
 import moze_intel.ssr.gameObjs.ObjHandler;
+import moze_intel.ssr.utils.TierHandler;
 import moze_intel.ssr.utils.Utils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -41,9 +42,7 @@ public class SSRCMD extends CommandBase {
 				sender.addChatMessage(new ChatComponentText(
 						"/ssr killall to kill all the ssr entities"));
 				sender.addChatMessage(new ChatComponentText(
-						"/ssr addtier x to add tiers"));
-				sender.addChatMessage(new ChatComponentText(
-						"/ssr removetier x to remove tiers"));
+						"/ssr settier x to set tier of the shard"));
 				sender.addChatMessage(new ChatComponentText(
 						"/ssr addkills x to add kills"));
 				sender.addChatMessage(new ChatComponentText(
@@ -68,24 +67,27 @@ public class SSRCMD extends CommandBase {
 							EnumChatFormatting.GREEN + "Killed " + killCounter
 									+ " entities!"));
 				}
-			} else if (params[0].equals("addtier")) {
+			} else if (params[0].equals("settier")) {
 
 				if (params.length == 2) {
 					int tierAmount = Integer.parseInt(params[1]);
+					int minKills = TierHandler.getMinKills(tierAmount);
+					if (((EntityPlayerMP) sender).getHeldItem() != null
+							&& ((EntityPlayerMP) sender).getHeldItem()
+									.getItem() == ObjHandler.SOUL_SHARD) {
+						ItemStack shard = ((EntityPlayerMP) sender)
+								.getHeldItem();
+						for (int i = 1; i <= tierAmount; i++) {
 
+							Utils.setShardTier(shard, (byte) 1);
+							Utils.setShardKillCount(shard, (short) minKills);
+
+						}
+					}
 				} else {
 					sender.addChatMessage(new ChatComponentText(
 							EnumChatFormatting.RED
-									+ "Wrong use of command, /ssr addtier x"));
-				}
-			} else if (params[0].equals("removetier")) {
-				if (params.length == 2) {
-					int tierAmount = Integer.parseInt(params[1]);
-
-				} else {
-					sender.addChatMessage(new ChatComponentText(
-							EnumChatFormatting.RED
-									+ "Wrong use of command, /ssr removetier x"));
+									+ "Wrong use of command, /ssr settier x"));
 				}
 			} else if (params[0].equals("addkills")) {
 
