@@ -2,9 +2,13 @@ package moze_intel.ssr.commands;
 
 import java.util.List;
 
+import moze_intel.ssr.gameObjs.ObjHandler;
+import moze_intel.ssr.utils.Utils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
@@ -29,7 +33,7 @@ public class SSRCMD extends CommandBase {
 	public void processCommand(ICommandSender sender, String[] params) {
 
 		if ((params.length > 0) && (params.length <= 7)) {
-			if (params[0] == "help") {
+			if (params[0].equals("help")) {
 				sender.addChatMessage(new ChatComponentText(
 						"--- Showing SSR help page 1 of 1 ---")
 						.setChatStyle(new ChatStyle()
@@ -45,7 +49,7 @@ public class SSRCMD extends CommandBase {
 				sender.addChatMessage(new ChatComponentText(
 						"/ssr removekills x to remove kills"));
 
-			} else if (params[0] == "killall") {
+			} else if (params[0].equals("killall")) {
 				int killCounter = 0;
 
 				for (Entity ent : (List<Entity>) sender.getEntityWorld().loadedEntityList) {
@@ -64,7 +68,7 @@ public class SSRCMD extends CommandBase {
 							EnumChatFormatting.GREEN + "Killed " + killCounter
 									+ " entities!"));
 				}
-			} else if (params[0] == "addtier") {
+			} else if (params[0].equals("addtier")) {
 
 				if (params.length == 2) {
 					int tierAmount = Integer.parseInt(params[1]);
@@ -74,7 +78,7 @@ public class SSRCMD extends CommandBase {
 							EnumChatFormatting.RED
 									+ "Wrong use of command, /ssr addtier x"));
 				}
-			} else if (params[0] == "removetier") {
+			} else if (params[0].equals("removetier")) {
 				if (params.length == 2) {
 					int tierAmount = Integer.parseInt(params[1]);
 
@@ -83,16 +87,28 @@ public class SSRCMD extends CommandBase {
 							EnumChatFormatting.RED
 									+ "Wrong use of command, /ssr removetier x"));
 				}
-			} else if (params[0] == "addkills") {
-				if (params.length == 2) {
-					int killAmount = Integer.parseInt(params[1]);
+			} else if (params[0].equals("addkills")) {
+
+				int killAmount = 1000;
+
+				if (params.length >= 2) {
+					killAmount = Integer.parseInt(params[1]);
 
 				} else {
 					sender.addChatMessage(new ChatComponentText(
 							EnumChatFormatting.RED
 									+ "Wrong use of command, /ssr addkills x"));
 				}
-			} else if (params[0] == "removekills") {
+
+				if (((EntityPlayerMP) sender).getHeldItem() != null
+						&& ((EntityPlayerMP) sender).getHeldItem().getItem() == ObjHandler.SOUL_SHARD) {
+					ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
+					for (int i = 1; i <= killAmount; i++) {
+
+						Utils.increaseShardKillCount(shard, (short) 1);
+					}
+				}
+			} else if (params[0].equals("removekills")) {
 				if (params.length == 2) {
 					int killAmount = Integer.parseInt(params[1]);
 
