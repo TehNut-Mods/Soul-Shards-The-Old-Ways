@@ -162,7 +162,7 @@ public class SoulForgeTile extends TileEntityFurnace {
 	private ItemStack getSmeltingResult(ItemStack itemStack) {
 		Item item = itemStack.getItem();
 		if (item == Items.iron_ingot) {
-			return new ItemStack(ObjHandler.VILE_DUST, 1);
+			return new ItemStack(ObjHandler.SOULIUM_INGOT, 1);
 		} else if (item == Items.diamond) {
 			return new ItemStack(ObjHandler.SOUL_SHARD, 1);
 		} else {
@@ -226,8 +226,8 @@ public class SoulForgeTile extends TileEntityFurnace {
 		this.furnaceCookTime = nbtTag_.getShort("CookTime");
 		this.currentItemBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
 
-		if (nbtTag_.hasKey("CustomName", 8)) {
-			this.customName = nbtTag_.getString("CustomName");
+		if (nbtTag_.hasKey("Soul Forge", 8)) {
+			this.customName = nbtTag_.getString("Soul Forge");
 		}
 	}
 
@@ -250,7 +250,7 @@ public class SoulForgeTile extends TileEntityFurnace {
 		nbtTag_.setTag("Items", nbttaglist);
 
 		if (this.hasCustomInventoryName()) {
-			nbtTag_.setString("CustomName", this.customName);
+			nbtTag_.setString("Soul Forge", this.customName);
 		}
 	}
 }

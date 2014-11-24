@@ -22,7 +22,7 @@ public class SSRCore {
 
 	public static final String ID = "SSR";
 	public static final String NAME = "Soul Shards Reborn";
-	public static final String VERSION = "RC3.1";
+	public static final String VERSION = "RC3.1-C";
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

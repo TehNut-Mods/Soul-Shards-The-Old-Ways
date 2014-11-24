@@ -12,16 +12,22 @@ import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public final class ObjHandler {
-	public static ToolMaterial SOULSWORD = EnumHelper.addToolMaterial(
-			"SOULSWORD", 0, 250, 6.0F, 2.5F, 25);
+	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM",
+			2, 750, 7.0F, 2.5F, 22);
+
 	public static final Enchantment SOUL_STEALER = new SoulStealerEnchant(
 			SSRConfig.ENCHANT_ID, SSRConfig.ENCHANT_WEIGHT);
+
 	public static final SSRCreativeTab CREATIVE_TAB = new SSRCreativeTab();
 	public static final Item VILE_DUST = new VileDustItem();
 	public static final Item CORRUPTED_ESSENCE = new CorruptedEssenceItem();
 	public static final Item SOUL_SHARD = new SoulShardItem();
 	public static final Item SOULIUM_INGOT = new SouliumIngot();
-	public static final Item SOUL_SWORD = new SoulSwordItem(SOULSWORD);
+	public static final Item SOUL_SWORD = new SoulSwordItem(SOULIUM);
+	public static final Item SOUL_PICK = new SoulPickaxeItem(SOULIUM);
+	public static final Item SOUL_AXE = new SoulAxeItem(SOULIUM);
+	public static final Item SOUL_HOE = new SoulHoeItem(SOULIUM);
+	public static final Item SOUL_SPADE = new SoulSpadeItem(SOULIUM);
 	public static final Block SOUL_CAGE = new SoulCageBlock();
 	public static final Block SOUL_FORGE = new SoulForgeBlock();
 	public static final Block SOULIUM_BLOCK = new SouliumBlock();
@@ -36,7 +42,11 @@ public final class ObjHandler {
 
 			GameRegistry.registerItem(SOULIUM_INGOT, "ssr_soulium_ingot");
 
-			GameRegistry.registerItem(SOUL_SWORD, "soul_sword");
+			GameRegistry.registerItem(SOUL_SWORD, "ssr_soul_sword");
+			GameRegistry.registerItem(SOUL_PICK, "ssr_soul_pickaxe");
+			GameRegistry.registerItem(SOUL_AXE, "ssr_soul_axe");
+			GameRegistry.registerItem(SOUL_HOE, "ssr_soul_hoe");
+			GameRegistry.registerItem(SOUL_SPADE, "ssr_soul_spade");
 
 			GameRegistry.registerBlock(SOUL_FORGE, SoulForgeItem.class,
 					"ssr_forge_block");
@@ -60,6 +70,26 @@ public final class ObjHandler {
 			GameRegistry.addShapedRecipe(
 					new ItemStack(ObjHandler.SOULIUM_BLOCK), "AAA", "AAA",
 					"AAA", 'A', ObjHandler.SOULIUM_INGOT);
+
+			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_SWORD),
+					"A", "A", "B", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+					Items.iron_ingot);
+
+			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_PICK),
+					"AAA", "CBC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+					Items.iron_ingot);
+
+			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_AXE),
+					"AAC", "ABC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+					Items.iron_ingot);
+
+			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_HOE),
+					"AAC", "CBC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+					Items.iron_ingot);
+
+			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_SPADE),
+					"A", "B", "B", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+					Items.iron_ingot);
 
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.SOULIUM_INGOT, 9), ObjHandler.SOULIUM_BLOCK);

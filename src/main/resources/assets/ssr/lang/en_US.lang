@@ -3,10 +3,16 @@ item.ssr.shard.name=Soul Shard
 item.ssr.vile_dust.name=Vile Dust
 item.ssr.corrupted_essence.name=Corrupted Essence
 item.ssr.soulium_ingot.name=Soulium Ingot
+item.ssr.soul_sword.name=Soul Sword
+item.ssr.soul_pickaxe.name=Soul Pickaxe
+item.ssr.soul_axe.name=Soul Axe
+item.ssr.soul_hoe.name=Soul Hoe
+item.ssr.soul_spade.name=Soul Spade
 
 tile.ssr.soulium_block.name=Block of Soulium
 tile.ssr.soul_forge.name=Soul Forge
 tile.ssr_cage_block.name=Soul Cage
+
 ssr.waila.soulcage.mob=Entity: 
 ssr.waila.soulcage.tier=Tier: 
 ssr.waila.soulcage.activated=Status: Activated
@@ -39,13 +45,10 @@ achievement.createCage=These are the Soul Cages
 achievement.createCage.desc=Where is the goat?
 
 achievement.vile_dust=Vile Smelting
-achievement.vile_dust.desc=
+achievement.vile_dust.desc=It smells kinda... vile
 
-achievement.corrupted_essence=
-achievement.corrupted_essence.desc=
+achievement.corrupted_essence=Essence of Corruption
+achievement.corrupted_essence.desc=Slightly more corrupt than a politician!
 
 achievement.soulForge=Forge Of Souls
-achievement.soulForge.desc=
-
-
-
+achievement.soulForge.desc=It's like a normal forge, but for souls
