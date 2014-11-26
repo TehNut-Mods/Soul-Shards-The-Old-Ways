@@ -1,5 +1,6 @@
-package moze_intel.ssr.gameObjs;
+package moze_intel.ssr.gameObjs.item;
 
+import moze_intel.ssr.gameObjs.ObjHandler;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemHoe;

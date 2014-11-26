@@ -1,5 +1,6 @@
-package moze_intel.ssr.gameObjs;
+package moze_intel.ssr.gameObjs.item;
 
+import moze_intel.ssr.gameObjs.ObjHandler;
 import java.util.List;
 
 import moze_intel.ssr.utils.EntityMapper;

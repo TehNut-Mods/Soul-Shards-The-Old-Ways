@@ -1,5 +1,23 @@
 package moze_intel.ssr.gameObjs;
 
+import moze_intel.ssr.gameObjs.block.SoulCageBlock;
+import moze_intel.ssr.gameObjs.block.SoulForgeBlock;
+import moze_intel.ssr.gameObjs.block.SouliumBlock;
+import moze_intel.ssr.gameObjs.item.CorruptedEssenceItem;
+import moze_intel.ssr.gameObjs.item.IronNugget;
+import moze_intel.ssr.gameObjs.item.SoulAxeItem;
+import moze_intel.ssr.gameObjs.item.SoulForgeItem;
+import moze_intel.ssr.gameObjs.item.SoulHoeItem;
+import moze_intel.ssr.gameObjs.item.SoulPickaxeItem;
+import moze_intel.ssr.gameObjs.item.SoulShardItem;
+import moze_intel.ssr.gameObjs.item.SoulSpadeItem;
+import moze_intel.ssr.gameObjs.item.SoulSwordItem;
+import moze_intel.ssr.gameObjs.item.SouliumBlockItem;
+import moze_intel.ssr.gameObjs.item.SouliumIngot;
+import moze_intel.ssr.gameObjs.item.SouliumNugget;
+import moze_intel.ssr.gameObjs.item.VileDustItem;
+import moze_intel.ssr.gameObjs.tile.SoulCageTile;
+import moze_intel.ssr.gameObjs.tile.SoulForgeTile;
 import moze_intel.ssr.utils.SSRConfig;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -121,11 +139,11 @@ public class ObjHandler {
 		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
 				"III", "IXI", "III", 'I', Blocks.iron_bars);
 
-		/*
-		 * if (SSRConfig.ENABLE_ENDSTONE_RECIPE)
-		 * GameRegistry.addShapedRecipe(new ItemStack(Blocks.end_stone, 2),
-		 * " a ", "bcb", " a ", 'a', Blocks.stone, 'b', new ItemStack(
-		 * Blocks.sand, 1, 0), 'c', Items.ender_pearl);
-		 */
+		
+		if (SSRConfig.ENABLE_ENDSTONE_RECIPE){
+			GameRegistry.addShapedRecipe(new ItemStack(Blocks.end_stone, 2),
+				" a ", "bcb", " a ", 'a', Blocks.stone, 'b', new ItemStack(
+			Blocks.sand, 1, 0), 'c', Items.ender_pearl);
+		}
 	}
 }

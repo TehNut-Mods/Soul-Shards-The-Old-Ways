@@ -11,6 +11,7 @@ import moze_intel.ssr.utils.SSRConfig;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -23,7 +24,9 @@ public class SSRCore {
 	public static final String ID = "SSR";
 	public static final String NAME = "Soul Shards Reborn";
 	public static final String VERSION = "RC3.1-C";
-
+	
+	@Instance(ID)
+	public static SSRCore modInstance;
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		SSRConfig.load(event);

@@ -1,5 +1,6 @@
-package moze_intel.ssr.gameObjs;
+package moze_intel.ssr.gameObjs.tile;
 
+import moze_intel.ssr.gameObjs.ObjHandler;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

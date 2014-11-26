@@ -21,7 +21,7 @@ public final class SSRConfig {
 	public static boolean ALLOW_SPAWNER_ABSORB;
 	public static boolean INVERT_REDSTONE;
 	public static boolean ENABLE_FLOOD_PREVENTION;
-	// public static boolean ENABLE_ENDSTONE_RECIPE;
+	public static boolean ENABLE_ENDSTONE_RECIPE;
 	public static boolean ENABLE_DEBUG;
 	public static boolean THEOLDWAYS;
 
@@ -121,9 +121,7 @@ public final class SSRConfig {
 			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "Misc",
 					80, 1, 200,
 					"Max number of Entities soul cages can spawn in an area");
-			// ENABLE_ENDSTONE_RECIPE =
-			// config.getBoolean("Enable Endstone Recipe", "Misc", false,
-			// "This will make Endstone craftable");
+			ENABLE_ENDSTONE_RECIPE = config.getBoolean("Enable Endstone Recipe", "Misc", false, "This will make Endstone craftable");
 			ENABLE_DEBUG = config
 					.getBoolean(
 							"Enable Debug",

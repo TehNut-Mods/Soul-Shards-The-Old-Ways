@@ -1,12 +1,15 @@
-package moze_intel.ssr.gameObjs;
+package moze_intel.ssr.gameObjs.block;
 
 import java.util.Random;
 
+import moze_intel.ssr.gameObjs.ObjHandler;
+import moze_intel.ssr.gameObjs.tile.SoulForgeTile;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -16,7 +19,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SoulForgeBlock extends BlockContainer {
 	@SideOnly(Side.CLIENT)
-	private IIcon forgeicon_top;
 	private IIcon forgeicon_on;
 	private IIcon forgeicon_off;
 
@@ -93,22 +95,29 @@ public class SoulForgeBlock extends BlockContainer {
 		}
 	}
 
+	public Item getItemDropped(int par1, Random random, int par3) {
+		return Item.getItemFromBlock(ObjHandler.SOUL_FORGE);
+	}
+
+	public Item getItem(World world, int par2, int par3, int par4) {
+		return Item.getItemFromBlock(ObjHandler.SOUL_FORGE);
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon("furnace_side");
+		this.blockIcon = iconRegister.registerIcon("furnace_top");
 		this.forgeicon_on = iconRegister.registerIcon("ssr:forge_on");
 		this.forgeicon_off = iconRegister.registerIcon("ssr:forge_off");
-		this.forgeicon_top = iconRegister.registerIcon("furnace_top");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (side == 1) {
-			return this.forgeicon_top;
+			return this.blockIcon;
 		} else if (side == 0) {
-			return this.forgeicon_top;
+			return this.blockIcon;
 		} else if (meta == 1) {
 			return this.forgeicon_on;
 		} else {

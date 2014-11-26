@@ -1,7 +1,9 @@
-package moze_intel.ssr.gameObjs;
+package moze_intel.ssr.gameObjs.block;
 
 import java.util.Random;
 
+import moze_intel.ssr.gameObjs.ObjHandler;
+import moze_intel.ssr.gameObjs.tile.SoulCageTile;
 import moze_intel.ssr.utils.SSRLogger;
 import moze_intel.ssr.utils.Utils;
 import net.minecraft.block.Block;

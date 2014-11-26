@@ -1,7 +1,8 @@
-package moze_intel.ssr.gameObjs;
+package moze_intel.ssr.gameObjs.tile;
 
 import java.util.List;
 
+import moze_intel.ssr.gameObjs.ObjHandler;
 import moze_intel.ssr.utils.EntityMapper;
 import moze_intel.ssr.utils.SSRConfig;
 import moze_intel.ssr.utils.SSRLogger;
