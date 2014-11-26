@@ -162,7 +162,7 @@ public class SoulForgeTile extends TileEntityFurnace {
 	private ItemStack getSmeltingResult(ItemStack itemStack) {
 		Item item = itemStack.getItem();
 		if (item == Items.iron_ingot) {
-			return new ItemStack(ObjHandler.SOULIUM_INGOT, 1);
+			return new ItemStack(ObjHandler.SOULIUM_NUGGET, 3);
 		} else if (item == Items.diamond) {
 			return new ItemStack(ObjHandler.SOUL_SHARD, 1);
 		} else {

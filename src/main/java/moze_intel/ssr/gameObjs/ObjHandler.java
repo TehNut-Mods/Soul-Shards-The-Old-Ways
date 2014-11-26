@@ -11,26 +11,29 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public final class ObjHandler {
+public class ObjHandler {
+
 	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM",
 			2, 750, 7.0F, 2.5F, 22);
 
-	public static final Enchantment SOUL_STEALER = new SoulStealerEnchant(
+	public static Enchantment SOUL_STEALER = new SoulStealerEnchant(
 			SSRConfig.ENCHANT_ID, SSRConfig.ENCHANT_WEIGHT);
 
-	public static final SSRCreativeTab CREATIVE_TAB = new SSRCreativeTab();
-	public static final Item VILE_DUST = new VileDustItem();
-	public static final Item CORRUPTED_ESSENCE = new CorruptedEssenceItem();
-	public static final Item SOUL_SHARD = new SoulShardItem();
-	public static final Item SOULIUM_INGOT = new SouliumIngot();
-	public static final Item SOUL_SWORD = new SoulSwordItem(SOULIUM);
-	public static final Item SOUL_PICK = new SoulPickaxeItem(SOULIUM);
-	public static final Item SOUL_AXE = new SoulAxeItem(SOULIUM);
-	public static final Item SOUL_HOE = new SoulHoeItem(SOULIUM);
-	public static final Item SOUL_SPADE = new SoulSpadeItem(SOULIUM);
-	public static final Block SOUL_CAGE = new SoulCageBlock();
-	public static final Block SOUL_FORGE = new SoulForgeBlock();
-	public static final Block SOULIUM_BLOCK = new SouliumBlock();
+	public static SSRCreativeTab CREATIVE_TAB = new SSRCreativeTab();
+	public static Item VILE_DUST = new VileDustItem();
+	public static Item CORRUPTED_ESSENCE = new CorruptedEssenceItem();
+	public static Item SOUL_SHARD = new SoulShardItem();
+	public static Item SOULIUM_INGOT = new SouliumIngot();
+	public static Item SOULIUM_NUGGET = new SouliumNugget();
+	public static Item SOUL_SWORD = new SoulSwordItem(SOULIUM);
+	public static Item SOUL_PICK = new SoulPickaxeItem(SOULIUM);
+	public static Item SOUL_AXE = new SoulAxeItem(SOULIUM);
+	public static Item SOUL_HOE = new SoulHoeItem(SOULIUM);
+	public static Item SOUL_SPADE = new SoulSpadeItem(SOULIUM);
+	public static Item IRON_NUGGET = new IronNugget();
+	public static Block SOUL_CAGE = new SoulCageBlock();
+	public static Block SOUL_FORGE = new SoulForgeBlock();
+	public static Block SOULIUM_BLOCK = new SouliumBlock();
 
 	public static void registerObjs() {
 
@@ -41,7 +44,8 @@ public final class ObjHandler {
 					"ssr_corrupted_essence");
 
 			GameRegistry.registerItem(SOULIUM_INGOT, "ssr_soulium_ingot");
-
+			GameRegistry.registerItem(SOULIUM_NUGGET, "ssr_soulium_nugget");
+			GameRegistry.registerItem(IRON_NUGGET, "ssr_iron_nugget");
 			GameRegistry.registerItem(SOUL_SWORD, "ssr_soul_sword");
 			GameRegistry.registerItem(SOUL_PICK, "ssr_soul_pickaxe");
 			GameRegistry.registerItem(SOUL_AXE, "ssr_soul_axe");
@@ -50,6 +54,7 @@ public final class ObjHandler {
 
 			GameRegistry.registerBlock(SOUL_FORGE, SoulForgeItem.class,
 					"ssr_forge_block");
+
 			GameRegistry.registerBlock(SOULIUM_BLOCK, SouliumBlockItem.class,
 					"ssr_soulium_block");
 
@@ -66,6 +71,13 @@ public final class ObjHandler {
 
 			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
 					ObjHandler.VILE_DUST), 0.35F);
+
+			GameRegistry.addShapedRecipe(
+					new ItemStack(ObjHandler.SOULIUM_INGOT), "AAA", "AAA",
+					"AAA", 'A', ObjHandler.SOULIUM_NUGGET);
+
+			GameRegistry.addShapedRecipe(new ItemStack(Items.iron_ingot),
+					"AAA", "AAA", "AAA", 'A', ObjHandler.IRON_NUGGET);
 
 			GameRegistry.addShapedRecipe(
 					new ItemStack(ObjHandler.SOULIUM_BLOCK), "AAA", "AAA",
@@ -93,6 +105,10 @@ public final class ObjHandler {
 
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.SOULIUM_INGOT, 9), ObjHandler.SOULIUM_BLOCK);
+			GameRegistry.addShapelessRecipe(new ItemStack(
+					ObjHandler.SOULIUM_NUGGET, 9), ObjHandler.SOULIUM_INGOT);
+			GameRegistry.addShapelessRecipe(new ItemStack(
+					ObjHandler.IRON_NUGGET, 9), Items.iron_ingot);
 		}
 
 		GameRegistry.registerItem(SOUL_SHARD, "ssr_soul_shard");
