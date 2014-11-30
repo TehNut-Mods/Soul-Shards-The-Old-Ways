@@ -1,6 +1,7 @@
 package moze_intel.ssr.gameObjs.item;
 
 import moze_intel.ssr.gameObjs.ObjHandler;
+
 import java.util.List;
 
 import moze_intel.ssr.utils.EntityMapper;
@@ -11,6 +12,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -101,10 +103,39 @@ public class SoulShardItem extends Item {
 							false);
 				}
 			} else if (EntityMapper.isEntityValid(name)) {
-				Utils.setShardBoundEnt(stack, name);
-				Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
-				Utils.increaseShardKillCount(stack,
-						(short) SSRConfig.SPAWNER_ABSORB_BONUS);
+				if (stack.stackSize > 1) {
+					stack.stackSize--;
+					ItemStack newStack = new ItemStack(ObjHandler.SOUL_SHARD, 1);
+
+					Utils.setShardBoundEnt(newStack, name);
+					Utils.writeEntityHeldItem(newStack, (EntityLiving) ent);
+					Utils.increaseShardKillCount(newStack,
+							(short) SSRConfig.SPAWNER_ABSORB_BONUS);
+
+					boolean emptySpot = false;
+					int counter = 0;
+
+					while (!emptySpot && counter < 36) {
+						ItemStack inventoryStack = player.inventory
+								.getStackInSlot(counter);
+						if (inventoryStack == null) {
+							player.inventory.addItemStackToInventory(newStack);
+							emptySpot = true;
+						}
+						counter++;
+					}
+
+					if (!emptySpot) {
+						player.worldObj.spawnEntityInWorld(new EntityItem(
+								player.worldObj, player.posX, player.posY,
+								player.posZ, newStack));
+					}
+				} else {
+					Utils.setShardBoundEnt(stack, name);
+					Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
+					Utils.increaseShardKillCount(stack,
+							(short) SSRConfig.SPAWNER_ABSORB_BONUS);
+				}
 				world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, true);
 			}
 		}

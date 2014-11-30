@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import moze_intel.ssr.SSRCore;
+import moze_intel.ssr.gameObjs.ObjHandler;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -100,7 +101,7 @@ public final class SSRConfig {
 
 	public static void syncConfig() {
 		try {
-			ENCHANT_ID = config.getInt("ID", "Soul Stealer Enchant", 86, 1,
+			ENCHANT_ID = config.getInt("ID", "Soul Stealer Enchant", 52, 1,
 					128, "Soul-Stealer enchant id");
 			ENCHANT_WEIGHT = config.getInt("Weight", "Soul Stealer Enchant", 8,
 					1, 10, "Soul-Stealer enchant probability");

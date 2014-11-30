@@ -52,8 +52,20 @@ public class ObjHandler {
 	public static Block SOUL_CAGE = new SoulCageBlock();
 	public static Block SOUL_FORGE = new SoulForgeBlock();
 	public static Block SOULIUM_BLOCK = new SouliumBlock();
+	public static int enchantmentSoulStealingId;
 
 	public static void registerObjs() {
+
+//		int counter = 52;
+//		boolean found = false;
+//		while (counter <= 256 && !found) {
+//			if (Enchantment.enchantmentsList[counter] == null) {
+//				Enchantment SOUL_STEALER = new SoulStealerEnchant(counter,
+//						SSRConfig.ENCHANT_WEIGHT);
+//				enchantmentSoulStealingId = counter;
+//				found = true;
+//			}
+//		}
 
 		if (SSRConfig.THEOLDWAYS == true) {
 			GameRegistry.registerItem(VILE_DUST, "ssr_vile_dust");
@@ -139,11 +151,10 @@ public class ObjHandler {
 		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
 				"III", "IXI", "III", 'I', Blocks.iron_bars);
 
-		
-		if (SSRConfig.ENABLE_ENDSTONE_RECIPE){
+		if (SSRConfig.ENABLE_ENDSTONE_RECIPE) {
 			GameRegistry.addShapedRecipe(new ItemStack(Blocks.end_stone, 2),
-				" a ", "bcb", " a ", 'a', Blocks.stone, 'b', new ItemStack(
-			Blocks.sand, 1, 0), 'c', Items.ender_pearl);
+					" a ", "bcb", " a ", 'a', Blocks.stone, 'b', new ItemStack(
+							Blocks.sand, 1, 0), 'c', Items.ender_pearl);
 		}
 	}
 }

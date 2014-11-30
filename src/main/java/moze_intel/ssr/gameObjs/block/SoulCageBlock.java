@@ -1,9 +1,11 @@
 package moze_intel.ssr.gameObjs.block;
 
+import java.util.Calendar;
 import java.util.Random;
 
 import moze_intel.ssr.gameObjs.ObjHandler;
 import moze_intel.ssr.gameObjs.tile.SoulCageTile;
+import moze_intel.ssr.utils.HolidayHelper;
 import moze_intel.ssr.utils.SSRLogger;
 import moze_intel.ssr.utils.Utils;
 import net.minecraft.block.Block;
@@ -16,7 +18,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -25,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SoulCageBlock extends Block implements ITileEntityProvider {
 	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
+	public IIcon[] icons = new IIcon[5];
 
 	public SoulCageBlock() {
 		super(Material.iron);
@@ -77,7 +78,9 @@ public class SoulCageBlock extends Block implements ITileEntityProvider {
 					return false;
 				}
 
-				((IInventory) tile).setInventorySlotContents(0, stack.copy());
+				ItemStack newShard = stack.copy();
+				newShard.stackSize = 1;
+				((IInventory) tile).setInventorySlotContents(0, newShard);
 
 				if (!player.capabilities.isCreativeMode) {
 					stack.stackSize--;
@@ -142,18 +145,6 @@ public class SoulCageBlock extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		ForgeDirection dir = ForgeDirection.getOrientation(side);
-
-		if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-			return icons[0];
-		}
-
-		return icons[MathHelper.clamp_int(meta, 0, 2)];
-	}
-
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
@@ -161,9 +152,61 @@ public class SoulCageBlock extends Block implements ITileEntityProvider {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		icons = new IIcon[3];
-		for (int i = 0; i < 3; i++) {
-			icons[i] = iconRegister.registerIcon("ssr:cage_" + i);
+		if (HolidayHelper.isChristmas()) {
+			icons = new IIcon[4];
+			for (int i = 0; i < 4; i++) {
+				icons[i] = iconRegister.registerIcon("ssr:cage_" + i + "_xmas");
+			}
+		} else {
+			icons = new IIcon[5];
+			for (int i = 0; i < 5; i++) {
+				icons[i] = iconRegister.registerIcon("ssr:cage_" + i);
+			}
+		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int sideInt, int meta) {
+		ForgeDirection dir = ForgeDirection.getOrientation(sideInt);
+		if (HolidayHelper.isChristmas()) {
+			// Check block direction
+			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
+				// meta 2 == block activated
+				return icons[3];
+			} else {
+				// meta 2 == block activated
+				if (meta == 2) {
+					return icons[2];
+					// meta 1 == block has shard
+				} else if (meta == 1) {
+					return icons[1];
+					// meta 0 == block is empty
+				} else {
+					return icons[0];
+				}
+			}
+		} else {
+			// Check block direction
+			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
+				// meta 2 == block activated
+				if (meta == 2) {
+					return icons[4];
+				} else {
+					return icons[3];
+				}
+			} else {
+				// meta 2 == block activated
+				if (meta == 2) {
+					return icons[2];
+					// meta 1 == block has shard
+				} else if (meta == 1) {
+					return icons[1];
+					// meta 0 == block is empty
+				} else {
+					return icons[0];
+				}
+			}
 		}
 	}
 }
