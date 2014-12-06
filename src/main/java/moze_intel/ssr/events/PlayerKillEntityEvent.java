@@ -58,6 +58,7 @@ public class PlayerKillEntityEvent {
 				Utils.setShardBoundEnt(shard, entName);
 				Utils.writeEntityHeldItem(shard, dead);
 			}
+		Utils.writeEntityArmor(shard, dead);
 
 			int soulStealer = EnchantmentHelper.getEnchantmentLevel(
 					ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());

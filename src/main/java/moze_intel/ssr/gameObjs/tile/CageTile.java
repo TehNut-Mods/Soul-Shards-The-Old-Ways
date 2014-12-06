@@ -109,6 +109,10 @@ public class CageTile extends TileEntity implements ISidedInventory {
 				if (heldItem != null) {
 					toSpawn[i].setCurrentItemOrArmor(0, heldItem);
 				}
+				
+				for(int j=1;j<=4;j++){
+					toSpawn[i].setCurrentItemOrArmor(j, Utils.getEntityArmor(inventory, j));
+				}
 
 				toSpawn[i].getEntityData().setBoolean("SSR", true);
 				toSpawn[i].forceSpawn = true;
