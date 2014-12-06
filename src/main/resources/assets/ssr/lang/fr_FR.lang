@@ -3,6 +3,12 @@ item.ssr.shard.name=Fragment d'âme
 item.ssr.vile_dust.name=Poussière infâme
 item.ssr.corrupted_essence.name=Essence corrompue
 item.ssr.soulium_ingot.name=Lingot d'âmium (soulium)
+item.ssr.iron_nugget.name=Pépite de fer
+item.ssr.soul_sword.name=Épée d'âmium
+item.ssr.soul_pickaxe.name=Pioche d'âmium
+item.ssr.soul_axe.name=Hache d'âmium
+item.ssr.soul_hoe.name=Houe d'âmium
+item.ssr.soul_spade.name=Pelle d'âmium
 
 item.ssr.iron_nugget.name=Pépite de fer
 item.ssr.soul_sword.name=Épée d'âmium
@@ -15,7 +21,12 @@ container.soulforge=Forge d'âme
 
 tile.ssr.forge_block.name=Forge d'âme
 tile.ssr.soulium_block.name=Bloc d'âmium (soulium)
+<<<<<<< HEAD
 tile.ssr.cage_block.name=Cage d'âme
+=======
+tile.ssr_forge_block.name=Forge d'âme
+tile.ssr_cage_block.name=Cage d'âme
+>>>>>>> origin/master
 
 ssr.waila.soulcage.mob=Entity:
 ssr.waila.soulcage.tier=Tier:
@@ -55,4 +66,8 @@ achievement.corrupted_essence=Essence de corruption
 achievement.corrupted_essence.desc=Encore plus corrompue qu'un politicien
 
 achievement.soulForge=La forge des âmes
+<<<<<<< HEAD
 achievement.soulForge.desc=C'est comme une forge normale, mais pour les âmes
+=======
+achievement.soulForge.desc=C'est comme une forge normale, mais pour les âmes
+>>>>>>> origin/master
