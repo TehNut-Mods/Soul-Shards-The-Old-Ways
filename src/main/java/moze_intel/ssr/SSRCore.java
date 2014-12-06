@@ -23,7 +23,7 @@ public class SSRCore {
 
 	public static final String ID = "SSR";
 	public static final String NAME = "Soul Shards Reborn";
-	public static final String VERSION = "RC3.1-C";
+	public static final String VERSION = "1.0.2b";
 	
 	@Instance(ID)
 	public static SSRCore modInstance;

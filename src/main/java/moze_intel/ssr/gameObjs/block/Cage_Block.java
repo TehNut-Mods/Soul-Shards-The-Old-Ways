@@ -1,19 +1,19 @@
 package moze_intel.ssr.gameObjs.block;
 
-import java.util.Calendar;
 import java.util.Random;
 
 import moze_intel.ssr.gameObjs.ObjHandler;
-import moze_intel.ssr.gameObjs.tile.SoulCageTile;
+import moze_intel.ssr.gameObjs.tile.CageTile;
 import moze_intel.ssr.utils.HolidayHelper;
 import moze_intel.ssr.utils.SSRLogger;
 import moze_intel.ssr.utils.Utils;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -24,16 +24,50 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SoulCageBlock extends Block implements ITileEntityProvider {
+public class Cage_Block extends BlockContainer {
+
 	@SideOnly(Side.CLIENT)
 	public IIcon[] icons = new IIcon[5];
 
-	public SoulCageBlock() {
+	public Cage_Block() {
 		super(Material.iron);
-		this.setBlockName("ssr_cage_block");
+		this.setBlockName("ssr.cage_block");
 		this.setCreativeTab(ObjHandler.CREATIVE_TAB);
 		this.blockHardness = 3.0F;
 		this.blockResistance = 3.0F;
+	}
+
+	@Override
+	public boolean hasComparatorInputOverride() {
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(World world, int xPos, int yPos,
+			int zPos, int p_149736_5_) {
+		CageTile tile = (CageTile) world.getTileEntity(xPos, yPos, zPos);
+		if (tile.getStackInSlot(0) != null) {
+			ItemStack shard = tile.getStackInSlot(0);
+			int tier = Utils.getShardTier(shard);
+			switch (tier) {
+			case 1:
+				return 2;
+			case 2:
+				return 5;
+			case 3:
+				return 7;
+			case 4:
+				return 10;
+			case 5:
+				return 15;
+
+			default:
+				return 0;
+			}
+
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -97,8 +131,8 @@ public class SoulCageBlock extends Block implements ITileEntityProvider {
 		if (!world.isRemote) {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
-			if (tile instanceof SoulCageTile) {
-				((SoulCageTile) tile).checkRedstone();
+			if (tile instanceof CageTile) {
+				((CageTile) tile).checkRedstone();
 			}
 		}
 	}
@@ -131,7 +165,7 @@ public class SoulCageBlock extends Block implements ITileEntityProvider {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new SoulCageTile();
+		return new CageTile();
 	}
 
 	@Override

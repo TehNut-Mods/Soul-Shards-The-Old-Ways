@@ -8,9 +8,9 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SouliumBlock extends Block {
+public class Soulium_Block extends Block {
 
-	public SouliumBlock() {
+	public Soulium_Block() {
 		super(Material.iron);
 		this.setBlockName("ssr_soulium_block");
 		this.setCreativeTab(ObjHandler.CREATIVE_TAB);

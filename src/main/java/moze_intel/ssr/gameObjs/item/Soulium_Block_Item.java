@@ -6,16 +6,16 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
-public class SoulForgeItem extends ItemBlock {
+public class Soulium_Block_Item extends ItemBlock {
 	
-	public SoulForgeItem(Block block) {
-		super(ObjHandler.SOUL_FORGE);
+	public Soulium_Block_Item(Block block) {
+		super(ObjHandler.SOULIUM_BLOCK);
 		this.setHasSubtypes(true);
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return "tile.ssr.soul_forge";
+		return "tile.ssr.soulium_block";
 	}
 
 	@Override

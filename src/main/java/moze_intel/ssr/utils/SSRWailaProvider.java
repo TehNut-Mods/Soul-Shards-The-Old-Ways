@@ -6,8 +6,8 @@ import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
-import moze_intel.ssr.gameObjs.block.SoulCageBlock;
-import moze_intel.ssr.gameObjs.tile.SoulCageTile;
+import moze_intel.ssr.gameObjs.block.Cage_Block;
+import moze_intel.ssr.gameObjs.tile.CageTile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
@@ -32,7 +32,7 @@ public class SSRWailaProvider implements IWailaDataProvider {
 	public List<String> getWailaBody(ItemStack itemStack,
 			List<String> currenttip, IWailaDataAccessor accessor,
 			IWailaConfigHandler config) {
-		SoulCageTile teSoulCage = (SoulCageTile) accessor.getTileEntity();
+		CageTile teSoulCage = (CageTile) accessor.getTileEntity();
 		if (teSoulCage != null) {
 			if (teSoulCage.getStackInSlot(0) != null) {
 				// currenttip.add(StatCollector.translateToLocal("ssr.waila.soulcage.filled"));
@@ -70,7 +70,7 @@ public class SSRWailaProvider implements IWailaDataProvider {
 
 	public static void callbackRegister(IWailaRegistrar registrar) {
 		registrar.registerBodyProvider(new SSRWailaProvider(),
-				SoulCageBlock.class);
+				Cage_Block.class);
 	}
 
 }

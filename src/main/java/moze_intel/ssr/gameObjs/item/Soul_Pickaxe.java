@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SoulPickaxeItem extends ItemPickaxe {
+public class Soul_Pickaxe extends ItemPickaxe {
 
-	public SoulPickaxeItem(ToolMaterial Material) {
+	public Soul_Pickaxe(ToolMaterial Material) {
 		super(Material);
 		this.setUnlocalizedName("soul_pickaxe");
 		this.setCreativeTab(ObjHandler.CREATIVE_TAB);

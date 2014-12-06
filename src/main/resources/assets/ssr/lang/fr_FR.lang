@@ -4,9 +4,19 @@ item.ssr.vile_dust.name=Poussière infâme
 item.ssr.corrupted_essence.name=Essence corrompue
 item.ssr.soulium_ingot.name=Lingot d'âmium (soulium)
 
+item.ssr.iron_nugget.name=Pépite de fer
+item.ssr.soul_sword.name=Épée d'âmium
+item.ssr.soul_pickaxe.name=Pioche d'âmium
+item.ssr.soul_axe.name=Hache d'âmium
+item.ssr.soul_hoe.name=Houe d'âmium
+item.ssr.soul_spade.name=Pelle d'âmium
+
+container.soulforge=Forge d'âme
+
+tile.ssr.forge_block.name=Forge d'âme
 tile.ssr.soulium_block.name=Bloc d'âmium (soulium)
-tile.ssr_forge_block.name=Forge d'âme
-tile.ssr_cage_block.name=Cage d'âme
+tile.ssr.cage_block.name=Cage d'âme
+
 ssr.waila.soulcage.mob=Entity:
 ssr.waila.soulcage.tier=Tier:
 ssr.waila.soulcage.activated=Status: Activée
@@ -39,10 +49,10 @@ achievement.createCage=Ce sont les cages d'âmes
 achievement.createCage.desc=Mais où est la chèvre ?
 
 achievement.vile_dust=Cuisson infâme
-achievement.vile_dust.desc=
+achievement.vile_dust.desc=Sa sens un peu... mauvais
 
-achievement.corrupted_essence=
-achievement.corrupted_essence.desc=
+achievement.corrupted_essence=Essence de corruption
+achievement.corrupted_essence.desc=Encore plus corrompue qu'un politicien
 
 achievement.soulForge=La forge des âmes
-achievement.soulForge.desc=
+achievement.soulForge.desc=C'est comme une forge normale, mais pour les âmes

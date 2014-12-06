@@ -9,7 +9,9 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public final class EntityMapper {
 	private static final List<String> VALID_ENTITIES = new ArrayList<String>();
@@ -50,7 +52,11 @@ public final class EntityMapper {
 			skele.setSkeletonType(1);
 			return skele;
 		}
-
+		if (ent.equals("Villager")) {
+			EntityVillager villager = new EntityVillager(world);
+			VillagerRegistry.applyRandomTrade(villager, villager.worldObj.rand);
+			return villager;
+		}
 		return (EntityLiving) EntityList.createEntityByName(ent, world);
 	}
 }

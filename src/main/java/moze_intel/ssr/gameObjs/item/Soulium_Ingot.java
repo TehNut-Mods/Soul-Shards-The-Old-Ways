@@ -7,9 +7,9 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SouliumIngot extends Item {
+public class Soulium_Ingot extends Item {
 
-	public SouliumIngot() {
+	public Soulium_Ingot() {
 		this.setUnlocalizedName("soulium_ingot");
 		this.setCreativeTab(ObjHandler.CREATIVE_TAB);
 		this.setMaxStackSize(64);

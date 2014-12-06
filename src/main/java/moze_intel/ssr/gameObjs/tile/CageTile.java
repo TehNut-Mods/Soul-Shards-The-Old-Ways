@@ -21,7 +21,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -30,17 +30,18 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-public class SoulCageTile extends TileEntity implements IInventory {
+public class CageTile extends TileEntity implements ISidedInventory {
 	private ItemStack inventory;
 	private int counter;
 	private int updateCounter;
 	private int tier;
+	private static final int[] slot = new int[] { 0, 1, 2, 3, 4, 5 };
 	private String entName;
 	private boolean redstoneActive;
 	private boolean initChecks;
 	private boolean active;
 
-	public SoulCageTile() {
+	public CageTile() {
 		counter = 0;
 		updateCounter = 0;
 		redstoneActive = false;
@@ -53,7 +54,8 @@ public class SoulCageTile extends TileEntity implements IInventory {
 		if (worldObj.isRemote) {
 			return;
 		}
-
+		this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
+				ObjHandler.SOUL_CAGE);
 		if (!initChecks) {
 			checkRedstone();
 			initChecks = true;
@@ -364,5 +366,23 @@ public class SoulCageTile extends TileEntity implements IInventory {
 		this.writeToNBT(tag);
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord,
 				this.zCoord, 0, tag);
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+
+		return var1 == 0 ? slot : (var1 == 1 ? slot : slot);
+	}
+
+	@Override
+	public boolean canInsertItem(int var1, ItemStack stack, int p_102007_3_) {
+		return this.isItemValidForSlot(var1, stack);
+	}
+
+	@Override
+	public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_,
+			int p_102008_3_) {
+
+		return true;
 	}
 }

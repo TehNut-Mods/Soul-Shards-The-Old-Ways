@@ -11,9 +11,11 @@ item.ssr.soul_axe.name=Soul Axe
 item.ssr.soul_hoe.name=Soul Hoe
 item.ssr.soul_spade.name=Soul Spade
 
+container.soulforge=Soul Forge
+
+tile.ssr.forge_block.name=Soul Forge
 tile.ssr.soulium_block.name=Block of Soulium
-tile.ssr.soul_forge.name=Soul Forge
-tile.ssr_cage_block.name=Soul Cage
+tile.ssr.cage_block.name=Soul Cage
 
 ssr.waila.soulcage.mob=Entity: 
 ssr.waila.soulcage.tier=Tier: 

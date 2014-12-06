@@ -26,13 +26,13 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SoulShardItem extends Item {
+public class Soul_Shard extends Item {
 	@SideOnly(Side.CLIENT)
 	private IIcon unbound;
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
-	public SoulShardItem() {
+	public Soul_Shard() {
 		this.setUnlocalizedName("soul_shard");
 		this.setCreativeTab(ObjHandler.CREATIVE_TAB);
 		this.setMaxStackSize(64);
