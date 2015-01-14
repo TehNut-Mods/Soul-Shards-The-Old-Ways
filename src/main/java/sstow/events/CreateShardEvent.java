@@ -1,7 +1,7 @@
 package sstow.events;
 
 import sstow.gameObjs.ObjHandler;
-import sstow.utils.SSRConfig;
+import sstow.utils.Config;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,7 +15,7 @@ public class CreateShardEvent {
 
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent event) {
-		if (SSRConfig.EASYMODE == true) {
+		if (Config.EASYMODE == true) {
 
 			if (event.world.isRemote
 					|| event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {

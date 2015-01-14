@@ -1,7 +1,7 @@
 package sstow.events;
 
 import sstow.gameObjs.ObjHandler;
-import sstow.utils.SSRConfig;
+import sstow.utils.Config;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
@@ -13,14 +13,14 @@ public class AchievementEvents {
 	public void CageCrafted(ItemCraftedEvent event) {
 		if (event.crafting.getItem() == Item
 				.getItemFromBlock(ObjHandler.SOUL_CAGE)) {
-			event.player.addStat(SSRAchievement.achievementCage, 1);
+			event.player.addStat(Achievements.achievementCage, 1);
 		}
 	}
 
 	@SubscribeEvent
 	public void corruptedCrafted(ItemCraftedEvent event) {
 		if (event.crafting.getItem().equals(ObjHandler.CORRUPTED_ESSENCE)) {
-			event.player.addStat(SSRAchievement.corruption, 1);
+			event.player.addStat(Achievements.corruption, 1);
 		}
 	}
 
@@ -28,32 +28,32 @@ public class AchievementEvents {
 	public void forgeCrafted(ItemCraftedEvent event) {
 		if (event.crafting.getItem() == Item
 				.getItemFromBlock(ObjHandler.SOUL_FORGE)) {
-			event.player.addStat(SSRAchievement.soulForge, 1);
+			event.player.addStat(Achievements.soulForge, 1);
 		}
 	}
 
 	@SubscribeEvent
 	public void VileSmelted(ItemSmeltedEvent event) {
 		if (event.smelting.getItem().equals(ObjHandler.VILE_DUST)) {
-			event.player.addStat(SSRAchievement.theoldWays, 1);
+			event.player.addStat(Achievements.theoldWays, 1);
 		}
 	}
 
 	@SubscribeEvent
 	public void ShardPickUp(ItemPickupEvent event) {
-		if (SSRConfig.EASYMODE) {
+		if (Config.EASYMODE) {
 			if (event.pickedUp.getEntityItem().getItem()
 					.equals(ObjHandler.SOUL_SHARD)) {
-				event.player.addStat(SSRAchievement.achievementShard, 1);
+				event.player.addStat(Achievements.achievementShard, 1);
 			}
 		} else {
 		}
 	}
 
 	public void ShardPickUp(ItemSmeltedEvent event) {
-		if (!SSRConfig.EASYMODE) {
+		if (!Config.EASYMODE) {
 			if (event.smelting.getItem().equals(ObjHandler.SOUL_SHARD)) {
-				event.player.addStat(SSRAchievement.achievementShard, 1);
+				event.player.addStat(Achievements.achievementShard, 1);
 			}
 		} else {
 		}

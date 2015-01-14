@@ -2,7 +2,7 @@ package sstow.gameObjs.block;
 
 import java.util.Random;
 
-import sstow.SSRCore;
+import sstow.Main;
 import sstow.gameObjs.ObjHandler;
 import sstow.gameObjs.tile.ForgeTile;
 import net.minecraft.block.Block;
@@ -26,9 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class Forge_Block extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
 	private IIcon top;
-	@SideOnly(Side.CLIENT)
 	private IIcon front;
 	private IIcon bottom;
 
@@ -55,8 +53,8 @@ public class Forge_Block extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		this.blockIcon = iconRegister.registerIcon("furnace_top");
-		this.front = iconRegister.registerIcon(this.isBurning2 ? SSRCore.MODID
-				+ ":soulForge_active" : SSRCore.MODID + ":soulForge_idle");
+		this.front = iconRegister.registerIcon(this.isBurning2 ? Main.MODID
+				+ ":soulForge_active" : Main.MODID + ":soulForge_idle");
 		this.top = iconRegister.registerIcon("furnace_top");
 		this.bottom = iconRegister.registerIcon("obsidian");
 	}
@@ -76,7 +74,7 @@ public class Forge_Block extends BlockContainer {
 
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int par6, float par7, float par8, float par9) {
-		player.openGui(SSRCore.modInstance, 0, world, x, y, z);
+		player.openGui(Main.modInstance, 0, world, x, y, z);
 		return true;
 	}
 

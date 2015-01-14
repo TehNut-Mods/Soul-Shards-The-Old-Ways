@@ -5,7 +5,7 @@ import sstow.gameObjs.ObjHandler;
 import java.util.List;
 
 import sstow.utils.EntityMapper;
-import sstow.utils.SSRConfig;
+import sstow.utils.Config;
 import sstow.utils.TierHandler;
 import sstow.utils.Utils;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -57,7 +57,7 @@ public class Soul_Shard extends Item {
 	public ItemStack onItemRightClick(ItemStack stack, World world,
 			EntityPlayer player) {
 		if (world.isRemote || (Utils.hasMaxedKills(stack))
-				|| !SSRConfig.ALLOW_SPAWNER_ABSORB) {
+				|| !Config.ALLOW_SPAWNER_ABSORB) {
 			return stack;
 		}
 
@@ -97,7 +97,7 @@ public class Soul_Shard extends Item {
 			if (Utils.isShardBound(stack)) {
 				if (Utils.getShardBoundEnt(stack).equals(name)) {
 					Utils.increaseShardKillCount(stack,
-							(short) SSRConfig.SPAWNER_ABSORB_BONUS);
+							(short) Config.SPAWNER_ABSORB_BONUS);
 					Utils.checkForAchievements(player, stack);
 					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ,
 							false);
@@ -110,7 +110,7 @@ public class Soul_Shard extends Item {
 					Utils.setShardBoundEnt(newStack, name);
 					Utils.writeEntityHeldItem(newStack, (EntityLiving) ent);
 					Utils.increaseShardKillCount(newStack,
-							(short) SSRConfig.SPAWNER_ABSORB_BONUS);
+							(short) Config.SPAWNER_ABSORB_BONUS);
 
 					boolean emptySpot = false;
 					int counter = 0;
@@ -134,7 +134,7 @@ public class Soul_Shard extends Item {
 					Utils.setShardBoundEnt(stack, name);
 					Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
 					Utils.increaseShardKillCount(stack,
-							(short) SSRConfig.SPAWNER_ABSORB_BONUS);
+							(short) Config.SPAWNER_ABSORB_BONUS);
 				}
 				world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, true);
 			}

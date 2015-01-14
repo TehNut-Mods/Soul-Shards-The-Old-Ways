@@ -14,7 +14,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 
-public class SSRCMD extends CommandBase {
+public class SSTOWCMD extends CommandBase {
 	@Override
 	public String getCommandName() {
 		return "sstow";
@@ -36,7 +36,7 @@ public class SSRCMD extends CommandBase {
 		if ((params.length > 0) && (params.length <= 7)) {
 			if (params[0].equals("help")) {
 				sender.addChatMessage(new ChatComponentText(
-						"--- Showing SSR help page 1 of 1 ---")
+						"--- Showing SSTOW help page 1 of 1 ---")
 						.setChatStyle(new ChatStyle()
 								.setColor(EnumChatFormatting.GREEN)));
 				sender.addChatMessage(new ChatComponentText(
@@ -52,7 +52,7 @@ public class SSRCMD extends CommandBase {
 				int killCounter = 0;
 
 				for (Entity ent : (List<Entity>) sender.getEntityWorld().loadedEntityList) {
-					if (ent.getEntityData().getBoolean("SSR")) {
+					if (ent.getEntityData().getBoolean("SSTOW")) {
 						ent.setDead();
 						killCounter++;
 					}

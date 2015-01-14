@@ -1,13 +1,13 @@
 package sstow.events;
 
 import sstow.gameObjs.ObjHandler;
-import sstow.utils.SSRConfig;
+import sstow.utils.Config;
 import sstow.utils.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 
-public class SSRAchievement {
+public class Achievements {
 	public static Achievement achievementCage;
 	public static Achievement theoldWays;
 	public static Achievement corruption;
@@ -37,7 +37,7 @@ public class SSRAchievement {
 		Utils.setShardTier(shard5, (byte) 5);
 		Utils.setShardBoundEnt(shard5, "NULL");
 
-		if (SSRConfig.EASYMODE) {
+		if (Config.EASYMODE) {
 
 			achievementCage = new Achievement("achievement.createCage",
 					"createCage", -2, 0, ObjHandler.SOUL_CAGE,
@@ -74,7 +74,7 @@ public class SSRAchievement {
 							achievementTier2, achievementTier3,
 							achievementTier4, achievementTier5 }));
 
-		} else if (!SSRConfig.EASYMODE) {
+		} else if (!Config.EASYMODE) {
 
 			achievementCage = new Achievement("achievement.createCage",
 					"createCage", -2, 0, ObjHandler.SOUL_CAGE,
@@ -86,16 +86,16 @@ public class SSRAchievement {
 
 			corruption = new Achievement("achievement.corrupted_essence",
 					"corrupted_essence", 2, 1, ObjHandler.CORRUPTED_ESSENCE,
-					SSRAchievement.theoldWays).registerStat();
+					Achievements.theoldWays).registerStat();
 
 			soulForge = new Achievement("achievement.soulForge", "soulForge",
-					4, -1, ObjHandler.SOUL_FORGE, SSRAchievement.corruption)
+					4, -1, ObjHandler.SOUL_FORGE, Achievements.corruption)
 					.registerStat();
 
 			achievementShard = new Achievement("achievement.createShard",
 					"createShard", 4, 2,
 					new ItemStack(ObjHandler.SOUL_SHARD, 0),
-					SSRAchievement.soulForge).registerStat();
+					Achievements.soulForge).registerStat();
 
 			achievementTier1 = new Achievement("achievement.tier1Shard",
 					"tier1Shard", 3, 4, shard1, achievementShard)

@@ -4,8 +4,8 @@ import java.util.List;
 
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.EntityMapper;
-import sstow.utils.SSRConfig;
-import sstow.utils.SSRLogger;
+import sstow.utils.Config;
+import sstow.utils.TOWLogger;
 import sstow.utils.TierHandler;
 import sstow.utils.Utils;
 import net.minecraft.entity.EntityLiving;
@@ -90,8 +90,8 @@ public class CageTile extends TileEntity implements ISidedInventory {
 		}
 
 		if (counter >= TierHandler.getCooldown(tier - 1) * 20 - 1) {
-			if (SSRConfig.ENABLE_DEBUG) {
-				SSRLogger.logDebug("SPAWNING!");
+			if (Config.ENABLE_DEBUG) {
+				TOWLogger.logDebug("SPAWNING!");
 			}
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler
 					.getNumSpawns(tier - 1)];
@@ -143,12 +143,12 @@ public class CageTile extends TileEntity implements ISidedInventory {
 	}
 
 	private boolean canEntitySpawn(EntityLiving ent) {
-		if ((SSRConfig.ENABLE_FLOOD_PREVENTION) && (hasReachedSpawnLimit(ent))) {
+		if ((Config.ENABLE_FLOOD_PREVENTION) && (hasReachedSpawnLimit(ent))) {
 			return false;
 		}
 
 		if ((TierHandler.getChecksRedstone(tier - 1))
-				&& (redstoneActive == SSRConfig.INVERT_REDSTONE)) {
+				&& (redstoneActive == Config.INVERT_REDSTONE)) {
 			return false;
 		}
 
@@ -222,11 +222,11 @@ public class CageTile extends TileEntity implements ISidedInventory {
 
 		for (EntityLiving entity : (List<EntityLiving>) worldObj
 				.getEntitiesWithinAABB(ent.getClass(), aabb)) {
-			if (entity.getEntityData().getBoolean("SSR")) {
+			if (entity.getEntityData().getBoolean("SSTOW")) {
 				mobCount++;
 			}
 		}
-		return mobCount >= SSRConfig.MAX_NUM_ENTITIES;
+		return mobCount >= Config.MAX_NUM_ENTITIES;
 	}
 
 	private void spawnEntities(EntityLiving[] ents) {

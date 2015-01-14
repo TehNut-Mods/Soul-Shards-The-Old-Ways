@@ -1,13 +1,13 @@
 package sstow;
 
-import sstow.commands.SSRCMD;
+import sstow.commands.SSTOWCMD;
 import sstow.events.AchievementEvents;
 import sstow.events.CreateShardEvent;
 import sstow.events.PlayerKillEntityEvent;
-import sstow.events.SSRAchievement;
+import sstow.events.Achievements;
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.EntityMapper;
-import sstow.utils.SSRConfig;
+import sstow.utils.Config;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -18,25 +18,25 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = SSRCore.MODID, name = SSRCore.NAME, version = SSRCore.VERSION, guiFactory = "sstow.utils.guiFactory")
-public class SSRCore {
+@Mod(modid = Main.MODID, name = Main.NAME, version = Main.VERSION, guiFactory = "sstow.utils.guiFactory")
+public class Main {
 
 	public static final String MODID = "SSTOW";
 	public static final String NAME = "Soul Shards: The Old Ways";
-	public static final String VERSION = "RC-4B";
+	public static final String VERSION = "RC-4C";
 	
 	@Instance(MODID)
-	public static SSRCore modInstance;
+	public static Main modInstance;
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		SSRConfig.load(event);
+		Config.load(event);
 	}
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		ObjHandler.registerObjs();
 
-		SSRAchievement.Get();
+		Achievements.Get();
 
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
@@ -52,6 +52,6 @@ public class SSRCore {
 
 	@Mod.EventHandler
 	public void serverStart(FMLServerStartingEvent eventt) {
-		eventt.registerServerCommand(new SSRCMD());
+		eventt.registerServerCommand(new SSTOWCMD());
 	}
 }

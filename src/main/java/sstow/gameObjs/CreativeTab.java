@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SSRCreativeTab extends CreativeTabs {
+public class CreativeTab extends CreativeTabs {
 
-	public SSRCreativeTab() {
+	public CreativeTab() {
 		super("soul_shards_the_old_ways");
 	}
 

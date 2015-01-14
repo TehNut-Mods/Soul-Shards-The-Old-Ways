@@ -2,7 +2,7 @@ package sstow.utils;
 
 import java.util.Random;
 
-import sstow.events.SSRAchievement;
+import sstow.events.Achievements;
 import sstow.gameObjs.ObjHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
@@ -63,7 +63,7 @@ public final class Utils {
 
 				int soulStealer = EnchantmentHelper.getEnchantmentLevel(
 						ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());
-				soulStealer *= SSRConfig.ENCHANT_KILL_BONUS;
+				soulStealer *= Config.ENCHANT_KILL_BONUS;
 				Utils.increaseShardKillCount(newShard,
 						(short) (1 + soulStealer));
 				Utils.checkForAchievements(player, newShard);
@@ -84,19 +84,19 @@ public final class Utils {
 		case 0:
 			break;
 		case 1:
-			player.addStat(SSRAchievement.achievementTier1, 1);
+			player.addStat(Achievements.achievementTier1, 1);
 			break;
 		case 2:
-			player.addStat(SSRAchievement.achievementTier2, 1);
+			player.addStat(Achievements.achievementTier2, 1);
 			break;
 		case 3:
-			player.addStat(SSRAchievement.achievementTier3, 1);
+			player.addStat(Achievements.achievementTier3, 1);
 			break;
 		case 4:
-			player.addStat(SSRAchievement.achievementTier4, 1);
+			player.addStat(Achievements.achievementTier4, 1);
 			break;
 		case 5:
-			player.addStat(SSRAchievement.achievementTier5, 1);
+			player.addStat(Achievements.achievementTier5, 1);
 			break;
 		default:
 			break;

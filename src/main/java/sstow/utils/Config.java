@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import sstow.SSRCore;
+import sstow.Main;
 import sstow.gameObjs.ObjHandler;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -12,7 +12,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public final class SSRConfig {
+public final class Config {
 
 	public static int ENCHANT_ID;
 	public static int ENCHANT_WEIGHT;
@@ -78,13 +78,13 @@ public final class SSRConfig {
 			"Tier 5 Settings");
 
 	public static void load(FMLPreInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new SSRConfig());
+		FMLCommonHandler.instance().bus().register(new Config());
 		configDirectory = new File(event.getModConfigurationDirectory()
 				+ "/Soul Shards The Old Ways/");
 		if (!configDirectory.exists()) {
 			configDirectory.mkdir();
 		}
-		File configFile = new File(configDirectory, SSRCore.NAME.replace(":",
+		File configFile = new File(configDirectory, Main.NAME.replace(":",
 				"") + ".cfg");
 		config = new Configuration(configFile);
 		syncConfig();
@@ -92,8 +92,8 @@ public final class SSRConfig {
 
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event) {
-		if (event.modID.equals(SSRCore.MODID)) {
-			SSRLogger.logInfo("Updating config...");
+		if (event.modID.equals(Main.MODID)) {
+			TOWLogger.logInfo("Updating config...");
 			syncConfig();
 		}
 	}
@@ -165,9 +165,9 @@ public final class SSRConfig {
 
 			TierHandler.setTierReqKills(minKills);
 
-			SSRLogger.logInfo("Loaded configuration file!");
+			TOWLogger.logInfo("Loaded configuration file!");
 		} catch (Exception e) {
-			SSRLogger.logFatal("Failed to load configuration file!");
+			TOWLogger.logFatal("Failed to load configuration file!");
 			e.printStackTrace();
 		} finally {
 			if (config.hasChanged()) {

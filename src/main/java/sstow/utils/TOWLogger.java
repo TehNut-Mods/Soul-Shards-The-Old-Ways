@@ -1,13 +1,13 @@
 package sstow.utils;
 
-import sstow.SSRCore;
+import sstow.Main;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class SSRLogger {
-	private static Logger logger = LogManager.getLogger(SSRCore.MODID);
+public final class TOWLogger {
+	private static Logger logger = LogManager.getLogger(Main.MODID);
 
 	public static void logInfo(String message) {
 		logger.log(Level.INFO, message);

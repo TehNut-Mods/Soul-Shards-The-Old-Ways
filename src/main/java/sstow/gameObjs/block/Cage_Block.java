@@ -5,7 +5,7 @@ import java.util.Random;
 import sstow.gameObjs.ObjHandler;
 import sstow.gameObjs.tile.CageTile;
 import sstow.utils.HolidayHelper;
-import sstow.utils.SSRLogger;
+import sstow.utils.TOWLogger;
 import sstow.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -26,7 +26,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class Cage_Block extends BlockContainer {
 
-	@SideOnly(Side.CLIENT)
 	public IIcon[] icons = new IIcon[5];
 
 	public Cage_Block() {
@@ -83,7 +82,7 @@ public class Cage_Block extends BlockContainer {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
 			if (tile == null) {
-				SSRLogger.logFatal("ERROR: no tile entity found at coords: "
+				TOWLogger.logFatal("ERROR: no tile entity found at coords: "
 						+ x + " " + y + " " + " " + z);
 				return false;
 			}
@@ -150,7 +149,7 @@ public class Cage_Block extends BlockContainer {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
 			if (tile == null) {
-				SSRLogger.logFatal("ERROR: no tile entity found at coords: "
+				TOWLogger.logFatal("ERROR: no tile entity found at coords: "
 						+ x + " " + y + " " + " " + z);
 				return;
 			}

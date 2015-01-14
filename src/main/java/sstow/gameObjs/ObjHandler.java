@@ -1,7 +1,7 @@
 package sstow.gameObjs;
 
 //Import Blocks
-import sstow.SSRCore;
+import sstow.Main;
 import sstow.gameObjs.block.Forge_Block;
 import sstow.gameObjs.block.Cage_Block;
 import sstow.gameObjs.block.Soulium_Block;
@@ -23,7 +23,7 @@ import sstow.gameObjs.tile.ForgeTile;
 import sstow.gameObjs.tile.CageTile;
 import sstow.handler.GuiHandler;
 //Import Config
-import sstow.utils.SSRConfig;
+import sstow.utils.Config;
 //Import Required Minecraft stuff
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -42,9 +42,9 @@ public class ObjHandler {
 			2, 750, 7.0F, 2.5F, 22);
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new SoulStealerEnchant(
-			SSRConfig.ENCHANT_ID, SSRConfig.ENCHANT_WEIGHT);
+			Config.ENCHANT_ID, Config.ENCHANT_WEIGHT);
 	// Set the creative tab
-	public static SSRCreativeTab CREATIVE_TAB = new SSRCreativeTab();
+	public static CreativeTab CREATIVE_TAB = new CreativeTab();
 	// Set up the mod items
 	public static Item VILE_DUST = new Vile_Dust();
 	public static Item CORRUPTED_ESSENCE = new Corrupted_Essence();
@@ -83,8 +83,8 @@ public class ObjHandler {
 		// }
 		// }
 
-		if (!SSRConfig.EASYMODE) {
-			NetworkRegistry.INSTANCE.registerGuiHandler(SSRCore.modInstance,
+		if (!Config.EASYMODE) {
+			NetworkRegistry.INSTANCE.registerGuiHandler(Main.modInstance,
 					new GuiHandler());
 			// Register Items
 			GameRegistry.registerItem(VILE_DUST, "sstow_vile_dust");

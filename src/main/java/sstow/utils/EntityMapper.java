@@ -20,13 +20,13 @@ public final class EntityMapper {
 		for (Map.Entry<Class, String> entry : ((HashMap<Class, String>) EntityList.classToStringMapping)
 				.entrySet()) {
 			if (VALID_ENTITIES.contains(entry.getValue())) {
-				SSRLogger.logInfo("Skipping mapping for " + entry.getValue()
+				TOWLogger.logInfo("Skipping mapping for " + entry.getValue()
 						+ ": already mapped.");
 				continue;
 			}
 
 			if (IBossDisplayData.class.isAssignableFrom(entry.getKey())) {
-				SSRLogger.logInfo("Skipped mapping for " + entry.getValue()
+				TOWLogger.logInfo("Skipped mapping for " + entry.getValue()
 						+ ": detected as boss.");
 				continue;
 			}
@@ -38,7 +38,7 @@ public final class EntityMapper {
 
 		VALID_ENTITIES.add("Wither Skeleton");
 
-		SSRLogger.logInfo("Finished entity mapping (" + VALID_ENTITIES.size()
+		TOWLogger.logInfo("Finished entity mapping (" + VALID_ENTITIES.size()
 				+ " entries).");
 	}
 

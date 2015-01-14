@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 
-public class SSRWailaProvider implements IWailaDataProvider {
+public class WailaProvider implements IWailaDataProvider {
 
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor,
@@ -69,7 +69,7 @@ public class SSRWailaProvider implements IWailaDataProvider {
 	}
 
 	public static void callbackRegister(IWailaRegistrar registrar) {
-		registrar.registerBodyProvider(new SSRWailaProvider(),
+		registrar.registerBodyProvider(new WailaProvider(),
 				Cage_Block.class);
 	}
 

@@ -2,8 +2,8 @@ package sstow.events;
 
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.EntityMapper;
-import sstow.utils.SSRConfig;
-import sstow.utils.SSRLogger;
+import sstow.utils.Config;
+import sstow.utils.TOWLogger;
 import sstow.utils.Utils;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
@@ -36,7 +36,7 @@ public class PlayerKillEntityEvent {
 		String entName = EntityList.getEntityString(dead);
 
 		if (entName == null || entName.isEmpty()) {
-			SSRLogger
+			TOWLogger
 					.logFatal("Player killed entity with no unlocalized name: "
 							+ dead);
 			return;
@@ -62,7 +62,7 @@ public class PlayerKillEntityEvent {
 
 			int soulStealer = EnchantmentHelper.getEnchantmentLevel(
 					ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());
-			soulStealer *= SSRConfig.ENCHANT_KILL_BONUS;
+			soulStealer *= Config.ENCHANT_KILL_BONUS;
 
 			Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
 			Utils.checkForAchievements(player, shard);
