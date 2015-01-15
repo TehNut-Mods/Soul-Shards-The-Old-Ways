@@ -52,7 +52,7 @@ public class Forge_Block extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon("furnace_top");
+		this.blockIcon = iconRegister.registerIcon(Main.MODID + ":soulForge_side");
 		this.front = iconRegister.registerIcon(this.isBurning2 ? Main.MODID
 				+ ":soulForge_active" : Main.MODID + ":soulForge_idle");
 		this.top = iconRegister.registerIcon("furnace_top");

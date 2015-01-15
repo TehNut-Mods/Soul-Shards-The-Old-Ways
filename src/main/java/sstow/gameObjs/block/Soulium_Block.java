@@ -19,6 +19,7 @@ public class Soulium_Block extends Block {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		return blockIcon;
 	}

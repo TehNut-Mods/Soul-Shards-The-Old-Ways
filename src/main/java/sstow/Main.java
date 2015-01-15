@@ -23,10 +23,11 @@ public class Main {
 
 	public static final String MODID = "SSTOW";
 	public static final String NAME = "Soul Shards: The Old Ways";
-	public static final String VERSION = "RC-4C";
-	
+	public static final String VERSION = "RC5";
+
 	@Instance(MODID)
 	public static Main modInstance;
+
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Config.load(event);
@@ -42,7 +43,7 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
 		FMLInterModComms.sendMessage("Waila", "register",
-				"sstow.utils.SSRWailaProvider.callbackRegister");
+				"sstow.utils.WailaProvider.callbackRegister");
 	}
 
 	@Mod.EventHandler

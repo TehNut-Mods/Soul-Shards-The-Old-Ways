@@ -8,9 +8,12 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import sstow.gameObjs.block.Cage_Block;
 import sstow.gameObjs.tile.CageTile;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 public class WailaProvider implements IWailaDataProvider {
 
@@ -24,7 +27,6 @@ public class WailaProvider implements IWailaDataProvider {
 	public List<String> getWailaHead(ItemStack itemStack,
 			List<String> currenttip, IWailaDataAccessor accessor,
 			IWailaConfigHandler config) {
-
 		return currenttip;
 	}
 
@@ -45,8 +47,9 @@ public class WailaProvider implements IWailaDataProvider {
 				NBTTagCompound tag = (NBTTagCompound) accessor.getNBTData();
 
 				if (tag.getBoolean("active")) {
-					currenttip.add(StatCollector
-							.translateToLocal("sstow.waila.soulcage.activated"));
+					currenttip
+							.add(StatCollector
+									.translateToLocal("sstow.waila.soulcage.activated"));
 				} else {
 					currenttip
 							.add(StatCollector
@@ -69,8 +72,18 @@ public class WailaProvider implements IWailaDataProvider {
 	}
 
 	public static void callbackRegister(IWailaRegistrar registrar) {
-		registrar.registerBodyProvider(new WailaProvider(),
-				Cage_Block.class);
+		registrar.registerBodyProvider(new WailaProvider(), Cage_Block.class);
+		registrar.registerNBTProvider(new WailaProvider(), Cage_Block.class);
+	}
+
+
+	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile,
+			NBTTagCompound nbt, World world, int arg4, int arg5, int arg6) {
+		if (tile != null) {
+			tile.writeToNBT(nbt);
+		}
+
+		return nbt;
 	}
 
 }

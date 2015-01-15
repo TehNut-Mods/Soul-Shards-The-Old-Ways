@@ -17,6 +17,13 @@ public class HolidayHelper {
 		curTime = Calendar.getInstance();
 		return curTime.after(holidayStart) && curTime.before(holidayEnd);
 	}
+	
+	public static boolean isHalloween(){
+		setDate(holidayStart, Calendar.OCTOBER, 29, false);
+		setDate(holidayEnd, Calendar.NOVEMBER, 01, true);
+		curTime = Calendar.getInstance();
+		return curTime.after(holidayStart) && curTime.before(holidayEnd);
+	}
 
 	static void setDate(Calendar cal, int month, int date, boolean endOfDay) {
 		cal.clear();
