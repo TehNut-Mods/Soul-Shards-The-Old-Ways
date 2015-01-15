@@ -128,7 +128,7 @@ public final class Config {
 							false,
 							"This will enable debug mode, where the console will inform you when a mob is spawned");
 			EASYMODE = config
-					.getBoolean("Enable Easy mode?", "Misc", true,
+					.getBoolean("Enable Easy mode?", "Misc", false,
 							"RESTART REQUIRED, This will revert the shard creation to the structure method");
 
 			short[] minKills = new short[5];

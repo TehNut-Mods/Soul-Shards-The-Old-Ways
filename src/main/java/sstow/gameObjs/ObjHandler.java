@@ -109,15 +109,20 @@ public class ObjHandler {
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.CORRUPTED_ESSENCE, 1), Items.glowstone_dust,
 					ObjHandler.VILE_DUST);
+			
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.SOULIUM_INGOT, 9), ObjHandler.SOULIUM_BLOCK);
+			
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.SOULIUM_NUGGET, 9), ObjHandler.SOULIUM_INGOT);
+			
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.IRON_NUGGET, 9), Items.iron_ingot);
+			
 			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_FORGE),
-					"SSS", "SCS", "OOO", 'S', Blocks.stone, 'C',
+					"SSS", "SCS", "OOO", 'S', Blocks.cobblestone, 'C',
 					ObjHandler.CORRUPTED_ESSENCE, 'O', Blocks.obsidian);
+			
 			GameRegistry.addShapedRecipe(
 					new ItemStack(ObjHandler.SOULIUM_INGOT), "AAA", "AAA",
 					"AAA", 'A', ObjHandler.SOULIUM_NUGGET);
