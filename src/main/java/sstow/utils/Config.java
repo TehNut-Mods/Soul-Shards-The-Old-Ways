@@ -14,9 +14,11 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public final class Config {
 
+	//Enchant Section
 	public static int ENCHANT_ID;
 	public static int ENCHANT_WEIGHT;
 	public static int ENCHANT_KILL_BONUS;
+	//General Section
 	public static int SPAWNER_ABSORB_BONUS;
 	public static int MAX_NUM_ENTITIES;
 	public static boolean ALLOW_SPAWNER_ABSORB;
@@ -24,6 +26,10 @@ public final class Config {
 	public static boolean ENABLE_FLOOD_PREVENTION;
 	public static boolean ENABLE_DEBUG;
 	public static boolean EASYMODE;
+	//Recipes Section
+	public static int COOK_TIME;
+	public static int SHARDS;
+	public static int NUGGETS;
 
 	public static final short[] DEFAULT_MIN_KILLS = { 64, 128, 256, 512, 1024 };
 	private static final byte[] DEFAULT_NUM_SPAWNS = { 2, 4, 4, 4, 6 };
@@ -63,19 +69,14 @@ public final class Config {
 		sections = new ArrayList<Section>();
 	}
 
-	public static final Section sectionEnchant = new Section(
-			"Soul Stealer Enchant", "Soul Stealer Enchant");
-	public static final Section sectionMisc = new Section("Misc", "Misc");
-	public static final Section sectionTier1 = new Section("Tier 1 Settings",
-			"Tier 1 Settings");
-	public static final Section sectionTier2 = new Section("Tier 2 Settings",
-			"Tier 2 Settings");
-	public static final Section sectionTier3 = new Section("Tier 3 Settings",
-			"Tier 3 Settings");
-	public static final Section sectionTier4 = new Section("Tier 4 Settings",
-			"Tier 4 Settings");
-	public static final Section sectionTier5 = new Section("Tier 5 Settings",
-			"Tier 5 Settings");
+	public static final Section sectionEnchant = new Section("Soul Stealer Enchant", "Soul Stealer Enchant");
+	public static final Section sectionGeneral = new Section("General", "General");
+	public static final Section sectionRecipes = new Section("Recipes","Recipes");
+	public static final Section sectionTier1 = new Section("Tier 1 Settings", "Tier 1 Settings");
+	public static final Section sectionTier2 = new Section("Tier 2 Settings", "Tier 2 Settings");
+	public static final Section sectionTier3 = new Section("Tier 3 Settings", "Tier 3 Settings");
+	public static final Section sectionTier4 = new Section("Tier 4 Settings", "Tier 4 Settings");
+	public static final Section sectionTier5 = new Section("Tier 5 Settings", "Tier 5 Settings");
 
 	public static void load(FMLPreInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new Config());
@@ -100,36 +101,22 @@ public final class Config {
 
 	public static void syncConfig() {
 		try {
-			ENCHANT_ID = config.getInt("ID", "Soul Stealer Enchant", 52, 1,
-					128, "Soul-Stealer enchant id");
-			ENCHANT_WEIGHT = config.getInt("Weight", "Soul Stealer Enchant", 8,
-					1, 10, "Soul-Stealer enchant probability");
-			ENCHANT_KILL_BONUS = config
-					.getInt("Kill Bonus", "Soul Stealer Enchant", 1, 1, 10,
-							"Soul-Stealer kill bonus");
-			SPAWNER_ABSORB_BONUS = config
-					.getInt("Vanilla Spawner Bonus", "Misc", 200, 1, 400,
-							"Amount of kills added to the shard when right-clicking a spawner");
-			ALLOW_SPAWNER_ABSORB = config.getBoolean(
-					"Vanilla Spawner Absorbing", "Misc", true,
-					"Allow absorbing of vanilla spawners for a kill bonus");
-			INVERT_REDSTONE = config.getBoolean("Invert Redstone", "Misc",
-					false, "Active redstone stops a soul cage");
-			ENABLE_FLOOD_PREVENTION = config
-					.getBoolean("Flood Prevention", "Misc", true,
-							"Soul cages will stop when too many entities have been spawned");
-			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "Misc",
-					80, 1, 200,
-					"Max number of Entities soul cages can spawn in an area");
-			ENABLE_DEBUG = config
-					.getBoolean(
-							"Enable Debug",
-							"Misc",
-							false,
-							"This will enable debug mode, where the console will inform you when a mob is spawned");
-			EASYMODE = config
-					.getBoolean("Enable Easy mode?", "Misc", false,
-							"RESTART REQUIRED, This will revert the shard creation to the structure method");
+			//Soul Stealer Section
+			ENCHANT_ID = config.getInt("ID", "Soul Stealer Enchant", 52, 1, 128, "Soul-Stealer enchant id");
+			ENCHANT_WEIGHT = config.getInt("Weight", "Soul Stealer Enchant", 8, 1, 10, "Soul-Stealer enchant probability");
+			ENCHANT_KILL_BONUS = config.getInt("Kill Bonus", "Soul Stealer Enchant", 1, 1, 10, "Soul-Stealer kill bonus");
+			//General Section
+			SPAWNER_ABSORB_BONUS = config.getInt("Vanilla Spawner Bonus", "General", 64, 1, 400, "Amount of kills added to the shard when right-clicking a spawner");
+			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "General", 80, 1, 200, "Max number of Entities soul cages can spawn in an area");
+			ALLOW_SPAWNER_ABSORB = config.getBoolean("Vanilla Spawner Absorbing", "General", true, "Allow absorbing of vanilla spawners for a kill bonus");
+			INVERT_REDSTONE = config.getBoolean("Invert Redstone", "General", false, "Active redstone stops a soul cage");
+			ENABLE_FLOOD_PREVENTION = config.getBoolean("Flood Prevention", "General", true, "Soul cages will stop when too many entities have been spawned");
+			ENABLE_DEBUG = config.getBoolean("Enable Debug", "General", false, "This will enable debug mode, where the console will inform you when a mob is spawned");
+			EASYMODE = config.getBoolean("Enable Easy mode", "General", false, "RESTART REQUIRED: This will revert the shard creation to the structure method");
+			//Recipes Section
+			COOK_TIME = config.getInt("Cooking Time", "Recipes", 12800, 0, 999999, "Time (In Ticks) it takes to create Soulium and Soul Shards");
+			SHARDS = config.getInt("Shard Amount", "Recipes", 3, 1, 8, "RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
+			NUGGETS = config.getInt("Nugget Amount", "Recipes", 8, 1, 9, "RESTART REQUIRED: How many Soulium Nuggets do you want to get by smelting 1 iron ingot");
 
 			short[] minKills = new short[5];
 

@@ -27,7 +27,7 @@ public class PlayerKillEntityEvent {
 
 		EntityLiving dead = (EntityLiving) event.entity;
 
-		if (dead.getEntityData().getBoolean("SSR")) {
+		if (dead.getEntityData().getBoolean("SSTOW")) {
 			return;
 		}
 

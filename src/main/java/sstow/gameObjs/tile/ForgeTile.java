@@ -3,6 +3,7 @@ package sstow.gameObjs.tile;
 import sstow.gameObjs.ObjHandler;
 import sstow.gameObjs.block.Forge_Block;
 import sstow.handler.ForgeRecipes;
+import sstow.utils.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -145,13 +146,13 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int val1) {
-		return this.furnaceCookTime * val1 / 200;
+		return this.furnaceCookTime * val1 / Config.COOK_TIME;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int val1) {
 		if (this.currentBurnTime == 0) {
-			this.currentBurnTime = 200;
+			this.currentBurnTime = Config.COOK_TIME;
 		}
 		return this.furnaceBurnTime * val1 / this.currentBurnTime;
 	}
@@ -188,7 +189,7 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 
 			if (this.isBurning() && this.canSmelt()) {
 				++this.furnaceCookTime;
-				if (this.furnaceCookTime == 200) {
+				if (this.furnaceCookTime == Config.COOK_TIME) {
 					this.furnaceCookTime = 0;
 					this.smeltItem();
 					flag1 = true;
@@ -266,8 +267,9 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 				}
 			}
 
-			if (item == ObjHandler.CORRUPTED_ESSENCE)
+			if (item == ObjHandler.CORRUPTED_ESSENCE) {
 				return 1600;
+			}
 			// if (item instanceof ItemTool
 			// && ((ItemTool) item).getToolMaterialName()
 			// .equals("EMERALD")) {
@@ -318,7 +320,5 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 	public boolean canExtractItem(int var1, ItemStack itemstack, int var3) {
 		return var3 != 0 || var1 != 1 || itemstack.getItem() == Items.bucket;
 	}
-
-
 
 }

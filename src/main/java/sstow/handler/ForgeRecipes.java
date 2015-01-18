@@ -5,10 +5,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import sstow.gameObjs.ObjHandler;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import sstow.gameObjs.ObjHandler;
+import sstow.utils.Config;
 
 public class ForgeRecipes {
 	private static final ForgeRecipes SMELTING_BASE = new ForgeRecipes();
@@ -21,10 +22,12 @@ public class ForgeRecipes {
 	}
 
 	private ForgeRecipes() {
-		this.addRecipie(Items.diamond, new ItemStack(ObjHandler.SOUL_SHARD, 3),
-				0.8F);
+		this.addRecipie(Items.diamond, new ItemStack(ObjHandler.SOUL_SHARD,
+				Config.SHARDS), 1F);
 		this.addRecipie(Items.iron_ingot, new ItemStack(
-				ObjHandler.SOULIUM_INGOT), 0.8F);
+				ObjHandler.SOULIUM_NUGGET, Config.NUGGETS), 0.8F);
+		// this.addRecipie(Blocks.iron_block, new ItemStack(
+		// ObjHandler.SOULIUM_INGOT, 5), 0.9F);
 	}
 
 	public void addRecipie(Item item, ItemStack itemstack, float experience) {

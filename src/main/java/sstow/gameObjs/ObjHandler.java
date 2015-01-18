@@ -77,7 +77,7 @@ public class ObjHandler {
 		// while (counter <= 256 && !found) {
 		// if (Enchantment.enchantmentsList[counter] == null) {
 		// Enchantment SOUL_STEALER = new SoulStealerEnchant(counter,
-		// SSRConfig.ENCHANT_WEIGHT);
+		// Config.ENCHANT_WEIGHT);
 		// enchantmentSoulStealingId = counter;
 		// found = true;
 		// }

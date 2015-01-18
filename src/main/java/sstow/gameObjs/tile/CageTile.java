@@ -21,6 +21,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -36,6 +37,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 	private int updateCounter;
 	private int tier;
 	private static final int[] slot = new int[] { 0, 1, 2, 3, 4, 5 };
+
 	private String entName;
 	private boolean redstoneActive;
 	private boolean initChecks;
@@ -91,7 +93,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 
 		if (counter >= TierHandler.getCooldown(tier - 1) * 20 - 1) {
 			if (Config.ENABLE_DEBUG) {
-				TOWLogger.logDebug("SPAWNING!");
+				TOWLogger.logInfo("Successfully spawned: " + entName);
 			}
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler
 					.getNumSpawns(tier - 1)];
@@ -109,9 +111,10 @@ public class CageTile extends TileEntity implements ISidedInventory {
 				if (heldItem != null) {
 					toSpawn[i].setCurrentItemOrArmor(0, heldItem);
 				}
-				
-				for(int j=1;j<=4;j++){
-					toSpawn[i].setCurrentItemOrArmor(j, Utils.getEntityArmor(inventory, j));
+
+				for (int j = 1; j <= 4; j++) {
+					toSpawn[i].setCurrentItemOrArmor(j,
+							Utils.getEntityArmor(inventory, j));
 				}
 
 				toSpawn[i].getEntityData().setBoolean("SSTOW", true);
