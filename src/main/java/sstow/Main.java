@@ -5,7 +5,6 @@ import sstow.commands.SSTOWCMD;
 import sstow.events.AchievementEvents;
 import sstow.events.Achievements;
 import sstow.events.CreateShardEvent;
-import sstow.events.EntityDeathEvent;
 import sstow.events.PlayerKillEntityEvent;
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.Config;
@@ -42,7 +41,6 @@ public class Main {
 
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
-		//MinecraftForge.EVENT_BUS.register(new EntityDeathEvent());
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
 		FMLInterModComms.sendMessage("Waila", "register",
 				"sstow.utils.WailaProvider.callbackRegister");
