@@ -2,7 +2,7 @@
     {
         "modid": "SSTOW",
         "name": "Soul Shards The Old Ways",
-        "description": "Continuation of Moze_Intel’s Soul Shards: Reborn mod.",
+        "description": "Continuation of Moze_Intelâ€™s Soul Shards: Reborn mod.",
         "version": "RC6-B",
         "mcversion": "1.7.10",
         "url": "",
@@ -16,9 +16,10 @@
         "logoFile": "",
         "screenshots": [],
         "dependencies": [
+            "MinecraftForge",
             "Waila",
             "CoFHCore"
-            "MinecraftForge"
+        
         ],
         "useDependencyInformation": "true"
     }
