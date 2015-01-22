@@ -1,13 +1,8 @@
 package sstow.gameObjs.tile;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
-import sstow.gameObjs.ObjHandler;
-import sstow.utils.EntityMapper;
-import sstow.utils.Config;
-import sstow.utils.TOWLogger;
-import sstow.utils.TierHandler;
-import sstow.utils.Utils;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -21,7 +16,6 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,8 +24,18 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
+import sstow.gameObjs.ObjHandler;
+import sstow.utils.Config;
+import sstow.utils.EntityMapper;
+import sstow.utils.TOWLogger;
+import sstow.utils.TierHandler;
+import sstow.utils.Utils;
 
 public class CageTile extends TileEntity implements ISidedInventory {
+
+
+	
 	private ItemStack inventory;
 	private int counter;
 	private int updateCounter;
@@ -50,6 +54,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 		initChecks = false;
 		active = false;
 	}
+
 
 	@Override
 	public void updateEntity() {
@@ -120,6 +125,39 @@ public class CageTile extends TileEntity implements ISidedInventory {
 				toSpawn[i].getEntityData().setBoolean("SSTOW", true);
 				toSpawn[i].forceSpawn = true;
 				toSpawn[i].func_110163_bv();
+
+				// if this fails, don't crash the game
+				try {
+					// get the main class (like EntityZombie)
+					Class c = toSpawn[i].getClass();
+					while (c.getSuperclass() != EntityLiving.class
+							&& c.getSuperclass() != null) {
+						c = c.getSuperclass();
+					}
+					// set c to the EntityLiving class
+					c = c.getSuperclass();
+
+					// get the private experienceValue field
+					Field field;
+
+					try {
+						// obfuscated environment(normal game)
+						field = c.getDeclaredField("field_70728_aV");
+
+					} catch (Exception e) {
+						// System.out.println("couldn't find field, are you in a development environment?");
+						field = c.getDeclaredField("experienceValue");
+					}
+
+					field.setAccessible(true);
+					field.setInt(toSpawn[i], 0);
+
+				} catch (Exception e) {
+					// testing output. Should not be necessary anymore
+					// System.out.println("something went wrong");
+					// System.out.println(e.getLocalizedMessage()+ " - "+
+					// e.toString());
+				}
 			}
 			spawnEntities(toSpawn);
 			counter = 0;

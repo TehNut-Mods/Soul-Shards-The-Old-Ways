@@ -79,6 +79,7 @@ public class Cage_Block extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int side, float f1, float f2, float f3) {
+		// System.out.println("Block Activated");
 		if (!world.isRemote) {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
@@ -192,13 +193,13 @@ public class Cage_Block extends BlockContainer {
 				icons[i] = iconRegister.registerIcon("sstow:cage_" + i
 						+ "_xmas");
 			}
-//		} else if (HolidayHelper.isHalloween()) {
-//			icons = new IIcon[4];
-//			this.front = iconRegister.registerIcon("sstow:cage_1_spooky");
-//			for (int i = 0; i < 4; i++) {
-//				icons[i] = iconRegister.registerIcon("sstow:cage_" + i
-//						+ "_spooky");
-//			}
+			// } else if (HolidayHelper.isHalloween()) {
+			// icons = new IIcon[4];
+			// this.front = iconRegister.registerIcon("sstow:cage_1_spooky");
+			// for (int i = 0; i < 4; i++) {
+			// icons[i] = iconRegister.registerIcon("sstow:cage_" + i
+			// + "_spooky");
+			// }
 		} else {
 			icons = new IIcon[5];
 			for (int i = 0; i < 5; i++) {
@@ -228,23 +229,23 @@ public class Cage_Block extends BlockContainer {
 					return icons[0];
 				}
 			}
-//		} else if (HolidayHelper.isHalloween()) {
-//			// Check block direction
-//			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-//				// meta 2 == block activated
-//				return icons[3];
-//			} else {
-//				// meta 2 == block activated
-//				if (meta == 2) {
-//					return icons[2];
-//					// meta 1 == block has shard
-//				} else if (meta == 1) {
-//					return icons[1];
-//					// meta 0 == block is empty
-//				} else {
-//					return icons[0];
-//				}
-//			}
+			// } else if (HolidayHelper.isHalloween()) {
+			// // Check block direction
+			// if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
+			// // meta 2 == block activated
+			// return icons[3];
+			// } else {
+			// // meta 2 == block activated
+			// if (meta == 2) {
+			// return icons[2];
+			// // meta 1 == block has shard
+			// } else if (meta == 1) {
+			// return icons[1];
+			// // meta 0 == block is empty
+			// } else {
+			// return icons[0];
+			// }
+			// }
 		} else {
 			// Check block direction
 			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {

@@ -23,7 +23,7 @@ public class Main {
 
 	public static final String MODID = "SSTOW";
 	public static final String NAME = "Soul Shards: The Old Ways";
-	public static final String VERSION = "RC6-B";
+	public static final String VERSION = "RC7";
 
 	@Instance(MODID)
 	public static Main modInstance;

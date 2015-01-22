@@ -12,9 +12,11 @@ import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
 
 public class screenGUI extends GuiConfig {
+
 	public screenGUI(GuiScreen parentScreen) {
 		super(parentScreen, getConfigElements(parentScreen), Main.MODID, false,
-				false, GuiConfig.getAbridgedConfigPath("/Soul Shards The Old Ways/"));
+				false, GuiConfig
+						.getAbridgedConfigPath("/SSTOW/"));
 	}
 
 	private static List<IConfigElement> getConfigElements(GuiScreen parentScreen) {

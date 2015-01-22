@@ -47,6 +47,8 @@ public class SSTOWCMD extends CommandBase {
 						"/sstow addkills x to add kills"));
 				sender.addChatMessage(new ChatComponentText(
 						"/sstow removekills x to remove kills"));
+				sender.addChatMessage(new ChatComponentText(
+						"/sstow xp to show how much xp you have"));
 
 			} else if (params[0].equals("killall")) {
 				int killCounter = 0;
@@ -118,6 +120,17 @@ public class SSTOWCMD extends CommandBase {
 					sender.addChatMessage(new ChatComponentText(
 							EnumChatFormatting.RED
 									+ "Wrong use of command, /sstow removekills x"));
+				}
+			} else if (params[0].equals("xp")) {
+				int xp = 0;
+				if (((EntityPlayerMP) sender).experienceTotal > 0) {
+					xp = ((EntityPlayerMP) sender).experienceTotal;
+					sender.addChatMessage(new ChatComponentText(
+							EnumChatFormatting.GREEN + "You have " + xp
+									+ " of xp"));
+				} else {
+					sender.addChatMessage(new ChatComponentText(
+							EnumChatFormatting.RED + "You do not have any xp"));
 				}
 			} else {
 				sender.addChatMessage(new ChatComponentText(

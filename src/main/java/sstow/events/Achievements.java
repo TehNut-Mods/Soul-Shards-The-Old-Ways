@@ -1,11 +1,12 @@
 package sstow.events;
 
-import sstow.gameObjs.ObjHandler;
-import sstow.utils.Config;
-import sstow.utils.Utils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
+import sstow.gameObjs.ObjHandler;
+import sstow.utils.Config;
+import sstow.utils.Utils;
+import cpw.mods.fml.common.Loader;
 
 public class Achievements {
 	public static Achievement achievementCage;
@@ -18,21 +19,28 @@ public class Achievements {
 	public static Achievement achievementTier3;
 	public static Achievement achievementTier4;
 	public static Achievement achievementTier5;
+	public static Achievement pokeMobH;
+	public static Achievement pokeMobP;
+	public static Achievement fixed;
 
 	public static void Get() {
 
 		ItemStack shard1 = new ItemStack(ObjHandler.SOUL_SHARD);
 		Utils.setShardTier(shard1, (byte) 1);
 		Utils.setShardBoundEnt(shard1, "NULL");
+
 		ItemStack shard2 = new ItemStack(ObjHandler.SOUL_SHARD);
 		Utils.setShardTier(shard2, (byte) 2);
 		Utils.setShardBoundEnt(shard2, "NULL");
+
 		ItemStack shard3 = new ItemStack(ObjHandler.SOUL_SHARD);
 		Utils.setShardTier(shard3, (byte) 3);
 		Utils.setShardBoundEnt(shard3, "NULL");
+
 		ItemStack shard4 = new ItemStack(ObjHandler.SOUL_SHARD);
 		Utils.setShardTier(shard4, (byte) 4);
 		Utils.setShardBoundEnt(shard4, "NULL");
+
 		ItemStack shard5 = new ItemStack(ObjHandler.SOUL_SHARD);
 		Utils.setShardTier(shard5, (byte) 5);
 		Utils.setShardBoundEnt(shard5, "NULL");
@@ -68,11 +76,25 @@ public class Achievements {
 					"tier5Shard", 10, 0, shard5, achievementTier4).setSpecial()
 					.registerStat();
 
-			AchievementPage.registerAchievementPage(new AchievementPage(
-					"Soul Shards: Reborn", new Achievement[] { achievementCage,
-							achievementShard, achievementTier1,
-							achievementTier2, achievementTier3,
-							achievementTier4, achievementTier5 }));
+			fixed = new Achievement("achievement.fixed", "fixed", 10, 10,
+					ObjHandler.FIXED, (Achievement) null).initIndependentStat()
+					.registerStat();
+
+			if (Loader.isModLoaded("MineFactoryReloaded")) {
+				AchievementPage.registerAchievementPage(new AchievementPage(
+						"Soul Shards: The Old Ways", new Achievement[] {
+								achievementCage, achievementShard,
+								achievementTier1, achievementTier2,
+								achievementTier3, achievementTier4,
+								achievementTier5, fixed }));
+			} else {
+				AchievementPage.registerAchievementPage(new AchievementPage(
+						"Soul Shards: The Old Ways", new Achievement[] {
+								achievementCage, achievementShard,
+								achievementTier1, achievementTier2,
+								achievementTier3, achievementTier4,
+								achievementTier5 }));
+			}
 
 		} else if (!Config.EASYMODE) {
 
@@ -117,12 +139,27 @@ public class Achievements {
 					"tier5Shard", -5, 4, shard5, achievementTier4).setSpecial()
 					.registerStat();
 
-			AchievementPage.registerAchievementPage(new AchievementPage(
-					"Soul Shards: Reborn", new Achievement[] { achievementCage,
-							achievementShard, achievementTier1,
-							achievementTier2, achievementTier3,
-							achievementTier4, achievementTier5, theoldWays,
-							soulForge, corruption }));
+			fixed = new Achievement("achievement.fixed", "fixed", 10, 10,
+					ObjHandler.FIXED, (Achievement) null).initIndependentStat()
+					.registerStat();
+			
+			if (Loader.isModLoaded("MineFactoryReloaded")) {
+				AchievementPage.registerAchievementPage(new AchievementPage(
+						"Soul Shards: The Old Ways", new Achievement[] {
+								achievementCage, achievementShard,
+								achievementTier1, achievementTier2,
+								achievementTier3, achievementTier4,
+								achievementTier5, theoldWays, soulForge,
+								corruption, fixed }));
+			} else {
+				AchievementPage.registerAchievementPage(new AchievementPage(
+						"Soul Shards: The Old Ways", new Achievement[] {
+								achievementCage, achievementShard,
+								achievementTier1, achievementTier2,
+								achievementTier3, achievementTier4,
+								achievementTier5, theoldWays, soulForge,
+								corruption }));
+			}
 		}
 
 	}
