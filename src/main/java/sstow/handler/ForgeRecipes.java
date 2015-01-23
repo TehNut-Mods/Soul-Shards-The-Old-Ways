@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,16 +24,24 @@ public class ForgeRecipes {
 	}
 
 	private ForgeRecipes() {
-		this.addRecipie(Items.diamond, new ItemStack(ObjHandler.SOUL_SHARD,
+		this.addRecipe(Items.diamond, new ItemStack(ObjHandler.SOUL_SHARD,
 				Config.SHARDS), 1F);
-		this.addRecipie(Items.iron_ingot, new ItemStack(
+		this.addRecipe(Items.iron_ingot, new ItemStack(
 				ObjHandler.SOULIUM_NUGGET, Config.NUGGETS), 0.8F);
-		// this.addRecipie(Blocks.iron_block, new ItemStack(
-		// ObjHandler.SOULIUM_INGOT, 5), 0.9F);
+		this.addRecipe(Blocks.iron_block, new ItemStack(
+				ObjHandler.SOULIUM_INGOT, 8), 0.9F);
 	}
 
-	public void addRecipie(Item item, ItemStack itemstack, float experience) {
+	public void addRecipe(Item item, ItemStack itemstack, float experience) {
 		this.addLists(item, itemstack, experience);
+	}
+
+	public void addRecipe(Block block, ItemStack itemstack, float experience) {
+		this.addLists(block, itemstack, experience);
+	}
+
+	public void addLists(Block block, ItemStack itemstack, float experience) {
+		this.putLists(new ItemStack(block, 1, 32767), itemstack, experience);
 	}
 
 	public void addLists(Item item, ItemStack itemstack, float experience) {

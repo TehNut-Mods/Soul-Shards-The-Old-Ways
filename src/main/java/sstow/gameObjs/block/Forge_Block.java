@@ -2,9 +2,6 @@ package sstow.gameObjs.block;
 
 import java.util.Random;
 
-import sstow.Main;
-import sstow.gameObjs.ObjHandler;
-import sstow.gameObjs.tile.ForgeTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -21,6 +18,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import sstow.Main;
+import sstow.gameObjs.ObjHandler;
+import sstow.gameObjs.tile.ForgeTile;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -52,7 +52,8 @@ public class Forge_Block extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(Main.MODID + ":soulForge_side");
+		this.blockIcon = iconRegister.registerIcon(Main.MODID
+				+ ":soulForge_side");
 		this.front = iconRegister.registerIcon(this.isBurning2 ? Main.MODID
 				+ ":soulForge_active" : Main.MODID + ":soulForge_idle");
 		this.top = iconRegister.registerIcon("furnace_top");

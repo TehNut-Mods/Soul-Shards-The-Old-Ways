@@ -24,7 +24,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.Config;
 import sstow.utils.EntityMapper;
@@ -34,8 +33,6 @@ import sstow.utils.Utils;
 
 public class CageTile extends TileEntity implements ISidedInventory {
 
-
-	
 	private ItemStack inventory;
 	private int counter;
 	private int updateCounter;
@@ -54,7 +51,6 @@ public class CageTile extends TileEntity implements ISidedInventory {
 		initChecks = false;
 		active = false;
 	}
-
 
 	@Override
 	public void updateEntity() {
@@ -82,6 +78,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 			if (canEntitySpawn(ent)) {
 				setMetadata(2);
 				active = true;
+
 			} else {
 				setMetadata(1);
 				active = false;
@@ -100,6 +97,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 			if (Config.ENABLE_DEBUG) {
 				TOWLogger.logInfo("Successfully spawned: " + entName);
 			}
+
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler
 					.getNumSpawns(tier - 1)];
 

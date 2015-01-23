@@ -39,8 +39,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ObjHandler {
 	// Tool material for the soul tools/sword
-	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", 3, 3122, 12.0F, 6F, 30);
-	
+	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM",
+			3, 3122, 12.0F, 6F, 30);
+
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new SoulStealerEnchant(
 			Config.ENCHANT_ID, Config.ENCHANT_WEIGHT);
@@ -67,7 +68,8 @@ public class ObjHandler {
 
 	public static void initialisedBlock() {
 		SOUL_FORGE = new Forge_Block(false).setCreativeTab(CREATIVE_TAB);
-		SOUL_FORGE_ACTIVE = new Forge_Block(true).setBlockName("sstow.forge_block_active");
+		SOUL_FORGE_ACTIVE = new Forge_Block(true)
+				.setBlockName("sstow.forge_block_active");
 	}
 
 	public static int enchantmentSoulStealingId;
@@ -80,7 +82,8 @@ public class ObjHandler {
 			// Register Items
 			GameRegistry.registerItem(FIXED, "sstow_fixed");
 			GameRegistry.registerItem(VILE_DUST, "sstow_vile_dust");
-			GameRegistry.registerItem(CORRUPTED_ESSENCE, "sstow_corrupted_essence");
+			GameRegistry.registerItem(CORRUPTED_ESSENCE,
+					"sstow_corrupted_essence");
 			GameRegistry.registerItem(SOULIUM_INGOT, "sstow_soulium_ingot");
 			GameRegistry.registerItem(SOULIUM_NUGGET, "sstow_soulium_nugget");
 			GameRegistry.registerItem(IRON_NUGGET, "sstow_iron_nugget");
@@ -92,8 +95,10 @@ public class ObjHandler {
 			// Register Blocks
 			initialisedBlock();
 			GameRegistry.registerBlock(SOUL_FORGE, "sstow_forge");
-			GameRegistry.registerBlock(SOUL_FORGE_ACTIVE, SOUL_FORGE_ACTIVE.getUnlocalizedName());
-			GameRegistry.registerBlock(SOULIUM_BLOCK, Soulium_Block_Item.class, "sstow_soulium_block");
+			GameRegistry.registerBlock(SOUL_FORGE_ACTIVE,
+					SOUL_FORGE_ACTIVE.getUnlocalizedName());
+			GameRegistry.registerBlock(SOULIUM_BLOCK, Soulium_Block_Item.class,
+					"sstow_soulium_block");
 			// Register Tile Entities
 			GameRegistry.registerTileEntity(ForgeTile.class,
 					"sstow_soul_forge_tile");
@@ -101,20 +106,20 @@ public class ObjHandler {
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.CORRUPTED_ESSENCE, 1), Items.glowstone_dust,
 					ObjHandler.VILE_DUST);
-			
+
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.SOULIUM_INGOT, 9), ObjHandler.SOULIUM_BLOCK);
-			
+
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.SOULIUM_NUGGET, 9), ObjHandler.SOULIUM_INGOT);
-			
+
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.IRON_NUGGET, 9), Items.iron_ingot);
-			
+
 			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_FORGE),
 					"SSS", "SCS", "OOO", 'S', Blocks.cobblestone, 'C',
 					ObjHandler.CORRUPTED_ESSENCE, 'O', Blocks.obsidian);
-			
+
 			GameRegistry.addShapedRecipe(
 					new ItemStack(ObjHandler.SOULIUM_INGOT), "AAA", "AAA",
 					"AAA", 'A', ObjHandler.SOULIUM_NUGGET);
@@ -149,6 +154,7 @@ public class ObjHandler {
 		GameRegistry.registerTileEntity(CageTile.class, "sstow_soul_cage_tile");
 
 		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
-				"III", "IXI", "III", 'I', Blocks.iron_bars);
+				"SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S',
+				ObjHandler.SOULIUM_INGOT);
 	}
 }
