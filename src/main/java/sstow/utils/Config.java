@@ -30,6 +30,7 @@ public final class Config {
 	public static int COOK_TIME;
 	public static int SHARDS;
 	public static int NUGGETS;
+	public static int INGOTS;
 
 	public static final short[] DEFAULT_MIN_KILLS = { 64, 128, 256, 512, 1024 };
 	private static final byte[] DEFAULT_NUM_SPAWNS = { 2, 4, 4, 4, 6 };
@@ -74,6 +75,7 @@ public final class Config {
 	public static final Section tier4 = new Section("tier 4 settings", "tier 4 settings");
 	public static final Section tier5 = new Section("tier 5 settings", "tier 5 settings");
 
+
 	public static void load(FMLPreInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new Config());
 		configDirectory = new File(event.getModConfigurationDirectory() + "/SSTOW/");
@@ -111,6 +113,7 @@ public final class Config {
 			COOK_TIME = config.getInt("Cooking Time", "recipes", 12800, 0, 999999, "Time (In Ticks) it takes to create Soulium and Soul Shards");
 			SHARDS = config.getInt("Shard Amount", "recipes", 3, 1, 8, "RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
 			NUGGETS = config.getInt("Nugget Amount", "recipes", 8, 1, 9, "RESTART REQUIRED: How many Soulium Nuggets do you want to get by smelting 1 iron ingot");
+			INGOTS = config.getInt("Ingot Amount", "recipes", 7, 1, 9, "RESTART REQUIRED: How many Soulium Ingots do you want to get by smelting 1 iron block");
 
 			short[] minKills = new short[5];
 
