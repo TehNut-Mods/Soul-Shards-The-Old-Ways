@@ -24,34 +24,17 @@ public class ForgeRecipes {
 	}
 
 	private ForgeRecipes() {
-		this.addRecipe(Items.diamond, new ItemStack(ObjHandler.SOUL_SHARD,
-				Config.SHARDS), 1F);
-		this.addRecipe(Items.iron_ingot, new ItemStack(
+		this.addRecipe(new ItemStack(Items.diamond), new ItemStack(
+				ObjHandler.SOUL_SHARD, Config.SHARDS), 1F);
+		this.addRecipe(new ItemStack(Items.iron_ingot), new ItemStack(
 				ObjHandler.SOULIUM_NUGGET, Config.NUGGETS), 0.8F);
-		this.addRecipe(Blocks.iron_block, new ItemStack(
-				ObjHandler.SOULIUM_INGOT, 8), 0.9F);
+		this.addRecipe(new ItemStack(Blocks.iron_block), new ItemStack(
+				ObjHandler.SOULIUM_INGOT, Config.INGOTS), 0.9F);
 	}
 
-	public void addRecipe(Item item, ItemStack itemstack, float experience) {
-		this.addLists(item, itemstack, experience);
-	}
-
-	public void addRecipe(Block block, ItemStack itemstack, float experience) {
-		this.addLists(block, itemstack, experience);
-	}
-
-	public void addLists(Block block, ItemStack itemstack, float experience) {
-		this.putLists(new ItemStack(block, 1, 32767), itemstack, experience);
-	}
-
-	public void addLists(Item item, ItemStack itemstack, float experience) {
-		this.putLists(new ItemStack(item, 1, 32767), itemstack, experience);
-	}
-
-	public void putLists(ItemStack itemstack, ItemStack itemstack2,
-			float experience) {
-		this.smeltingList.put(itemstack, itemstack2);
-		this.experienceList.put(itemstack2, Float.valueOf(experience));
+	public void addRecipe(ItemStack input, ItemStack output, float experience) {
+		this.smeltingList.put(input, output);
+		this.experienceList.put(output, Float.valueOf(experience));
 	}
 
 	public ItemStack getSmeltingResult(ItemStack itemstack) {
