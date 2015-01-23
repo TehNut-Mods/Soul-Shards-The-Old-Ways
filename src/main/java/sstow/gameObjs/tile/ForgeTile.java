@@ -257,14 +257,13 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 			if (item instanceof ItemBlock
 					&& Block.getBlockFromItem(item) != Blocks.air) {
 				Block block = Block.getBlockFromItem(item);
-
-				if (block == ObjHandler.SOUL_FORGE) {
-					return 200;
-				}
-
-				if (block.getMaterial() == Material.rock) {
-					return 300;
-				}
+				// if (block == ObjHandler.SOUL_FORGE) {
+				// return 200;
+				// }
+				//
+				// if (block.getMaterial() == Material.rock) {
+				// return 300;
+				// }
 			}
 
 			if (item == ObjHandler.CORRUPTED_ESSENCE) {
