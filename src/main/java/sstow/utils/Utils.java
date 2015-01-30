@@ -1,7 +1,10 @@
 package sstow.utils;
 
+import java.util.Iterator;
 import java.util.Random;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
 import sstow.events.Achievements;
 import sstow.gameObjs.ObjHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,7 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 
 public final class Utils {
-
+	
 	public static ItemStack getShardFromInv(EntityPlayer player, String entity) {
 		ItemStack lastResort = null;
 
@@ -34,7 +37,7 @@ public final class Utils {
 			}
 		}
 
-		if (lastResort!=null && lastResort.stackSize > 1) {
+		if (lastResort != null && lastResort.stackSize > 1) {
 			boolean emptySpot = false;
 			int counter = 0;
 
@@ -246,44 +249,47 @@ public final class Utils {
 
 		return null;
 	}
-	
+
 	public static void writeEntityArmor(ItemStack shard, EntityLiving ent) {
-			for(int i=1;i<=4;i++){
-				ItemStack armor = ent.getEquipmentInSlot(i);
-	
-				if (armor != null) {
-					NBTTagCompound nbt = new NBTTagCompound();
-					armor.writeToNBT(nbt);
-	
-					if (nbt.hasKey("ench")) {
-						nbt.removeTag("ench");
-					}
-					
-					if(Utils.getShardKillCount(shard)>0){
-						if(shard.stackTagCompound.getTag("armor"+i)!=null){
-							NBTTagCompound oldnbt =(NBTTagCompound) shard.stackTagCompound.getTag("armor"+i);
-							ItemStack oldArmor =ItemStack.loadItemStackFromNBT(oldnbt);
-							if(oldArmor.getItem()!=armor.getItem()){
-								shard.stackTagCompound.removeTag("armor"+i);
-							}
-						}
-					}else{
-						shard.stackTagCompound.setTag("armor"+i, nbt);
-					}
-				}else{
-					shard.stackTagCompound.removeTag("armor"+i);
+		for (int i = 1; i <= 4; i++) {
+			ItemStack armor = ent.getEquipmentInSlot(i);
+
+			if (armor != null) {
+				NBTTagCompound nbt = new NBTTagCompound();
+				armor.writeToNBT(nbt);
+
+				if (nbt.hasKey("ench")) {
+					nbt.removeTag("ench");
 				}
+
+				if (Utils.getShardKillCount(shard) > 0) {
+					if (shard.stackTagCompound.getTag("armor" + i) != null) {
+						NBTTagCompound oldnbt = (NBTTagCompound) shard.stackTagCompound
+								.getTag("armor" + i);
+						ItemStack oldArmor = ItemStack
+								.loadItemStackFromNBT(oldnbt);
+						if (oldArmor.getItem() != armor.getItem()) {
+							shard.stackTagCompound.removeTag("armor" + i);
+						}
+					}
+				} else {
+					shard.stackTagCompound.setTag("armor" + i, nbt);
+				}
+			} else {
+				shard.stackTagCompound.removeTag("armor" + i);
 			}
+		}
 	}
-	
-	
+
 	public static ItemStack getEntityArmor(ItemStack shard, int armorSlot) {
-		if(shard.stackTagCompound.hasKey("armor"+armorSlot) && shard.stackTagCompound.getTag("armor"+armorSlot)!=null){
-			NBTTagCompound oldnbt =(NBTTagCompound) shard.stackTagCompound.getTag("armor"+armorSlot);
-			ItemStack oldArmor =ItemStack.loadItemStackFromNBT(oldnbt);
+		if (shard.stackTagCompound.hasKey("armor" + armorSlot)
+				&& shard.stackTagCompound.getTag("armor" + armorSlot) != null) {
+			NBTTagCompound oldnbt = (NBTTagCompound) shard.stackTagCompound
+					.getTag("armor" + armorSlot);
+			ItemStack oldArmor = ItemStack.loadItemStackFromNBT(oldnbt);
 			return oldArmor;
-		}else{
+		} else {
 			return null;
-		}	
+		}
 	}
 }

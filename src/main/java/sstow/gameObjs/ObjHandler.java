@@ -83,8 +83,7 @@ public class ObjHandler {
 			// Register Items
 			GameRegistry.registerItem(FIXED, "sstow_fixed");
 			GameRegistry.registerItem(VILE_DUST, "sstow_vile_dust");
-			GameRegistry.registerItem(CORRUPTED_ESSENCE,
-					"sstow_corrupted_essence");
+			GameRegistry.registerItem(CORRUPTED_ESSENCE, "sstow_corrupted_essence");
 			GameRegistry.registerItem(SOULIUM_INGOT, "sstow_soulium_ingot");
 			GameRegistry.registerItem(SOULIUM_NUGGET, "sstow_soulium_nugget");
 			GameRegistry.registerItem(IRON_NUGGET, "sstow_iron_nugget");
@@ -98,8 +97,7 @@ public class ObjHandler {
 			GameRegistry.registerBlock(SOUL_FORGE, "sstow_forge");
 			GameRegistry.registerBlock(SOUL_FORGE_ACTIVE,
 					SOUL_FORGE_ACTIVE.getUnlocalizedName());
-			GameRegistry.registerBlock(SOULIUM_BLOCK, Soulium_Block_Item.class,
-					"sstow_soulium_block");
+			GameRegistry.registerBlock(SOULIUM_BLOCK, "sstow_soulium_block");
 			// Register Tile Entities
 			GameRegistry.registerTileEntity(ForgeTile.class,
 					"sstow_soul_forge_tile");

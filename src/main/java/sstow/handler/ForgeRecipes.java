@@ -23,13 +23,27 @@ public class ForgeRecipes {
 		return SMELTING_BASE;
 	}
 
+	private ItemStack NuggetIngot() {
+		if (Config.NUGGETS == 9) {
+			return new ItemStack(ObjHandler.SOULIUM_INGOT, 1);
+		} else {
+			return new ItemStack(ObjHandler.SOULIUM_NUGGET, Config.NUGGETS);
+		}
+	}
+	
+	private ItemStack IngotBlock() {
+		if (Config.INGOTS == 9){
+			return new ItemStack(ObjHandler.SOULIUM_BLOCK, 1);
+		} else {
+			return new ItemStack(ObjHandler.SOULIUM_INGOT, Config.INGOTS);
+		}
+	}
+
 	private ForgeRecipes() {
 		this.addRecipe(new ItemStack(Items.diamond), new ItemStack(
 				ObjHandler.SOUL_SHARD, Config.SHARDS), 1F);
-		this.addRecipe(new ItemStack(Items.iron_ingot), new ItemStack(
-				ObjHandler.SOULIUM_NUGGET, Config.NUGGETS), 0.8F);
-		this.addRecipe(new ItemStack(Blocks.iron_block), new ItemStack(
-				ObjHandler.SOULIUM_INGOT, Config.INGOTS), 0.9F);
+		this.addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), 0.8F);
+		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), 1F);
 	}
 
 	public void addRecipe(ItemStack input, ItemStack output, float experience) {

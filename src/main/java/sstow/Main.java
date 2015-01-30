@@ -1,5 +1,7 @@
 package sstow;
 
+import codechicken.nei.api.API;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import sstow.commands.SSTOWCMD;
 import sstow.events.AchievementEvents;
@@ -9,7 +11,9 @@ import sstow.events.PlayerKillEntityEvent;
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.Config;
 import sstow.utils.EntityMapper;
+import sstow.utils.Utils;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -23,7 +27,7 @@ public class Main {
 
 	public static final String MODID = "SSTOW";
 	public static final String NAME = "Soul Shards: The Old Ways";
-	public static final String VERSION = "RC7";
+	public static final String VERSION = "RC7-A";
 
 	@Instance(MODID)
 	public static Main modInstance;
@@ -49,6 +53,11 @@ public class Main {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		EntityMapper.init();
+		if (Loader.isModLoaded("NotEnoughItems")) {
+			API.hideItem(new ItemStack(ObjHandler.SOUL_FORGE_ACTIVE));
+			API.hideItem(new ItemStack(ObjHandler.FIXED));
+			API.hideItem(new ItemStack(ObjHandler.IRON_NUGGET));
+		}
 	}
 
 	@Mod.EventHandler
