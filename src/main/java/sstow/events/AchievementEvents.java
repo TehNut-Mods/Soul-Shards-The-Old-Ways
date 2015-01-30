@@ -3,6 +3,7 @@ package sstow.events;
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.Config;
 import net.minecraft.item.Item;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
@@ -34,8 +35,19 @@ public class AchievementEvents {
 
 	@SubscribeEvent
 	public void VileSmelted(ItemSmeltedEvent event) {
-		if (event.smelting.getItem().equals(ObjHandler.VILE_DUST)) {
-			event.player.addStat(Achievements.theoldWays, 1);
+		if (!Loader.isModLoaded("Natura")) {
+			if (event.smelting.getItem().equals(ObjHandler.VILE_DUST)) {
+				event.player.addStat(Achievements.theoldWays, 1);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void VileCrafted(ItemCraftedEvent event) {
+		if (Loader.isModLoaded("Natura")) {
+			if (event.crafting.getItem().equals(ObjHandler.VILE_DUST)) {
+				event.player.addStat(Achievements.theoldWays, 1);
+			}
 		}
 	}
 
@@ -46,7 +58,6 @@ public class AchievementEvents {
 					.equals(ObjHandler.SOUL_SHARD)) {
 				event.player.addStat(Achievements.achievementShard, 1);
 			}
-		} else {
 		}
 	}
 
@@ -55,7 +66,6 @@ public class AchievementEvents {
 			if (event.smelting.getItem().equals(ObjHandler.SOUL_SHARD)) {
 				event.player.addStat(Achievements.achievementShard, 1);
 			}
-		} else {
 		}
 	}
 

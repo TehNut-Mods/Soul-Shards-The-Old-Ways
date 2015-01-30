@@ -34,6 +34,7 @@ import sstow.gameObjs.tile.ForgeTile;
 import sstow.handler.GuiHandler;
 //Import Config
 import sstow.utils.Config;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -143,18 +144,37 @@ public class ObjHandler {
 			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_SPADE),
 					"A", "B", "B", 'A', ObjHandler.SOULIUM_INGOT, 'B',
 					Items.iron_ingot);
-			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
-					ObjHandler.VILE_DUST), 0.35F);
+
+			GameRegistry.registerItem(SOUL_SHARD, "sstow_soul_shard");
+
+			GameRegistry.registerBlock(SOUL_CAGE, "sstow_soul_cage");
+
+			GameRegistry.registerTileEntity(CageTile.class,
+					"sstow_soul_cage_tile");
+
+			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
+					"SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S',
+					ObjHandler.SOULIUM_INGOT);
+
+			if (Loader.isModLoaded("Natura")) {
+				GameRegistry.addShapelessRecipe(new ItemStack(
+						ObjHandler.VILE_DUST, 2), Blocks.soul_sand);
+			} else {
+
+				GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
+						ObjHandler.VILE_DUST), 0.35F);
+			}
+		} else {
+
+			GameRegistry.registerItem(SOUL_SHARD, "sstow_soul_shard");
+
+			GameRegistry.registerBlock(SOUL_CAGE, "sstow_soul_cage");
+
+			GameRegistry.registerTileEntity(CageTile.class,
+					"sstow_soul_cage_tile");
+
+			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
+					"III", "IXI", "III", 'I', Blocks.iron_bars);
 		}
-
-		GameRegistry.registerItem(SOUL_SHARD, "sstow_soul_shard");
-
-		GameRegistry.registerBlock(SOUL_CAGE, "sstow_soul_cage");
-
-		GameRegistry.registerTileEntity(CageTile.class, "sstow_soul_cage_tile");
-
-		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
-				"SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S',
-				ObjHandler.SOULIUM_INGOT);
 	}
 }

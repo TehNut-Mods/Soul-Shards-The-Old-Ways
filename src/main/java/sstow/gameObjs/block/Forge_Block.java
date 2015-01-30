@@ -37,6 +37,7 @@ public class Forge_Block extends BlockContainer {
 	public Forge_Block(boolean isActive) {
 		super(Material.rock);
 		this.setBlockName("sstow.forge_block");
+		this.setHardness(3.5F);
 		isBurning2 = isActive;
 	}
 
@@ -52,10 +53,10 @@ public class Forge_Block extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(Main.MODID
-				+ ":soulForge_side");
-		this.front = iconRegister.registerIcon(this.isBurning2 ? Main.MODID
-				+ ":soulForge_active" : Main.MODID + ":soulForge_idle");
+		this.blockIcon = iconRegister.registerIcon("sstow:soulForge_side");
+		this.front = iconRegister
+				.registerIcon(this.isBurning2 ? "sstow:soulForge_active"
+						: "sstow:soulForge_idle");
 		this.top = iconRegister.registerIcon("furnace_top");
 		this.bottom = iconRegister.registerIcon("obsidian");
 	}
