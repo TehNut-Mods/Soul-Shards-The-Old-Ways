@@ -14,28 +14,34 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+
 apply plugin: 'forge'
 
-version = "1.7.10-Alpha-1.2"
-group= "SoulSReborn" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "SoulShardsReborn"
+version = "1-7-10-RC7-A"
+group= "SSTOW" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "SSTOW"
 
 minecraft {
-    version = "1.7.10-10.13.0.1208"
-    if (file('../run').exists()) {
-        runDir = "../run"
-    } else {
-        runDir = "assets"
-    }
+    version = "1.7.10-10.13.2.1232"
+	if(file('../run').exists()){
+		assetDir = "../run/assets"
+	} else {
+		assetDir = "assets"
+	}
+    //runDir = "eclipse"
 }
 
-
 dependencies {
+	compile files (
+		"lib/Waila-1.5.8a_1.7.10.jar",
+		"lib/CoFHCore-[1.7.10]3.0.0B9-40-dev.jar",
+		"lib/NotEnoughItems-1.7.10-1.0.4.79-universal.jar"
+	)
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
-
+      
     // real examples
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
@@ -46,7 +52,8 @@ dependencies {
 
 }
 
-processResources {
+processResources
+{
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -54,11 +61,11 @@ processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-
+                
         // replace version and mcversion
-        expand 'version': project.version, 'mcversion': project.minecraft.version
+        expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-
+        
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
