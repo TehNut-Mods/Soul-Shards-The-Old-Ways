@@ -24,7 +24,7 @@ public class Achievements {
 
 	public static void defaultAchievements() {
 
-		System.out.println("Rendering Icons");
+		// System.out.println("Rendering Icons");
 
 		ItemStack shard1 = new ItemStack(ObjHandler.SOUL_SHARD);
 		Utils.setShardTier(shard1, (byte) 1);
