@@ -1,10 +1,9 @@
 package sstow.gameObjs.item;
 
-import sstow.gameObjs.ObjHandler;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import sstow.gameObjs.ObjHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

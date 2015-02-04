@@ -1,21 +1,17 @@
 package sstow.gameObjs.tile;
 
-import sstow.gameObjs.ObjHandler;
-import sstow.gameObjs.block.Forge_Block;
-import sstow.handler.ForgeRecipes;
-import sstow.utils.Config;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import sstow.gameObjs.ObjHandler;
+import sstow.gameObjs.block.Forge_Block;
+import sstow.handler.ForgeRecipes;
+import sstow.utils.Config;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -253,18 +249,6 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 			return 0;
 		} else {
 			Item item = itemstack.getItem();
-
-			if (item instanceof ItemBlock
-					&& Block.getBlockFromItem(item) != Blocks.air) {
-				Block block = Block.getBlockFromItem(item);
-				// if (block == ObjHandler.SOUL_FORGE) {
-				// return 200;
-				// }
-				//
-				// if (block.getMaterial() == Material.rock) {
-				// return 300;
-				// }
-			}
 
 			if (item == ObjHandler.CORRUPTED_ESSENCE) {
 				return 1600;

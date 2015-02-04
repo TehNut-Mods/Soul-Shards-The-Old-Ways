@@ -1,10 +1,9 @@
 package sstow.gameObjs.item;
 
-import sstow.gameObjs.ObjHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
+import sstow.gameObjs.ObjHandler;
 
 public class Soulium_Block_Item extends ItemBlock {
 	

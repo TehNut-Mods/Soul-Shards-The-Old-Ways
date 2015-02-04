@@ -1,13 +1,7 @@
 package sstow.gameObjs.item;
 
-import sstow.gameObjs.ObjHandler;
-
 import java.util.List;
 
-import sstow.utils.EntityMapper;
-import sstow.utils.Config;
-import sstow.utils.TierHandler;
-import sstow.utils.Utils;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -23,6 +17,11 @@ import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import sstow.gameObjs.ObjHandler;
+import sstow.utils.Config;
+import sstow.utils.EntityMapper;
+import sstow.utils.TierHandler;
+import sstow.utils.Utils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -158,6 +157,7 @@ public class Soul_Shard extends Item {
 		return Utils.hasMaxedKills(stack);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tabs, List list) {
@@ -171,6 +171,7 @@ public class Soul_Shard extends Item {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list,

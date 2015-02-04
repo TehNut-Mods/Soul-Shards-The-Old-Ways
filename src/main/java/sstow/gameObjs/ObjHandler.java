@@ -23,7 +23,6 @@ import sstow.gameObjs.item.Soul_Pickaxe;
 import sstow.gameObjs.item.Soul_Shard;
 import sstow.gameObjs.item.Soul_Spade;
 import sstow.gameObjs.item.Soul_Sword;
-import sstow.gameObjs.item.Soulium_Block_Item;
 import sstow.gameObjs.item.Soulium_Ingot;
 import sstow.gameObjs.item.Soulium_Nugget;
 import sstow.gameObjs.item.Vile_Dust;
@@ -46,8 +45,10 @@ public class ObjHandler {
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new SoulStealerEnchant(
 			Config.ENCHANT_ID, Config.ENCHANT_WEIGHT);
+
 	// Set the creative tab
 	public static CreativeTab CREATIVE_TAB = new CreativeTab();
+
 	// Set up the mod items
 	public static Item FIXED = new fixedAchievement();
 	public static Item VILE_DUST = new Vile_Dust();
@@ -61,6 +62,7 @@ public class ObjHandler {
 	public static Item SOUL_HOE = new Soul_Hoe(SOULIUM);
 	public static Item SOUL_SPADE = new Soul_Spade(SOULIUM);
 	public static Item IRON_NUGGET = new Iron_Nugget();
+
 	// Set up the mod blocks
 	public static Block SOUL_CAGE = new Cage_Block();
 	public static Block SOUL_FORGE;
@@ -76,103 +78,103 @@ public class ObjHandler {
 	public static int enchantmentSoulStealingId;
 
 	public static void registerObjs() {
+		NetworkRegistry.INSTANCE.registerGuiHandler(Main.modInstance,
+				new GuiHandler());
 
-		if (!Config.EASYMODE) {
-			NetworkRegistry.INSTANCE.registerGuiHandler(Main.modInstance,
-					new GuiHandler());
-			// Register Items
+		// Register Items
+		if (Loader.isModLoaded("MineFactoryReloaded"))
 			GameRegistry.registerItem(FIXED, "sstow_fixed");
-			GameRegistry.registerItem(VILE_DUST, "sstow_vile_dust");
-			GameRegistry.registerItem(CORRUPTED_ESSENCE, "sstow_corrupted_essence");
-			GameRegistry.registerItem(SOULIUM_INGOT, "sstow_soulium_ingot");
-			GameRegistry.registerItem(SOULIUM_NUGGET, "sstow_soulium_nugget");
-			GameRegistry.registerItem(IRON_NUGGET, "sstow_iron_nugget");
-			GameRegistry.registerItem(SOUL_SWORD, "sstow_soul_sword");
-			GameRegistry.registerItem(SOUL_PICK, "sstow_soul_pickaxe");
-			GameRegistry.registerItem(SOUL_AXE, "sstow_soul_axe");
-			GameRegistry.registerItem(SOUL_HOE, "sstow_soul_hoe");
-			GameRegistry.registerItem(SOUL_SPADE, "sstow_soul_spade");
-			// Register Blocks
-			initialisedBlock();
-			GameRegistry.registerBlock(SOUL_FORGE, "sstow_forge");
-			GameRegistry.registerBlock(SOUL_FORGE_ACTIVE,
-					SOUL_FORGE_ACTIVE.getUnlocalizedName());
-			GameRegistry.registerBlock(SOULIUM_BLOCK, "sstow_soulium_block");
-			// Register Tile Entities
-			GameRegistry.registerTileEntity(ForgeTile.class,
-					"sstow_soul_forge_tile");
-			// Register Recipes
+
+		GameRegistry.registerItem(VILE_DUST, "sstow_vile_dust");
+		GameRegistry.registerItem(CORRUPTED_ESSENCE, "sstow_corrupted_essence");
+		GameRegistry.registerItem(SOULIUM_INGOT, "sstow_soulium_ingot");
+		GameRegistry.registerItem(SOULIUM_NUGGET, "sstow_soulium_nugget");
+		GameRegistry.registerItem(IRON_NUGGET, "sstow_iron_nugget");
+		GameRegistry.registerItem(SOUL_SWORD, "sstow_soul_sword");
+		GameRegistry.registerItem(SOUL_PICK, "sstow_soul_pickaxe");
+		GameRegistry.registerItem(SOUL_AXE, "sstow_soul_axe");
+		GameRegistry.registerItem(SOUL_HOE, "sstow_soul_hoe");
+		GameRegistry.registerItem(SOUL_SPADE, "sstow_soul_spade");
+
+		// Register Blocks
+		initialisedBlock();
+		GameRegistry.registerBlock(SOUL_FORGE, "sstow_forge");
+		GameRegistry.registerBlock(SOUL_FORGE_ACTIVE,
+				SOUL_FORGE_ACTIVE.getUnlocalizedName());
+		GameRegistry.registerBlock(SOULIUM_BLOCK, "sstow_soulium_block");
+
+		// Register Tile Entities
+		GameRegistry.registerTileEntity(ForgeTile.class,
+				"sstow_soul_forge_tile");
+
+		// Register Recipes
+		GameRegistry.addShapelessRecipe(new ItemStack(ObjHandler.SOULIUM_INGOT,
+				9), ObjHandler.SOULIUM_BLOCK);
+
+		GameRegistry.addShapelessRecipe(new ItemStack(
+				ObjHandler.SOULIUM_NUGGET, 9), ObjHandler.SOULIUM_INGOT);
+
+		GameRegistry.addShapelessRecipe(
+				new ItemStack(ObjHandler.IRON_NUGGET, 9), Items.iron_ingot);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_FORGE),
+				"SSS", "SCS", "OOO", 'S', Blocks.cobblestone, 'C',
+				ObjHandler.CORRUPTED_ESSENCE, 'O', Blocks.obsidian);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOULIUM_INGOT),
+				"AAA", "AAA", "AAA", 'A', ObjHandler.SOULIUM_NUGGET);
+
+		GameRegistry.addShapedRecipe(new ItemStack(Items.iron_ingot), "AAA",
+				"AAA", "AAA", 'A', ObjHandler.IRON_NUGGET);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOULIUM_BLOCK),
+				"AAA", "AAA", "AAA", 'A', ObjHandler.SOULIUM_INGOT);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_SWORD), "A",
+				"A", "B", 'A', ObjHandler.SOULIUM_INGOT, 'B', Items.iron_ingot);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_PICK),
+				"AAA", "CBC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+				Items.iron_ingot);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_AXE), "AAC",
+				"ABC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+				Items.iron_ingot);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_HOE), "AAC",
+				"CBC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
+				Items.iron_ingot);
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_SPADE), "A",
+				"B", "B", 'A', ObjHandler.SOULIUM_INGOT, 'B', Items.iron_ingot);
+
+		GameRegistry.registerItem(SOUL_SHARD, "sstow_soul_shard");
+
+		GameRegistry.registerBlock(SOUL_CAGE, "sstow_soul_cage");
+
+		GameRegistry.registerTileEntity(CageTile.class, "sstow_soul_cage_tile");
+
+		GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
+				"SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S',
+				ObjHandler.SOULIUM_INGOT);
+
+		if (Loader.isModLoaded("Natura")) {
+
+			GameRegistry.addShapelessRecipe(new ItemStack(ObjHandler.VILE_DUST,
+					2), Blocks.soul_sand, Items.glowstone_dust);
+
+			GameRegistry.addSmelting(ObjHandler.VILE_DUST, new ItemStack(
+					ObjHandler.CORRUPTED_ESSENCE), 0.35F);
+
+		} else {
+
 			GameRegistry.addShapelessRecipe(new ItemStack(
 					ObjHandler.CORRUPTED_ESSENCE, 1), Items.glowstone_dust,
 					ObjHandler.VILE_DUST);
 
-			GameRegistry.addShapelessRecipe(new ItemStack(
-					ObjHandler.SOULIUM_INGOT, 9), ObjHandler.SOULIUM_BLOCK);
-
-			GameRegistry.addShapelessRecipe(new ItemStack(
-					ObjHandler.SOULIUM_NUGGET, 9), ObjHandler.SOULIUM_INGOT);
-
-			GameRegistry.addShapelessRecipe(new ItemStack(
-					ObjHandler.IRON_NUGGET, 9), Items.iron_ingot);
-
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_FORGE),
-					"SSS", "SCS", "OOO", 'S', Blocks.cobblestone, 'C',
-					ObjHandler.CORRUPTED_ESSENCE, 'O', Blocks.obsidian);
-
-			GameRegistry.addShapedRecipe(
-					new ItemStack(ObjHandler.SOULIUM_INGOT), "AAA", "AAA",
-					"AAA", 'A', ObjHandler.SOULIUM_NUGGET);
-			GameRegistry.addShapedRecipe(new ItemStack(Items.iron_ingot),
-					"AAA", "AAA", "AAA", 'A', ObjHandler.IRON_NUGGET);
-			GameRegistry.addShapedRecipe(
-					new ItemStack(ObjHandler.SOULIUM_BLOCK), "AAA", "AAA",
-					"AAA", 'A', ObjHandler.SOULIUM_INGOT);
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_SWORD),
-					"A", "A", "B", 'A', ObjHandler.SOULIUM_INGOT, 'B',
-					Items.iron_ingot);
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_PICK),
-					"AAA", "CBC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
-					Items.iron_ingot);
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_AXE),
-					"AAC", "ABC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
-					Items.iron_ingot);
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_HOE),
-					"AAC", "CBC", "CBC", 'A', ObjHandler.SOULIUM_INGOT, 'B',
-					Items.iron_ingot);
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_SPADE),
-					"A", "B", "B", 'A', ObjHandler.SOULIUM_INGOT, 'B',
-					Items.iron_ingot);
-
-			GameRegistry.registerItem(SOUL_SHARD, "sstow_soul_shard");
-
-			GameRegistry.registerBlock(SOUL_CAGE, "sstow_soul_cage");
-
-			GameRegistry.registerTileEntity(CageTile.class,
-					"sstow_soul_cage_tile");
-
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
-					"SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S',
-					ObjHandler.SOULIUM_INGOT);
-
-			if (Loader.isModLoaded("Natura")) {
-				GameRegistry.addShapelessRecipe(new ItemStack(
-						ObjHandler.VILE_DUST, 2), Blocks.soul_sand);
-			} else {
-
-				GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
-						ObjHandler.VILE_DUST), 0.35F);
-			}
-		} else {
-
-			GameRegistry.registerItem(SOUL_SHARD, "sstow_soul_shard");
-
-			GameRegistry.registerBlock(SOUL_CAGE, "sstow_soul_cage");
-
-			GameRegistry.registerTileEntity(CageTile.class,
-					"sstow_soul_cage_tile");
-
-			GameRegistry.addShapedRecipe(new ItemStack(ObjHandler.SOUL_CAGE),
-					"III", "IXI", "III", 'I', Blocks.iron_bars);
+			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
+					ObjHandler.VILE_DUST), 0.35F);
 		}
+
 	}
 }

@@ -9,21 +9,22 @@ import sstow.utils.Utils;
 import cpw.mods.fml.common.Loader;
 
 public class Achievements {
-	public static Achievement achievementCage;
-	public static Achievement theoldWays;
+	public static Achievement soulcage;
+	public static Achievement viledust;
 	public static Achievement corruption;
-	public static Achievement soulForge;
-	public static Achievement achievementShard;
-	public static Achievement achievementTier1;
-	public static Achievement achievementTier2;
-	public static Achievement achievementTier3;
-	public static Achievement achievementTier4;
-	public static Achievement achievementTier5;
-	public static Achievement pokeMobH;
-	public static Achievement pokeMobP;
+	public static Achievement soulforge;
+	public static Achievement unboundshard;
+	public static Achievement shardt1;
+	public static Achievement shardt2;
+	public static Achievement shardt3;
+	public static Achievement shardt4;
+	public static Achievement shardt5;
+
 	public static Achievement fixed;
 
-	public static void Get() {
+	public static void defaultAchievements() {
+
+		System.out.println("Rendering Icons");
 
 		ItemStack shard1 = new ItemStack(ObjHandler.SOUL_SHARD);
 		Utils.setShardTier(shard1, (byte) 1);
@@ -45,122 +46,86 @@ public class Achievements {
 		Utils.setShardTier(shard5, (byte) 5);
 		Utils.setShardBoundEnt(shard5, "NULL");
 
-		if (Config.EASYMODE) {
+		//System.out.println("Registering Achievement Icon Locations");
 
-			achievementCage = new Achievement("achievement.createCage",
-					"createCage", -2, 0, ObjHandler.SOUL_CAGE,
-					(Achievement) null).initIndependentStat().registerStat();
+		viledust = new Achievement("achievement.vile_dust", "vile_dust", -1,
+				-3, ObjHandler.VILE_DUST, (Achievement) null)
+				.initIndependentStat().registerStat();
 
-			achievementShard = new Achievement("achievement.createShard",
-					"createShard", 0, 0,
+		corruption = new Achievement("achievement.corrupted_essence",
+				"corrupted_essence", -1, -1, ObjHandler.CORRUPTED_ESSENCE,
+				Achievements.viledust).registerStat();
+
+		soulforge = new Achievement("achievement.soulForge", "soulForge", -1,
+				1, ObjHandler.SOUL_FORGE, Achievements.corruption)
+				.registerStat();
+
+		soulcage = new Achievement("achievement.createCage", "createCage", 0,
+				0, ObjHandler.SOUL_CAGE, Achievements.soulforge).registerStat();
+		if (!Config.EASYMODE) {
+			unboundshard = new Achievement("achievement.createShard",
+					"createShard", 4, 1,
+					new ItemStack(ObjHandler.SOUL_SHARD, 0),
+					Achievements.soulforge).registerStat();
+		} else {
+			unboundshard = new Achievement("achievement.createShard",
+					"createShard", 4, 1,
 					new ItemStack(ObjHandler.SOUL_SHARD, 0), (Achievement) null)
 					.initIndependentStat().registerStat();
-
-			achievementTier1 = new Achievement("achievement.tier1Shard",
-					"tier1Shard", 2, 0, shard1, achievementShard)
-					.registerStat();
-
-			achievementTier2 = new Achievement("achievement.tier2Shard",
-					"tier2Shard", 4, 0, shard2, achievementTier1)
-					.registerStat();
-
-			achievementTier3 = new Achievement("achievement.tier3Shard",
-					"tier3Shard", 6, 0, shard3, achievementTier2)
-					.registerStat();
-
-			achievementTier4 = new Achievement("achievement.tier4Shard",
-					"tier4Shard", 8, 0, shard4, achievementTier3)
-					.registerStat();
-
-			achievementTier5 = new Achievement("achievement.tier5Shard",
-					"tier5Shard", 10, 0, shard5, achievementTier4).setSpecial()
-					.registerStat();
-
-			fixed = new Achievement("achievement.fixed", "fixed", 10, 10,
-					ObjHandler.FIXED, (Achievement) null).initIndependentStat()
-					.registerStat();
-
-			if (Loader.isModLoaded("MineFactoryReloaded")) {
-				AchievementPage.registerAchievementPage(new AchievementPage(
-						"Soul Shards: The Old Ways", new Achievement[] {
-								achievementCage, achievementShard,
-								achievementTier1, achievementTier2,
-								achievementTier3, achievementTier4,
-								achievementTier5, fixed }));
-			} else {
-				AchievementPage.registerAchievementPage(new AchievementPage(
-						"Soul Shards: The Old Ways", new Achievement[] {
-								achievementCage, achievementShard,
-								achievementTier1, achievementTier2,
-								achievementTier3, achievementTier4,
-								achievementTier5 }));
-			}
-
-		} else if (!Config.EASYMODE) {
-
-			achievementCage = new Achievement("achievement.createCage",
-					"createCage", -2, 0, ObjHandler.SOUL_CAGE,
-					(Achievement) null).initIndependentStat().registerStat();
-
-			theoldWays = new Achievement("achievement.vile_dust", "vile_dust",
-					0, 0, ObjHandler.VILE_DUST, (Achievement) null)
-					.initIndependentStat().registerStat();
-
-			corruption = new Achievement("achievement.corrupted_essence",
-					"corrupted_essence", 2, 1, ObjHandler.CORRUPTED_ESSENCE,
-					Achievements.theoldWays).registerStat();
-
-			soulForge = new Achievement("achievement.soulForge", "soulForge",
-					4, -1, ObjHandler.SOUL_FORGE, Achievements.corruption)
-					.registerStat();
-
-			achievementShard = new Achievement("achievement.createShard",
-					"createShard", 4, 2,
-					new ItemStack(ObjHandler.SOUL_SHARD, 0),
-					Achievements.soulForge).registerStat();
-
-			achievementTier1 = new Achievement("achievement.tier1Shard",
-					"tier1Shard", 3, 4, shard1, achievementShard)
-					.registerStat();
-
-			achievementTier2 = new Achievement("achievement.tier2Shard",
-					"tier2Shard", 1, 4, shard2, achievementTier1)
-					.registerStat();
-
-			achievementTier3 = new Achievement("achievement.tier3Shard",
-					"tier3Shard", -1, 4, shard3, achievementTier2)
-					.registerStat();
-
-			achievementTier4 = new Achievement("achievement.tier4Shard",
-					"tier4Shard", -3, 4, shard4, achievementTier3)
-					.registerStat();
-
-			achievementTier5 = new Achievement("achievement.tier5Shard",
-					"tier5Shard", -5, 4, shard5, achievementTier4).setSpecial()
-					.registerStat();
-
-			fixed = new Achievement("achievement.fixed", "fixed", 10, 10,
-					ObjHandler.FIXED, (Achievement) null).initIndependentStat()
-					.registerStat();
-			
-			if (Loader.isModLoaded("MineFactoryReloaded")) {
-				AchievementPage.registerAchievementPage(new AchievementPage(
-						"Soul Shards: The Old Ways", new Achievement[] {
-								achievementCage, achievementShard,
-								achievementTier1, achievementTier2,
-								achievementTier3, achievementTier4,
-								achievementTier5, theoldWays, soulForge,
-								corruption, fixed }));
-			} else {
-				AchievementPage.registerAchievementPage(new AchievementPage(
-						"Soul Shards: The Old Ways", new Achievement[] {
-								achievementCage, achievementShard,
-								achievementTier1, achievementTier2,
-								achievementTier3, achievementTier4,
-								achievementTier5, theoldWays, soulForge,
-								corruption }));
-			}
 		}
+		shardt1 = new Achievement("achievement.tier1Shard", "tier1Shard", 2,
+				-2, shard1, unboundshard).registerStat();
 
+		shardt2 = new Achievement("achievement.tier2Shard", "tier2Shard", 6,
+				-2, shard2, shardt1).registerStat();
+
+		shardt3 = new Achievement("achievement.tier3Shard", "tier3Shard", 7, 2,
+				shard3, shardt2).registerStat();
+
+		shardt4 = new Achievement("achievement.tier4Shard", "tier4Shard", 4, 4,
+				shard4, shardt3).registerStat();
+
+		shardt5 = new Achievement("achievement.tier5Shard", "tier5Shard", 1, 2,
+				shard5, shardt4).setSpecial().registerStat();
+
+	}
+
+	public static void MFRAchievements() {
+		//System.out.println("Registering MFR Achievement");
+
+		fixed = new Achievement("achievement.fixed", "fixed", 10, 10,
+				ObjHandler.FIXED, (Achievement) null).initIndependentStat()
+				.registerStat();
+
+		//System.out.println("Registering MFR Achievement Pages");
+
+		AchievementPage.registerAchievementPage(new AchievementPage(
+				"Soul Shards: The Old Ways", new Achievement[] { soulcage,
+						unboundshard, shardt1, shardt2, shardt3, shardt4,
+						shardt5, viledust, soulforge, corruption, fixed }));
+	}
+
+	public static void defaultAchievementPages() {
+		//System.out.println("Registering Achievement Page");
+
+		AchievementPage.registerAchievementPage(new AchievementPage(
+				"Soul Shards TOW", new Achievement[] { soulcage, unboundshard,
+						shardt1, shardt2, shardt3, shardt4, shardt5, viledust,
+						corruption, soulforge }));
+	}
+
+	public static void Get() {
+
+		defaultAchievements();
+
+		if (Loader.isModLoaded("MineFactoryReloaded")) {
+
+			MFRAchievements();
+
+		} else {
+
+			defaultAchievementPages();
+
+		}
 	}
 }

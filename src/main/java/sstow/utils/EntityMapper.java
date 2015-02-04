@@ -16,6 +16,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 public final class EntityMapper {
 	private static final List<String> VALID_ENTITIES = new ArrayList<String>();
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void init() {
 		for (Map.Entry<Class, String> entry : ((HashMap<Class, String>) EntityList.classToStringMapping)
 				.entrySet()) {

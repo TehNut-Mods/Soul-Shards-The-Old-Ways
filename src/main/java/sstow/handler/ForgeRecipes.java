@@ -5,10 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.Config;
@@ -16,8 +14,8 @@ import sstow.utils.Config;
 public class ForgeRecipes {
 	private static final ForgeRecipes SMELTING_BASE = new ForgeRecipes();
 
-	private Map smeltingList = new HashMap();
-	private Map experienceList = new HashMap();
+	private Map<ItemStack, ItemStack> smeltingList = new HashMap<ItemStack, ItemStack>();
+	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
 
 	public static ForgeRecipes smelting() {
 		return SMELTING_BASE;
@@ -30,9 +28,9 @@ public class ForgeRecipes {
 			return new ItemStack(ObjHandler.SOULIUM_NUGGET, Config.NUGGETS);
 		}
 	}
-	
+
 	private ItemStack IngotBlock() {
-		if (Config.INGOTS == 9){
+		if (Config.INGOTS == 9) {
 			return new ItemStack(ObjHandler.SOULIUM_BLOCK, 1);
 		} else {
 			return new ItemStack(ObjHandler.SOULIUM_INGOT, Config.INGOTS);
@@ -40,8 +38,10 @@ public class ForgeRecipes {
 	}
 
 	private ForgeRecipes() {
-		this.addRecipe(new ItemStack(Items.diamond), new ItemStack(
-				ObjHandler.SOUL_SHARD, Config.SHARDS), 1F);
+		if (!Config.EASYMODE) {
+			this.addRecipe(new ItemStack(Items.diamond), new ItemStack(
+					ObjHandler.SOUL_SHARD, Config.SHARDS), 1F);
+		}
 		this.addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), 0.8F);
 		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), 1F);
 	}
@@ -52,14 +52,14 @@ public class ForgeRecipes {
 	}
 
 	public ItemStack getSmeltingResult(ItemStack itemstack) {
-		Iterator iterator = this.smeltingList.entrySet().iterator();
-		Entry entry;
+		Iterator<?> iterator = this.smeltingList.entrySet().iterator();
+		Entry<?, ?> entry;
 
 		do {
 			if (!iterator.hasNext()) {
 				return null;
 			}
-			entry = (Entry) iterator.next();
+			entry = (Entry<?, ?>) iterator.next();
 		} while (!canBeSmelted(itemstack, (ItemStack) entry.getKey()));
 		return (ItemStack) entry.getValue();
 	}
@@ -71,15 +71,15 @@ public class ForgeRecipes {
 	}
 
 	public float giveExperience(ItemStack itemstack) {
-		Iterator iterator = this.experienceList.entrySet().iterator();
-		Entry entry;
+		Iterator<?> iterator = this.experienceList.entrySet().iterator();
+		Entry<?, ?> entry;
 
 		do {
 			if (!iterator.hasNext()) {
 				return 0.0f;
 			}
 
-			entry = (Entry) iterator.next();
+			entry = (Entry<?, ?>) iterator.next();
 		} while (!this.canBeSmelted(itemstack, (ItemStack) entry.getKey()));
 
 		if (itemstack.getItem().getSmeltingExperience(itemstack) != -1) {

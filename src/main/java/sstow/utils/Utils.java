@@ -1,12 +1,7 @@
 package sstow.utils;
 
-import java.util.Iterator;
 import java.util.Random;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
-import sstow.events.Achievements;
-import sstow.gameObjs.ObjHandler;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -18,9 +13,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import sstow.events.Achievements;
+import sstow.gameObjs.ObjHandler;
 
 public final class Utils {
-	
+
 	public static ItemStack getShardFromInv(EntityPlayer player, String entity) {
 		ItemStack lastResort = null;
 
@@ -87,19 +84,19 @@ public final class Utils {
 		case 0:
 			break;
 		case 1:
-			player.addStat(Achievements.achievementTier1, 1);
+			player.addStat(Achievements.shardt1, 1);
 			break;
 		case 2:
-			player.addStat(Achievements.achievementTier2, 1);
+			player.addStat(Achievements.shardt2, 1);
 			break;
 		case 3:
-			player.addStat(Achievements.achievementTier3, 1);
+			player.addStat(Achievements.shardt3, 1);
 			break;
 		case 4:
-			player.addStat(Achievements.achievementTier4, 1);
+			player.addStat(Achievements.shardt4, 1);
 			break;
 		case 5:
-			player.addStat(Achievements.achievementTier5, 1);
+			player.addStat(Achievements.shardt5, 1);
 			break;
 		default:
 			break;

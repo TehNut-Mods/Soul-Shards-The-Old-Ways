@@ -26,6 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class Cage_Block extends BlockContainer {
 
 	public IIcon[] icons = new IIcon[5];
+	@SuppressWarnings("unused")
 	private IIcon front;
 
 	public Cage_Block() {

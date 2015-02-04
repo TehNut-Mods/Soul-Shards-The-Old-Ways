@@ -1,6 +1,5 @@
 package sstow;
 
-import codechicken.nei.api.API;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import sstow.commands.SSTOWCMD;
@@ -11,7 +10,7 @@ import sstow.events.PlayerKillEntityEvent;
 import sstow.gameObjs.ObjHandler;
 import sstow.utils.Config;
 import sstow.utils.EntityMapper;
-import sstow.utils.Utils;
+import codechicken.nei.api.API;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -27,7 +26,7 @@ public class Main {
 
 	public static final String MODID = "SSTOW";
 	public static final String NAME = "Soul Shards: The Old Ways";
-	public static final String VERSION = "RC7-A";
+	public static final String VERSION = "RC8";
 
 	@Instance(MODID)
 	public static Main modInstance;
@@ -40,12 +39,14 @@ public class Main {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		ObjHandler.registerObjs();
-
+		//System.out.println("Achievements Loading");
 		Achievements.Get();
-
+		//System.out.println("Achievements Loaded");
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
+		//System.out.println("Registering Achievement Events");
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
+		//System.out.println("Achievement Events Registed");
 		FMLInterModComms.sendMessage("Waila", "register",
 				"sstow.utils.WailaProvider.callbackRegister");
 	}
@@ -61,7 +62,7 @@ public class Main {
 	}
 
 	@Mod.EventHandler
-	public void serverStart(FMLServerStartingEvent eventt) {
-		eventt.registerServerCommand(new SSTOWCMD());
+	public void serverStart(FMLServerStartingEvent event) {
+		event.registerServerCommand(new SSTOWCMD());
 	}
 }

@@ -52,6 +52,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 		active = false;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote) {
@@ -253,6 +254,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 				.isEmpty();
 	}
 
+	@SuppressWarnings("unchecked")
 	private boolean hasReachedSpawnLimit(EntityLiving ent) {
 		AxisAlignedBB aabb = AxisAlignedBB
 				.getBoundingBox(xCoord - 16, yCoord - 16, zCoord - 16,
