@@ -1,27 +1,53 @@
-# MinecraftForge Stuff
-*.iml
-*.ipr
-*.iws
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
 .classpath
 .project
-.settings/org.eclipse.jdt.core.prefs
+gradlew
+gradlew.bat
 
-CREDITS-fml*
-forge-*-changelog.txt
-gradlew*
-LICENSE-fml*
-MinecraftForge-Credits.txt
-MinecraftForge-License.txt
-Thumbs.db
-README.txt
-build/
-.gradle/
-eclipse/
-gradle/
-libs/
-<<<<<<< HEAD
-out/
-=======
-out/
->>>>>>> 23853e2979d696b27de6f9bf3b9a3a9635120b1a
-/bin/
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+.gradle
+bin
+gradle
+lib
+libs
+.settings

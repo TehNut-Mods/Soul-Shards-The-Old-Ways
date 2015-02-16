@@ -138,10 +138,16 @@ public class Cage_Block extends BlockContainer {
 		}
 	}
 
+	public void onBlockPlacedBy(World world, int xCoord, int yCoord,
+			int zCoord, EntityPlayer entity, ItemStack itemstack) {
+		entity.getDisplayName();
+	}
+
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		if (!world.isRemote && world.getBlockMetadata(x, y, z) != 0) {
 			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
+
 		}
 	}
 

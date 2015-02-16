@@ -1,7 +1,5 @@
 package sstow.gameObjs;
 
-//Import Blocks
-//Import Required Minecraft stuff
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -14,7 +12,6 @@ import sstow.Main;
 import sstow.gameObjs.block.Cage_Block;
 import sstow.gameObjs.block.Forge_Block;
 import sstow.gameObjs.block.Soulium_Block;
-//Import Items
 import sstow.gameObjs.item.Corrupted_Essence;
 import sstow.gameObjs.item.Iron_Nugget;
 import sstow.gameObjs.item.Soul_Axe;
@@ -27,11 +24,9 @@ import sstow.gameObjs.item.Soulium_Ingot;
 import sstow.gameObjs.item.Soulium_Nugget;
 import sstow.gameObjs.item.Vile_Dust;
 import sstow.gameObjs.item.fixedAchievement;
-//Import Tile Entities
 import sstow.gameObjs.tile.CageTile;
 import sstow.gameObjs.tile.ForgeTile;
 import sstow.handler.GuiHandler;
-//Import Config
 import sstow.utils.Config;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.NetworkRegistry;

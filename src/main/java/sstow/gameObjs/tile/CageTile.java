@@ -44,6 +44,8 @@ public class CageTile extends TileEntity implements ISidedInventory {
 	private boolean initChecks;
 	private boolean active;
 
+	String Owner;
+
 	public CageTile() {
 		counter = 0;
 		updateCounter = 0;
@@ -52,6 +54,10 @@ public class CageTile extends TileEntity implements ISidedInventory {
 		active = false;
 	}
 
+	public void addOwner(String playerName){
+		Owner = playerName;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void updateEntity() {
