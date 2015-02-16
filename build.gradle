@@ -23,8 +23,8 @@ archivesBaseName = "SSTOW"
 
 minecraft {
     version = "1.7.10-10.13.2.1232"
-	if(file('../run').exists()){
-		assetDir = "../run/assets"
+	if(file('../run-1.7.10').exists()){
+		assetDir = "../run-1.7.10/assets"
 	} else {
 		assetDir = "assets"
 	}
