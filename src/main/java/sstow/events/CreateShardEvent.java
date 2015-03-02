@@ -1,7 +1,5 @@
 package sstow.events;
 
-import sstow.gameObjs.ObjHandler;
-import sstow.utils.Config;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import sstow.gameObjs.ObjHandler;
+import sstow.utils.Config;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CreateShardEvent {

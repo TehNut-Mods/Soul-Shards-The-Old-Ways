@@ -2,9 +2,6 @@ package sstow.commands;
 
 import java.util.List;
 
-import sstow.gameObjs.ObjHandler;
-import sstow.utils.TierHandler;
-import sstow.utils.Utils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -13,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import sstow.gameObjs.ObjHandler;
+import sstow.utils.TierHandler;
+import sstow.utils.Utils;
 
 public class SSTOWCMD extends CommandBase {
 	@Override

@@ -16,7 +16,8 @@ public class ForgeRecipes {
 
 	private Map<ItemStack, ItemStack> smeltingList = new HashMap<ItemStack, ItemStack>();
 	private Map<ItemStack, Float> experienceList = new HashMap<ItemStack, Float>();
-
+	
+	
 	public static ForgeRecipes smelting() {
 		return SMELTING_BASE;
 	}

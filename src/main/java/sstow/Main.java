@@ -26,7 +26,7 @@ public class Main {
 
 	public static final String MODID = "SSTOW";
 	public static final String NAME = "Soul Shards: The Old Ways";
-	public static final String VERSION = "RC8";
+	public static final String VERSION = "@VERSION@";
 
 	@Instance(MODID)
 	public static Main modInstance;
@@ -39,14 +39,14 @@ public class Main {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		ObjHandler.registerObjs();
-		//System.out.println("Achievements Loading");
+		// System.out.println("Achievements Loading");
 		Achievements.Get();
-		//System.out.println("Achievements Loaded");
+		// System.out.println("Achievements Loaded");
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
-		//System.out.println("Registering Achievement Events");
+		// System.out.println("Registering Achievement Events");
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
-		//System.out.println("Achievement Events Registed");
+		// System.out.println("Achievement Events Registed");
 		FMLInterModComms.sendMessage("Waila", "register",
 				"sstow.utils.WailaProvider.callbackRegister");
 	}

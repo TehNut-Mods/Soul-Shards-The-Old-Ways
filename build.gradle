@@ -17,8 +17,8 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1-7-10-RC7-A"
-group= "SSTOW" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "RC8"
+group= "SSTOW-1-7-10" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SSTOW"
 
 minecraft {
@@ -29,13 +29,15 @@ minecraft {
 		assetDir = "assets"
 	}
     //runDir = "eclipse"
+	replaceIn "Main.java"
+    replace "@VERSION@", project.version
 }
 
 dependencies {
 	compile files (
-		"lib/Waila-1.5.8a_1.7.10.jar",
-		"lib/CoFHCore-[1.7.10]3.0.0B9-40-dev.jar",
-		"lib/NotEnoughItems-1.7.10-1.0.4.79-universal.jar"
+		"../Libraries/Waila-1.5.8a_1.7.10.jar",
+		"../Libraries/CoFHCore-[1.7.10]3.0.0B9-40-dev.jar",
+		"../Libraries/NotEnoughItems-1.7.10-1.0.4.79-universal.jar"
 	)
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -70,4 +72,13 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+// Create deobf dev jars
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+artifacts {
+    archives deobfJar
 }

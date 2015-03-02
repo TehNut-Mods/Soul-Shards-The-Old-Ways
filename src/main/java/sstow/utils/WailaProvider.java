@@ -23,14 +23,12 @@ public class WailaProvider implements IWailaDataProvider {
 		return null;
 	}
 
-	@Override
 	public List<String> getWailaHead(ItemStack itemStack,
 			List<String> currenttip, IWailaDataAccessor accessor,
 			IWailaConfigHandler config) {
 		return currenttip;
 	}
 
-	@Override
 	public List<String> getWailaBody(ItemStack itemStack,
 			List<String> currenttip, IWailaDataAccessor accessor,
 			IWailaConfigHandler config) {
@@ -64,7 +62,6 @@ public class WailaProvider implements IWailaDataProvider {
 		return currenttip;
 	}
 
-	@Override
 	public List<String> getWailaTail(ItemStack itemStack,
 			List<String> currenttip, IWailaDataAccessor accessor,
 			IWailaConfigHandler config) {
@@ -75,7 +72,6 @@ public class WailaProvider implements IWailaDataProvider {
 		registrar.registerBodyProvider(new WailaProvider(), Cage_Block.class);
 		registrar.registerNBTProvider(new WailaProvider(), Cage_Block.class);
 	}
-
 
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile,
 			NBTTagCompound nbt, World world, int arg4, int arg5, int arg6) {

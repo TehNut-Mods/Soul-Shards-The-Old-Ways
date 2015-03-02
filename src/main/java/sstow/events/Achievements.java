@@ -46,7 +46,7 @@ public class Achievements {
 		Utils.setShardTier(shard5, (byte) 5);
 		Utils.setShardBoundEnt(shard5, "NULL");
 
-		//System.out.println("Registering Achievement Icon Locations");
+		// System.out.println("Registering Achievement Icon Locations");
 
 		viledust = new Achievement("achievement.vile_dust", "vile_dust", -1,
 				-3, ObjHandler.VILE_DUST, (Achievement) null)
@@ -91,13 +91,13 @@ public class Achievements {
 	}
 
 	public static void MFRAchievements() {
-		//System.out.println("Registering MFR Achievement");
+		// System.out.println("Registering MFR Achievement");
 
 		fixed = new Achievement("achievement.fixed", "fixed", 10, 10,
 				ObjHandler.FIXED, (Achievement) null).initIndependentStat()
 				.registerStat();
 
-		//System.out.println("Registering MFR Achievement Pages");
+		// System.out.println("Registering MFR Achievement Pages");
 
 		AchievementPage.registerAchievementPage(new AchievementPage(
 				"Soul Shards: The Old Ways", new Achievement[] { soulcage,
@@ -106,7 +106,7 @@ public class Achievements {
 	}
 
 	public static void defaultAchievementPages() {
-		//System.out.println("Registering Achievement Page");
+		// System.out.println("Registering Achievement Page");
 
 		AchievementPage.registerAchievementPage(new AchievementPage(
 				"Soul Shards TOW", new Achievement[] { soulcage, unboundshard,
