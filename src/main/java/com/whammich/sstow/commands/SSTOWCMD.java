@@ -2,7 +2,7 @@ package com.whammich.sstow.commands;
 
 import java.util.List;
 
-import com.whammich.sstow.gameObjs.ObjHandler;
+import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.TierHandler;
 import com.whammich.sstow.utils.Utils;
 
@@ -76,7 +76,7 @@ public class SSTOWCMD extends CommandBase {
 					int minKills = TierHandler.getMinKills(tierAmount);
 					if (((EntityPlayerMP) sender).getHeldItem() != null
 							&& ((EntityPlayerMP) sender).getHeldItem()
-									.getItem() == ObjHandler.SOUL_SHARD) {
+									.getItem() == Register.SOUL_SHARD) {
 						ItemStack shard = ((EntityPlayerMP) sender)
 								.getHeldItem();
 						for (int i = 1; i <= tierAmount; i++) {
@@ -105,7 +105,7 @@ public class SSTOWCMD extends CommandBase {
 				}
 
 				if (((EntityPlayerMP) sender).getHeldItem() != null
-						&& ((EntityPlayerMP) sender).getHeldItem().getItem() == ObjHandler.SOUL_SHARD) {
+						&& ((EntityPlayerMP) sender).getHeldItem().getItem() == Register.SOUL_SHARD) {
 					ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
 					for (int i = 1; i <= killAmount; i++) {
 

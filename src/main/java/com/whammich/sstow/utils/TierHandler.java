@@ -97,17 +97,17 @@ public final class TierHandler {
 			}
 
 		if (error) {
-			TOWLogger
+			ModLogger
 					.logFatal("Custom tier kill settings are incorrect, resetting defaults.");
 		} else {
 			MIN_KILLS = tempMin;
 			MAX_KILLS = tempMax;
 
-			TOWLogger.logInfo("Loaded custom tier kill settings!");
+			ModLogger.logInfo("Loaded custom tier kill settings!");
 		}
 
-		TOWLogger.logInfo("Min kills: " + arrayToString(MIN_KILLS));
-		TOWLogger.logInfo("Max kills: " + arrayToString(MAX_KILLS));
+		ModLogger.logInfo("Min kills: " + arrayToString(MIN_KILLS));
+		ModLogger.logInfo("Max kills: " + arrayToString(MAX_KILLS));
 	}
 
 	public static boolean isShardValid(ItemStack shard) {
@@ -126,7 +126,7 @@ public final class TierHandler {
 			}
 		}
 
-		TOWLogger.logFatal("Soul shard has an incorrect kill counter of: "
+		ModLogger.logFatal("Soul shard has an incorrect kill counter of: "
 				+ kills);
 		return 0;
 	}

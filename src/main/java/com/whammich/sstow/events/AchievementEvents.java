@@ -1,7 +1,7 @@
 package com.whammich.sstow.events;
 
-import com.whammich.sstow.gameObjs.ObjHandler;
 import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.Register;
 
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.Loader;
@@ -17,7 +17,7 @@ public class AchievementEvents {
 	public void CageCrafted(ItemCraftedEvent event) {
 		// System.out.println("Register Soul Cage Event");
 		if (event.crafting.getItem() == Item
-				.getItemFromBlock(ObjHandler.SOUL_CAGE)) {
+				.getItemFromBlock(Register.SOUL_CAGE)) {
 			event.player.addStat(Achievements.soulcage, 1);
 		} else {
 			return;
@@ -29,7 +29,7 @@ public class AchievementEvents {
 	public void corruptedCrafted(ItemCraftedEvent event) {
 		if (!Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Corrupted Crafted Event");
-			if (event.crafting.getItem().equals(ObjHandler.CORRUPTED_ESSENCE)) {
+			if (event.crafting.getItem().equals(Register.CORRUPTED_ESSENCE)) {
 				event.player.addStat(Achievements.corruption, 1);
 			} else {
 				return;
@@ -44,7 +44,7 @@ public class AchievementEvents {
 	public void corruptedSmelted(ItemSmeltedEvent event) {
 		if (Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Corrupted Smelted Event");
-			if (event.smelting.getItem().equals(ObjHandler.CORRUPTED_ESSENCE)) {
+			if (event.smelting.getItem().equals(Register.CORRUPTED_ESSENCE)) {
 				event.player.addStat(Achievements.corruption, 1);
 			} else {
 				return;
@@ -59,7 +59,7 @@ public class AchievementEvents {
 	public void forgeCrafted(ItemCraftedEvent event) {
 		// System.out.println("Register Soul Forge Event");
 		if (event.crafting.getItem() == Item
-				.getItemFromBlock(ObjHandler.SOUL_FORGE)) {
+				.getItemFromBlock(Register.SOUL_FORGE)) {
 			event.player.addStat(Achievements.soulforge, 1);
 		} else {
 			return;
@@ -71,7 +71,7 @@ public class AchievementEvents {
 	public void VileSmelted(ItemSmeltedEvent event) {
 		if (!Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Vile Smelt Event");
-			if (event.smelting.getItem().equals(ObjHandler.VILE_DUST)) {
+			if (event.smelting.getItem().equals(Register.VILE_DUST)) {
 				event.player.addStat(Achievements.viledust, 1);
 			} else {
 				return;
@@ -86,7 +86,7 @@ public class AchievementEvents {
 	public void VileCrafted(ItemCraftedEvent event) {
 		if (Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Vile Craft Event");
-			if (event.crafting.getItem().equals(ObjHandler.VILE_DUST)) {
+			if (event.crafting.getItem().equals(Register.VILE_DUST)) {
 				event.player.addStat(Achievements.viledust, 1);
 			} else {
 				return;
@@ -102,7 +102,7 @@ public class AchievementEvents {
 		// if (Config.EASYMODE == true) {
 		// System.out.println("Register Shard Pickup Event");
 		if (event.pickedUp.getEntityItem().getItem()
-				.equals(ObjHandler.SOUL_SHARD)) {
+				.equals(Register.SOUL_SHARD)) {
 			event.player.addStat(Achievements.unboundshard, 1);
 		} else {
 			return;
@@ -117,7 +117,7 @@ public class AchievementEvents {
 	public void ShardSmelt(ItemSmeltedEvent event) {
 		if (Config.EASYMODE == false) {
 			// System.out.println("Register Shard Smelt Event");
-			if (event.smelting.getItem().equals(ObjHandler.SOUL_SHARD)) {
+			if (event.smelting.getItem().equals(Register.SOUL_SHARD)) {
 				event.player.addStat(Achievements.unboundshard, 1);
 			} else {
 				return;

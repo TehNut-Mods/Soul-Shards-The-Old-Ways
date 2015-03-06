@@ -1,19 +1,18 @@
 package com.whammich.sstow;
 
+import net.minecraftforge.common.MinecraftForge;
+
+import com.whammich.sstow.commands.SSTOWCMD;
 import com.whammich.sstow.events.AchievementEvents;
 import com.whammich.sstow.events.Achievements;
 import com.whammich.sstow.events.CreateShardEvent;
 import com.whammich.sstow.events.PlayerKillEntityEvent;
-import com.whammich.sstow.gameObjs.ObjHandler;
 import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.EntityMapper;
-import com.whammich.sstow.commands.SSTOWCMD;
+import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import codechicken.nei.api.API;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -22,14 +21,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = SSTheOldWays.MODID, name = SSTheOldWays.NAME, version = SSTheOldWays.VERSION, guiFactory = "sstow.utils.guiFactory")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, guiFactory = Reference.GuiFactory_class)
 public class SSTheOldWays {
 
-	public static final String MODID = "SSTOW";
-	public static final String NAME = "Soul Shards: The Old Ways";
-	public static final String VERSION = "@VERSION@";
-
-	@Instance(MODID)
+	@Instance(Reference.MOD_ID)
 	public static SSTheOldWays modInstance;
 
 	@Mod.EventHandler
@@ -39,7 +34,7 @@ public class SSTheOldWays {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		ObjHandler.registerObjs();
+		Register.registerObjs();
 		// System.out.println("Achievements Loading");
 		Achievements.Get();
 		// System.out.println("Achievements Loaded");
@@ -55,11 +50,6 @@ public class SSTheOldWays {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		EntityMapper.init();
-		if (Loader.isModLoaded("NotEnoughItems")) {
-			API.hideItem(new ItemStack(ObjHandler.SOUL_FORGE_ACTIVE));
-			API.hideItem(new ItemStack(ObjHandler.FIXED));
-			API.hideItem(new ItemStack(ObjHandler.IRON_NUGGET));
-		}
 	}
 
 	@Mod.EventHandler

@@ -1,9 +1,9 @@
 package com.whammich.sstow.events;
 
-import com.whammich.sstow.gameObjs.ObjHandler;
 import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.EntityMapper;
-import com.whammich.sstow.utils.TOWLogger;
+import com.whammich.sstow.utils.ModLogger;
+import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.Utils;
 
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -42,7 +42,7 @@ public class PlayerKillEntityEvent {
 		String entName = EntityList.getEntityString(dead);
 
 		if (entName == null || entName.isEmpty()) {
-			TOWLogger
+			ModLogger
 					.logFatal("Player killed entity with no unlocalized name: "
 							+ dead);
 			return;
@@ -67,7 +67,7 @@ public class PlayerKillEntityEvent {
 			Utils.writeEntityArmor(shard, dead);
 
 			int soulStealer = EnchantmentHelper.getEnchantmentLevel(
-					ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());
+					Register.SOUL_STEALER.effectId, player.getHeldItem());
 			soulStealer *= Config.ENCHANT_KILL_BONUS;
 
 			Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));

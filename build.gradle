@@ -29,7 +29,7 @@ minecraft {
 		assetDir = "assets"
 	}
     //runDir = "eclipse"
-	replaceIn "Main.java"
+	replaceIn "Reference.java"
     replace "@VERSION@", project.version
 }
 

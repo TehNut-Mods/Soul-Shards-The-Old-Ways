@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.whammich.sstow.SSTheOldWays;
-
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -99,8 +97,8 @@ public final class Config {
 
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event) {
-		if (event.modID.equals(SSTheOldWays.MODID)) {
-			TOWLogger.logInfo("Updating config...");
+		if (event.modID.equals(Reference.MOD_ID)) {
+			ModLogger.logInfo("Updating config...");
 			syncConfig();
 		}
 	}
@@ -198,9 +196,9 @@ public final class Config {
 
 			TierHandler.setTierReqKills(minKills);
 
-			TOWLogger.logInfo("Loaded configuration file!");
+			ModLogger.logInfo("Loaded configuration file!");
 		} catch (Exception e) {
-			TOWLogger.logFatal("Failed to load configuration file!");
+			ModLogger.logFatal("Failed to load configuration file!");
 			e.printStackTrace();
 		} finally {
 			if (config.hasChanged()) {

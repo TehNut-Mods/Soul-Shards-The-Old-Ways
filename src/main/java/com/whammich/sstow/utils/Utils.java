@@ -3,7 +3,6 @@ package com.whammich.sstow.utils;
 import java.util.Random;
 
 import com.whammich.sstow.events.Achievements;
-import com.whammich.sstow.gameObjs.ObjHandler;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
@@ -25,7 +24,7 @@ public final class Utils {
 		for (int i = 0; i <= 8; i++) {
 			ItemStack stack = player.inventory.getStackInSlot(i);
 
-			if (stack != null && stack.getItem() == ObjHandler.SOUL_SHARD
+			if (stack != null && stack.getItem() == Register.SOUL_SHARD
 					&& !hasMaxedKills(stack)) {
 				if (!isShardBound(stack) && lastResort == null) {
 					lastResort = stack;
@@ -39,7 +38,7 @@ public final class Utils {
 			boolean emptySpot = false;
 			int counter = 0;
 
-			ItemStack newShard = new ItemStack(ObjHandler.SOUL_SHARD, 1);
+			ItemStack newShard = new ItemStack(Register.SOUL_SHARD, 1);
 			while (!emptySpot && counter < 36) {
 				ItemStack inventoryStack = player.inventory
 						.getStackInSlot(counter);
@@ -63,7 +62,7 @@ public final class Utils {
 				}
 
 				int soulStealer = EnchantmentHelper.getEnchantmentLevel(
-						ObjHandler.SOUL_STEALER.effectId, player.getHeldItem());
+						Register.SOUL_STEALER.effectId, player.getHeldItem());
 				soulStealer *= Config.ENCHANT_KILL_BONUS;
 				Utils.increaseShardKillCount(newShard,
 						(short) (1 + soulStealer));
