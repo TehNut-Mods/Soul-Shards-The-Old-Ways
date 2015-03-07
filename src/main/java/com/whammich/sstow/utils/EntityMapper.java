@@ -15,7 +15,6 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public final class EntityMapper {
 	public static List<String> entityList = new ArrayList<String>();
-	public static List<String> entBlackList = new ArrayList<String>();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void init() {
@@ -36,7 +35,6 @@ public final class EntityMapper {
 
 			if (EntityLiving.class.isAssignableFrom(entry.getKey())) {
 				entityList.add(entry.getValue());
-				entBlackList.add(entry.getValue());
 			}
 		}
 
