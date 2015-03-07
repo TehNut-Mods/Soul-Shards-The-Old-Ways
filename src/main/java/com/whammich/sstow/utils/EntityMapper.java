@@ -14,13 +14,15 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public final class EntityMapper {
-	private static final List<String> VALID_ENTITIES = new ArrayList<String>();
+	public static List<String> entityList = new ArrayList<String>();
+	public static List<String> entBlackList = new ArrayList<String>();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void init() {
 		for (Map.Entry<Class, String> entry : ((HashMap<Class, String>) EntityList.classToStringMapping)
 				.entrySet()) {
-			if (VALID_ENTITIES.contains(entry.getValue())) {
+
+			if (entityList.contains(entry.getValue())) {
 				ModLogger.logInfo("Skipping mapping for " + entry.getValue()
 						+ ": already mapped.");
 				continue;
@@ -33,18 +35,19 @@ public final class EntityMapper {
 			}
 
 			if (EntityLiving.class.isAssignableFrom(entry.getKey())) {
-				VALID_ENTITIES.add(entry.getValue());
+				entityList.add(entry.getValue());
+				entBlackList.add(entry.getValue());
 			}
 		}
 
-		VALID_ENTITIES.add("Wither Skeleton");
+		entityList.add("Wither Skeleton");
 
-		ModLogger.logInfo("Finished entity mapping (" + VALID_ENTITIES.size()
+		ModLogger.logInfo("Finished entity mapping (" + entityList.size()
 				+ " entries).");
 	}
 
 	public static boolean isEntityValid(String entName) {
-		return VALID_ENTITIES.contains(entName);
+		return entityList.contains(entName);
 	}
 
 	public static EntityLiving getNewEntityInstance(World world, String ent) {

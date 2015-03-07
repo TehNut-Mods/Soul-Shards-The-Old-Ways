@@ -1,5 +1,7 @@
 package com.whammich.sstow;
 
+import java.io.File;
+
 import net.minecraftforge.common.MinecraftForge;
 
 import com.whammich.sstow.commands.SSTOWCMD;
@@ -8,6 +10,7 @@ import com.whammich.sstow.events.Achievements;
 import com.whammich.sstow.events.CreateShardEvent;
 import com.whammich.sstow.events.PlayerKillEntityEvent;
 import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.EntityBlackList;
 import com.whammich.sstow.utils.EntityMapper;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
@@ -50,10 +53,13 @@ public class SSTheOldWays {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		EntityMapper.init();
+		EntityBlackList
+				.init(new File(Config.configDirectory + "/BlackList.cfg"));
 	}
 
 	@Mod.EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new SSTOWCMD());
+
 	}
 }
