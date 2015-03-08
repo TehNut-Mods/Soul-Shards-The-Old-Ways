@@ -1,5 +1,15 @@
 package com.whammich.sstow.utils;
 
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
+
+import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.block.Cage_Block;
 import com.whammich.sstow.block.Forge_Block;
 import com.whammich.sstow.block.Soulium_Block;
@@ -19,16 +29,7 @@ import com.whammich.sstow.item.Vile_Dust;
 import com.whammich.sstow.item.fixedAchievement;
 import com.whammich.sstow.tileentity.CageTile;
 import com.whammich.sstow.tileentity.ForgeTile;
-import com.whammich.sstow.SSTheOldWays;
 
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.EnumHelper;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;

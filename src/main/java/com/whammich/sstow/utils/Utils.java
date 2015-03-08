@@ -259,7 +259,7 @@ public final class Utils {
 					nbt.removeTag("ench");
 				}
 
-				if (Utils.getShardKillCount(shard) > 0) {
+				if (shard.stackTagCompound.hasKey("armor" + i)) {
 					if (shard.stackTagCompound.getTag("armor" + i) != null) {
 						NBTTagCompound oldnbt = (NBTTagCompound) shard.stackTagCompound
 								.getTag("armor" + i);
