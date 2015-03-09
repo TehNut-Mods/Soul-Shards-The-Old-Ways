@@ -36,8 +36,6 @@ $RECYCLE.BIN/
 .Trashes
 .classpath
 .project
-gradlew
-gradlew.bat
 
 # Directories potentially created on remote AFP share
 .AppleDB
