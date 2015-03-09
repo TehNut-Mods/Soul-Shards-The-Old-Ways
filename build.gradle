@@ -42,6 +42,10 @@ repositories {
 				name 'Prof Mobius Repo'
 				url "http://mobiusstrip.eu/maven"
 		}
+		ivy {
+				name "CoFHCore"
+				artifactPattern "http://addons-origin.cursecdn.com/files/2229/440/[module]-[revision].[ext]"
+		}
 }
 
 dependencies {
@@ -49,11 +53,8 @@ dependencies {
 	compile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:dev"
 	compile "codechicken:CodeChickenCore:${minecraft_version}-${ccc_version}:dev"
 	compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
-	
-	
-	compile files (
-	"../Libraries/CoFHCore-[1.7.10]3.0.0B9-40-dev.jar"
-	)
+	compile name: 'CoFHCore', version: "${cofhcore_version}", ext: 'jar'
+	compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 processResources
