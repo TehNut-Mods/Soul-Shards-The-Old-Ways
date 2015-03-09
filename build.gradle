@@ -16,42 +16,44 @@ buildscript {
 }
 
 apply plugin: 'forge'
+apply plugin: 'curseforge'
 
-version = "RC8"
-group= "SSTOW-1-7-10" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "${mod_version}"
+group= "com.whammich.sstow" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SSTOW"
 
 minecraft {
-    version = "1.7.10-10.13.2.1232"
+    version = "${minecraft_version}-${forge_version}"
 	if(file('../run-1.7.10').exists()){
 		assetDir = "../run-1.7.10/assets"
 	} else {
 		assetDir = "assets"
 	}
-    //runDir = "eclipse"
 	replaceIn "Reference.java"
     replace "@VERSION@", project.version
 }
 
+repositories {
+		maven {
+				name 'Chicken Bones Repo'
+				url "http://chickenbones.net/maven/"
+		}
+		maven {
+				name 'Prof Mobius Repo'
+				url "http://mobiusstrip.eu/maven"
+		}
+}
+
 dependencies {
+	compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
+	compile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:dev"
+	compile "codechicken:CodeChickenCore:${minecraft_version}-${ccc_version}:dev"
+	compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
+	
+	
 	compile files (
-		"../Libraries/Waila-1.5.8a_1.7.10.jar",
-		"../Libraries/CoFHCore-[1.7.10]3.0.0B9-40-dev.jar",
-		"../Libraries/NotEnoughItems-1.7.10-1.0.4.79-universal.jar"
+	"../Libraries/CoFHCore-[1.7.10]3.0.0B9-40-dev.jar"
 	)
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
 }
 
 processResources
