@@ -25,9 +25,9 @@ archivesBaseName = "SSTOW"
 minecraft {
     version = "${minecraft_version}-${forge_version}"
 	if(file('../run-1.7.10').exists()){
-		assetDir = "../run-1.7.10/assets"
+		runDir = "../run-1.7.10/assets"
 	} else {
-		assetDir = "assets"
+		runDir = "run"
 	}
 	replaceIn "Reference.java"
     replace "@VERSION@", project.version
