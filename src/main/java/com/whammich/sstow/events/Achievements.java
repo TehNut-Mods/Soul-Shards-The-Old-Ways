@@ -50,11 +50,11 @@ public class Achievements {
 		// System.out.println("Registering Achievement Icon Locations");
 
 		viledust = new Achievement("achievement.vile_dust", "vile_dust", -1,
-				-3, Register.VILE_DUST, (Achievement) null)
+				-3, new ItemStack(Register.MATERIALS, 1, 3), (Achievement) null)
 				.initIndependentStat().registerStat();
 
 		corruption = new Achievement("achievement.corrupted_essence",
-				"corrupted_essence", -1, -1, Register.CORRUPTED_ESSENCE,
+				"corrupted_essence", -1, -1, new ItemStack(Register.MATERIALS, 1, 4),
 				Achievements.viledust).registerStat();
 
 		soulforge = new Achievement("achievement.soulForge", "soulForge", -1,

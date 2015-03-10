@@ -1,10 +1,10 @@
 item.sstow.shard_unbound.name=未绑定灵魂碎片
 item.sstow.shard.name=灵魂碎片
-item.sstow.vile_dust.name=污秽粉尘
-item.sstow.corrupted_essence.name=腐化精华
-item.sstow.soulium_ingot.name=灵魂锭
-item.sstow.soulium_nugget.name=灵魂粒
-item.sstow.iron_nugget.name=铁粒
+item.sstow.material.nugget.iron.name=铁粒
+item.sstow.material.nugget.soulium.name=灵魂粒
+item.sstow.material.ingot.soulium.name=灵魂锭
+item.sstow.material.dust.vile.name=污秽粉尘
+item.sstow.material.essence.corrupted.name=腐化精华
 item.sstow.soul_sword.name=灵魂剑
 item.sstow.soul_pickaxe.name=灵魂镐
 item.sstow.soul_axe.name=灵魂斧

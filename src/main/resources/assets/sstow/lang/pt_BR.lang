@@ -1,10 +1,10 @@
 item.sstow.shard_unbound.name=Fragmento de Alma Desvinculado
 item.sstow.shard.name=Fragmento de Alma
-item.sstow.vile_dust.name=Pó Vil
-item.sstow.corrupted_essence.name=Essência Corrupta
-item.sstow.soulium_ingot.name=Barra de Álmio
-item.sstow.soulium_nugget.name=Pepita de Álmio
-item.sstow.iron_nugget.name=Pepita de Ferro
+item.sstow.material.nugget.iron.name=Pepita de Ferro
+item.sstow.material.nugget.soulium.name=Pepita de Álmio
+item.sstow.material.ingot.soulium.name=Barra de Álmio
+item.sstow.material.dust.vile.name=Pó Vil
+item.sstow.material.essence.corrupted.name=Essência Corrupta
 item.sstow.soul_sword.name=Espada de Almas
 item.sstow.soul_pickaxe.name=Picareta de Almas
 item.sstow.soul_axe.name=Machado de Almas

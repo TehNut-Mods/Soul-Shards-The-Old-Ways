@@ -25,9 +25,9 @@ public class SFRecipeHandler {
 
 	private ItemStack NuggetIngot() {
 		if (Config.NUGGETS == 9) {
-			return new ItemStack(Register.SOULIUM_INGOT, 1);
+			return new ItemStack(Register.MATERIALS, 1, 2);
 		} else {
-			return new ItemStack(Register.SOULIUM_NUGGET, Config.NUGGETS);
+			return new ItemStack(Register.MATERIALS, Config.NUGGETS, 1);
 		}
 	}
 
@@ -35,7 +35,7 @@ public class SFRecipeHandler {
 		if (Config.INGOTS == 9) {
 			return new ItemStack(Register.SOULIUM_BLOCK, 1);
 		} else {
-			return new ItemStack(Register.SOULIUM_INGOT, Config.INGOTS);
+			return new ItemStack(Register.MATERIALS, Config.INGOTS, 2);
 		}
 	}
 

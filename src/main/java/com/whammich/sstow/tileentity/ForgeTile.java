@@ -250,8 +250,9 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 			return 0;
 		} else {
 			Item item = itemstack.getItem();
+            int meta = itemstack.getItemDamage();
 
-			if (item == Register.CORRUPTED_ESSENCE) {
+			if (item == Register.MATERIALS && meta == 4) {
 				return 1600;
 			}
 			// if (item instanceof ItemTool
