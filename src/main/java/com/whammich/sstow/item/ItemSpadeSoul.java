@@ -4,26 +4,26 @@ import com.whammich.sstow.utils.Register;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemSpade;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Soul_Sword extends ItemSword {
+public class ItemSpadeSoul extends ItemSpade {
 
-	public Soul_Sword(ToolMaterial Material) {
+	public ItemSpadeSoul(ToolMaterial Material) {
 		super(Material);
-		this.setUnlocalizedName("soul_sword");
+		this.setUnlocalizedName("soul_spade");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soul_sword";
+		return "item.sstow.soul_spade";
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon("sstow:soul_sword");
+		itemIcon = iconRegister.registerIcon("sstow:soul_spade");
 	}
 }

@@ -32,7 +32,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-public class CageTile extends TileEntity implements ISidedInventory {
+public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	private ItemStack inventory;
 	private int counter;
@@ -47,7 +47,7 @@ public class CageTile extends TileEntity implements ISidedInventory {
 
 	String Owner;
 
-	public CageTile() {
+	public TileEntityCage() {
 		counter = 0;
 		updateCounter = 0;
 		redstoneActive = false;

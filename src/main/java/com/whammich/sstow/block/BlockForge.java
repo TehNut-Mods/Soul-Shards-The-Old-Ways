@@ -2,7 +2,7 @@ package com.whammich.sstow.block;
 
 import java.util.Random;
 
-import com.whammich.sstow.tileentity.ForgeTile;
+import com.whammich.sstow.tileentity.TileEntityForge;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.SSTheOldWays;
 
@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Forge_Block extends BlockContainer {
+public class BlockForge extends BlockContainer {
 
 	private IIcon top;
 	private IIcon front;
@@ -35,7 +35,7 @@ public class Forge_Block extends BlockContainer {
 	private final boolean isBurning2;
 	private final Random random = new Random();
 
-	public Forge_Block(boolean isActive) {
+	public BlockForge(boolean isActive) {
 		super(Material.rock);
 		this.setBlockName("sstow.forge_block");
 		this.setHardness(3.5F);
@@ -95,7 +95,7 @@ public class Forge_Block extends BlockContainer {
 	}
 
 	public TileEntity createNewTileEntity(World world, int var1) {
-		return new ForgeTile();
+		return new TileEntityForge();
 	}
 
 	public void onBlockPlacedBy(World world, int x, int y, int z,
@@ -120,7 +120,7 @@ public class Forge_Block extends BlockContainer {
 		}
 
 		if (itemstack.hasDisplayName()) {
-			((ForgeTile) world.getTileEntity(x, y, z)).furnaceName(itemstack
+			((TileEntityForge) world.getTileEntity(x, y, z)).furnaceName(itemstack
 					.getDisplayName());
 		}
 	}
@@ -147,7 +147,7 @@ public class Forge_Block extends BlockContainer {
 	public void breakBlock(World world, int x, int y, int z, Block block,
 			int meta) {
 		if (!isBurning) {
-			ForgeTile forgeTile = (ForgeTile) world.getTileEntity(x, y, z);
+			TileEntityForge forgeTile = (TileEntityForge) world.getTileEntity(x, y, z);
 			if (forgeTile != null) {
 				for (int i = 0; i < forgeTile.getSizeInventory(); ++i) {
 					ItemStack itemstack = forgeTile.getStackInSlot(i);

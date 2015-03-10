@@ -1,6 +1,6 @@
 package com.whammich.sstow.tileentity;
 
-import com.whammich.sstow.block.Forge_Block;
+import com.whammich.sstow.block.BlockForge;
 import com.whammich.sstow.guihandler.SFRecipeHandler;
 import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.Register;
@@ -17,7 +17,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ForgeTile extends TileEntity implements ISidedInventory {
+public class TileEntityForge extends TileEntity implements ISidedInventory {
 
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
@@ -198,7 +198,7 @@ public class ForgeTile extends TileEntity implements ISidedInventory {
 
 		if (flag != this.furnaceBurnTime > 0) {
 			flag1 = true;
-			Forge_Block.updateBlockstate(this.furnaceBurnTime > 0,
+			BlockForge.updateBlockstate(this.furnaceBurnTime > 0,
 					this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 		}
 

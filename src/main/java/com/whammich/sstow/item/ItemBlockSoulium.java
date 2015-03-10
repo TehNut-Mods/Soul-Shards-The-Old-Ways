@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class Soulium_Block_Item extends ItemBlock {
+public class ItemBlockSoulium extends ItemBlock {
 	
-	public Soulium_Block_Item(Block block) {
+	public ItemBlockSoulium(Block block) {
 		super(Register.SOULIUM_BLOCK);
 		this.setHasSubtypes(true);
 	}

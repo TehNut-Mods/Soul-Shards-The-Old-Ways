@@ -3,8 +3,8 @@ package com.whammich.sstow.enchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 
-public class SoulStealerEnchant extends Enchantment {
-	public SoulStealerEnchant(int id, int weight) {
+public class EnchantmentSoulStealer extends Enchantment {
+	public EnchantmentSoulStealer(int id, int weight) {
 		super(id, weight, EnumEnchantmentType.weapon);
 		this.name = "soul_stealer";
 	}

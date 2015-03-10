@@ -2,7 +2,7 @@ package com.whammich.sstow.block;
 
 import java.util.Random;
 
-import com.whammich.sstow.tileentity.CageTile;
+import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.utils.HolidayHelper;
 import com.whammich.sstow.utils.ModLogger;
 import com.whammich.sstow.utils.Register;
@@ -24,13 +24,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Cage_Block extends BlockContainer {
+public class BlockCage extends BlockContainer {
 
 	public IIcon[] icons = new IIcon[5];
 	@SuppressWarnings("unused")
 	private IIcon front;
 
-	public Cage_Block() {
+	public BlockCage() {
 		super(Material.iron);
 		this.setBlockName("sstow.cage_block");
 		this.setCreativeTab(Register.CREATIVE_TAB);
@@ -46,7 +46,7 @@ public class Cage_Block extends BlockContainer {
 	@Override
 	public int getComparatorInputOverride(World world, int xPos, int yPos,
 			int zPos, int p_149736_5_) {
-		CageTile tile = (CageTile) world.getTileEntity(xPos, yPos, zPos);
+		TileEntityCage tile = (TileEntityCage) world.getTileEntity(xPos, yPos, zPos);
 		if (tile.getStackInSlot(0) != null) {
 			ItemStack shard = tile.getStackInSlot(0);
 			int tier = Utils.getShardTier(shard);
@@ -133,8 +133,8 @@ public class Cage_Block extends BlockContainer {
 		if (!world.isRemote) {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
-			if (tile instanceof CageTile) {
-				((CageTile) tile).checkRedstone();
+			if (tile instanceof TileEntityCage) {
+				((TileEntityCage) tile).checkRedstone();
 			}
 		}
 	}
@@ -173,7 +173,7 @@ public class Cage_Block extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new CageTile();
+		return new TileEntityCage();
 	}
 
 	@Override

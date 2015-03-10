@@ -2,8 +2,8 @@ package com.whammich.sstow.compat.waila;
 
 import java.util.List;
 
-import com.whammich.sstow.block.Cage_Block;
-import com.whammich.sstow.tileentity.CageTile;
+import com.whammich.sstow.block.BlockCage;
+import com.whammich.sstow.tileentity.TileEntityCage;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -33,7 +33,7 @@ public class WailaProvider implements IWailaDataProvider {
 	public List<String> getWailaBody(ItemStack itemStack,
 			List<String> currenttip, IWailaDataAccessor accessor,
 			IWailaConfigHandler config) {
-		CageTile teSoulCage = (CageTile) accessor.getTileEntity();
+		TileEntityCage teSoulCage = (TileEntityCage) accessor.getTileEntity();
 		if (teSoulCage != null) {
 			if (teSoulCage.getStackInSlot(0) != null) {
 				// currenttip.add(StatCollector.translateToLocal("sstow.waila.soulcage.filled"));
@@ -70,8 +70,8 @@ public class WailaProvider implements IWailaDataProvider {
 	}
 
 	public static void callbackRegister(IWailaRegistrar registrar) {
-		registrar.registerBodyProvider(new WailaProvider(), Cage_Block.class);
-		registrar.registerNBTProvider(new WailaProvider(), Cage_Block.class);
+		registrar.registerBodyProvider(new WailaProvider(), BlockCage.class);
+		registrar.registerNBTProvider(new WailaProvider(), BlockCage.class);
 	}
 
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity tile,

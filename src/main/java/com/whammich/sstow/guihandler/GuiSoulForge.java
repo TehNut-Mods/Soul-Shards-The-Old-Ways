@@ -7,8 +7,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.whammich.sstow.tileentity.ForgeContainer;
-import com.whammich.sstow.tileentity.ForgeTile;
+import com.whammich.sstow.tileentity.ContainerForge;
+import com.whammich.sstow.tileentity.TileEntityForge;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,10 +18,10 @@ public class GuiSoulForge extends GuiContainer {
 
 	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(
 			"textures/gui/container/furnace.png");
-	private ForgeTile tileFurnace;
+	private TileEntityForge tileFurnace;
 
-	public GuiSoulForge(InventoryPlayer invPlayer, ForgeTile tile) {
-		super(new ForgeContainer(invPlayer, tile));
+	public GuiSoulForge(InventoryPlayer invPlayer, TileEntityForge tile) {
+		super(new ContainerForge(invPlayer, tile));
 		this.tileFurnace = tile;
 
 	}

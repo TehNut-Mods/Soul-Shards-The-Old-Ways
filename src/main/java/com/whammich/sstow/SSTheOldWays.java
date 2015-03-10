@@ -4,7 +4,7 @@ import java.io.File;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.whammich.sstow.commands.SSTOWCMD;
+import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.events.AchievementEvents;
 import com.whammich.sstow.events.Achievements;
 import com.whammich.sstow.events.CreateShardEvent;
@@ -47,7 +47,7 @@ public class SSTheOldWays {
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
 		// System.out.println("Achievement Events Registed");
 		FMLInterModComms.sendMessage("Waila", "register",
-				"sstow.utils.WailaProvider.callbackRegister");
+				Reference.Waila_callBack);
 	}
 
 	@Mod.EventHandler
@@ -59,7 +59,7 @@ public class SSTheOldWays {
 
 	@Mod.EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
-		event.registerServerCommand(new SSTOWCMD());
+		event.registerServerCommand(new CommandSSTOW());
 
 	}
 }

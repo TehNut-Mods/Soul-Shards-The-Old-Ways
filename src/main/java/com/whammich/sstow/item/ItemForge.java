@@ -6,9 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class Forge_Item extends ItemBlock {
+public class ItemForge extends ItemBlock {
 	
-	public Forge_Item(Block block) {
+	public ItemForge(Block block) {
 		super(Register.SOUL_FORGE);
 		this.setHasSubtypes(true);
 	}

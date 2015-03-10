@@ -12,13 +12,13 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ForgeContainer extends Container {
-	private ForgeTile tileFurnace;
+public class ContainerForge extends Container {
+	private TileEntityForge tileFurnace;
 	private int lastCookTime;
 	private int lastBurnTime;
 	private int lastItemBurnTime;
 
-	public ForgeContainer(InventoryPlayer player, ForgeTile tileEntityFurnace) {
+	public ContainerForge(InventoryPlayer player, TileEntityForge tileEntityFurnace) {
 		this.tileFurnace = tileEntityFurnace;
 		this.addSlotToContainer(new Slot(tileEntityFurnace, 0, 56, 17));
 		this.addSlotToContainer(new Slot(tileEntityFurnace, 1, 56, 53));
@@ -109,7 +109,7 @@ public class ForgeContainer extends Container {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return null;
 					}
-				} else if (ForgeTile.isItemFuel(itemstack1)) {
+				} else if (TileEntityForge.isItemFuel(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
 						return null;
 					}

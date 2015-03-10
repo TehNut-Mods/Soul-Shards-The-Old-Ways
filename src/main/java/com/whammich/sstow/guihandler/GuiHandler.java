@@ -1,7 +1,7 @@
 package com.whammich.sstow.guihandler;
 
-import com.whammich.sstow.tileentity.ForgeContainer;
-import com.whammich.sstow.tileentity.ForgeTile;
+import com.whammich.sstow.tileentity.ContainerForge;
+import com.whammich.sstow.tileentity.TileEntityForge;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -17,9 +17,9 @@ public class GuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
 		if (ID == 0) {
-			ForgeTile tileEntityFurnace = (ForgeTile) world
+			TileEntityForge tileEntityFurnace = (TileEntityForge) world
 					.getTileEntity(x, y, z);
-			return new ForgeContainer(player.inventory, tileEntityFurnace);
+			return new ContainerForge(player.inventory, tileEntityFurnace);
 		}
 		return null;
 	}
@@ -28,7 +28,7 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
 		if (ID == 0) {
-			ForgeTile tileEntityTestContainer = (ForgeTile) world
+			TileEntityForge tileEntityTestContainer = (TileEntityForge) world
 					.getTileEntity(x, y, z);
 			return new GuiSoulForge(player.inventory, tileEntityTestContainer);
 		}

@@ -3,27 +3,27 @@ package com.whammich.sstow.item;
 import com.whammich.sstow.utils.Register;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Soul_Axe extends ItemAxe {
+public class ItemPickaxeSoul extends ItemPickaxe {
 
-	public Soul_Axe(ToolMaterial Material) {
+	public ItemPickaxeSoul(ToolMaterial Material) {
 		super(Material);
-		this.setUnlocalizedName("soul_axe");
+		this.setUnlocalizedName("soul_pickaxe");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soul_axe";
+		return "item.sstow.soul_pickaxe";
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon("sstow:soul_axe");
+		itemIcon = iconRegister.registerIcon("sstow:soul_pickaxe");
 	}
 }

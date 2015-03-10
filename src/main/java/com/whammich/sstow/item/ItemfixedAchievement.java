@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class fixedAchievement extends Item {
+public class ItemfixedAchievement extends Item {
 
-	public fixedAchievement() {
+	public ItemfixedAchievement() {
 		this.setMaxStackSize(1);
 		this.setMaxDamage(0);
 	}
