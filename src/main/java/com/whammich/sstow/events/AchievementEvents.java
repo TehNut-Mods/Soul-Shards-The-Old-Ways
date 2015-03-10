@@ -9,6 +9,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
+import net.minecraft.item.ItemStack;
 
 public class AchievementEvents {
 
@@ -29,7 +30,7 @@ public class AchievementEvents {
 	public void corruptedCrafted(ItemCraftedEvent event) {
 		if (!Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Corrupted Crafted Event");
-			if (event.crafting.getItem().equals(Register.CORRUPTED_ESSENCE)) {
+			if (event.crafting.equals(new ItemStack(Register.MATERIALS, 1, 4))) {
 				event.player.addStat(Achievements.corruption, 1);
 			} else {
 				return;
@@ -44,7 +45,7 @@ public class AchievementEvents {
 	public void corruptedSmelted(ItemSmeltedEvent event) {
 		if (Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Corrupted Smelted Event");
-			if (event.smelting.getItem().equals(Register.CORRUPTED_ESSENCE)) {
+			if (event.smelting.equals(new ItemStack(Register.MATERIALS, 1, 4))) {
 				event.player.addStat(Achievements.corruption, 1);
 			} else {
 				return;
@@ -71,7 +72,7 @@ public class AchievementEvents {
 	public void VileSmelted(ItemSmeltedEvent event) {
 		if (!Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Vile Smelt Event");
-			if (event.smelting.getItem().equals(Register.VILE_DUST)) {
+			if (event.smelting.equals(new ItemStack(Register.MATERIALS, 1, 3))) {
 				event.player.addStat(Achievements.viledust, 1);
 			} else {
 				return;
@@ -86,7 +87,7 @@ public class AchievementEvents {
 	public void VileCrafted(ItemCraftedEvent event) {
 		if (Loader.isModLoaded("Natura")) {
 			// System.out.println("Register Vile Craft Event");
-			if (event.crafting.getItem().equals(Register.VILE_DUST)) {
+			if (event.crafting.equals(new ItemStack(Register.MATERIALS, 1, 3))) {
 				event.player.addStat(Achievements.viledust, 1);
 			} else {
 				return;

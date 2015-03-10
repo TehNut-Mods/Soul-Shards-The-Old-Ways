@@ -1,10 +1,10 @@
 item.sstow.shard_unbound.name=Ungebundener Seelensplitter
 item.sstow.shard.name=Seelensplitter
-item.sstow.vile_dust.name=Widerlicher Staub
-item.sstow.corrupted_essence.name=Verdorbene Essenz
-item.sstow.soulium_ingot.name=Souliumbarren
-item.sstow.soulium_nugget.name=Souliumnugget
-item.sstow.iron_nugget.name=Eisennugget
+item.sstow.material.nugget.iron.name=Eisennugget
+item.sstow.material.nugget.soulium.name=Souliumnugget
+item.sstow.material.ingot.soulium.name=Souliumbarren
+item.sstow.material.dust.vile.name=Widerlicher Staub
+item.sstow.material.essence.corrupted.name=Verdorbene Essenz
 item.sstow.soul_sword.name=Seelenschwert
 item.sstow.soul_pickaxe.name=Seelenspitzhacke
 item.sstow.soul_axe.name=Seelenaxt

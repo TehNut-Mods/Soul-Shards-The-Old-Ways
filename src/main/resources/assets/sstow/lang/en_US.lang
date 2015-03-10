@@ -1,10 +1,10 @@
 item.sstow.shard_unbound.name=Unbound Soul Shard
 item.sstow.shard.name=Soul Shard
-item.sstow.vile_dust.name=Vile Dust
-item.sstow.corrupted_essence.name=Corrupted Essence
-item.sstow.soulium_ingot.name=Soulium Ingot
-item.sstow.soulium_nugget.name=Soulium Nugget
-item.sstow.iron_nugget.name=Iron Nugget
+item.sstow.material.nugget.iron.name=Iron Nugget
+item.sstow.material.nugget.soulium.name=Soulium Nugget
+item.sstow.material.ingot.soulium.name=Soulium Ingot
+item.sstow.material.dust.vile.name=Vile Dust
+item.sstow.material.essence.corrupted.name=Corrupted Essence
 item.sstow.soul_sword.name=Soul Sword
 item.sstow.soul_pickaxe.name=Soul Pickaxe
 item.sstow.soul_axe.name=Soul Axe
