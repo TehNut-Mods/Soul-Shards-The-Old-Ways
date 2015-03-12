@@ -156,7 +156,7 @@ public final class Utils {
 				(byte) MathHelper.clamp_int(tier, 0, 5));
 	}
 
-	/**
+	/*
 	 * Returns an empty string if unbound.
 	 */
 	public static String getShardBoundEnt(ItemStack shard) {
@@ -167,7 +167,7 @@ public final class Utils {
 		return shard.stackTagCompound.getString("Entity");
 	}
 
-	/**
+	/*
 	 * Does not check if the shard is already bound!
 	 */
 	public static void setShardBoundEnt(ItemStack shard, String value) {
