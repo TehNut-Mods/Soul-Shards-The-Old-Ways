@@ -1,87 +1,131 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
 
 apply plugin: 'forge'
-apply plugin: 'curseforge'
+apply plugin: 'maven-publish'
 
-version = "${mod_version}"
-group= "com.whammich.sstow" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "SSTOW"
+def build_number = 'CUSTOM'
 
-minecraft {
-    version = "${minecraft_version}-${forge_version}"
-	if(file('../run-1.7.10').exists()){
-		runDir = "../run-1.7.10/assets"
-	} else {
-		runDir = "run"
-	}
-	replaceIn "Reference.java"
-    replace "@VERSION@", project.version
+if (System.getenv('BUILD_NUMBER') != null)
+    build_number = System.getenv('BUILD_NUMBER')
+
+group = package_group
+archivesBaseName = mod_name
+version = "${mc_version}-${mod_version}-${build_number}"
+
+import org.ajoberstar.grgit.Grgit
+
+def gitHash = 'unknown'
+if (new File(projectDir, '.git').exists()) {
+    def repo = Grgit.open(project.file('.'))
+    gitHash = repo.log().find().abbreviatedId
 }
 
 repositories {
-		maven {
-				name 'Chicken Bones Repo'
-				url "http://chickenbones.net/maven/"
-		}
-		maven {
-				name 'Prof Mobius Repo'
-				url "http://mobiusstrip.eu/maven"
-		}
-		ivy {
-				name "CoFHCore"
-				artifactPattern "http://addons-origin.cursecdn.com/files/2229/839/[module]-[revision].[ext]"
-		}
+	maven { url "http://chickenbones.net/maven/" }
+	maven {	url "http://mobiusstrip.eu/maven" }
+	
+	ivy {
+			name "CoFHCore"
+			artifactPattern "http://addons-origin.cursecdn.com/files/2229/839/[module]-[revision].[ext]"
+	}
 }
 
 dependencies {
-	compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
-	compile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:dev"
-	compile "codechicken:CodeChickenCore:${minecraft_version}-${ccc_version}:dev"
-	compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
+	compile "mcp.mobius.waila:Waila:${waila_version}_${mc_version}:dev"
+	compile "codechicken:CodeChickenLib:${mc_version}-${ccl_version}:dev"
+	compile "codechicken:CodeChickenCore:${mc_version}-${ccc_version}:dev"
+	compile "codechicken:NotEnoughItems:${mc_version}-${nei_version}:dev"
 	compile name: 'CoFHCore', version: "${cofhcore_version}", ext: 'jar'
 	compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-processResources
-{
-    // this will ensure that this task is redone when the versions change.
+minecraft {
+    version = "${mc_version}-${forge_version}"
+    runDir = "run"
+
+	replaceIn "Reference.java"
+    replace "@VERSION@", project.version
+	
+    if (project.hasProperty('mappings_version'))
+        mappings = project.mappings_version
+}
+
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        include '**/*.info'
+        include '**/*.properties'
+
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
-    // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        exclude '**/*.info'
+        exclude '**/*.properties'
     }
 }
-// Create deobf dev jars
+
+jar {
+    classifier = ''
+    manifest.mainAttributes(
+            "Built-By": System.getProperty('user.name'),
+            "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+            "Implementation-Title": project.name,
+            "Implementation-Version": project.version,
+            "Git-Hash": gitHash
+    )
+}
+
+// Source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+// Javadoc jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+// Deobf jar
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
 }
 
-artifacts {
-    archives deobfJar
+tasks.build.dependsOn sourceJar, javadocJar, deobfJar
+
+tasks.withType(JavaCompile) { task ->
+    task.options.encoding = 'UTF-8'
+}
+
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourceJar
+            artifact javadocJar
+            artifact deobfJar
+        }
+    }
+    repositories {
+        if (project.hasProperty('maven_repo')) {
+            maven { url maven_repo }
+        } else {
+            mavenLocal()
+        }
+    }
 }
