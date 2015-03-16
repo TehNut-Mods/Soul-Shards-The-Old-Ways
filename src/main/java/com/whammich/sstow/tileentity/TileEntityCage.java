@@ -1,13 +1,7 @@
 package com.whammich.sstow.tileentity;
 
+import java.lang.reflect.Field;
 import java.util.List;
-
-import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.EntityMapper;
-import com.whammich.sstow.utils.ModLogger;
-import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.utils.TierHandler;
-import com.whammich.sstow.utils.Utils;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -30,6 +24,13 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+
+import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.EntityMapper;
+import com.whammich.sstow.utils.ModLogger;
+import com.whammich.sstow.utils.Register;
+import com.whammich.sstow.utils.TierHandler;
+import com.whammich.sstow.utils.Utils;
 
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
@@ -58,10 +59,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		Owner = playerName;
 	}
 
-<<<<<<< HEAD
 	@SuppressWarnings("rawtypes")
-=======
->>>>>>> origin/dev
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote) {
@@ -134,7 +132,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				toSpawn[i].forceSpawn = true;
 				toSpawn[i].func_110163_bv();
 
-<<<<<<< HEAD
+
 				// if this fails, don't crash the game
 				try {
 					// get the main class (like EntityZombie)
@@ -162,8 +160,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 					// System.out.println(e.getLocalizedMessage()+ " - "+
 					// e.toString());
 				}
-=======
->>>>>>> origin/dev
+
 			}
 			spawnEntities(toSpawn);
 			counter = 0;
