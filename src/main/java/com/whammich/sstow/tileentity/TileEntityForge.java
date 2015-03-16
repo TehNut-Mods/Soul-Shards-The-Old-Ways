@@ -1,10 +1,5 @@
 package com.whammich.sstow.tileentity;
 
-import com.whammich.sstow.block.BlockForge;
-import com.whammich.sstow.guihandler.SFRecipeHandler;
-import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.Register;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
@@ -13,7 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.common.registry.GameRegistry;
+
+import com.whammich.sstow.block.BlockForge;
+import com.whammich.sstow.guihandler.SFRecipeHandler;
+import com.whammich.sstow.utils.Config;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -22,12 +21,12 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
-
-	private ItemStack[] furnaceItemStacks = new ItemStack[3];
+	@SuppressWarnings("unused")
+	private static final int[] slotsBy = new int[] { 3 };
+	private ItemStack[] furnaceItemStacks = new ItemStack[4];
 	public int furnaceBurnTime;
 	public int currentBurnTime;
 	public int furnaceCookTime;
-
 	private String furnaceName;
 
 	public void furnaceName(String string) {
@@ -104,7 +103,6 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 		super.readFromNBT(tagCompound);
 		NBTTagList tagList = tagCompound.getTagList("Items", 10);
 		this.furnaceItemStacks = new ItemStack[this.getSizeInventory()];
-
 		for (int i = 0; i < tagList.tagCount(); ++i) {
 			NBTTagCompound tabCompound1 = tagList.getCompoundTagAt(i);
 			byte byte0 = tabCompound1.getByte("Slot");
@@ -115,6 +113,7 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 		}
 		this.furnaceBurnTime = tagCompound.getShort("BurnTime");
 		this.furnaceCookTime = tagCompound.getShort("CookTime");
+		/* burn time here */
 		this.currentBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
 		if (tagCompound.hasKey("CustomName", 8)) {
 			this.furnaceName = tagCompound.getString("CustomName");
@@ -138,18 +137,17 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 		if (this.hasCustomInventoryName()) {
 			tagCompound.setString("CustomName", this.furnaceName);
 		}
-
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int val1) {
-		return this.furnaceCookTime * val1 / Config.COOK_TIME;
+		return this.furnaceCookTime * val1 / this.smeltTime();
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int val1) {
 		if (this.currentBurnTime == 0) {
-			this.currentBurnTime = Config.COOK_TIME;
+			this.currentBurnTime = this.smeltTime();
 		}
 		return this.furnaceBurnTime * val1 / this.currentBurnTime;
 	}
@@ -161,20 +159,16 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	public void updateEntity() {
 		boolean flag = this.furnaceBurnTime > 0;
 		boolean flag1 = false;
-
 		if (this.furnaceBurnTime > 0) {
 			--this.furnaceBurnTime;
 		}
-
 		if (!this.worldObj.isRemote) {
 			if (this.furnaceBurnTime == 0 && this.canSmelt()) {
 				this.currentBurnTime = this.furnaceBurnTime = getItemBurnTime(this.furnaceItemStacks[1]);
-
 				if (this.furnaceBurnTime > 0) {
 					flag1 = true;
 					if (this.furnaceItemStacks[1] != null) {
 						--this.furnaceItemStacks[1].stackSize;
-
 						if (this.furnaceItemStacks[1].stackSize == 0) {
 							this.furnaceItemStacks[1] = furnaceItemStacks[1]
 									.getItem().getContainerItem(
@@ -183,10 +177,9 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 					}
 				}
 			}
-
 			if (this.isBurning() && this.canSmelt()) {
 				++this.furnaceCookTime;
-				if (this.furnaceCookTime == Config.COOK_TIME) {
+				if (this.furnaceCookTime == this.smeltTime()) {
 					this.furnaceCookTime = 0;
 					this.smeltItem();
 					flag1 = true;
@@ -195,13 +188,11 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 				this.furnaceCookTime = 0;
 			}
 		}
-
 		if (flag != this.furnaceBurnTime > 0) {
 			flag1 = true;
 			BlockForge.updateBlockstate(this.furnaceBurnTime > 0,
 					this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 		}
-
 		if (flag1) {
 			this.markDirty();
 		}
@@ -225,47 +216,63 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 		}
 	}
 
+	public int smeltTime() {
+		if (this.furnaceItemStacks[0] == null) {
+			return 200;
+		} else {
+			int smeltTime = (int) (SFRecipeHandler.smelting().getSmeltingTime(
+					this.furnaceItemStacks[0]) * 0.1 * Config.COOK_TIME);
+			if (smeltTime == 0) {
+				return 200;
+			}
+			return smeltTime;
+		}
+	}
+
 	public void smeltItem() {
 		if (this.canSmelt()) {
 			ItemStack itemstack = SFRecipeHandler.smelting().getSmeltingResult(
 					this.furnaceItemStacks[0]);
-
+			ItemStack itemstack2 = SFRecipeHandler.smelting().getSecondaryResult(
+					this.furnaceItemStacks[0]);
 			if (this.furnaceItemStacks[2] == null) {
 				this.furnaceItemStacks[2] = itemstack.copy();
 			} else if (this.furnaceItemStacks[2].getItem() == itemstack
 					.getItem()) {
 				this.furnaceItemStacks[2].stackSize += itemstack.stackSize;
 			}
-
+			if (itemstack2 != null) {
+				if (this.furnaceItemStacks[3] == null) {
+					this.furnaceItemStacks[3] = itemstack2.copy();
+				} else if (this.furnaceItemStacks[3].getItem() == itemstack2
+						.getItem()) {
+					this.furnaceItemStacks[3].stackSize += itemstack2.stackSize;
+				}
+			}
 			--this.furnaceItemStacks[0].stackSize;
-
 			if (this.furnaceItemStacks[0].stackSize <= 0) {
 				this.furnaceItemStacks[0] = null;
 			}
 		}
 	}
 
-	public static int getItemBurnTime(ItemStack itemstack) {
+	@SuppressWarnings("unused")
+	public int getItemBurnTime(ItemStack itemstack) {
 		if (itemstack == null) {
 			return 0;
 		} else {
 			Item item = itemstack.getItem();
-            int meta = itemstack.getItemDamage();
-
-			if (item == Register.MATERIALS && meta == 4) {
-				return 1600;
-			}
-			// if (item instanceof ItemTool
-			// && ((ItemTool) item).getToolMaterialName()
-			// .equals("EMERALD")) {
-			// return 300;
-			// }
-			return GameRegistry.getFuelValue(itemstack);
+			int fuelCost = (int) SFRecipeHandler.smelting().getFuelCost(
+					this.furnaceItemStacks[0]);
+			int fuelMod = (int) SFRecipeHandler.smelting().getFuelMod(
+					this.furnaceItemStacks[1]);
+			int BurnTime = (int) this.smeltTime() / fuelCost * fuelMod;
+			return BurnTime;
 		}
 	}
 
 	public static boolean isItemFuel(ItemStack itemstack) {
-		return getItemBurnTime(itemstack) > 0;
+		return SFRecipeHandler.smelting().getFuelMod(itemstack) > 0;
 	}
 
 	@Override
@@ -278,12 +285,10 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 
 	@Override
 	public void openInventory() {
-
 	}
 
 	@Override
 	public void closeInventory() {
-
 	}
 
 	@Override

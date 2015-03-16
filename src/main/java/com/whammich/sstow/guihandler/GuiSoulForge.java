@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.whammich.sstow.tileentity.ContainerForge;
 import com.whammich.sstow.tileentity.TileEntityForge;
+import com.whammich.sstow.utils.Reference;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiSoulForge extends GuiContainer {
 
 	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(
-			"textures/gui/container/furnace.png");
+			Reference.MOD_ID + ":textures/gui/container/forge.png");
 	private TileEntityForge tileFurnace;
 
 	public GuiSoulForge(InventoryPlayer invPlayer, TileEntityForge tile) {
