@@ -1,6 +1,5 @@
 package com.whammich.sstow.tileentity;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import com.whammich.sstow.utils.Config;
@@ -55,11 +54,10 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		active = false;
 	}
 
-	public void addOwner(String playerName){
+	public void addOwner(String playerName) {
 		Owner = playerName;
 	}
-	
-	@SuppressWarnings("rawtypes")
+
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote) {
@@ -132,33 +130,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				toSpawn[i].forceSpawn = true;
 				toSpawn[i].func_110163_bv();
 
-				// if this fails, don't crash the game
-				//try {
-					// get the main class (like EntityZombie)
-				//	Class c = toSpawn[i].getClass();
-				//	while (c.getSuperclass() != EntityLiving.class
-				//			&& c.getSuperclass() != null) {
-				//		c = c.getSuperclass();
-				//	}
-					// set c to the EntityLiving class
-				//	c = c.getSuperclass();
-					// get the private experienceValue field
-				//	Field field;
-				//	try {
-						// obfuscated environment(normal game)
-				//		field = c.getDeclaredField("field_70728_aV");
-				//	} catch (Exception e) {
-						// System.out.println("couldn't find field, are you in a development environment?");
-				//		field = c.getDeclaredField("experienceValue");
-				//	}
-				//	field.setAccessible(true);
-				//	field.setInt(toSpawn[i], 0);
-				//} catch (Exception e) {
-					// testing output. Should not be necessary anymore
-					// System.out.println("something went wrong");
-					// System.out.println(e.getLocalizedMessage()+ " - "+
-					// e.toString());
-				//}
 			}
 			spawnEntities(toSpawn);
 			counter = 0;
