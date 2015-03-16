@@ -133,37 +133,32 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				toSpawn[i].func_110163_bv();
 
 				// if this fails, don't crash the game
-				try {
+				//try {
 					// get the main class (like EntityZombie)
-					Class c = toSpawn[i].getClass();
-					while (c.getSuperclass() != EntityLiving.class
-							&& c.getSuperclass() != null) {
-						c = c.getSuperclass();
-					}
+				//	Class c = toSpawn[i].getClass();
+				//	while (c.getSuperclass() != EntityLiving.class
+				//			&& c.getSuperclass() != null) {
+				//		c = c.getSuperclass();
+				//	}
 					// set c to the EntityLiving class
-					c = c.getSuperclass();
-
+				//	c = c.getSuperclass();
 					// get the private experienceValue field
-					Field field;
-
-					try {
+				//	Field field;
+				//	try {
 						// obfuscated environment(normal game)
-						field = c.getDeclaredField("field_70728_aV");
-
-					} catch (Exception e) {
+				//		field = c.getDeclaredField("field_70728_aV");
+				//	} catch (Exception e) {
 						// System.out.println("couldn't find field, are you in a development environment?");
-						field = c.getDeclaredField("experienceValue");
-					}
-
-					field.setAccessible(true);
-					field.setInt(toSpawn[i], 0);
-
-				} catch (Exception e) {
+				//		field = c.getDeclaredField("experienceValue");
+				//	}
+				//	field.setAccessible(true);
+				//	field.setInt(toSpawn[i], 0);
+				//} catch (Exception e) {
 					// testing output. Should not be necessary anymore
 					// System.out.println("something went wrong");
 					// System.out.println(e.getLocalizedMessage()+ " - "+
 					// e.toString());
-				}
+				//}
 			}
 			spawnEntities(toSpawn);
 			counter = 0;
