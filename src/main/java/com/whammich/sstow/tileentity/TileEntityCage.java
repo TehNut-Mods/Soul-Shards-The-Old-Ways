@@ -1,6 +1,5 @@
 package com.whammich.sstow.tileentity;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import com.whammich.sstow.utils.Config;
@@ -59,7 +58,10 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		Owner = playerName;
 	}
 
+<<<<<<< HEAD
 	@SuppressWarnings("rawtypes")
+=======
+>>>>>>> origin/dev
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote) {
@@ -132,6 +134,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				toSpawn[i].forceSpawn = true;
 				toSpawn[i].func_110163_bv();
 
+<<<<<<< HEAD
 				// if this fails, don't crash the game
 				try {
 					// get the main class (like EntityZombie)
@@ -159,6 +162,8 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 					// System.out.println(e.getLocalizedMessage()+ " - "+
 					// e.toString());
 				}
+=======
+>>>>>>> origin/dev
 			}
 			spawnEntities(toSpawn);
 			counter = 0;
