@@ -399,7 +399,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack != null && stack.getItem() == Register.SOUL_SHARD
+		return stack != null && stack.getItem() == Register.ItemShardSoul
 				&& Utils.isShardBound(stack) && Utils.getShardTier(stack) > 0;
 	}
 

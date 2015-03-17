@@ -105,7 +105,7 @@ public class ItemShardSoul extends Item {
 			} else if (EntityMapper.isEntityValid(name)) {
 				if (stack.stackSize > 1) {
 					stack.stackSize--;
-					ItemStack newStack = new ItemStack(Register.SOUL_SHARD, 1);
+					ItemStack newStack = new ItemStack(Register.ItemShardSoul, 1);
 
 					Utils.setShardBoundEnt(newStack, name);
 					Utils.writeEntityHeldItem(newStack, (EntityLiving) ent);

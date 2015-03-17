@@ -76,7 +76,7 @@ public class CommandSSTOW extends CommandBase {
 					int minKills = TierHandler.getMinKills(tierAmount);
 					if (((EntityPlayerMP) sender).getHeldItem() != null
 							&& ((EntityPlayerMP) sender).getHeldItem()
-									.getItem() == Register.SOUL_SHARD) {
+									.getItem() == Register.ItemShardSoul) {
 						ItemStack shard = ((EntityPlayerMP) sender)
 								.getHeldItem();
 						for (int i = 1; i <= tierAmount; i++) {
@@ -105,7 +105,7 @@ public class CommandSSTOW extends CommandBase {
 				}
 
 				if (((EntityPlayerMP) sender).getHeldItem() != null
-						&& ((EntityPlayerMP) sender).getHeldItem().getItem() == Register.SOUL_SHARD) {
+						&& ((EntityPlayerMP) sender).getHeldItem().getItem() == Register.ItemShardSoul) {
 					ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
 					for (int i = 1; i <= killAmount; i++) {
 

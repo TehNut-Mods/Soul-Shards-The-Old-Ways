@@ -27,34 +27,34 @@ public class Achievements {
 
 		System.out.println("Rendering Icons");
 
-		ItemStack shard1 = new ItemStack(Register.SOUL_SHARD);
+		ItemStack shard1 = new ItemStack(Register.ItemShardSoul);
 		Utils.setShardTier(shard1, (byte) 1);
 		Utils.setShardBoundEnt(shard1, "NULL");
 
-		ItemStack shard2 = new ItemStack(Register.SOUL_SHARD);
+		ItemStack shard2 = new ItemStack(Register.ItemShardSoul);
 		Utils.setShardTier(shard2, (byte) 2);
 		Utils.setShardBoundEnt(shard2, "NULL");
 
-		ItemStack shard3 = new ItemStack(Register.SOUL_SHARD);
+		ItemStack shard3 = new ItemStack(Register.ItemShardSoul);
 		Utils.setShardTier(shard3, (byte) 3);
 		Utils.setShardBoundEnt(shard3, "NULL");
 
-		ItemStack shard4 = new ItemStack(Register.SOUL_SHARD);
+		ItemStack shard4 = new ItemStack(Register.ItemShardSoul);
 		Utils.setShardTier(shard4, (byte) 4);
 		Utils.setShardBoundEnt(shard4, "NULL");
 
-		ItemStack shard5 = new ItemStack(Register.SOUL_SHARD);
+		ItemStack shard5 = new ItemStack(Register.ItemShardSoul);
 		Utils.setShardTier(shard5, (byte) 5);
 		Utils.setShardBoundEnt(shard5, "NULL");
 
 		// System.out.println("Registering Achievement Icon Locations");
 
 		viledust = new Achievement("achievement.vile_dust", "vile_dust", -1,
-				-3, new ItemStack(Register.MATERIALS, 1, 3), (Achievement) null)
+				-3, new ItemStack(Register.ItemMaterials, 1, 3), (Achievement) null)
 				.initIndependentStat().registerStat();
 
 		corruption = new Achievement("achievement.corrupted_essence",
-				"corrupted_essence", -1, -1, new ItemStack(Register.MATERIALS, 1, 4),
+				"corrupted_essence", -1, -1, new ItemStack(Register.ItemMaterials, 1, 4),
 				Achievements.viledust).registerStat();
 
 		soulforge = new Achievement("achievement.soulForge", "soulForge", -1,
@@ -66,12 +66,12 @@ public class Achievements {
 		if (!Config.EASYMODE) {
 			unboundshard = new Achievement("achievement.createShard",
 					"createShard", 4, 1,
-					new ItemStack(Register.SOUL_SHARD, 0),
+					new ItemStack(Register.ItemShardSoul, 0),
 					Achievements.soulforge).registerStat();
 		} else {
 			unboundshard = new Achievement("achievement.createShard",
 					"createShard", 4, 1,
-					new ItemStack(Register.SOUL_SHARD, 0), (Achievement) null)
+					new ItemStack(Register.ItemShardSoul, 0), (Achievement) null)
 					.initIndependentStat().registerStat();
 		}
 		shardt1 = new Achievement("achievement.tier1Shard", "tier1Shard", 2,

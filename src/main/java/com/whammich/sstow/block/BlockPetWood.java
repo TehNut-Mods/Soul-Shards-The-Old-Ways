@@ -36,9 +36,9 @@ public class BlockPetWood extends BlockRotatedPillar {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID
-				+ ":PetrifiedWood");
+				+ ":pet_log_birch");
 		this.blockIconTop = iconRegister.registerIcon(Reference.MOD_ID
-				+ ":PetrifiedWood_top");
+				+ ":pet_log_birch_top");
 	}
 
 }

@@ -46,7 +46,7 @@ public class CreateShardEvent {
 						event.x + (dir.offsetX * 1.75D), event.y
 								+ (dir.offsetY * 1.75D) + 0.5D, event.z
 								+ (dir.offsetZ * 1.75D), new ItemStack(
-								Register.SOUL_SHARD)));
+								Register.ItemShardSoul)));
 			}
 		}
 	}

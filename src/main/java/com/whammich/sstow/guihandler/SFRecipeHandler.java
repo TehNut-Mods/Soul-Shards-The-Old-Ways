@@ -28,9 +28,9 @@ public class SFRecipeHandler {
 
 	private ItemStack NuggetIngot() {
 		if (Config.NUGGETS == 9) {
-			return new ItemStack(Register.MATERIALS, 1, 2);
+			return new ItemStack(Register.ItemMaterials, 1, 2);
 		} else {
-			return new ItemStack(Register.MATERIALS, Config.NUGGETS, 1);
+			return new ItemStack(Register.ItemMaterials, Config.NUGGETS, 1);
 		}
 	}
 
@@ -38,18 +38,18 @@ public class SFRecipeHandler {
 		if (Config.INGOTS == 9) {
 			return new ItemStack(Register.SOULIUM_BLOCK, 1);
 		} else {
-			return new ItemStack(Register.MATERIALS, Config.INGOTS, 2);
+			return new ItemStack(Register.ItemMaterials, Config.INGOTS, 2);
 		}
 	}
 
 	private SFRecipeHandler() {
 		if (!Config.EASYMODE) {
 			this.addRecipe(new ItemStack(Items.diamond), new ItemStack(
-					Register.SOUL_SHARD, Config.SHARDS), null, 8, 100, 1F);
+					Register.ItemShardSoul, Config.SHARDS), null, 8, 100, 1F);
 		}
 		this.addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), null, 4, 20, 0.8F);
 		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), null, 4, 500, 0.9F);
-		this.addFuel(new ItemStack(Register.MATERIALS, 4), 1);
+		this.addFuel(new ItemStack(Register.ItemMaterials, 4), 1);
 		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.XENOLITH), null, 8, 100, 1F);
 		this.addRecipe(new ItemStack(Blocks.log, 1), new ItemStack(Register.PETRIFIEDWOOD), null, 8, 100, 1F);
 		this.addRecipe(new ItemStack(Blocks.log2, 1), new ItemStack(Register.PETRIFIEDWOOD), null, 8, 100, 1F);

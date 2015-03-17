@@ -17,12 +17,16 @@ import com.whammich.sstow.utils.Register;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, guiFactory = Reference.GuiFactory_class)
 public class SSTheOldWays {
@@ -30,12 +34,12 @@ public class SSTheOldWays {
 	@Instance(Reference.MOD_ID)
 	public static SSTheOldWays modInstance;
 
-	@Mod.EventHandler
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Config.load(event);
 	}
 
-	@Mod.EventHandler
+	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		Register.registerObjs();
 		// System.out.println("Achievements Loading");
@@ -50,14 +54,35 @@ public class SSTheOldWays {
 				Reference.Waila_callBack);
 	}
 
-	@Mod.EventHandler
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		EntityMapper.init();
 		EntityBlackList
 				.init(new File(Config.configDirectory + "/BlackList.cfg"));
 	}
+	
+	@EventHandler
+	public void onMissingMapping(FMLMissingMappingsEvent event){
+		for (MissingMapping m : event.get()){
+			if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_sword")) {
+				m.remap(Register.ItemSwordSoul);
+			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_pickaxe")) {
+				m.remap(Register.ItemPickaxeSoul);
+			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_axe")) {
+				m.remap(Register.ItemAxeSoul);
+			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_hoe")) {
+				m.remap(Register.ItemHoeSoul);
+			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_spade")) {
+				m.remap(Register.ItemSpadeSoul);
+			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_materials")) {
+				m.remap(Register.ItemMaterials);
+			}else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_shard")) {
+				m.remap(Register.ItemShardSoul);
+			}
+		}
+	}
 
-	@Mod.EventHandler
+	@EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandSSTOW());
 

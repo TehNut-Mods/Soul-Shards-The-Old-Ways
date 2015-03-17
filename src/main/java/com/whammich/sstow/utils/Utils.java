@@ -24,7 +24,7 @@ public final class Utils {
 		for (int i = 0; i <= 8; i++) {
 			ItemStack stack = player.inventory.getStackInSlot(i);
 
-			if (stack != null && stack.getItem() == Register.SOUL_SHARD
+			if (stack != null && stack.getItem() == Register.ItemShardSoul
 					&& !hasMaxedKills(stack)) {
 				if (!isShardBound(stack) && lastResort == null) {
 					lastResort = stack;
@@ -38,7 +38,7 @@ public final class Utils {
 			boolean emptySpot = false;
 			int counter = 0;
 
-			ItemStack newShard = new ItemStack(Register.SOUL_SHARD, 1);
+			ItemStack newShard = new ItemStack(Register.ItemShardSoul, 1);
 			while (!emptySpot && counter < 36) {
 				ItemStack inventoryStack = player.inventory
 						.getStackInSlot(counter);
