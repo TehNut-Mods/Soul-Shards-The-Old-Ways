@@ -21,12 +21,15 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
+	
 	@SuppressWarnings("unused")
 	private static final int[] slotsBy = new int[] { 3 };
+	
 	private ItemStack[] furnaceItemStacks = new ItemStack[4];
 	public int furnaceBurnTime;
 	public int currentBurnTime;
 	public int furnaceCookTime;
+	
 	private String furnaceName;
 
 	public void furnaceName(String string) {

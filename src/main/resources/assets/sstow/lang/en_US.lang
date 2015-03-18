@@ -16,6 +16,7 @@ container.soulforge=Soul Forge
 tile.sstow.forge_block.name=Soul Forge
 tile.sstow.soulium_block.name=Block of Soulium
 tile.sstow.cage_block.name=Soul Cage
+tile.sstow.petrified.wood.birch.name=
 
 sstow.waila.soulcage.mob=Entity: 
 sstow.waila.soulcage.tier=Tier: 

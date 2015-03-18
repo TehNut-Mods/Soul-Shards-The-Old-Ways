@@ -3,6 +3,7 @@ package com.whammich.sstow.block;
 import java.util.Random;
 
 import com.whammich.sstow.tileentity.TileEntityForge;
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.SSTheOldWays;
 
@@ -54,10 +55,10 @@ public class BlockForge extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon("sstow:soulForge_side");
+		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":soulForge_side");
 		this.front = iconRegister
-				.registerIcon(this.isBurning2 ? "sstow:soulForge_active"
-						: "sstow:soulForge_idle");
+				.registerIcon(this.isBurning2 ? Reference.MOD_ID + ":soulForge_active"
+						: Reference.MOD_ID + ":soulForge_idle");
 		this.top = iconRegister.registerIcon("furnace_top");
 		this.bottom = iconRegister.registerIcon("obsidian");
 	}

@@ -15,7 +15,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.block.BlockForge;
-import com.whammich.sstow.block.BlockPetWood;
+import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockSoulium;
 import com.whammich.sstow.block.BlockXenolith;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
@@ -63,7 +63,7 @@ public class Register {
 	public static Block SOUL_FORGE_ACTIVE = new BlockForge(true).setBlockName("sstow.forge_block_active");;
 	public static Block SOULIUM_BLOCK = new BlockSoulium();
 	public static Block XENOLITH = new BlockXenolith();
-	public static Block PETRIFIEDWOOD = new BlockPetWood();
+	public static Block PETRIFIEDWOOD = new BlockPetrified();
 
 	public static int enchantmentSoulStealingId;
 

@@ -47,6 +47,7 @@ public class SFRecipeHandler {
 			this.addRecipe(new ItemStack(Items.diamond), new ItemStack(
 					Register.ItemShardSoul, Config.SHARDS), null, 8, 100, 1F);
 		}
+						// I							O			   B	 F  B	E
 		this.addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), null, 4, 20, 0.8F);
 		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), null, 4, 500, 0.9F);
 		this.addFuel(new ItemStack(Register.ItemMaterials, 4), 1);
@@ -58,6 +59,9 @@ public class SFRecipeHandler {
 	public void addRecipe(ItemStack input, ItemStack output, ItemStack byproduct, int fuelCost, int burnTime, float experience) {
 		this.smeltingList.put(input, output);
 		this.experienceList.put(output, Float.valueOf(experience));
+		this.timeList.put(input, burnTime);
+		this.secondaryList.put(input, byproduct);
+		this.burnList.put(input, fuelCost);
 	}
 
 	private void addFuel(ItemStack itemStack, int fuelMod) {
