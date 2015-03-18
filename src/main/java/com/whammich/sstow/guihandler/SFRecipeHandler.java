@@ -52,8 +52,8 @@ public class SFRecipeHandler {
 		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), null, 4, 500, 0.9F);
 		this.addFuel(new ItemStack(Register.ItemMaterials, 4), 1);
 		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.XENOLITH), null, 8, 100, 1F);
-		this.addRecipe(new ItemStack(Blocks.log, 1), new ItemStack(Register.PETRIFIEDWOOD), null, 8, 100, 1F);
-		this.addRecipe(new ItemStack(Blocks.log2, 1), new ItemStack(Register.PETRIFIEDWOOD), null, 8, 100, 1F);
+		//this.addRecipe(new ItemStack(Blocks.log, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
+		//this.addRecipe(new ItemStack(Blocks.log2, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
 	}
 
 	public void addRecipe(ItemStack input, ItemStack output, ItemStack byproduct, int fuelCost, int burnTime, float experience) {

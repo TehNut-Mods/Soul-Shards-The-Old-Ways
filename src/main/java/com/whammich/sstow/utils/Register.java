@@ -63,7 +63,9 @@ public class Register {
 	public static Block SOUL_FORGE_ACTIVE = new BlockForge(true).setBlockName("sstow.forge_block_active");;
 	public static Block SOULIUM_BLOCK = new BlockSoulium();
 	public static Block XENOLITH = new BlockXenolith();
-	public static Block PETRIFIEDWOOD = new BlockPetrified();
+	public static Block BlockPetrifiedOak = new BlockPetrified("Oak");
+	public static Block BlockPetrifiedSpruce = new BlockPetrified("Spruce");
+	public static Block BlockPetrifiedBirch = new BlockPetrified("Birch");
 
 	public static int enchantmentSoulStealingId;
 
@@ -96,7 +98,9 @@ public class Register {
         GameRegistry.registerBlock(SOULIUM_BLOCK, "sstow_soulium_block");
         GameRegistry.registerBlock(SOUL_CAGE, "sstow_soul_cage");
         GameRegistry.registerBlock(XENOLITH, "sstow_xenolith");
-        GameRegistry.registerBlock(PETRIFIEDWOOD, "BlockPetWood");
+        GameRegistry.registerBlock(BlockPetrifiedOak, "BlockPetrifiedOak");
+        GameRegistry.registerBlock(BlockPetrifiedSpruce, "BlockPetrifiedSpruce");
+        GameRegistry.registerBlock(BlockPetrifiedBirch, "BlockPetrifiedBirch");
     }
 
     private static void registerOreDictEntries() {
@@ -123,8 +127,8 @@ public class Register {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SOULIUM_BLOCK), "AAA", "AAA", "AAA", 'A', "ingotSoulium"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AAC", "ABC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHoeSoul), "AAC", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHoeSoul), "AA", "CB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(SOUL_CAGE), "SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S', "ingotSoulium"));
 

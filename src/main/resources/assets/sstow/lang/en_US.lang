@@ -16,6 +16,7 @@ container.soulforge=Soul Forge
 tile.sstow.forge_block.name=Soul Forge
 tile.sstow.soulium_block.name=Block of Soulium
 tile.sstow.cage_block.name=Soul Cage
+
 tile.sstow.petrified.wood.oak.name=Petrified Oak Log
 tile.sstow.petrified.wood.spruce.name=Petrified Spruce Log
 tile.sstow.petrified.wood.birch.name=Petrified Birch Log
