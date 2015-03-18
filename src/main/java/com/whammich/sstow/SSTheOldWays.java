@@ -14,6 +14,7 @@ import com.whammich.sstow.utils.EntityBlackList;
 import com.whammich.sstow.utils.EntityMapper;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
+import com.whammich.sstow.utils.Remapping;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -64,20 +65,10 @@ public class SSTheOldWays {
 	@EventHandler
 	public void onMissingMapping(FMLMissingMappingsEvent event){
 		for (MissingMapping m : event.get()){
-			if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_sword")) {
-				m.remap(Register.ItemSwordSoul);
-			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_pickaxe")) {
-				m.remap(Register.ItemPickaxeSoul);
-			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_axe")) {
-				m.remap(Register.ItemAxeSoul);
-			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_hoe")) {
-				m.remap(Register.ItemHoeSoul);
-			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_spade")) {
-				m.remap(Register.ItemSpadeSoul);
-			} else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_materials")) {
-				m.remap(Register.ItemMaterials);
-			}else if (m.type == GameRegistry.Type.ITEM && m.name.contains("sstow_soul_shard")) {
-				m.remap(Register.ItemShardSoul);
+			for(int i = 0; i < Remapping.oldItemNames.length; i++){
+				if (m.type == GameRegistry.Type.ITEM && m.name.contains(Remapping.oldItemNames[i])) {
+					m.remap(Remapping.newItemNames[i]);
+				}
 			}
 		}
 	}

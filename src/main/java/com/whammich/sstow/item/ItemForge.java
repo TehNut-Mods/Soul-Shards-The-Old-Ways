@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 public class ItemForge extends ItemBlock {
 	
 	public ItemForge(Block block) {
-		super(Register.SOUL_FORGE);
+		super(Register.BlockForge);
 		this.setHasSubtypes(true);
 	}
 

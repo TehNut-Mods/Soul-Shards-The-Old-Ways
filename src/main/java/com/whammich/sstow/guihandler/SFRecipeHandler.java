@@ -36,7 +36,7 @@ public class SFRecipeHandler {
 
 	private ItemStack IngotBlock() {
 		if (Config.INGOTS == 9) {
-			return new ItemStack(Register.SOULIUM_BLOCK, 1);
+			return new ItemStack(Register.BlockSoulium, 1);
 		} else {
 			return new ItemStack(Register.ItemMaterials, Config.INGOTS, 2);
 		}
@@ -51,7 +51,7 @@ public class SFRecipeHandler {
 		this.addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), null, 4, 20, 0.8F);
 		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), null, 4, 500, 0.9F);
 		this.addFuel(new ItemStack(Register.ItemMaterials, 4), 1);
-		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.XENOLITH), null, 8, 100, 1F);
+		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.BlockXenolith), null, 8, 100, 1F);
 		//this.addRecipe(new ItemStack(Blocks.log, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
 		//this.addRecipe(new ItemStack(Blocks.log2, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
 	}

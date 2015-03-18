@@ -25,8 +25,8 @@ public class NEISoulShardsConfig implements IConfigureNEI {
 	@Override
 	public void loadConfig() {
 		// TODO Auto-generated method stub
-		API.hideItem(new ItemStack(Register.SOUL_FORGE_ACTIVE));
-		API.hideItem(new ItemStack(Register.FIXED));
+		API.hideItem(new ItemStack(Register.BlockForgeActive));
+		API.hideItem(new ItemStack(Register.ItemFixedDummy));
 		API.hideItem(new ItemStack(Register.ItemMaterials, 1, 0));
 
 		RecipeHandlerSoulShards handler = new RecipeHandlerSoulShards();

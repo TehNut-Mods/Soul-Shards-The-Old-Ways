@@ -58,11 +58,11 @@ public class Achievements {
 				Achievements.viledust).registerStat();
 
 		soulforge = new Achievement("achievement.soulForge", "soulForge", -1,
-				1, Register.SOUL_FORGE, Achievements.corruption)
+				1, Register.BlockForge, Achievements.corruption)
 				.registerStat();
 
 		soulcage = new Achievement("achievement.createCage", "createCage", 0,
-				0, Register.SOUL_CAGE, Achievements.soulforge).registerStat();
+				0, Register.BlockCage, Achievements.soulforge).registerStat();
 		if (!Config.EASYMODE) {
 			unboundshard = new Achievement("achievement.createShard",
 					"createShard", 4, 1,
@@ -95,7 +95,7 @@ public class Achievements {
 		// System.out.println("Registering MFR Achievement");
 
 		fixed = new Achievement("achievement.fixed", "fixed", 10, 10,
-				Register.FIXED, (Achievement) null).initIndependentStat()
+				Register.ItemFixedDummy, (Achievement) null).initIndependentStat()
 				.registerStat();
 
 		// System.out.println("Registering MFR Achievement Pages");

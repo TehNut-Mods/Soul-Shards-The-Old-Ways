@@ -18,7 +18,7 @@ public class AchievementEvents {
 	public void CageCrafted(ItemCraftedEvent event) {
 		// System.out.println("Register Soul Cage Event");
 		if (event.crafting.getItem() == Item
-				.getItemFromBlock(Register.SOUL_CAGE)) {
+				.getItemFromBlock(Register.BlockCage)) {
 			event.player.addStat(Achievements.soulcage, 1);
 		} else {
 			return;
@@ -60,7 +60,7 @@ public class AchievementEvents {
 	public void forgeCrafted(ItemCraftedEvent event) {
 		// System.out.println("Register Soul Forge Event");
 		if (event.crafting.getItem() == Item
-				.getItemFromBlock(Register.SOUL_FORGE)) {
+				.getItemFromBlock(Register.BlockForge)) {
 			event.player.addStat(Achievements.soulforge, 1);
 		} else {
 			return;

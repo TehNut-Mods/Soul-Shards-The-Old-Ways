@@ -83,11 +83,11 @@ public class BlockForge extends BlockContainer {
 	}
 
 	public Item getItemDropped(int par1, Random random, int par3) {
-		return Item.getItemFromBlock(Register.SOUL_FORGE);
+		return Item.getItemFromBlock(Register.BlockForge);
 	}
 
 	public Item getItem(World world, int par2, int par3, int par4) {
-		return Item.getItemFromBlock(Register.SOUL_FORGE);
+		return Item.getItemFromBlock(Register.BlockForge);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -132,9 +132,9 @@ public class BlockForge extends BlockContainer {
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 		isBurning = true;
 		if (burning) {
-			world.setBlock(x, y, z, Register.SOUL_FORGE_ACTIVE);
+			world.setBlock(x, y, z, Register.BlockForgeActive);
 		} else {
-			world.setBlock(x, y, z, Register.SOUL_FORGE);
+			world.setBlock(x, y, z, Register.BlockForge);
 		}
 		isBurning = false;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 2);

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 public class ItemBlockSoulium extends ItemBlock {
 	
 	public ItemBlockSoulium(Block block) {
-		super(Register.SOULIUM_BLOCK);
+		super(Register.BlockSoulium);
 		this.setHasSubtypes(true);
 	}
 
