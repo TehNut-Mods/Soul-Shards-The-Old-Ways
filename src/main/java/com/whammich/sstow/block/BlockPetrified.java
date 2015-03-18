@@ -22,7 +22,7 @@ public class BlockPetrified extends BlockRotatedPillar {
 
 	private static String[] names = { "wood.oak", "wood.spruce", "wood.birch", "wood.jungle", "wood.acacia", "wood.darkoak" };
 
-	private IIcon[] icon = new IIcon[16];
+	private IIcon[] icon = new IIcon[6];
 
 	public BlockPetrified() {
 		super(Material.rock);
@@ -65,10 +65,11 @@ public class BlockPetrified extends BlockRotatedPillar {
 	
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        this.icon[2] = iconRegister.registerIcon(Reference.MOD_ID + ":pet_log_birch");
-//        this.icon[1] = iconRegister.registerIcon(Reference.MOD_ID + ":soulium_nugget");
-//        this.icon[2] = iconRegister.registerIcon(Reference.MOD_ID + ":soulium_ingot");
-//        this.icon[3] = iconRegister.registerIcon(Reference.MOD_ID + ":vile_dust");
-//        this.icon[4] = iconRegister.registerIcon(Reference.MOD_ID + ":corrupted_essence");
+    	this.icon[0] = iconRegister.registerIcon(Reference.MOD_ID + ":pet_log_oak");
+    	this.icon[1] = iconRegister.registerIcon(Reference.MOD_ID + ":pet_log_spruce");
+    	this.icon[2] = iconRegister.registerIcon(Reference.MOD_ID + ":pet_log_birch");
+    	this.icon[3] = iconRegister.registerIcon(Reference.MOD_ID + ":pet_log_jungle");
+    	this.icon[4] = iconRegister.registerIcon(Reference.MOD_ID + ":pet_log_acacia");
+    	this.icon[5] = iconRegister.registerIcon(Reference.MOD_ID + ":pet_log_darkoak");
     }
 }

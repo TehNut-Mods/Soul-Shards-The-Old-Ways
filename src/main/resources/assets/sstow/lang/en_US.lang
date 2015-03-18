@@ -16,7 +16,13 @@ container.soulforge=Soul Forge
 tile.sstow.forge_block.name=Soul Forge
 tile.sstow.soulium_block.name=Block of Soulium
 tile.sstow.cage_block.name=Soul Cage
-tile.sstow.petrified.wood.birch.name=
+tile.sstow.petrified.wood.oak.name=Petrified Oak Log
+tile.sstow.petrified.wood.spruce.name=Petrified Spruce Log
+tile.sstow.petrified.wood.birch.name=Petrified Birch Log
+tile.sstow.petrified.wood.jungle.name=Petrified Jungle Log
+tile.sstow.petrified.wood.acacia.name=Petrified Acacia Log
+tile.sstow.petrified.wood.darkoak.name=Petrified Dark Oak Log
+
 
 sstow.waila.soulcage.mob=Entity: 
 sstow.waila.soulcage.tier=Tier: 
