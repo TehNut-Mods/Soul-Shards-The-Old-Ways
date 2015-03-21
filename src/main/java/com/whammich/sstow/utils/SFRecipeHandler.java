@@ -1,12 +1,9 @@
-package com.whammich.sstow.guihandler;
+package com.whammich.sstow.utils;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.Register;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -43,15 +40,14 @@ public class SFRecipeHandler {
 	}
 
 	private SFRecipeHandler() {
-		if (!Config.EASYMODE) {
-			this.addRecipe(new ItemStack(Items.diamond), new ItemStack(
-					Register.ItemShardSoul, Config.SHARDS), null, 8, 100, 1F);
-		}
-						// I							O			   B	 F  B	E
+		this.addFuel(new ItemStack(Register.ItemMaterials, 1, 4), 1);
+		
+		if (!Config.EASYMODE)
+			this.addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 100, 1F);
+		
 		this.addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), null, 4, 20, 0.8F);
 		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), null, 4, 500, 0.9F);
-		this.addFuel(new ItemStack(Register.ItemMaterials, 4), 1);
-		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.BlockXenolith), null, 8, 100, 1F);
+		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.BlockXenolith), null, 4, 500, 1F);
 		//this.addRecipe(new ItemStack(Blocks.log, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
 		//this.addRecipe(new ItemStack(Blocks.log2, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
 	}

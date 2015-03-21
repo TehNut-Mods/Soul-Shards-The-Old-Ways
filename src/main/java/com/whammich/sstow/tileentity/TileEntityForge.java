@@ -10,8 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 import com.whammich.sstow.block.BlockForge;
-import com.whammich.sstow.guihandler.SFRecipeHandler;
-import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.SFRecipeHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -224,7 +223,7 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 			return 200;
 		} else {
 			int smeltTime = (int) (SFRecipeHandler.smelting().getSmeltingTime(
-					this.furnaceItemStacks[0]) * 0.1 * Config.COOK_TIME);
+					this.furnaceItemStacks[0]) * 0.1 );// * Config.COOK_TIME);
 			if (smeltTime == 0) {
 				return 200;
 			}

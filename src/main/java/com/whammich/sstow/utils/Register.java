@@ -48,7 +48,7 @@ public class Register {
 	public static SoulShardTab CREATIVE_TAB = new SoulShardTab();
 
 	// Set up the mod items
-    public static Item ItemMaterials = new ItemMaterials();
+	public static Item ItemMaterials = new ItemMaterials();
 	public static Item ItemFixedDummy = new ItemfixedAchievement();
 	public static Item ItemShardSoul = new ItemShardSoul();
 	public static Item ItemSwordSoul = new ItemSwordSoul(SOULIUM);
@@ -59,86 +59,122 @@ public class Register {
 
 	// Set up the mod blocks
 	public static Block BlockCage = new BlockCage();
-	public static Block BlockForge = new BlockForge(false).setCreativeTab(CREATIVE_TAB);
-	public static Block BlockForgeActive = new BlockForge(true).setBlockName("sstow.forge_block_active");;
+	public static Block BlockForge = new BlockForge(false)
+			.setCreativeTab(CREATIVE_TAB);
+	public static Block BlockForgeActive = new BlockForge(true)
+			.setBlockName("sstow.forge_block_active");;
 	public static Block BlockSoulium = new BlockSoulium();
 	public static Block BlockXenolith = new BlockXenolith();
 	public static Block BlockPetrifiedOak = new BlockPetrified("Oak");
 	public static Block BlockPetrifiedSpruce = new BlockPetrified("Spruce");
 	public static Block BlockPetrifiedBirch = new BlockPetrified("Birch");
 
-	public static int enchantmentSoulStealingId;
 
 	public static void registerObjs() {
-		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance,
+				new GuiHandler());
 
-        registerItems();
-        registerBlocks();
-        registerOreDictEntries();
-        registerTileEntities();
-        registerRecipes();
-    }
+		registerItems();
+		registerBlocks();
+		registerOreDictEntries();
+		registerTileEntities();
+		registerRecipes();
 
-    private static void registerItems() {
-        if (Loader.isModLoaded("MineFactoryReloaded"))
-            GameRegistry.registerItem(ItemFixedDummy, "ItemFixedDummy");
 
-        GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
-        
-        GameRegistry.registerItem(ItemSwordSoul, "ItemSwordSoul");
-        GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
-        GameRegistry.registerItem(ItemAxeSoul, "ItemAxeSoul");
-        GameRegistry.registerItem(ItemHoeSoul, "ItemHoeSoul");
-        GameRegistry.registerItem(ItemSpadeSoul, "ItemSpadeSoul");
-        GameRegistry.registerItem(ItemShardSoul, "ItemShardSoul");
-    }
+	}
 
-    private static void registerBlocks() {
-        GameRegistry.registerBlock(BlockForge, "BlockForge");
-        GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
-        GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");
-        GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
-        GameRegistry.registerBlock(BlockXenolith, "sstow_xenolith");
-        GameRegistry.registerBlock(BlockPetrifiedOak, "BlockPetrifiedOak");
-        GameRegistry.registerBlock(BlockPetrifiedSpruce, "BlockPetrifiedSpruce");
-        GameRegistry.registerBlock(BlockPetrifiedBirch, "BlockPetrifiedBirch");
-    }
+	private static void registerItems() {
+		if (Loader.isModLoaded("MineFactoryReloaded"))
+			GameRegistry.registerItem(ItemFixedDummy, "ItemFixedDummy");
 
-    private static void registerOreDictEntries() {
-        OreDictionary.registerOre("nuggetIron", new ItemStack(ItemMaterials, 1, 0));
-        OreDictionary.registerOre("nuggetSoulium", new ItemStack(ItemMaterials, 1, 1));
-        OreDictionary.registerOre("ingotSoulium", new ItemStack(ItemMaterials, 1, 2));
-        OreDictionary.registerOre("dustVile", new ItemStack(ItemMaterials, 1, 3));
-        OreDictionary.registerOre("essenceCorrupted", new ItemStack(ItemMaterials, 1, 4));
-    }
+		GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
 
-    private static void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityForge.class, "sstow_soul_forge_tile");
-        GameRegistry.registerTileEntity(TileEntityCage.class, "sstow_soul_cage_tile");
-    }
+		GameRegistry.registerItem(ItemSwordSoul, "ItemSwordSoul");
+		GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
+		GameRegistry.registerItem(ItemAxeSoul, "ItemAxeSoul");
+		GameRegistry.registerItem(ItemHoeSoul, "ItemHoeSoul");
+		GameRegistry.registerItem(ItemSpadeSoul, "ItemSpadeSoul");
+		GameRegistry.registerItem(ItemShardSoul, "ItemShardSoul");
+	}
 
-    private static void registerRecipes() {
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 2), BlockSoulium));
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 1), "ingotSoulium"));
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 0), "ingotIron"));
+	private static void registerBlocks() {
+		GameRegistry.registerBlock(BlockForge, "BlockForge");
+		GameRegistry.registerBlock(BlockForgeActive,
+				BlockForgeActive.getUnlocalizedName());
+		GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");
+		GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
+		GameRegistry.registerBlock(BlockXenolith, "sstow_xenolith");
+		GameRegistry.registerBlock(BlockPetrifiedOak, "BlockPetrifiedOak");
+		GameRegistry
+				.registerBlock(BlockPetrifiedSpruce, "BlockPetrifiedSpruce");
+		GameRegistry.registerBlock(BlockPetrifiedBirch, "BlockPetrifiedBirch");
+	}
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockForge), "SSS", "SCS", "OOO", 'S', "cobblestone", 'C', "essenceCorrupted", 'O', Blocks.obsidian));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemMaterials, 1, 2), "AAA", "AAA", "AAA", 'A', "nuggetSoulium"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.iron_ingot), "AAA", "AAA", "AAA", 'A', "nuggetIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockSoulium), "AAA", "AAA", "AAA", 'A', "ingotSoulium"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHoeSoul), "AA", "CB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockCage), "SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S', "ingotSoulium"));
+	private static void registerOreDictEntries() {
+		OreDictionary.registerOre("nuggetIron", new ItemStack(ItemMaterials, 1,
+				0));
+		OreDictionary.registerOre("nuggetSoulium", new ItemStack(ItemMaterials,
+				1, 1));
+		OreDictionary.registerOre("ingotSoulium", new ItemStack(ItemMaterials,
+				1, 2));
+		OreDictionary.registerOre("dustVile",
+				new ItemStack(ItemMaterials, 1, 3));
+		OreDictionary.registerOre("essenceCorrupted", new ItemStack(
+				ItemMaterials, 1, 4));
+	}
 
-        if (Loader.isModLoaded("Natura")) {
-            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 2, 3), Blocks.soul_sand, "dustGlowstone"));
-            GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), new ItemStack(ItemMaterials, 1, 4), 0.35F);
-        } else {
-            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 1, 4), "dustGlowstone", "dustVile"));
-            GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
-        }
-    }
+	private static void registerTileEntities() {
+		GameRegistry.registerTileEntity(TileEntityForge.class,
+				"sstow_soul_forge_tile");
+		GameRegistry.registerTileEntity(TileEntityCage.class,
+				"sstow_soul_cage_tile");
+	}
+
+	private static void registerRecipes() {
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(
+				ItemMaterials, 9, 2), BlockSoulium));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(
+				ItemMaterials, 9, 1), "ingotSoulium"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(
+				ItemMaterials, 9, 0), "ingotIron"));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockForge),
+				"SSS", "SCS", "OOO", 'S', "cobblestone", 'C',
+				"essenceCorrupted", 'O', Blocks.obsidian));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemMaterials,
+				1, 2), "AAA", "AAA", "AAA", 'A', "nuggetSoulium"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(
+				Items.iron_ingot), "AAA", "AAA", "AAA", 'A', "nuggetIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockSoulium),
+				"AAA", "AAA", "AAA", 'A', "ingotSoulium"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(ItemSwordSoul), "A", "A", "B", 'A',
+				"ingotSoulium", 'B', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(
+				ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium",
+				'B', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul),
+				"AA", "AB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHoeSoul),
+				"AA", "CB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(
+				new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A',
+				"ingotSoulium", 'B', "ingotIron"));
+		GameRegistry
+				.addRecipe(new ShapedOreRecipe(new ItemStack(BlockCage), "SIS",
+						"IXI", "SIS", 'I', Blocks.iron_bars, 'S',
+						"ingotSoulium"));
+
+		if (Loader.isModLoaded("Natura")) {
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(
+					ItemMaterials, 2, 3), Blocks.soul_sand, "dustGlowstone"));
+			GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3),
+					new ItemStack(ItemMaterials, 1, 4), 0.35F);
+		} else {
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(
+					ItemMaterials, 1, 4), "dustGlowstone", "dustVile"));
+			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(
+					ItemMaterials, 1, 3), 0.35F);
+		}
+	}
 }

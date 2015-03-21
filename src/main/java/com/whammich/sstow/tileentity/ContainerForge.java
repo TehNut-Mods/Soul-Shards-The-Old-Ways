@@ -1,6 +1,6 @@
 package com.whammich.sstow.tileentity;
 
-import com.whammich.sstow.guihandler.SFRecipeHandler;
+import com.whammich.sstow.utils.SFRecipeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,21 +18,22 @@ public class ContainerForge extends Container {
 	private int lastBurnTime;
 	private int lastItemBurnTime;
 
-	public ContainerForge(InventoryPlayer player, TileEntityForge tileEntityFurnace) {
+	public ContainerForge(InventoryPlayer player,
+			TileEntityForge tileEntityFurnace) {
 		this.tileFurnace = tileEntityFurnace;
 		this.addSlotToContainer(new Slot(tileEntityFurnace, 0, 56, 17));
 		this.addSlotToContainer(new Slot(tileEntityFurnace, 1, 56, 53));
 		this.addSlotToContainer(new SlotFurnace(player.player,
-				tileEntityFurnace, 2, 116, 35));
+				tileEntityFurnace, 2, 116, 17));
+		this.addSlotToContainer(new SlotFurnace(player.player,
+				tileEntityFurnace, 3, 116, 53));
 		int i;
-
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
 				this.addSlotToContainer(new Slot(player, j + i * 9 + 9,
 						8 + j * 18, 84 + i * 18));
 			}
 		}
-
 		for (i = 0; i < 9; ++i) {
 			this.addSlotToContainer(new Slot(player, i, 8 + i * 18, 142));
 		}
@@ -49,23 +50,19 @@ public class ContainerForge extends Container {
 		super.detectAndSendChanges();
 		for (int i = 0; i < this.crafters.size(); ++i) {
 			ICrafting craft = (ICrafting) this.crafters.get(i);
-
 			if (this.lastCookTime != this.tileFurnace.furnaceCookTime) {
 				craft.sendProgressBarUpdate(this, 0,
 						this.tileFurnace.furnaceCookTime);
 			}
-
 			if (this.lastBurnTime != this.tileFurnace.furnaceBurnTime) {
 				craft.sendProgressBarUpdate(this, 1,
 						this.tileFurnace.furnaceBurnTime);
 			}
-
 			if (this.lastItemBurnTime != this.tileFurnace.currentBurnTime) {
 				craft.sendProgressBarUpdate(this, 2,
 						this.tileFurnace.currentBurnTime);
 			}
 		}
-
 		this.lastBurnTime = this.tileFurnace.furnaceBurnTime;
 		this.lastCookTime = this.tileFurnace.furnaceCookTime;
 		this.lastItemBurnTime = this.tileFurnace.currentBurnTime;
@@ -76,11 +73,9 @@ public class ContainerForge extends Container {
 		if (par1 == 0) {
 			this.tileFurnace.furnaceCookTime = par2;
 		}
-
 		if (par1 == 1) {
 			this.tileFurnace.furnaceBurnTime = par2;
 		}
-
 		if (par1 == 2) {
 			this.tileFurnace.currentBurnTime = par2;
 		}
@@ -94,11 +89,9 @@ public class ContainerForge extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(par2);
-
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-
 			if (par2 == 2) {
 				if (!this.mergeItemStack(itemstack1, 3, 39, true)) {
 					return null;

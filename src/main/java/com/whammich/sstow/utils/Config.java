@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
+
+import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -73,21 +76,18 @@ public final class Config {
 			"enchantment");
 	public static final Section general = new Section("general", "general");
 	public static final Section recipes = new Section("recipes", "recipes");
-	public static final Section tier1 = new Section("tier 1 settings",
-			"tier 1 settings");
-	public static final Section tier2 = new Section("tier 2 settings",
-			"tier 2 settings");
-	public static final Section tier3 = new Section("tier 3 settings",
-			"tier 3 settings");
-	public static final Section tier4 = new Section("tier 4 settings",
-			"tier 4 settings");
-	public static final Section tier5 = new Section("tier 5 settings",
-			"tier 5 settings");
+	public static final Section tier1 = new Section("tier 1 settings", "tier 1 settings");
+	public static final Section tier2 = new Section("tier 2 settings", "tier 2 settings");
+	public static final Section tier3 = new Section("tier 3 settings", "tier 3 settings");
+	public static final Section tier4 = new Section("tier 4 settings", "tier 4 settings");
+	public static final Section tier5 = new Section("tier 5 settings", "tier 5 settings");
 
+	public static int enchantmentSoulStealingId;
+	
 	public static void load(FMLPreInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new Config());
 		configDirectory = new File(event.getModConfigurationDirectory()
-				+ "/SSTOW/");
+				+ "/sstow/");
 		if (!configDirectory.exists()) {
 			configDirectory.mkdir();
 		}
@@ -104,11 +104,12 @@ public final class Config {
 		}
 	}
 
+
 	public static void syncConfig() {
 		try {
+
 			// Soul Stealer Section
-			ENCHANT_ID = config.getInt("ID", "enchantment", 52, 1, 128,
-					"Soul-Stealer enchant id");
+			ENCHANT_ID = config.getInt("ID", "enchantment", 52, 1, 128, "Soul-Stealer enchant id");
 			ENCHANT_WEIGHT = config.getInt("Weight", "enchantment", 8, 1, 10,
 					"Soul-Stealer enchant probability");
 			ENCHANT_KILL_BONUS = config.getInt("Kill Bonus", "enchantment", 1,

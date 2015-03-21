@@ -14,7 +14,7 @@ import com.whammich.sstow.utils.EntityBlackList;
 import com.whammich.sstow.utils.EntityMapper;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.utils.Remapping;
+import com.whammich.sstow.utils.Remap;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -65,9 +65,14 @@ public class SSTheOldWays {
 	@EventHandler
 	public void onMissingMapping(FMLMissingMappingsEvent event){
 		for (MissingMapping m : event.get()){
-			for(int i = 0; i < Remapping.oldItemNames.length; i++){
-				if (m.type == GameRegistry.Type.ITEM && m.name.contains(Remapping.oldItemNames[i])) {
-					m.remap(Remapping.newItemNames[i]);
+			for(int i = 0; i < Remap.oldItemNames.length; i++){
+				if (m.type == GameRegistry.Type.ITEM && m.name.contains(Remap.oldItemNames[i])) {
+					m.remap(Remap.newItemNames[i]);
+				}
+			}
+			for(int i = 0; i < Remap.oldBlockNames.length; i++){
+				if (m.type == GameRegistry.Type.ITEM && m.name.contains(Remap.oldBlockNames[i])) {
+					m.remap(Remap.newBlockNames[i]);
 				}
 			}
 		}
