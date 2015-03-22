@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPlankPetrified extends Block {
 	@SideOnly(Side.CLIENT)
-	protected IIcon[] sideIcon;
+	protected IIcon[] blockIcon;
 
 	public BlockPlankPetrified() {
 		super(Material.rock);
@@ -27,7 +27,7 @@ public class BlockPlankPetrified extends Block {
 		useNeighborBrightness = true;
 		blockHardness = 3.0F;
 		blockResistance = 3.0F;
-		setBlockName("petrified.plank");
+		setBlockName("sstow.petrified.plank");
 	}
 
 	public static final String[] names = new String[] { "oak", "spruce", "birch", "jungle", "acacia", "big_oak" };
@@ -36,21 +36,18 @@ public class BlockPlankPetrified extends Block {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
-		list.add(new ItemStack(item, 1, 0));
-		list.add(new ItemStack(item, 1, 1));
-		list.add(new ItemStack(item, 1, 2));
-		list.add(new ItemStack(item, 1, 3));
-		list.add(new ItemStack(item, 1, 4));
-		list.add(new ItemStack(item, 1, 5));
+        for (int i = 0; i < names.length; i++) {
+            list.add(new ItemStack(item, 1, i));
+        }
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.sideIcon = new IIcon[names.length];
+		this.blockIcon = new IIcon[names.length];
 
-		for (int i = 0; i < this.sideIcon.length; ++i) {
-			this.sideIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":petrified_planks/petrified_planks_" + names[i]);
+		for (int i = 0; i < this.blockIcon.length; ++i) {
+			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":petrified_planks/petrified_planks_" + names[i]);
 		}
 	}
 
@@ -58,7 +55,7 @@ public class BlockPlankPetrified extends Block {
 	public IIcon getIcon(int side, int meta) {
 		if (meta > 6)
 			meta = 0;
-		return blockIcon;
+		return blockIcon[meta];
 		
 	}
 }

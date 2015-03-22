@@ -22,7 +22,7 @@ public class BlockPetrified2 extends BlockRotatedPillar {
 
     public BlockPetrified2() {
         super(Material.rock);
-        setBlockName("petrified.log");
+        setBlockName("sstow.petrified.log");
         setCreativeTab(Register.CREATIVE_TAB);
         setLightOpacity(255);
         useNeighborBrightness = true;
