@@ -1,17 +1,5 @@
 package com.whammich.sstow.utils;
 
-import com.whammich.sstow.SSTheOldWays;
-import com.whammich.sstow.block.*;
-import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
-import com.whammich.sstow.guihandler.GuiHandler;
-import com.whammich.sstow.item.*;
-import com.whammich.sstow.item.blocks.ItemBlockPetrified;
-import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
-import com.whammich.sstow.tileentity.TileEntityCage;
-import com.whammich.sstow.tileentity.TileEntityForge;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -23,6 +11,34 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import com.whammich.sstow.SSTheOldWays;
+import com.whammich.sstow.block.BlockCage;
+import com.whammich.sstow.block.BlockForge;
+import com.whammich.sstow.block.BlockPetrified;
+import com.whammich.sstow.block.BlockPetrified2;
+import com.whammich.sstow.block.BlockPlankPetrified;
+import com.whammich.sstow.block.BlockSoulium;
+import com.whammich.sstow.block.BlockXenolith;
+import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
+import com.whammich.sstow.guihandler.GuiHandler;
+import com.whammich.sstow.item.ItemAxeSoul;
+import com.whammich.sstow.item.ItemHoeSoul;
+import com.whammich.sstow.item.ItemMaterials;
+import com.whammich.sstow.item.ItemPickaxeSoul;
+import com.whammich.sstow.item.ItemShardSoul;
+import com.whammich.sstow.item.ItemSpadeSoul;
+import com.whammich.sstow.item.ItemSwordSoul;
+import com.whammich.sstow.item.ItemfixedAchievement;
+import com.whammich.sstow.item.blocks.ItemBlockPetrified;
+import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
+import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
+import com.whammich.sstow.tileentity.TileEntityCage;
+import com.whammich.sstow.tileentity.TileEntityForge;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Register {
 	// Tool material for the soul tools/sword
@@ -53,7 +69,8 @@ public class Register {
 
 	public static Block BlockPetrified = new BlockPetrified();
     public static Block BlockPetrified2 = new BlockPetrified2();
-
+    public static Block BlockPetrifiedPlanks = new BlockPlankPetrified();
+    
 	public static void registerObjs() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance, new GuiHandler());
 
@@ -86,6 +103,7 @@ public class Register {
 		GameRegistry.registerBlock(BlockXenolith, "sstow_xenolith");
 		GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");
 		GameRegistry.registerBlock(BlockPetrified2, ItemBlockPetrified2.class, "BlockPetrifiedLog2");
+		GameRegistry.registerBlock(BlockPetrifiedPlanks, ItemBlockPlankPetrified.class, "BlockPetrifiedPlanks");
 	}
 
 	private static void registerOreDictEntries() {
