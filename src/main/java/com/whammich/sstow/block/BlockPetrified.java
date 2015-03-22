@@ -1,7 +1,9 @@
 package com.whammich.sstow.block;
 
-import java.util.List;
-
+import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -10,11 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import com.whammich.sstow.utils.Reference;
-import com.whammich.sstow.utils.Register;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 public class BlockPetrified extends BlockRotatedPillar {
 	@SideOnly(Side.CLIENT)
@@ -24,27 +22,23 @@ public class BlockPetrified extends BlockRotatedPillar {
 
 	public BlockPetrified() {
 		super(Material.rock);
-		setCreativeTab(Register.CREATIVE_TAB);
-		setLightOpacity(255);
-		useNeighborBrightness = true;
-		blockHardness = 3.0F;
-		blockResistance = 3.0F;
-		setBlockName("petrified_log");
+        setBlockName("petrified_log");
+        setCreativeTab(Register.CREATIVE_TAB);
+        setLightOpacity(255);
+        useNeighborBrightness = true;
+        blockHardness = 3.0F;
+        blockResistance = 3.0F;
 	}
 
-	public static final String[] names = new String[] { "oak", "spruce",
-			"birch", "jungle", "acacia", "big_oak" };
+	public static final String[] names = { "oak", "spruce", "birch", "jungle" };
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
-		list.add(new ItemStack(item, 1, 0));
-		list.add(new ItemStack(item, 1, 1));
-		list.add(new ItemStack(item, 1, 2));
-		list.add(new ItemStack(item, 1, 3));
-		list.add(new ItemStack(item, 1, 4));
-		list.add(new ItemStack(item, 1, 5));
+        for (int i = 0; i < names.length; i++) {
+            list.add(new ItemStack(item, 1, i));
+        }
 	}
 
 	@Override
@@ -54,10 +48,8 @@ public class BlockPetrified extends BlockRotatedPillar {
 		this.topIcon = new IIcon[names.length];
 
 		for (int i = 0; i < this.sideIcon.length; ++i) {
-			this.sideIcon[i] = iconRegister.registerIcon(Reference.MOD_ID
-					+ ":petrified_logs/petrified_log_" + names[i]);
-			this.topIcon[i] = iconRegister.registerIcon(Reference.MOD_ID
-					+ ":petrified_logs/petrified_log_" + names[i] + "_top");
+			this.sideIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":petrified_logs/petrified_log_" + names[i]);
+			this.topIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":petrified_logs/petrified_log_" + names[i] + "_top");
 		}
 	}
 
@@ -77,5 +69,4 @@ public class BlockPetrified extends BlockRotatedPillar {
 	public IIcon getTopIcon(int side) {
 		return this.topIcon[side % this.topIcon.length];
 	}
-
 }
