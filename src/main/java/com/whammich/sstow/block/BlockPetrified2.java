@@ -54,11 +54,6 @@ public class BlockPetrified2 extends BlockRotatedPillar {
     }
 
     @Override
-    public int damageDropped(int meta) {
-        return meta;
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public IIcon getSideIcon(int side) {
         return this.sideIcon[side % this.sideIcon.length];
