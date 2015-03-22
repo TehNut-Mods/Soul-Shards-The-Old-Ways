@@ -11,7 +11,7 @@ public class ItemBlockPetrified extends ItemBlock {
 		super(block);
 		setHasSubtypes(true);
 	}
-
+	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		return getUnlocalizedName() + "." + names[stack.getItemDamage() % names.length];
