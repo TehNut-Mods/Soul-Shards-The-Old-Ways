@@ -28,6 +28,7 @@ import com.whammich.sstow.item.ItemShardSoul;
 import com.whammich.sstow.item.ItemSpadeSoul;
 import com.whammich.sstow.item.ItemSwordSoul;
 import com.whammich.sstow.item.ItemfixedAchievement;
+import com.whammich.sstow.item.blocks.ItemBlockPetrified;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityForge;
 
@@ -59,17 +60,18 @@ public class Register {
 
 	// Set up the mod blocks
 	public static Block BlockCage = new BlockCage();
-	public static Block BlockForge = new BlockForge(false)
-			.setCreativeTab(CREATIVE_TAB);
-	public static Block BlockForgeActive = new BlockForge(true)
-			.setBlockName("sstow.forge_block_active");;
+	public static Block BlockForge = new BlockForge(false).setCreativeTab(CREATIVE_TAB);
+	public static Block BlockForgeActive = new BlockForge(true).setBlockName("sstow.forge_block_active");;
 	public static Block BlockSoulium = new BlockSoulium();
 	public static Block BlockXenolith = new BlockXenolith();
-	public static Block BlockPetrifiedOak = new BlockPetrified("Oak");
-	public static Block BlockPetrifiedSpruce = new BlockPetrified("Spruce");
-	public static Block BlockPetrifiedBirch = new BlockPetrified("Birch");
 
-
+	public static Block BlockPetrifiedOak;
+	public static Block BlockPetrifiedSpruce;
+	public static Block BlockPetrifiedBirch;
+	public static Block BlockPetrifiedJungle;
+	public static Block BlockPetrifiedAcacia;
+	public static Block BlockPetrifiedBigOak;
+	
 	public static void registerObjs() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance,
 				new GuiHandler());
@@ -99,15 +101,30 @@ public class Register {
 
 	private static void registerBlocks() {
 		GameRegistry.registerBlock(BlockForge, "BlockForge");
-		GameRegistry.registerBlock(BlockForgeActive,
-				BlockForgeActive.getUnlocalizedName());
+		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");
 		GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
 		GameRegistry.registerBlock(BlockXenolith, "sstow_xenolith");
-		GameRegistry.registerBlock(BlockPetrifiedOak, "BlockPetrifiedOak");
-		GameRegistry
-				.registerBlock(BlockPetrifiedSpruce, "BlockPetrifiedSpruce");
-		GameRegistry.registerBlock(BlockPetrifiedBirch, "BlockPetrifiedBirch");
+		
+		
+		BlockPetrifiedOak = new BlockPetrified("Oak");
+		GameRegistry.registerBlock(BlockPetrifiedOak, ItemBlockPetrified.class, "PetrifiedOak");
+		
+		BlockPetrifiedSpruce = new BlockPetrified("Spruce");
+		GameRegistry.registerBlock(BlockPetrifiedSpruce, ItemBlockPetrified.class, "PetrifiedSpruce");
+		
+		BlockPetrifiedBirch = new BlockPetrified("Birch");
+		GameRegistry.registerBlock(BlockPetrifiedBirch, ItemBlockPetrified.class, "PetrifiedBirch");
+		
+		BlockPetrifiedJungle = new BlockPetrified("Jungle");
+		GameRegistry.registerBlock(BlockPetrifiedJungle, ItemBlockPetrified.class, "PetrifiedJungle");
+		
+		BlockPetrifiedAcacia = new BlockPetrified("Acacia");
+		GameRegistry.registerBlock(BlockPetrifiedAcacia, ItemBlockPetrified.class, "PetrifiedAcacia");
+		
+		BlockPetrifiedBigOak = new BlockPetrified("Big_Oak");
+		GameRegistry.registerBlock(BlockPetrifiedBigOak, ItemBlockPetrified.class, "PetrifiedBigOak");
+	
 	}
 
 	private static void registerOreDictEntries() {

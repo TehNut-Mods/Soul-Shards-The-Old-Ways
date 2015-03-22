@@ -12,21 +12,21 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPetrified extends BlockRotatedPillar {
-
 	private IIcon blockIconTop;
-
-	String texture;
+	public String texture;
 
 	public BlockPetrified(String string) {
 		super(Material.rock);
 		texture = string;
-		this.setBlockName("sstow.petrified.wood." + string.toLowerCase());
-		this.setCreativeTab(Register.CREATIVE_TAB);
-		this.blockHardness = 3.0F;
-		this.blockResistance = 3.0F;
+		setCreativeTab(Register.CREATIVE_TAB);
+		setLightOpacity(255);
+		useNeighborBrightness = true;
+		blockHardness = 3.0F;
+		blockResistance = 3.0F;
+		setBlockName("petrified");
+		
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
 	protected IIcon getSideIcon(int side) {
 		return blockIcon;
@@ -39,7 +39,7 @@ public class BlockPetrified extends BlockRotatedPillar {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":petrified" + texture.toLowerCase() + "log");
-		this.blockIconTop = iconRegister.registerIcon(Reference.MOD_ID + ":petrified" + texture.toLowerCase() + "logtop");
+		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":log_" + texture.toLowerCase());
+		this.blockIconTop = iconRegister.registerIcon(Reference.MOD_ID + ":log_" + texture.toLowerCase() + "_top");
 	}
 }
