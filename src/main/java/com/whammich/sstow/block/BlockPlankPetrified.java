@@ -30,7 +30,14 @@ public class BlockPlankPetrified extends Block {
 		setBlockName("sstow.petrified.plank");
 	}
 
-	public static final String[] names = new String[] { "oak", "spruce", "birch", "jungle", "acacia", "big_oak" };
+	public static final String[] names = new String[] { 
+		"oak",    // 0 
+		"spruce", // 1 
+		"birch",  // 2
+		"jungle", // 3
+		"acacia", // 4
+		"big_oak" // 5
+	};
 
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })

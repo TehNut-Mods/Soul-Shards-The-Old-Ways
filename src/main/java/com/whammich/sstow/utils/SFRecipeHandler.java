@@ -40,24 +40,29 @@ public class SFRecipeHandler {
 	}
 
 	private SFRecipeHandler() {
+		// Fuel
 		this.addFuel(new ItemStack(Register.ItemMaterials, 1, 4), 1);
-		
+
+		// Items		
 		if (!Config.EASYMODE){
-			this.addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 100, 1F);
+			addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 12600, 1F);
 		}
-		this.addRecipe(new ItemStack(Items.iron_ingot), new ItemStack(Items.gold_ingot, 1), null, 4, 20, 0.8F);
-		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), new ItemStack(Items.iron_ingot, 3), 4, 500, 0.9F);
-		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.BlockXenolith), null, 4, 500, 1F);
-		this.addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
-		this.addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
-		this.addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);
-		this.addRecipe(new ItemStack(Blocks.log, 1, 3), new ItemStack(Register.BlockPetrified, 1, 3), null, 1, 1600, 2F);
-		this.addRecipe(new ItemStack(Blocks.log2, 1, 0), new ItemStack(Register.BlockPetrified2, 1, 0), null, 1, 1600, 2F);
-		this.addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
-		this.addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
+		addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
+		addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.NUGGETS, 0), 2, 6000, 0.9F);
+		
+		// Blocks
+		addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), new ItemStack(Items.iron_ingot, 9 - Config.INGOTS), 5, 12000, 0.9F);
+		addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 1, 1600, 1F);
+		addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
+		addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
+		addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);
+		addRecipe(new ItemStack(Blocks.log, 1, 3), new ItemStack(Register.BlockPetrified, 1, 3), null, 1, 1600, 2F);
+		addRecipe(new ItemStack(Blocks.log2, 1, 0), new ItemStack(Register.BlockPetrified2, 1, 0), null, 1, 1600, 2F);
+		addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
 	}
 
-	public void addRecipe(ItemStack input, ItemStack output, ItemStack byproduct, int fuelCost, int burnTime, float experience) {
+	public void addRecipe(ItemStack input, ItemStack output,
+			ItemStack byproduct, int fuelCost, int burnTime, float experience) {
 		this.smeltingList.put(input, output);
 		this.experienceList.put(output, Float.valueOf(experience));
 		this.timeList.put(input, burnTime);
