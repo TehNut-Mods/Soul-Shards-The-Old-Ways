@@ -48,8 +48,12 @@ public class SFRecipeHandler {
 		this.addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), null, 4, 20, 0.8F);
 		this.addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), null, 4, 500, 0.9F);
 		this.addRecipe(new ItemStack(Blocks.stone, 1), new ItemStack(Register.BlockXenolith), null, 4, 500, 1F);
-		//this.addRecipe(new ItemStack(Blocks.log, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
-		//this.addRecipe(new ItemStack(Blocks.log2, 1), new ItemStack(Register.BlockPetrified), null, 8, 100, 1F);
+		this.addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
+		this.addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
+		this.addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);
+		this.addRecipe(new ItemStack(Blocks.log, 1, 3), new ItemStack(Register.BlockPetrified, 1, 3), null, 1, 1600, 2F);
+		this.addRecipe(new ItemStack(Blocks.log2, 1, 0), new ItemStack(Register.BlockPetrified2, 1, 0), null, 1, 1600, 2F);
+		this.addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
 	}
 
 	public void addRecipe(ItemStack input, ItemStack output, ItemStack byproduct, int fuelCost, int burnTime, float experience) {

@@ -40,8 +40,7 @@ public class ItemShardSoul extends Item {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int slot,
-			boolean isHeld) {
+	public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isHeld) {
 		if (world.isRemote) {
 			return;
 		}
@@ -54,27 +53,21 @@ public class ItemShardSoul extends Item {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world,
-			EntityPlayer player) {
-		if (world.isRemote || (Utils.hasMaxedKills(stack))
-				|| !Config.ALLOW_SPAWNER_ABSORB) {
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		if (world.isRemote || (Utils.hasMaxedKills(stack)) || !Config.ALLOW_SPAWNER_ABSORB) {
 			return stack;
 		}
 
-		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(
-				world, player, false);
+		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, false);
 
-		if (mop == null
-				|| mop.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK) {
+		if (mop == null || mop.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK) {
 			return stack;
 		}
 
-		TileEntity tile = world.getTileEntity(mop.blockX, mop.blockY,
-				mop.blockZ);
+		TileEntity tile = world.getTileEntity(mop.blockX, mop.blockY, mop.blockZ);
 
 		if (tile instanceof TileEntityMobSpawner) {
-			String name = ((TileEntityMobSpawner) tile).func_145881_a()
-					.getEntityNameToSpawn();
+			String name = ((TileEntityMobSpawner) tile).func_145881_a().getEntityNameToSpawn();
 
 			Entity ent = EntityMapper.getNewEntityInstance(world, name);
 

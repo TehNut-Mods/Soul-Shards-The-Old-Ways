@@ -1,6 +1,6 @@
 package com.whammich.sstow.tileentity;
 
-import java.lang.reflect.Field;
+//import java.lang.reflect.Field;
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
@@ -31,6 +31,7 @@ import com.whammich.sstow.utils.ModLogger;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.TierHandler;
 import com.whammich.sstow.utils.Utils;
+import com.whammich.sstow.utils.EntityBlackList;
 
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
@@ -59,12 +60,17 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		Owner = playerName;
 	}
 
-	@SuppressWarnings("rawtypes")
+	//@SuppressWarnings("rawtypes")
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote) {
 			return;
 		}
+		
+		if (EntityBlackList.bList.contains(entName)){
+			return;
+		}
+		
 		this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
 				Register.BlockCage);
 		if (!initChecks) {
@@ -133,33 +139,33 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				toSpawn[i].func_110163_bv();
 
 
-				// if this fails, don't crash the game
-				try {
-					// get the main class (like EntityZombie)
-					Class c = toSpawn[i].getClass();
-					while (c.getSuperclass() != EntityLiving.class
-							&& c.getSuperclass() != null) {
-						c = c.getSuperclass();
-					}
-					// set c to the EntityLiving class
-					c = c.getSuperclass();
-					// get the private experienceValue field
-					Field field;
-					try {
-						// obfuscated environment(normal game)
-						field = c.getDeclaredField("field_70728_aV");
-					} catch (Exception e) {
-						// System.out.println("couldn't find field, are you in a development environment?");
-						field = c.getDeclaredField("experienceValue");
-					}
-					field.setAccessible(true);
-					field.setInt(toSpawn[i], 0);
-				} catch (Exception e) {
-					// testing output. Should not be necessary anymore
-					// System.out.println("something went wrong");
-					// System.out.println(e.getLocalizedMessage()+ " - "+
-					// e.toString());
-				}
+//				// if this fails, don't crash the game
+//				try {
+//					// get the main class (like EntityZombie)
+//					Class c = toSpawn[i].getClass();
+//					while (c.getSuperclass() != EntityLiving.class
+//							&& c.getSuperclass() != null) {
+//						c = c.getSuperclass();
+//					}
+//					// set c to the EntityLiving class
+//					c = c.getSuperclass();
+//					// get the private experienceValue field
+//					Field field;
+//					try {
+//						// obfuscated environment(normal game)
+//						field = c.getDeclaredField("field_70728_aV");
+//					} catch (Exception e) {
+//						// System.out.println("couldn't find field, are you in a development environment?");
+//						field = c.getDeclaredField("experienceValue");
+//					}
+//					field.setAccessible(true);
+//					field.setInt(toSpawn[i], 0);
+//				} catch (Exception e) {
+//					// testing output. Should not be necessary anymore
+//					// System.out.println("something went wrong");
+//					// System.out.println(e.getLocalizedMessage()+ " - "+
+//					// e.toString());
+//				}
 
 			}
 			spawnEntities(toSpawn);

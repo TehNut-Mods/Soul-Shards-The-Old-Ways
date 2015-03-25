@@ -20,15 +20,13 @@ public class EntityBlackList {
 			Iterator<String> iter = EntityMapper.entityList.iterator();
 			while (iter.hasNext()) {
 				String name = iter.next();
-				boolean val = config.get("Entity Blacklist", name, false)
-						.getBoolean(false);
+				boolean val = config.get("Entity Blacklist", name, false).getBoolean(false);
 				if (val)
 					bList.add(name);
 			}
 			ModLogger.logInfo("Soul Shards Loaded Entity Blacklist");
 		} catch (Exception e) {
-			ModLogger
-					.logFatal("Soul Shards had a problem loading Entity Blacklist");
+			ModLogger.logFatal("Soul Shards had a problem loading Entity Blacklist");
 			e.printStackTrace();
 		} finally {
 			if (config.hasChanged())
