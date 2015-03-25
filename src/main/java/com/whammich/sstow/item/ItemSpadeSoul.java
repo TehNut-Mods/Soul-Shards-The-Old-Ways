@@ -12,13 +12,12 @@ public class ItemSpadeSoul extends ItemSpade {
 
 	public ItemSpadeSoul(ToolMaterial Material) {
 		super(Material);
-		this.setUnlocalizedName("soul_spade");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soul_spade";
+		return "item.sstow.soultool.spade";
 	}
 
 	@SideOnly(Side.CLIENT)

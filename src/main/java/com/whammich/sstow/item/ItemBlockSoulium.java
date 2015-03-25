@@ -15,7 +15,7 @@ public class ItemBlockSoulium extends ItemBlock {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return "tile.sstow.soulium_block";
+		return "tile.sstow.soulium.block";
 	}
 
 	@Override

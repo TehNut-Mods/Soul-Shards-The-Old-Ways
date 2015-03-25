@@ -1,22 +1,28 @@
-item.sstow.shard_unbound.name=Unbound Soul Shard
+# Items
+# Shards
+item.sstow.shard.unbound.name=Unbound Soul Shard
 item.sstow.shard.name=Soul Shard
+# Materials
 item.sstow.material.nugget.iron.name=Iron Nugget
 item.sstow.material.nugget.soulium.name=Soulium Nugget
 item.sstow.material.ingot.soulium.name=Soulium Ingot
 item.sstow.material.dust.vile.name=Vile Dust
 item.sstow.material.essence.corrupted.name=Corrupted Essence
-item.sstow.soul_sword.name=Soul Sword
-item.sstow.soul_pickaxe.name=Soul Pickaxe
-item.sstow.soul_axe.name=Soul Axe
-item.sstow.soul_hoe.name=Soul Hoe
-item.sstow.soul_spade.name=Soul Spade
+item.sstow.material.petrified.stick.name=Petrified Stick
+# Tools
+item.sstow.soultool.sword.name=Soul Sword
+item.sstow.soultool.pickaxe.name=Soul Pickaxe
+item.sstow.soultool.axe.name=Soul Axe
+item.sstow.soultool.hoe.name=Soul Hoe
+item.sstow.soultool.spade.name=Soul Spade
 
-container.soulforge=Soul Forge
+# Blocks
+tile.sstow.block.forge.name=Soul Forge
+tile.sstow.block.soulium.name=Block of Soulium
+tile.sstow.block.cage.name=Soul Cage
+tile.sstow.block.xenolith.name=Polished Xenolith
 
-tile.sstow.forge_block.name=Soul Forge
-tile.sstow.soulium_block.name=Block of Soulium
-tile.sstow.cage_block.name=Soul Cage
-
+# Petrified Blocks
 tile.sstow.petrified.log.oak.name=Petrified Oak Log
 tile.sstow.petrified.plank.oak.name=Petrified Oak Planks
 tile.sstow.petrified.log.spruce.name=Petrified Spruce Log
@@ -30,17 +36,21 @@ tile.sstow.petrified.plank.acacia.name=Petrified Acacia Planks
 tile.sstow.petrified.log.big_oak.name=Petrified Dark Oak Log
 tile.sstow.petrified.plank.big_oak.name=Petrified Dark Oak Planks
 
-
+# WAILA Support
 sstow.waila.soulcage.mob=Entity: 
 sstow.waila.soulcage.tier=Tier: 
 sstow.waila.soulcage.activated=Status: Activated
 sstow.waila.soulcage.deactivated=Status: Deactivated
 sstow.waila.soulcage.empty=Status: Empty
 
+# Enchantment
 enchantment.soul_stealer=Soul Stealer
 
-itemGroup.soul_shards_the_old_ways=Soul Shards The Old Ways
+# GUI
+container.soulforge=Soul Forge
+itemGroup.sstow=Soul Shards The Old Ways
 
+# Achievements
 achievement.createShard=Create a Soul Shard
 achievement.createShard.desc=Created your first Soul Shard
 

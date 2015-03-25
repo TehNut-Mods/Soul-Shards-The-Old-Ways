@@ -33,7 +33,6 @@ public class ItemShardSoul extends Item {
 	private IIcon[] icons;
 
 	public ItemShardSoul() {
-		this.setUnlocalizedName("soul_shard");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(64);
 		this.setMaxDamage(0);
@@ -142,7 +141,7 @@ public class ItemShardSoul extends Item {
 			return "item.sstow.shard";
 		}
 
-		return "item.sstow.shard_unbound";
+		return "item.sstow.shard.unbound";
 	}
 
 	@Override

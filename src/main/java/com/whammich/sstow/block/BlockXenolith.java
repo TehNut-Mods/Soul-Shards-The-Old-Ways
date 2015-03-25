@@ -18,6 +18,7 @@ public class BlockXenolith extends Block {
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.blockHardness = 3.0F;
 		this.blockResistance = 3.0F;
+		setBlockName("sstow.block.xenolith");
 	}
 
 	@Override

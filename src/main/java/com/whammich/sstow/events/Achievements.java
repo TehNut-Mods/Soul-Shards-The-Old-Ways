@@ -25,8 +25,6 @@ public class Achievements {
 
 	public static void defaultAchievements() {
 
-		System.out.println("Rendering Icons");
-
 		ItemStack shard1 = new ItemStack(Register.ItemShardSoul);
 		Utils.setShardTier(shard1, (byte) 1);
 		Utils.setShardBoundEnt(shard1, "NULL");
@@ -46,8 +44,6 @@ public class Achievements {
 		ItemStack shard5 = new ItemStack(Register.ItemShardSoul);
 		Utils.setShardTier(shard5, (byte) 5);
 		Utils.setShardBoundEnt(shard5, "NULL");
-
-		// System.out.println("Registering Achievement Icon Locations");
 
 		viledust = new Achievement("achievement.vile_dust", "vile_dust", -1,
 				-3, new ItemStack(Register.ItemMaterials, 1, 3), (Achievement) null)

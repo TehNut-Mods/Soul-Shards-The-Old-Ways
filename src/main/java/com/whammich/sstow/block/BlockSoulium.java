@@ -13,7 +13,7 @@ public class BlockSoulium extends Block {
 
 	public BlockSoulium() {
 		super(Material.iron);
-		this.setBlockName("sstow.soulium_block");
+		this.setBlockName("sstow.block.soulium");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.blockHardness = 3.0F;
 		this.blockResistance = 3.0F;

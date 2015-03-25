@@ -16,7 +16,6 @@ import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.Remap;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -43,16 +42,11 @@ public class SSTheOldWays {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		Register.registerObjs();
-		// System.out.println("Achievements Loading");
 		Achievements.Get();
-		// System.out.println("Achievements Loaded");
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
-		// System.out.println("Registering Achievement Events");
-		FMLCommonHandler.instance().bus().register(new AchievementEvents());
-		// System.out.println("Achievement Events Registed");
-		FMLInterModComms.sendMessage("Waila", "register",
-				Reference.Waila_callBack);
+		MinecraftForge.EVENT_BUS.register(new AchievementEvents());
+		FMLInterModComms.sendMessage("Waila", "register", Reference.Waila_callBack);
 	}
 
 	@EventHandler

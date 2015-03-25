@@ -12,13 +12,12 @@ public class ItemAxeSoul extends ItemAxe {
 
 	public ItemAxeSoul(ToolMaterial Material) {
 		super(Material);
-		this.setUnlocalizedName("soul_axe");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soul_axe";
+		return "item.sstow.soultool.axe";
 	}
 
 	@SideOnly(Side.CLIENT)

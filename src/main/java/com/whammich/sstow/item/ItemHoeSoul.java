@@ -18,7 +18,7 @@ public class ItemHoeSoul extends ItemHoe {
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soul_hoe";
+		return "item.sstow.soultool.hoe";
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -12,13 +12,12 @@ public class ItemPickaxeSoul extends ItemPickaxe {
 
 	public ItemPickaxeSoul(ToolMaterial Material) {
 		super(Material);
-		this.setUnlocalizedName("soul_pickaxe");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soul_pickaxe";
+		return "item.sstow.soultool.pickaxe";
 	}
 
 	@SideOnly(Side.CLIENT)

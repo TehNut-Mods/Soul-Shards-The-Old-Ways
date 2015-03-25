@@ -16,7 +16,6 @@ public class AchievementEvents {
 	// Soul Cage Crafting Event
 	@SubscribeEvent
 	public void CageCrafted(ItemCraftedEvent event) {
-		// System.out.println("Register Soul Cage Event");
 		if (event.crafting.getItem() == Item
 				.getItemFromBlock(Register.BlockCage)) {
 			event.player.addStat(Achievements.soulcage, 1);
@@ -29,7 +28,6 @@ public class AchievementEvents {
 	@SubscribeEvent
 	public void corruptedCrafted(ItemCraftedEvent event) {
 		if (!Loader.isModLoaded("Natura")) {
-			// System.out.println("Register Corrupted Crafted Event");
 			if (event.crafting.equals(new ItemStack(Register.ItemMaterials, 1, 4))) {
 				event.player.addStat(Achievements.corruption, 1);
 			} else {
@@ -44,7 +42,6 @@ public class AchievementEvents {
 	@SubscribeEvent
 	public void corruptedSmelted(ItemSmeltedEvent event) {
 		if (Loader.isModLoaded("Natura")) {
-			// System.out.println("Register Corrupted Smelted Event");
 			if (event.smelting.equals(new ItemStack(Register.ItemMaterials, 1, 4))) {
 				event.player.addStat(Achievements.corruption, 1);
 			} else {
@@ -71,7 +68,6 @@ public class AchievementEvents {
 	@SubscribeEvent
 	public void VileSmelted(ItemSmeltedEvent event) {
 		if (!Loader.isModLoaded("Natura")) {
-			// System.out.println("Register Vile Smelt Event");
 			if (event.smelting.equals(new ItemStack(Register.ItemMaterials, 1, 3))) {
 				event.player.addStat(Achievements.viledust, 1);
 			} else {
@@ -86,7 +82,6 @@ public class AchievementEvents {
 	@SubscribeEvent
 	public void VileCrafted(ItemCraftedEvent event) {
 		if (Loader.isModLoaded("Natura")) {
-			// System.out.println("Register Vile Craft Event");
 			if (event.crafting.equals(new ItemStack(Register.ItemMaterials, 1, 3))) {
 				event.player.addStat(Achievements.viledust, 1);
 			} else {

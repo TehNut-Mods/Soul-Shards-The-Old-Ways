@@ -12,13 +12,12 @@ public class ItemSwordSoul extends ItemSword {
 
 	public ItemSwordSoul(ToolMaterial Material) {
 		super(Material);
-		this.setUnlocalizedName("soul_sword");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soul_sword";
+		return "item.sstow.soultool.sword";
 	}
 
 	@SideOnly(Side.CLIENT)
