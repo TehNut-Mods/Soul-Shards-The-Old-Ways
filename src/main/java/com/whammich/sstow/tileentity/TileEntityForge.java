@@ -20,15 +20,15 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	private static final int[] slotsTop = new int[] { 0 };
 	private static final int[] slotsBottom = new int[] { 2, 1 };
 	private static final int[] slotsSides = new int[] { 1 };
-	
+
 	@SuppressWarnings("unused")
 	private static final int[] slotsBy = new int[] { 3 };
-	
+
 	private ItemStack[] furnaceItemStacks = new ItemStack[4];
 	public int furnaceBurnTime;
 	public int currentBurnTime;
 	public int furnaceCookTime;
-	
+
 	private String furnaceName;
 
 	public void furnaceName(String string) {
@@ -223,7 +223,7 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 			return 200;
 		} else {
 			int smeltTime = (int) (SFRecipeHandler.smelting().getSmeltingTime(
-					this.furnaceItemStacks[0]) * 0.1 );// * Config.COOK_TIME);
+					this.furnaceItemStacks[0]) * 0.1);// * Config.COOK_TIME);
 			if (smeltTime == 0) {
 				return 200;
 			}
@@ -232,28 +232,41 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	}
 
 	public void smeltItem() {
+		
 		if (this.canSmelt()) {
-			ItemStack itemstack = SFRecipeHandler.smelting().getSmeltingResult(
-					this.furnaceItemStacks[0]);
-			ItemStack itemstack2 = SFRecipeHandler.smelting().getSecondaryResult(
-					this.furnaceItemStacks[0]);
+			
+			ItemStack itemstack = SFRecipeHandler.smelting().getSmeltingResult(this.furnaceItemStacks[0]);
+			ItemStack itemstack1 = SFRecipeHandler.smelting().getSecondaryResult(this.furnaceItemStacks[0]);
+			
 			if (this.furnaceItemStacks[2] == null) {
+
 				this.furnaceItemStacks[2] = itemstack.copy();
-			} else if (this.furnaceItemStacks[2].getItem() == itemstack
-					.getItem()) {
+				
+			} else if (this.furnaceItemStacks[2].getItem() == itemstack.getItem()) {
+				
 				this.furnaceItemStacks[2].stackSize += itemstack.stackSize;
 			}
-			if (itemstack2 != null) {
+			
+			if (itemstack1 != null) {
+				
 				if (this.furnaceItemStacks[3] == null) {
-					this.furnaceItemStacks[3] = itemstack2.copy();
-				} else if (this.furnaceItemStacks[3].getItem() == itemstack2
-						.getItem()) {
-					this.furnaceItemStacks[3].stackSize += itemstack2.stackSize;
+					
+					this.furnaceItemStacks[3] = itemstack1.copy();
+					
+				} else if (this.furnaceItemStacks[3].getItem() == itemstack1.getItem()) {
+					
+					this.furnaceItemStacks[3].stackSize += itemstack1.stackSize;
+					
 				}
+				
 			}
+			
 			--this.furnaceItemStacks[0].stackSize;
+			
 			if (this.furnaceItemStacks[0].stackSize <= 0) {
+				
 				this.furnaceItemStacks[0] = null;
+				
 			}
 		}
 	}
