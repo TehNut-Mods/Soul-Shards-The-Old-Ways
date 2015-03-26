@@ -2,6 +2,7 @@
 # Shards
 item.sstow.shard.unbound.name=Unbound Soul Shard
 item.sstow.shard.name=Soul Shard
+
 # Materials
 item.sstow.material.nugget.iron.name=Iron Nugget
 item.sstow.material.nugget.soulium.name=Soulium Nugget
@@ -9,6 +10,7 @@ item.sstow.material.ingot.soulium.name=Soulium Ingot
 item.sstow.material.dust.vile.name=Vile Dust
 item.sstow.material.essence.corrupted.name=Corrupted Essence
 item.sstow.material.petrified.stick.name=Petrified Stick
+
 # Tools
 item.sstow.soultool.sword.name=Soul Sword
 item.sstow.soultool.pickaxe.name=Soul Pickaxe
@@ -50,36 +52,3 @@ enchantment.soul_stealer=Soul Stealer
 container.soulforge=Soul Forge
 itemGroup.sstow=Soul Shards The Old Ways
 
-# Achievements
-achievement.createShard=Create a Soul Shard
-achievement.createShard.desc=Created your first Soul Shard
-
-achievement.tier1Shard=Whoops
-achievement.tier1Shard.desc=You have blood on your hands
-
-achievement.tier2Shard=Murderer
-achievement.tier2Shard.desc=Your soul is stained
-
-achievement.tier3Shard=Serial Killer
-achievement.tier3Shard.desc=You've become the monster
-
-achievement.tier4Shard=Psychopath
-achievement.tier4Shard.desc=What is wrong with you?
-
-achievement.tier5Shard=Genocidal Maniac
-achievement.tier5Shard.desc=You have no soul
-
-achievement.createCage=These are the Soul Cages
-achievement.createCage.desc=Where is the goat?
-
-achievement.vile_dust=Vile Dusting
-achievement.vile_dust.desc=It smells kinda... vile
-
-achievement.corrupted_essence=Essence of Corruption
-achievement.corrupted_essence.desc=Slightly more corrupt than a politician!
-
-achievement.soulForge=Forge Of Souls
-achievement.soulForge.desc=It's like a normal forge, but for souls
-
-achievement.fixed=Fixed it!
-achievement.fixed.desc=Attempting to Exploit

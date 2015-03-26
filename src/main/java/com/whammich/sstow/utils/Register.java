@@ -1,6 +1,7 @@
 package com.whammich.sstow.utils;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -18,6 +19,7 @@ import com.whammich.sstow.block.BlockForge;
 import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockPetrified2;
 import com.whammich.sstow.block.BlockPlankPetrified;
+import com.whammich.sstow.block.BlockSoulAnvil;
 import com.whammich.sstow.block.BlockSoulium;
 import com.whammich.sstow.block.BlockXenolith;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
@@ -66,6 +68,7 @@ public class Register {
 	public static Block BlockForgeActive = new BlockForge(true).setBlockName("sstow.forge_block_active");
 	public static Block BlockSoulium = new BlockSoulium();
 	public static Block BlockXenolith = new BlockXenolith();
+	public static Block SoulAnvil = new BlockSoulAnvil(Material.anvil);
 
 	public static Block BlockPetrified = new BlockPetrified();
     public static Block BlockPetrified2 = new BlockPetrified2();
@@ -93,9 +96,11 @@ public class Register {
 		GameRegistry.registerItem(ItemHoeSoul, "ItemHoeSoul");
 		GameRegistry.registerItem(ItemSpadeSoul, "ItemSpadeSoul");
 		GameRegistry.registerItem(ItemShardSoul, "ItemShardSoul");
+		
 	}
 
 	private static void registerBlocks() {
+		GameRegistry.registerBlock(SoulAnvil,"SoulAnvil");
 		GameRegistry.registerBlock(BlockForge, "BlockForge");
 		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");

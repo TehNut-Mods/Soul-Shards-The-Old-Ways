@@ -90,7 +90,7 @@ public class ItemShardSoul extends Item {
 				if (Utils.getShardBoundEnt(stack).equals(name)) {
 					Utils.increaseShardKillCount(stack,
 							(short) Config.SPAWNER_ABSORB_BONUS);
-					Utils.checkForAchievements(player, stack);
+//					Utils.checkForAchievements(player, stack);
 					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ,
 							false);
 				}

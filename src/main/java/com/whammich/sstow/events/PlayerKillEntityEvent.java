@@ -74,7 +74,7 @@ public class PlayerKillEntityEvent {
 			soulStealer *= Config.ENCHANT_KILL_BONUS;
 
 			Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
-			Utils.checkForAchievements(player, shard);
+//			Utils.checkForAchievements(player, shard);
 		}
 	}
 }
