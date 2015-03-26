@@ -2,6 +2,7 @@ package com.whammich.sstow.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -35,6 +36,7 @@ import com.whammich.sstow.item.ItemfixedAchievement;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
 import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
+import com.whammich.sstow.render.RenderSoulAnvil;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityForge;
 
@@ -156,4 +158,9 @@ public class Register {
 			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
 		}
 	}
+	
+	private static void registerRenders() {
+		TileEntitySpecialRenderer renderAnvil = new RenderSoulAnvil();
+	}
+	
 }
