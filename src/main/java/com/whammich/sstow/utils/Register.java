@@ -85,8 +85,6 @@ public class Register {
 	}
 
 	private static void registerItems() {
-		if (Loader.isModLoaded("MineFactoryReloaded"))
-			GameRegistry.registerItem(ItemFixedDummy, "ItemFixedDummy");
 
 		GameRegistry.registerItem(ItemModules, "ItemModulesSoul");
 		GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
