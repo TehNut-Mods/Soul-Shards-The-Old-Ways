@@ -9,16 +9,15 @@ public class RecipeHandlerSoulShards extends TemplateRecipeHandler {
 
 	public class CachedSoulShardsRecipe extends CachedRecipe {
 
-		
-		
 		@Override
 		public PositionedStack getResult() {
 			// TODO Auto-generated method stub
-			return null;
+			return result;
 		}
-		
+
+		PositionedStack result;
 	}
-	
+
 	@Override
 	public String getRecipeName() {
 		// TODO Auto-generated method stub

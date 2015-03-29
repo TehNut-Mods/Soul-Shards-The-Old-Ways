@@ -1,8 +1,6 @@
 package com.whammich.sstow.utils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,7 +18,6 @@ import com.whammich.sstow.block.BlockForge;
 import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockPetrified2;
 import com.whammich.sstow.block.BlockPlankPetrified;
-import com.whammich.sstow.block.BlockSoulAnvil;
 import com.whammich.sstow.block.BlockSoulium;
 import com.whammich.sstow.block.BlockXenolith;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
@@ -28,6 +25,7 @@ import com.whammich.sstow.guihandler.GuiHandler;
 import com.whammich.sstow.item.ItemAxeSoul;
 import com.whammich.sstow.item.ItemHoeSoul;
 import com.whammich.sstow.item.ItemMaterials;
+import com.whammich.sstow.item.ItemModules;
 import com.whammich.sstow.item.ItemPickaxeSoul;
 import com.whammich.sstow.item.ItemShardSoul;
 import com.whammich.sstow.item.ItemSpadeSoul;
@@ -36,7 +34,6 @@ import com.whammich.sstow.item.ItemfixedAchievement;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
 import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
-import com.whammich.sstow.render.RenderSoulAnvil;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityForge;
 
@@ -55,6 +52,7 @@ public class Register {
 	public static SoulShardTab CREATIVE_TAB = new SoulShardTab();
 
 	// Set up the mod items
+	public static Item ItemModules = new ItemModules();
 	public static Item ItemMaterials = new ItemMaterials();
 	public static Item ItemFixedDummy = new ItemfixedAchievement();
 	public static Item ItemShardSoul = new ItemShardSoul();
@@ -70,7 +68,6 @@ public class Register {
 	public static Block BlockForgeActive = new BlockForge(true).setBlockName("sstow.forge_block_active");
 	public static Block BlockSoulium = new BlockSoulium();
 	public static Block BlockXenolith = new BlockXenolith();
-	public static Block SoulAnvil = new BlockSoulAnvil(Material.anvil);
 
 	public static Block BlockPetrified = new BlockPetrified();
     public static Block BlockPetrified2 = new BlockPetrified2();
@@ -91,6 +88,7 @@ public class Register {
 		if (Loader.isModLoaded("MineFactoryReloaded"))
 			GameRegistry.registerItem(ItemFixedDummy, "ItemFixedDummy");
 
+		GameRegistry.registerItem(ItemModules, "ItemModulesSoul");
 		GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
 		GameRegistry.registerItem(ItemSwordSoul, "ItemSwordSoul");
 		GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
@@ -102,7 +100,6 @@ public class Register {
 	}
 
 	private static void registerBlocks() {
-		GameRegistry.registerBlock(SoulAnvil,"SoulAnvil");
 		GameRegistry.registerBlock(BlockForge, "BlockForge");
 		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");
@@ -159,8 +156,8 @@ public class Register {
 		}
 	}
 	
-	private static void registerRenders() {
-		TileEntitySpecialRenderer renderAnvil = new RenderSoulAnvil();
-	}
+//	private static void registerRenders() {
+//		TileEntitySpecialRenderer renderAnvil = new RenderSoulAnvil();
+//	}
 	
 }
