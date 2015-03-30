@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-    private static String[] names = { "nugget.iron", "nugget.soulium", "ingot.soulium", "dust.vile", "essence.corrupted" };
+    private static String[] names = { "nugget.iron", "nugget.soulium", "ingot.soulium", "dust.vile", "essence.corrupted", "petrified.stick" };
     private IIcon[] icon = new IIcon[16];
 
     public ItemMaterials() {
@@ -38,11 +38,12 @@ public class ItemMaterials extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        this.icon[0] = iconRegister.registerIcon(Reference.MOD_ID + ":iron_nugget");
-        this.icon[1] = iconRegister.registerIcon(Reference.MOD_ID + ":soulium_nugget");
-        this.icon[2] = iconRegister.registerIcon(Reference.MOD_ID + ":soulium_ingot");
-        this.icon[3] = iconRegister.registerIcon(Reference.MOD_ID + ":vile_dust");
-        this.icon[4] = iconRegister.registerIcon(Reference.MOD_ID + ":corrupted_essence");
+        this.icon[0] = iconRegister.registerIcon(Reference.MOD_ID + ":nuggetIron");
+        this.icon[1] = iconRegister.registerIcon(Reference.MOD_ID + ":nuggetSoulium");
+        this.icon[2] = iconRegister.registerIcon(Reference.MOD_ID + ":ingotSoulium");
+        this.icon[3] = iconRegister.registerIcon(Reference.MOD_ID + ":dustVile");
+        this.icon[4] = iconRegister.registerIcon(Reference.MOD_ID + ":essenceCorrupted");
+        this.icon[5] = iconRegister.registerIcon(Reference.MOD_ID + ":stickPetrified");
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})

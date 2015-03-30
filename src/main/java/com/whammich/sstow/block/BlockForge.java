@@ -2,11 +2,6 @@ package com.whammich.sstow.block;
 
 import java.util.Random;
 
-import com.whammich.sstow.tileentity.TileEntityForge;
-import com.whammich.sstow.utils.Reference;
-import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.SSTheOldWays;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,6 +18,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.whammich.sstow.SSTheOldWays;
+import com.whammich.sstow.tileentity.TileEntityForge;
+import com.whammich.sstow.utils.HolidayHelper;
+import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -55,13 +57,20 @@ public class BlockForge extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":soulForge_side");
-		this.front = iconRegister
-				.registerIcon(this.isBurning2 ? Reference.MOD_ID + ":soulForge_active"
-						: Reference.MOD_ID + ":soulForge_idle");
-		this.top = iconRegister.registerIcon("furnace_top");
-		this.bottom = iconRegister.registerIcon("obsidian");
+		if (HolidayHelper.isHalloween()) {
+			this.blockIcon = iconRegister.registerIcon("minecraft:pumpkin_side");
+			this.front = iconRegister.registerIcon(this.isBurning2 ? Reference.MOD_ID + ":soulForge_active_halloween" : Reference.MOD_ID + ":soulForge_idle_halloween");
+			this.top = iconRegister.registerIcon("minecraft:pumpkin_top");
+			this.bottom = iconRegister.registerIcon("minecraft:pumpkin_top");
+		} else {
+			this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":soulForge_side");
+			this.front = iconRegister.registerIcon(this.isBurning2 ? Reference.MOD_ID + ":soulForge_active" : Reference.MOD_ID + ":soulForge_idle");
+			this.top = iconRegister.registerIcon("furnace_top");
+			this.bottom = iconRegister.registerIcon("obsidian");
+		}
 	}
+
+
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
