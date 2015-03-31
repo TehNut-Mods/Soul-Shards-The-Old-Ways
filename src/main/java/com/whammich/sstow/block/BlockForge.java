@@ -45,16 +45,19 @@ public class BlockForge extends BlockContainer {
 		isBurning2 = isActive;
 	}
 
+	@Override
 	public boolean hasComparatorInputOverride() {
 		return true;
 	}
 
+	@Override
 	public int getComparatorInputOverride(World world, int xCoord, int yCoord,
 			int zCoord, int side) {
 		return Container.calcRedstoneFromInventory((IInventory) world
 				.getTileEntity(xCoord, yCoord, zCoord));
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
 		if (HolidayHelper.isHalloween()) {
@@ -72,6 +75,7 @@ public class BlockForge extends BlockContainer {
 
 
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (side == 1) {
@@ -85,29 +89,35 @@ public class BlockForge extends BlockContainer {
 		}
 	}
 
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int par6, float par7, float par8, float par9) {
 		player.openGui(SSTheOldWays.modInstance, 0, world, x, y, z);
 		return true;
 	}
 
+	@Override
 	public Item getItemDropped(int par1, Random random, int par3) {
 		return Item.getItemFromBlock(Register.BlockForge);
 	}
 
+	@Override
 	public Item getItem(World world, int par2, int par3, int par4) {
 		return Item.getItemFromBlock(Register.BlockForge);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
 	}
 
+	@Override
 	public TileEntity createNewTileEntity(World world, int var1) {
 		return new TileEntityForge();
 	}
 
+	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entity, ItemStack itemstack) {
 		int dir = MathHelper
@@ -135,8 +145,7 @@ public class BlockForge extends BlockContainer {
 		}
 	}
 
-	public static void updateBlockstate(boolean burning, World world, int x,
-			int y, int z) {
+	public static void updateBlockstate(boolean burning, World world, int x, int y, int z) {
 		int dir = world.getBlockMetadata(x, y, z);
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 		isBurning = true;
@@ -154,6 +163,7 @@ public class BlockForge extends BlockContainer {
 		}
 	}
 
+	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block,
 			int meta) {
 		if (!isBurning) {
@@ -201,6 +211,7 @@ public class BlockForge extends BlockContainer {
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z,
 			Random random) {

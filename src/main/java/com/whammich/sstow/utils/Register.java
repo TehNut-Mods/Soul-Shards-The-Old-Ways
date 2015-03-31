@@ -1,6 +1,7 @@
 package com.whammich.sstow.utils;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,6 +16,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.block.BlockForge;
+import com.whammich.sstow.block.BlockGlassObsidian;
 import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockPetrified2;
 import com.whammich.sstow.block.BlockPlankPetrified;
@@ -25,7 +27,6 @@ import com.whammich.sstow.guihandler.GuiHandler;
 import com.whammich.sstow.item.ItemAxeSoul;
 import com.whammich.sstow.item.ItemHoeSoul;
 import com.whammich.sstow.item.ItemMaterials;
-import com.whammich.sstow.item.ItemModules;
 import com.whammich.sstow.item.ItemPickaxeSoul;
 import com.whammich.sstow.item.ItemShardSoul;
 import com.whammich.sstow.item.ItemSpadeSoul;
@@ -54,7 +55,6 @@ public class Register {
 	public static SoulShardTab CREATIVE_TAB = new SoulShardTab();
 
 	// Set up the mod items
-	public static Item ItemModules = new ItemModules();
 	public static Item ItemMaterials = new ItemMaterials();
 	public static Item ItemFixedDummy = new ItemfixedAchievement();
 	public static Item ItemShardSoul = new ItemShardSoul();
@@ -74,6 +74,7 @@ public class Register {
 	public static Block BlockPetrified = new BlockPetrified();
     public static Block BlockPetrified2 = new BlockPetrified2();
     public static Block BlockPetrifiedPlanks = new BlockPlankPetrified();
+    public static Block BlockObsidianGlass = new BlockGlassObsidian(Material.rock, false);
     
 	public static void registerObjs() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance, new GuiHandler());
@@ -88,7 +89,6 @@ public class Register {
 
 	private static void registerItems() {
 
-		GameRegistry.registerItem(ItemModules, "ItemModulesSoul");
 		GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
 		GameRegistry.registerItem(ItemSwordSoul, "ItemSwordSoul");
 		GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
@@ -104,6 +104,7 @@ public class Register {
 		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");
 		GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
+		GameRegistry.registerBlock(BlockObsidianGlass, "BlockObsidGlass");
 		GameRegistry.registerBlock(BlockXenolith, ItemBlockXenolith.class, "BlockXenolith");
 		GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");
 		GameRegistry.registerBlock(BlockPetrified2, ItemBlockPetrified2.class, "BlockPetrifiedLog2");
