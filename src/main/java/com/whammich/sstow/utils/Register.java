@@ -31,7 +31,6 @@ import com.whammich.sstow.item.ItemPickaxeSoul;
 import com.whammich.sstow.item.ItemShardSoul;
 import com.whammich.sstow.item.ItemSpadeSoul;
 import com.whammich.sstow.item.ItemSwordSoul;
-import com.whammich.sstow.item.ItemfixedAchievement;
 import com.whammich.sstow.item.blocks.ItemBlockForge;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
@@ -56,7 +55,6 @@ public class Register {
 
 	// Set up the mod items
 	public static Item ItemMaterials = new ItemMaterials();
-	public static Item ItemFixedDummy = new ItemfixedAchievement();
 	public static Item ItemShardSoul = new ItemShardSoul();
 	public static Item ItemSwordSoul = new ItemSwordSoul(SOULIUM);
 	public static Item ItemPickaxeSoul = new ItemPickaxeSoul(SOULIUM);

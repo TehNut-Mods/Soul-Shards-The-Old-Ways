@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 
 public class Remap {
 	public static String[] oldItemNames = { 
-		"sstow_fixed", 
 		"sstow_soul_sword",
 		"sstow_soul_pickaxe", 
 		"sstow_soul_axe", 
@@ -16,7 +15,6 @@ public class Remap {
 	};
 
 	public static Item[] newItemNames = { 
-		Register.ItemFixedDummy,
 		Register.ItemSwordSoul, 
 		Register.ItemPickaxeSoul,
 		Register.ItemAxeSoul,
