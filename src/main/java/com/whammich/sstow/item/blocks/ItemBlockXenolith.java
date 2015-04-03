@@ -7,10 +7,13 @@ import net.minecraft.item.ItemStack;
 public class ItemBlockXenolith extends ItemBlock {
 
 	public static final String[] names = new String[] { 
-		"raw",    		// 0 
-		"decorative",	// 1
-		"nether",		// 2
-		"soulium"		// 3
+		"raw",    		// 0
+		"polished",		// 1
+		"decorative",	// 2
+		"nether",		// 3
+		"soulium",		// 4
+		"redstone",		// 5
+		"ender",		// 6
 	};
 
 	public ItemBlockXenolith(Block block) {
