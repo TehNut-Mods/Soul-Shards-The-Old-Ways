@@ -17,10 +17,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockXenolith extends Block {
-	
+
 	@SideOnly(Side.CLIENT)
 	protected IIcon[] blockIcon;
-	
+	@SideOnly(Side.CLIENT)
+	protected IIcon bottomIcon;
+	@SideOnly(Side.CLIENT)
+	protected IIcon otherIcon;
+
 	public BlockXenolith() {
 		super(Material.rock);
 		setCreativeTab(Register.CREATIVE_TAB);
@@ -30,41 +34,56 @@ public class BlockXenolith extends Block {
 		blockResistance = 3.0F;
 		setBlockName("sstow.block.xenolith");
 	}
-	
+
 	public static final String[] names = new String[] { 
-		"raw",    		// 0
-		"polished",		// 1
-		"decorative",	// 2
-		"nether",		// 3
-		"soulium",		// 4
-		"redstone",		// 5
-		"ender",		// 6
+			"raw",			// 0
+			"polished",		// 1
+			"decorative",	// 2
+			"nether",		// 3
+			"soulium",		// 4
+			"redstone",		// 5
+			"ender",		// 6
 	};
-	
+
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
-        for (int i = 0; i < names.length; i++) {
-            list.add(new ItemStack(item, 1, i));
-        }
+		for (int i = 0; i < names.length; i++) {
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = new IIcon[names.length];
 
+		this.blockIcon = new IIcon[names.length];
+		this.bottomIcon = iconRegister.registerIcon("nether_brick");
+		this.otherIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_raw");
+		
 		for (int i = 0; i < this.blockIcon.length; ++i) {
-			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_" + names[i]);
+			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID
+					+ ":xenolith/xenolith_" + names[i]);
 		}
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		if (meta > 6)
+		if (meta == 3) {
+			if (side == 0) {
+				return bottomIcon;
+			} else if(side == 1) {
+				return otherIcon;
+			} else {
+				return blockIcon[meta];
+			}
+		}
+
+		if (meta > 6) {
 			meta = 0;
+		}
 		return blockIcon[meta];
-		
+
 	}
 }
