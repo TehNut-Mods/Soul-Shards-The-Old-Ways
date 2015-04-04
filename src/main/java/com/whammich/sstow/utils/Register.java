@@ -21,6 +21,7 @@ import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockPetrified2;
 import com.whammich.sstow.block.BlockPlankPetrified;
 import com.whammich.sstow.block.BlockSoulium;
+import com.whammich.sstow.block.BlockXenoLight;
 import com.whammich.sstow.block.BlockXenolith;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
 import com.whammich.sstow.guihandler.GuiHandler;
@@ -67,6 +68,7 @@ public class Register {
 	public static Block BlockForge = new BlockForge(false).setCreativeTab(CREATIVE_TAB);
 	public static Block BlockForgeActive = new BlockForge(true).setBlockName("sstow.forge_block_active");
 	public static Block BlockSoulium = new BlockSoulium();
+	public static Block BlockXenoLight = new BlockXenoLight();
 	
 	public static Block BlockXenolith = new BlockXenolith();
 	public static Block BlockPetrified = new BlockPetrified();
@@ -101,7 +103,8 @@ public class Register {
 		GameRegistry.registerBlock(BlockForge, ItemBlockForge.class, "BlockForge");
 		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");
-		GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
+		GameRegistry.registerBlock(BlockXenoLight, "BlockXenoLight");
+				GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
 		GameRegistry.registerBlock(BlockObsidianGlass, "BlockObsidGlass");
 		GameRegistry.registerBlock(BlockXenolith, ItemBlockXenolith.class, "BlockXenolith");
 		GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");

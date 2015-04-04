@@ -23,7 +23,7 @@ public final class Config {
 	public static boolean INVERT_REDSTONE;
 	public static boolean ENABLE_FLOOD_PREVENTION;
 	public static boolean ENABLE_DEBUG;
-	public static boolean EASYMODE;
+	public static boolean RITUAL;
 	// recipes Section
 	public static int COOK_TIME;
 	public static int SHARDS;
@@ -132,7 +132,7 @@ public final class Config {
 							"general",
 							false,
 							"This will enable debug mode, where the console will inform you when a mob is spawned");
-			EASYMODE = config
+			RITUAL = config
 					.getBoolean("Enable Easy mode", "general", false,
 							"RESTART REQUIRED: This will revert the shard creation to the structure method");
 			// recipes Section

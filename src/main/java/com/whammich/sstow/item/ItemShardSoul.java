@@ -2,12 +2,6 @@ package com.whammich.sstow.item;
 
 import java.util.List;
 
-import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.EntityMapper;
-import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.utils.TierHandler;
-import com.whammich.sstow.utils.Utils;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -20,18 +14,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.EntityMapper;
+import com.whammich.sstow.utils.Register;
+import com.whammich.sstow.utils.TierHandler;
+import com.whammich.sstow.utils.Utils;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemShardSoul extends Item {
+	
 	@SideOnly(Side.CLIENT)
 	private IIcon unbound;
+	
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icons;
 
+	private int tier;
+	
 	public ItemShardSoul() {
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(64);
@@ -53,10 +59,29 @@ public class ItemShardSoul extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+		byte level = Utils.getShardTier(stack);
+		tier = Utils.getShardTier(stack);
+
 		if (world.isRemote || (Utils.hasMaxedKills(stack)) || !Config.ALLOW_SPAWNER_ABSORB) {
 			return stack;
 		}
-
+		
+		if(!Utils.isShardBound(stack)){
+			player.addChatComponentMessage(new ChatComponentText("Kill a mob to bind it"));
+		} else if(Utils.getShardTier(stack) == 0){
+			player.addChatComponentMessage(new ChatComponentText("Soul Shard Tier " + level));
+			player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
+			player.addChatComponentMessage(new ChatComponentText("This shard cannot be used in a soul cage, you must level it up"));
+		} else {
+		player.addChatComponentMessage(new ChatComponentText("Soul Shard Tier " + level));
+		player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
+		player.addChatComponentMessage(new ChatComponentText("Requires Player: " + TierHandler.getChecksPlayer((int) tier - 1)));
+		player.addChatComponentMessage(new ChatComponentText("Requires Darkness: " + TierHandler.getChecksLight((int) tier - 1)));
+		player.addChatComponentMessage(new ChatComponentText("Requires Worlds: " + TierHandler.getChecksWorld((int) tier - 1)));
+		player.addChatComponentMessage(new ChatComponentText("Uses Redstone: " + TierHandler.getChecksRedstone((int) tier - 1)));
+		player.addChatComponentMessage(new ChatComponentText("Spawn Amount: " + TierHandler.getNumSpawns((int) tier - 1)));
+		player.addChatComponentMessage(new ChatComponentText("Spawn Rate: " + TierHandler.getCooldown((int) tier - 1)));
+		}
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, false);
 
 		if (mop == null || mop.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK) {
@@ -135,6 +160,13 @@ public class ItemShardSoul extends Item {
 		return stack;
 	}
 
+	public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10) {
+		if (world.isRemote) {
+
+		}
+		return true;
+	}
+	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		if (Utils.isShardBound(stack)) {

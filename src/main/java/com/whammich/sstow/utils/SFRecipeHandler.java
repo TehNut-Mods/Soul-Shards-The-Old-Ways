@@ -44,7 +44,7 @@ public class SFRecipeHandler {
 		this.addFuel(new ItemStack(Register.ItemMaterials, 1, 4), 1);
 
 		// Items		
-		if (!Config.EASYMODE){
+		if (!Config.RITUAL){
 			addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 12600, 1F);
 		}
 		addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
@@ -52,7 +52,7 @@ public class SFRecipeHandler {
 		
 		// Blocks
 		addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), new ItemStack(Items.iron_ingot, 9 - Config.INGOTS), 5, 12000, 0.9F);
-		addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 1, 1600, 1F);
+		addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 2, 1600, 1F);
 		addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
 		addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
 		addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);
@@ -61,8 +61,7 @@ public class SFRecipeHandler {
 		addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
 	}
 
-	public void addRecipe(ItemStack input, ItemStack output,
-			ItemStack byproduct, int fuelCost, int burnTime, float experience) {
+	public void addRecipe(ItemStack input, ItemStack output, ItemStack byproduct, int fuelCost, int burnTime, float experience) {
 		this.smeltingList.put(input, output);
 		this.experienceList.put(output, Float.valueOf(experience));
 		this.timeList.put(input, burnTime);

@@ -31,6 +31,7 @@ tile.sstow.block.xenolith.nether.name=Nether Xenolith
 tile.sstow.block.xenolith.soulium.name=Soulium infused Xenolith
 tile.sstow.block.xenolith.redstone.name=Redsotne infused Xenolith
 tile.sstow.block.xenolith.ender.name=Ender infused Xenolith
+tile.sstow.block.xenolith.light.name=Glowing Xenolith
 
 # Petrified Blocks
 tile.sstow.petrified.log.oak.name=Petrified Oak Log

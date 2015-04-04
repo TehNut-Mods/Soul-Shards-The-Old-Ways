@@ -24,6 +24,8 @@ public class BlockXenolith extends Block {
 	protected IIcon bottomIcon;
 	@SideOnly(Side.CLIENT)
 	protected IIcon otherIcon;
+	@SideOnly(Side.CLIENT)
+	protected IIcon redIcon;
 
 	public BlockXenolith() {
 		super(Material.rock);
@@ -61,6 +63,7 @@ public class BlockXenolith extends Block {
 		this.blockIcon = new IIcon[names.length];
 		this.bottomIcon = iconRegister.registerIcon("nether_brick");
 		this.otherIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_raw");
+		this.redIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_redstone_tb");
 		
 		for (int i = 0; i < this.blockIcon.length; ++i) {
 			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID
@@ -78,7 +81,16 @@ public class BlockXenolith extends Block {
 			} else {
 				return blockIcon[meta];
 			}
-		}
+		} 
+//		else if (meta == 5){
+//			if (side == 0) {
+//				return redIcon;
+//			} else if(side == 1) {
+//				return redIcon;
+//			} else {
+//				return blockIcon[meta];
+//			}
+//		}
 
 		if (meta > 6) {
 			meta = 0;

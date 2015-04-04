@@ -16,15 +16,13 @@ public class CreateShardEvent {
 
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent event) {
-		if (Config.EASYMODE == true) {
+		if (Config.RITUAL == true) {
 
-			if (event.world.isRemote
-					|| event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+			if (event.world.isRemote || event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
 				return;
 			}
 
-			if (event.entityPlayer.getHeldItem() == null
-					|| event.entityPlayer.getHeldItem().getItem() != Items.diamond) {
+			if (event.entityPlayer.getHeldItem() == null || event.entityPlayer.getHeldItem().getItem() != Items.diamond) {
 				return;
 			}
 
@@ -32,8 +30,7 @@ public class CreateShardEvent {
 				return;
 			}
 
-			if (checkHorizontal(event.world, event.x, event.y, event.z)
-					|| checkVertical(event.world, event.x, event.y, event.z)) {
+			if (checkHorizontal(event.world, event.x, event.y, event.z) || checkVertical(event.world, event.x, event.y, event.z)) {
 				if (!event.entityPlayer.capabilities.isCreativeMode) {
 					event.entityPlayer.getHeldItem().stackSize--;
 				}

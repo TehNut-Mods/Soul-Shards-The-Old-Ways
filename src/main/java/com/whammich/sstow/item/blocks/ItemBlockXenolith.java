@@ -19,7 +19,7 @@ public class ItemBlockXenolith extends ItemBlock {
 	}
 
 	@Override
-	public int getMetadata(int par1) {
-		return par1;
+	public int getMetadata(int meta) {
+		return meta;
 	}
 }

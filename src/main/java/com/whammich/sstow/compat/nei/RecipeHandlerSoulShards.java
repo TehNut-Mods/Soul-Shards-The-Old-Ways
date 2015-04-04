@@ -1,9 +1,9 @@
 package com.whammich.sstow.compat.nei;
 
-import com.whammich.sstow.utils.Reference;
-
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+
+import com.whammich.sstow.utils.Reference;
 
 public class RecipeHandlerSoulShards extends TemplateRecipeHandler {
 
