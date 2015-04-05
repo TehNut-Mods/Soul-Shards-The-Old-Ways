@@ -69,8 +69,7 @@ public final class Config {
 		sections = new ArrayList<Section>();
 	}
 
-	public static final Section enchantment = new Section("enchantment",
-			"enchantment");
+	public static final Section enchantment = new Section("enchantment", "enchantment");
 	public static final Section general = new Section("general", "general");
 	public static final Section recipes = new Section("recipes", "recipes");
 	public static final Section tier1 = new Section("tier 1 settings", "tier 1 settings");
@@ -107,92 +106,36 @@ public final class Config {
 
 			// Soul Stealer Section
 			ENCHANT_ID = config.getInt("ID", "enchantment", 52, 1, 128, "Soul-Stealer enchant id");
-			ENCHANT_WEIGHT = config.getInt("Weight", "enchantment", 8, 1, 10,
-					"Soul-Stealer enchant probability");
-			ENCHANT_KILL_BONUS = config.getInt("Kill Bonus", "enchantment", 1,
-					1, 10, "Soul-Stealer kill bonus");
+			ENCHANT_WEIGHT = config.getInt("Weight", "enchantment", 8, 1, 10, "Soul-Stealer enchant probability");
+			ENCHANT_KILL_BONUS = config.getInt("Kill Bonus", "enchantment", 1, 1, 10, "Soul-Stealer kill bonus");
+			
 			// general Section
-			SPAWNER_ABSORB_BONUS = config
-					.getInt("Vanilla Spawner Bonus", "general", 64, 1, 400,
-							"Amount of kills added to the shard when right-clicking a spawner");
-			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "general",
-					80, 1, 200,
-					"Max number of Entities soul cages can spawn in an area");
-			ALLOW_SPAWNER_ABSORB = config.getBoolean(
-					"Vanilla Spawner Absorbing", "general", true,
-					"Allow absorbing of vanilla spawners for a kill bonus");
-			INVERT_REDSTONE = config.getBoolean("Invert Redstone", "general",
-					false, "Active redstone stops a soul cage");
-			ENABLE_FLOOD_PREVENTION = config
-					.getBoolean("Flood Prevention", "general", true,
-							"Soul cages will stop when too many entities have been spawned");
-			ENABLE_DEBUG = config
-					.getBoolean(
-							"Enable Debug",
-							"general",
-							false,
-							"This will enable debug mode, where the console will inform you when a mob is spawned");
-			RITUAL = config
-					.getBoolean("Enable Easy mode", "general", false,
-							"RESTART REQUIRED: This will revert the shard creation to the structure method");
+			SPAWNER_ABSORB_BONUS = config.getInt("Vanilla Spawner Bonus", "general", 64, 1, 400, "Amount of kills added to the shard when right-clicking a spawner");
+			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "general", 80, 1, 200, "Max number of Entities soul cages can spawn in an area");
+			ALLOW_SPAWNER_ABSORB = config.getBoolean("Vanilla Spawner Absorbing", "general", true, "Allow absorbing of vanilla spawners for a kill bonus");
+			INVERT_REDSTONE = config.getBoolean("Invert Redstone", "general", false, "Active redstone stops a soul cage");
+			ENABLE_FLOOD_PREVENTION = config.getBoolean("Flood Prevention", "general", true, "Soul cages will stop when too many entities have been spawned");
+			ENABLE_DEBUG = config.getBoolean("Enable Debug", "general", false, "This will enable debug mode, where the console will inform you when a mob is spawned");
+			RITUAL = config.getBoolean("Enable Ritual", "general", false, "RESTART REQUIRED: This will revert the shard creation to the structure method");
+			
 			// recipes Section
-			COOK_TIME = config
-					.getInt("Cooking Time", "recipes", 12800, 0, 999999,
-							"Time (In Ticks) it takes to create Soulium and Soul Shards");
-			SHARDS = config
-					.getInt("Shard Amount",
-							"recipes",
-							3,
-							1,
-							8,
-							"RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
-			NUGGETS = config
-					.getInt("Nugget Amount",
-							"recipes",
-							8,
-							1,
-							9,
-							"RESTART REQUIRED: How many Soulium Nuggets do you want to get by smelting 1 iron ingot");
-			INGOTS = config
-					.getInt("Ingot Amount",
-							"recipes",
-							7,
-							1,
-							9,
-							"RESTART REQUIRED: How many Soulium Ingots do you want to get by smelting 1 iron block");
-			IRNNUG = config.getInt("Iron Nugget Amount", "recipes", 2, 0, 9,
-					"How many iron nugget by product do you want?");
+			COOK_TIME = config.getInt("Cooking Time", "recipes", 12800, 0, 999999, "Time (In Ticks) it takes to create Soulium and Soul Shards");
+			SHARDS = config.getInt("Shard Amount", "recipes", 3, 1, 8, "RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
+			NUGGETS = config.getInt("Nugget Amount", "recipes", 8, 1, 9, "RESTART REQUIRED: How many Soulium Nuggets do you want to get by smelting 1 iron ingot");
+			INGOTS = config.getInt("Ingot Amount", "recipes", 7, 1, 9, "RESTART REQUIRED: How many Soulium Ingots do you want to get by smelting 1 iron block");
+			IRNNUG = config.getInt("Iron Nugget Amount", "recipes", 2, 0, 9, "How many iron nugget by product do you want?");
 
 			short[] minKills = new short[5];
 
 			for (int i = 0; i < 5; i++) {
-				minKills[i] = (short) config.getInt("Min kills", "tier "
-						+ (i + 1) + " settings", DEFAULT_MIN_KILLS[i], 1, 2048,
-						"Minimum kills for the tier");
+				minKills[i] = (short) config.getInt("Min kills", "tier " + (i + 1) + " settings", DEFAULT_MIN_KILLS[i], 1, 2048, "Minimum kills for the tier");
 
-				TierHandler.setNumSpawns(i, (byte) config.getInt("Num Spawns",
-						"tier " + (i + 1) + " settings", DEFAULT_NUM_SPAWNS[i],
-						1, 10, "Number of spawns per operation"));
-				TierHandler.setSpawnDelay(i, (byte) config.getInt("Cooldown",
-						"tier " + (i + 1) + " settings",
-						DEFAULT_SPAWN_DELAY[i], 1, 60,
-						"Cooldown time for soul cages (in seconds)"));
-				TierHandler.setPlayerChecks(i, config.getBoolean(
-						"Check Player", "tier " + (i + 1) + " settings",
-						DEFAULT_NEEDS_PLAYER[i],
-						"Needs a player nearby to spawn entities"));
-				TierHandler.setLightChecks(i, config.getBoolean("Check Light",
-						"tier " + (i + 1) + " settings",
-						DEFAULT_CHECKS_LIGHT[i],
-						"Needs appropriate light to spawn entities"));
-				TierHandler.setWorldChecks(i, config.getBoolean("Checks World",
-						"tier " + (i + 1) + " settings",
-						DEFAULT_CHECKS_WORLD[i],
-						"Needs appropriate world to spawn entities"));
-				TierHandler.setRedstoneChecks(i, config.getBoolean(
-						"Redstone control", "tier " + (i + 1) + " settings",
-						DEFAULT_CHECKS_REDSTONE[i],
-						"Reacts to a redstone signal"));
+				TierHandler.setNumSpawns(i, (byte) config.getInt("Num Spawns", "tier " + (i + 1) + " settings", DEFAULT_NUM_SPAWNS[i], 1, 10, "Number of spawns per operation"));
+				TierHandler.setSpawnDelay(i, (byte) config.getInt("Cooldown", "tier " + (i + 1) + " settings", DEFAULT_SPAWN_DELAY[i], 1, 60, "Cooldown time for soul cages (in seconds)"));
+				TierHandler.setPlayerChecks(i, config.getBoolean("Check Player", "tier " + (i + 1) + " settings", DEFAULT_NEEDS_PLAYER[i], "Needs a player nearby to spawn entities"));
+				TierHandler.setLightChecks(i, config.getBoolean("Check Light", "tier " + (i + 1) + " settings", DEFAULT_CHECKS_LIGHT[i], "Needs appropriate light to spawn entities"));
+				TierHandler.setWorldChecks(i, config.getBoolean("Checks World", "tier " + (i + 1) + " settings", DEFAULT_CHECKS_WORLD[i], "Needs appropriate world to spawn entities"));
+				TierHandler.setRedstoneChecks(i, config.getBoolean("Redstone control", "tier " + (i + 1) + " settings", DEFAULT_CHECKS_REDSTONE[i], "Reacts to a redstone signal"));
 			}
 
 			TierHandler.setTierReqKills(minKills);

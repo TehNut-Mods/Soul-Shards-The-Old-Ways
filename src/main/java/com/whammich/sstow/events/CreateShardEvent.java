@@ -1,8 +1,5 @@
 package com.whammich.sstow.events;
 
-import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.Register;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -10,6 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
+import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.Register;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CreateShardEvent {
@@ -38,7 +39,9 @@ public class CreateShardEvent {
 				event.world.func_147480_a(event.x, event.y, event.z, false);
 
 				ForgeDirection dir = ForgeDirection.getOrientation(event.face);
-
+				
+//				event.world.addWeatherEffect(new EntityHarmlessLightningBolt(event.world, event.x + 1, event.y, event.z + 1));
+				
 				event.world.spawnEntityInWorld(new EntityItem(event.world,
 						event.x + (dir.offsetX * 1.75D), event.y
 								+ (dir.offsetY * 1.75D) + 0.5D, event.z
