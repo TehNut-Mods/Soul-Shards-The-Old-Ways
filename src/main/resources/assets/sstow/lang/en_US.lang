@@ -29,7 +29,7 @@ tile.sstow.block.xenolith.polished.name=Polished Xenolith
 tile.sstow.block.xenolith.decorative.name=Decorative Xenolith
 tile.sstow.block.xenolith.nether.name=Nether Xenolith
 tile.sstow.block.xenolith.soulium.name=Soulium infused Xenolith
-tile.sstow.block.xenolith.redstone.name=Redsotne infused Xenolith
+tile.sstow.block.xenolith.redstone.name=Redstone infused Xenolith
 tile.sstow.block.xenolith.ender.name=Ender infused Xenolith
 tile.sstow.block.xenolith.light.name=Glowing Xenolith
 
@@ -62,5 +62,12 @@ container.soulforge=Soul Forge
 itemGroup.sstow=Soul Shards The Old Ways
 
 # Soul Shard Details
-sstow.shard.unbound=You need to bind the shard to a mob type
-sstow.shard.level=Soul Shard Tier 
+chat.sstow.shard.unbound=You need to bind the shard to a mob type
+chat.sstow.shard.level=Soul Shard Tier
+chat.sstow.shard.bound=Bound to:
+chat.sstow.shard.player=Checks Player:
+chat.sstow.shard.light=Checks Lightlevels:
+chat.sstow.shard.dimension=Checks Dimension:
+chat.sstow.shard.redstone=Uses Redstone:
+chat.sstow.shard.quantity=Spawn Amount:
+chat.sstow.shard.rate=Spawn Rate:
