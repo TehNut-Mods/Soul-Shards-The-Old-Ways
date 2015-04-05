@@ -61,3 +61,6 @@ enchantment.soul_stealer=Soul Stealer
 container.soulforge=Soul Forge
 itemGroup.sstow=Soul Shards The Old Ways
 
+# Soul Shard Details
+sstow.shard.unbound=You need to bind the shard to a mob type
+sstow.shard.level=Soul Shard Tier 

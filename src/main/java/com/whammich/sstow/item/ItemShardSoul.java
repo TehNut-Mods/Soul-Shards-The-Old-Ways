@@ -66,22 +66,23 @@ public class ItemShardSoul extends Item {
 			return stack;
 		}
 		
-		if(!Utils.isShardBound(stack)){
-			player.addChatComponentMessage(new ChatComponentText("Kill a mob to bind it"));
-		} else if(Utils.getShardTier(stack) == 0){
+		if(!Utils.isShardBound(stack) && level == 0) {
+			player.addChatComponentMessage(new ChatComponentText(Utils.localize("sstow.shard.unbound")));
+		} else if(level == 0) {
 			player.addChatComponentMessage(new ChatComponentText("Soul Shard Tier " + level));
 			player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
 			player.addChatComponentMessage(new ChatComponentText("This shard cannot be used in a soul cage, you must level it up"));
-		} else {
-		player.addChatComponentMessage(new ChatComponentText("Soul Shard Tier " + level));
-		player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
-		player.addChatComponentMessage(new ChatComponentText("Requires Player: " + TierHandler.getChecksPlayer((int) tier - 1)));
-		player.addChatComponentMessage(new ChatComponentText("Requires Darkness: " + TierHandler.getChecksLight((int) tier - 1)));
-		player.addChatComponentMessage(new ChatComponentText("Requires Worlds: " + TierHandler.getChecksWorld((int) tier - 1)));
-		player.addChatComponentMessage(new ChatComponentText("Uses Redstone: " + TierHandler.getChecksRedstone((int) tier - 1)));
-		player.addChatComponentMessage(new ChatComponentText("Spawn Amount: " + TierHandler.getNumSpawns((int) tier - 1)));
-		player.addChatComponentMessage(new ChatComponentText("Spawn Rate: " + TierHandler.getCooldown((int) tier - 1)));
+		} else if(level > 0) {
+			player.addChatComponentMessage(new ChatComponentText("Tier " + level));
+			player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
+			player.addChatComponentMessage(new ChatComponentText("Requires Player: " + TierHandler.getChecksPlayer((int) tier - 1)));
+			player.addChatComponentMessage(new ChatComponentText("Requires Darkness: " + TierHandler.getChecksLight((int) tier - 1)));
+			player.addChatComponentMessage(new ChatComponentText("Requires Worlds: " + TierHandler.getChecksWorld((int) tier - 1)));
+			player.addChatComponentMessage(new ChatComponentText("Uses Redstone: " + TierHandler.getChecksRedstone((int) tier - 1)));
+			player.addChatComponentMessage(new ChatComponentText("Spawn Amount: " + TierHandler.getNumSpawns((int) tier - 1)));
+			player.addChatComponentMessage(new ChatComponentText("Spawn Rate: " + TierHandler.getCooldown((int) tier - 1)));
 		}
+		
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, false);
 
 		if (mop == null || mop.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK) {
