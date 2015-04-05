@@ -62,25 +62,29 @@ public class ItemShardSoul extends Item {
 		byte level = Utils.getShardTier(stack);
 		tier = Utils.getShardTier(stack);
 
+		if (!world.isRemote){
+			if(player.isSneaking()){
+				if(!Utils.isShardBound(stack)){
+					player.addChatComponentMessage(new ChatComponentText("Kill a mob to bind it"));
+				} else if(Utils.getShardTier(stack) == 0){
+					player.addChatComponentMessage(new ChatComponentText("Soul Shard Tier " + level));
+					player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
+					player.addChatComponentMessage(new ChatComponentText("This shard cannot be used in a soul cage, you must level it up"));
+				} else {
+					player.addChatComponentMessage(new ChatComponentText("Soul Shard Tier " + level));
+					player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
+					player.addChatComponentMessage(new ChatComponentText("Requires Player: " + TierHandler.getChecksPlayer((int) tier - 1)));
+					player.addChatComponentMessage(new ChatComponentText("Requires Darkness: " + TierHandler.getChecksLight((int) tier - 1)));
+					player.addChatComponentMessage(new ChatComponentText("Requires Worlds: " + TierHandler.getChecksWorld((int) tier - 1)));
+					player.addChatComponentMessage(new ChatComponentText("Uses Redstone: " + TierHandler.getChecksRedstone((int) tier - 1)));
+					player.addChatComponentMessage(new ChatComponentText("Spawn Amount: " + TierHandler.getNumSpawns((int) tier - 1)));
+					player.addChatComponentMessage(new ChatComponentText("Spawn Rate: " + TierHandler.getCooldown((int) tier - 1)));
+				}
+			}
+		}
+
 		if (world.isRemote || (Utils.hasMaxedKills(stack)) || !Config.ALLOW_SPAWNER_ABSORB) {
 			return stack;
-		}
-		
-		if(!Utils.isShardBound(stack) && level == 0) {
-			player.addChatComponentMessage(new ChatComponentText(Utils.localize("sstow.shard.unbound")));
-		} else if(level == 0) {
-			player.addChatComponentMessage(new ChatComponentText("Soul Shard Tier " + level));
-			player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
-			player.addChatComponentMessage(new ChatComponentText("This shard cannot be used in a soul cage, you must level it up"));
-		} else if(level > 0) {
-			player.addChatComponentMessage(new ChatComponentText("Tier " + level));
-			player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
-			player.addChatComponentMessage(new ChatComponentText("Requires Player: " + TierHandler.getChecksPlayer((int) tier - 1)));
-			player.addChatComponentMessage(new ChatComponentText("Requires Darkness: " + TierHandler.getChecksLight((int) tier - 1)));
-			player.addChatComponentMessage(new ChatComponentText("Requires Worlds: " + TierHandler.getChecksWorld((int) tier - 1)));
-			player.addChatComponentMessage(new ChatComponentText("Uses Redstone: " + TierHandler.getChecksRedstone((int) tier - 1)));
-			player.addChatComponentMessage(new ChatComponentText("Spawn Amount: " + TierHandler.getNumSpawns((int) tier - 1)));
-			player.addChatComponentMessage(new ChatComponentText("Spawn Rate: " + TierHandler.getCooldown((int) tier - 1)));
 		}
 		
 		MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, false);
@@ -161,13 +165,6 @@ public class ItemShardSoul extends Item {
 		return stack;
 	}
 
-	public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int side, float par8, float par9, float par10) {
-		if (world.isRemote) {
-
-		}
-		return true;
-	}
-	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		if (Utils.isShardBound(stack)) {
