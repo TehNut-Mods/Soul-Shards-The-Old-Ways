@@ -23,6 +23,18 @@ public class SFRecipeHandler {
 		return SMELTING_BASE;
 	}
 
+	public Map<ItemStack, ItemStack> getSmeltingList() {
+		return smeltingList;
+	}
+	
+	public Map<ItemStack, ItemStack> getByProductList() {
+		return secondaryList;
+	}
+	
+	public Map<ItemStack, Integer> getFuelList() {
+		return fuelList;
+	}
+	
 	public ItemStack NuggetIngot() {
 		if (Config.NUGGETS == 9) {
 			return new ItemStack(Register.ItemMaterials, 1, 2);

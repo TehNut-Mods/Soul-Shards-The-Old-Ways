@@ -56,7 +56,8 @@ public class EntityHarmlessLightningBolt extends EntityWeatherEffect{
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
+    @SuppressWarnings("rawtypes")
+	public void onUpdate()
     {
 	  super.onUpdate();
 

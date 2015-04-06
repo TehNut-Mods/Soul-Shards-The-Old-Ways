@@ -31,7 +31,7 @@ import com.whammich.sstow.utils.ModLogger;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.TierHandler;
 import com.whammich.sstow.utils.Utils;
-import com.whammich.sstow.utils.EntityBlackList;
+import com.whammich.sstow.utils.Entitylist;
 
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
@@ -67,7 +67,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			return;
 		}
 		
-		if (EntityBlackList.bList.contains(entName)){
+		if (Entitylist.bList.contains(entName)){
 			return;
 		}
 		

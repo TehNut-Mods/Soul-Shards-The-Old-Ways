@@ -8,7 +8,7 @@ import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.events.CreateShardEvent;
 import com.whammich.sstow.events.PlayerKillEntityEvent;
 import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.EntityBlackList;
+import com.whammich.sstow.utils.Entitylist;
 import com.whammich.sstow.utils.EntityMapper;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
@@ -48,7 +48,7 @@ public class SSTheOldWays {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		EntityMapper.init();
-		EntityBlackList
+		Entitylist
 				.init(new File(Config.configDirectory + "/BlackList.cfg"));
 	}
 	

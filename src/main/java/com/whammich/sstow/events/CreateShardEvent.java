@@ -4,6 +4,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+//import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -39,6 +40,10 @@ public class CreateShardEvent {
 				event.world.func_147480_a(event.x, event.y, event.z, false);
 
 				ForgeDirection dir = ForgeDirection.getOrientation(event.face);
+
+//				event.entityPlayer.addChatComponentMessage(new ChatComponentText((char) 167 + "5" + (char) 167 + "o" + "You hear whispering around you,"));
+//				event.entityPlayer.addChatComponentMessage(new ChatComponentText((char) 167 + "5" + (char) 167 + "o" + "but as you try to listen; silence falls"));
+//				event.world.playSoundEffect(event.x, event.y, event.z, "portal.trigger", 0.05F, 1.0F);
 				
 //				event.world.addWeatherEffect(new EntityHarmlessLightningBolt(event.world, event.x + 1, event.y, event.z + 1));
 				

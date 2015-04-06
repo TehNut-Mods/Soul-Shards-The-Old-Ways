@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.EntityBlackList;
+import com.whammich.sstow.utils.Entitylist;
 import com.whammich.sstow.utils.EntityMapper;
 import com.whammich.sstow.utils.ModLogger;
 import com.whammich.sstow.utils.Register;
@@ -42,7 +42,7 @@ public class PlayerKillEntityEvent {
 
 		String entName = EntityList.getEntityString(dead);
 		
-		if (EntityBlackList.bList.contains(entName)){
+		if (Entitylist.bList.contains(entName)){
 			return;
 		}
 		

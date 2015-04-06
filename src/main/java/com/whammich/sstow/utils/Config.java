@@ -34,14 +34,10 @@ public final class Config {
 	public static final short[] DEFAULT_MIN_KILLS = { 64, 128, 256, 512, 1024 };
 	private static final byte[] DEFAULT_NUM_SPAWNS = { 2, 4, 4, 4, 6 };
 	private static final byte[] DEFAULT_SPAWN_DELAY = { 20, 10, 5, 5, 2 };
-	private static final boolean[] DEFAULT_NEEDS_PLAYER = { true, true, false,
-		false, false };
-	private static final boolean[] DEFAULT_CHECKS_LIGHT = { true, true, true,
-		true, false };
-	private static final boolean[] DEFAULT_CHECKS_WORLD = { true, true, true,
-		false, false };
-	private static final boolean[] DEFAULT_CHECKS_REDSTONE = { false, false,
-		false, false, true };
+	private static final boolean[] DEFAULT_NEEDS_PLAYER = { true, true, false, false, false };
+	private static final boolean[] DEFAULT_CHECKS_LIGHT = { true, true, true, true, false };
+	private static final boolean[] DEFAULT_CHECKS_WORLD = { true, true, true, false, false };
+	private static final boolean[] DEFAULT_CHECKS_REDSTONE = { false, false, false, false, true };
 
 	public static Configuration config;
 
@@ -82,8 +78,7 @@ public final class Config {
 
 	public static void load(FMLPreInitializationEvent event) {
 		FMLCommonHandler.instance().bus().register(new Config());
-		configDirectory = new File(event.getModConfigurationDirectory()
-				+ "/sstow/");
+		configDirectory = new File(event.getModConfigurationDirectory() + "/sstow/");
 		if (!configDirectory.exists()) {
 			configDirectory.mkdir();
 		}
