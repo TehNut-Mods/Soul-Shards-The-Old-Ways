@@ -103,13 +103,13 @@ public class ForgeRecipeHandler extends FurnaceRecipeHandler {
 		}
 	}
 
-	@Override
-	public void loadUsageRecipes(String inputId, Object... ingredients) {
-		if (inputId.equals("item") && getClass() == ForgeRecipeHandler.class)
-			loadCraftingRecipes("soulforge");
-		else
-			super.loadUsageRecipes(inputId, ingredients);
-	}
+	 @Override
+	 public void loadUsageRecipes(String inputId, Object... ingredients) {
+	  if (inputId.equals("item") && getClass() == ForgeRecipeHandler.class)
+	   loadUsageRecipes((ItemStack)ingredients[0]);
+	  else
+	   super.loadUsageRecipes(inputId, ingredients);
+	 }	
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
