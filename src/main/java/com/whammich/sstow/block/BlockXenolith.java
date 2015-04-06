@@ -37,14 +37,14 @@ public class BlockXenolith extends Block {
 		setBlockName("sstow.block.xenolith");
 	}
 
-	public static final String[] names = new String[] { 
-			"raw",			// 0
-			"polished",		// 1
-			"decorative",	// 2
-			"nether",		// 3
-			"soulium",		// 4
-			"redstone",		// 5
-			"ender",		// 6
+	public static final String[] names = new String[] {
+		"raw",			// 0
+		"polished",		// 1
+		"decorative",	// 2
+		"nether",		// 3
+		"soulium",		// 4
+		"redstone",		// 5
+		"ender",		// 6
 	};
 
 	@Override
@@ -62,9 +62,11 @@ public class BlockXenolith extends Block {
 
 		this.blockIcon = new IIcon[names.length];
 		this.bottomIcon = iconRegister.registerIcon("nether_brick");
-		this.otherIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_raw");
-		this.redIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_redstone_tb");
-		
+		this.otherIcon = iconRegister.registerIcon(Reference.MOD_ID
+				+ ":xenolith/xenolith_raw");
+		this.redIcon = iconRegister.registerIcon(Reference.MOD_ID
+				+ ":xenolith/xenolith_redstone_tb");
+
 		for (int i = 0; i < this.blockIcon.length; ++i) {
 			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID
 					+ ":xenolith/xenolith_" + names[i]);
@@ -76,21 +78,21 @@ public class BlockXenolith extends Block {
 		if (meta == 3) {
 			if (side == 0) {
 				return bottomIcon;
-			} else if(side == 1) {
+			} else if (side == 1) {
 				return otherIcon;
 			} else {
 				return blockIcon[meta];
 			}
-		} 
-//		else if (meta == 5){
-//			if (side == 0) {
-//				return redIcon;
-//			} else if(side == 1) {
-//				return redIcon;
-//			} else {
-//				return blockIcon[meta];
-//			}
-//		}
+		}
+		// else if (meta == 5){
+		// if (side == 0) {
+		// return redIcon;
+		// } else if(side == 1) {
+		// return redIcon;
+		// } else {
+		// return blockIcon[meta];
+		// }
+		// }
 
 		if (meta > 6) {
 			meta = 0;
