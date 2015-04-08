@@ -120,6 +120,23 @@ public class Register {
 		OreDictionary.registerOre("essenceCorrupted", new ItemStack(ItemMaterials, 1, 4));
 		OreDictionary.registerOre("stickPetrified", new ItemStack(ItemMaterials, 1, 5));
 		OreDictionary.registerOre("stickWood", new ItemStack(ItemMaterials, 1, 5));
+
+		// Petrified Logs OreDict
+		OreDictionary.registerOre("treeStone", new ItemStack(BlockPetrified, 1, 0));
+		OreDictionary.registerOre("treeStone", new ItemStack(BlockPetrified, 1, 1));
+		OreDictionary.registerOre("treeStone", new ItemStack(BlockPetrified, 1, 2));
+		OreDictionary.registerOre("treeStone", new ItemStack(BlockPetrified, 1, 3));
+		OreDictionary.registerOre("treeStone", new ItemStack(BlockPetrified2, 1, 0));
+		OreDictionary.registerOre("treeStone", new ItemStack(BlockPetrified2, 1, 1));
+
+		OreDictionary.registerOre("treeWood", new ItemStack(BlockPetrified, 1, 0));
+		OreDictionary.registerOre("treeWood", new ItemStack(BlockPetrified, 1, 1));
+		OreDictionary.registerOre("treeWood", new ItemStack(BlockPetrified, 1, 2));
+		OreDictionary.registerOre("treeWood", new ItemStack(BlockPetrified, 1, 3));
+		OreDictionary.registerOre("treeWood", new ItemStack(BlockPetrified2, 1, 0));
+		OreDictionary.registerOre("treeWood", new ItemStack(BlockPetrified2, 1, 1));
+
+		// Petrified Planks OreDict
 		OreDictionary.registerOre("plankStone", new ItemStack(BlockPetrifiedPlanks, 1, 0));
 		OreDictionary.registerOre("plankStone", new ItemStack(BlockPetrifiedPlanks, 1, 1));
 		OreDictionary.registerOre("plankStone", new ItemStack(BlockPetrifiedPlanks, 1, 2));
