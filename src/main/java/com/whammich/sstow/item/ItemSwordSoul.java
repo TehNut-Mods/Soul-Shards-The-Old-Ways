@@ -8,8 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.IIcon;
 
 public class ItemSwordSoul extends ItemSword {
+
+    private static String[] browniePoints = { "Xougian" };
+    private IIcon[] icon = new IIcon[browniePoints.length];
 
 	public ItemSwordSoul(ToolMaterial Material) {
 		super(Material);
@@ -25,5 +29,24 @@ public class ItemSwordSoul extends ItemSword {
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 		itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":swordsoul");
+
+        for (int i = 0; i < browniePoints.length; i++) {
+            icon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":brownie/" + browniePoints[i].toLowerCase().replaceAll(" ", ""));
+        }
 	}
+
+    @Override
+    public IIcon getIconIndex(ItemStack stack) {
+        for (int i = 0; i < browniePoints.length; i++) {
+            if (stack.getDisplayName().equalsIgnoreCase(browniePoints[i]))
+                return icon[i];
+        }
+
+        return itemIcon;
+    }
+
+    @Override
+    public IIcon getIcon(ItemStack stack, int pass) {
+        return getIconIndex(stack);
+    }
 }

@@ -56,6 +56,11 @@ public class BlockXenolith extends Block {
 		}
 	}
 
+    @Override
+    public int damageDropped(int meta) {
+        return meta;
+    }
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
