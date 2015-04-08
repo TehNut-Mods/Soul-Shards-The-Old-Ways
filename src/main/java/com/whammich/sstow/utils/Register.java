@@ -62,7 +62,7 @@ public class Register {
 	public static Item ItemAxeSoul = new ItemAxeSoul(SOULIUM);
 	public static Item ItemHoeSoul = new ItemHoeSoul(SOULIUM);
 	public static Item ItemSpadeSoul = new ItemSpadeSoul(SOULIUM);
-
+	
 	// Set up the mod blocks
 	public static Block BlockCage = new BlockCage();
 	public static Block BlockForge = new BlockForge(false).setCreativeTab(CREATIVE_TAB);
@@ -104,7 +104,7 @@ public class Register {
 		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(BlockSoulium, "sstow_soulium_block");
 		GameRegistry.registerBlock(BlockXenoLight, "BlockXenoLight");
-				GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
+		GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
 		GameRegistry.registerBlock(BlockObsidianGlass, "BlockObsidGlass");
 		GameRegistry.registerBlock(BlockXenolith, ItemBlockXenolith.class, "BlockXenolith");
 		GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");
@@ -158,9 +158,5 @@ public class Register {
 			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
 		}
 	}
-	
-//	private static void registerRenders() {
-//		TileEntitySpecialRenderer renderAnvil = new RenderSoulAnvil();
-//	}
 	
 }

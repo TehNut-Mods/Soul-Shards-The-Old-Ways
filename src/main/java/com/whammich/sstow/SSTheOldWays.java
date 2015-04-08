@@ -8,8 +8,8 @@ import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.events.CreateShardEvent;
 import com.whammich.sstow.events.PlayerKillEntityEvent;
 import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.Entitylist;
 import com.whammich.sstow.utils.EntityMapper;
+import com.whammich.sstow.utils.Entitylist;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.Remap;
@@ -39,7 +39,6 @@ public class SSTheOldWays {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		Register.registerObjs();
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
 		FMLInterModComms.sendMessage("Waila", "register", Reference.Waila_callBack);
@@ -47,9 +46,9 @@ public class SSTheOldWays {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		Register.registerObjs();
 		EntityMapper.init();
-		Entitylist
-				.init(new File(Config.configDirectory + "/BlackList.cfg"));
+		Entitylist.init(new File(Config.configDirectory + "/entitylist.cfg"));
 	}
 	
 	@EventHandler

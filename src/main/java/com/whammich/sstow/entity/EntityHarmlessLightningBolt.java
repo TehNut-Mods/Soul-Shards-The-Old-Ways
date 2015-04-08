@@ -1,15 +1,7 @@
 package com.whammich.sstow.entity;
 
-import java.util.List;
-
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.effect.EntityWeatherEffect;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityHarmlessLightningBolt extends EntityWeatherEffect{
@@ -56,7 +48,6 @@ public class EntityHarmlessLightningBolt extends EntityWeatherEffect{
     /**
      * Called to update the entity's position/logic.
      */
-    @SuppressWarnings("rawtypes")
 	public void onUpdate()
     {
 	  super.onUpdate();

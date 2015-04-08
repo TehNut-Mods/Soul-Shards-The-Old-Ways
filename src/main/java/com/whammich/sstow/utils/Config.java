@@ -29,7 +29,6 @@ public final class Config {
 	public static int SHARDS;
 	public static int NUGGETS;
 	public static int INGOTS;
-	public static int IRNNUG;
 
 	public static final short[] DEFAULT_MIN_KILLS = { 64, 128, 256, 512, 1024 };
 	private static final byte[] DEFAULT_NUM_SPAWNS = { 2, 4, 4, 4, 6 };
@@ -118,7 +117,6 @@ public final class Config {
 			SHARDS = config.getInt("Shard Amount", "recipes", 3, 1, 8, "RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
 			NUGGETS = config.getInt("Nugget Amount", "recipes", 8, 1, 9, "RESTART REQUIRED: How many Soulium Nuggets do you want to get by smelting 1 iron ingot");
 			INGOTS = config.getInt("Ingot Amount", "recipes", 7, 1, 9, "RESTART REQUIRED: How many Soulium Ingots do you want to get by smelting 1 iron block");
-			IRNNUG = config.getInt("Iron Nugget Amount", "recipes", 2, 0, 9, "How many iron nugget by product do you want?");
 
 			short[] minKills = new short[5];
 
