@@ -12,7 +12,7 @@ import net.minecraft.util.IIcon;
 
 public class ItemSwordSoul extends ItemSword {
 
-    private static String[] browniePoints = { "Xougian" };
+    private static String[] browniePoints = { "Xoguian" };
     private IIcon[] icon = new IIcon[browniePoints.length];
 
 	public ItemSwordSoul(ToolMaterial Material) {
