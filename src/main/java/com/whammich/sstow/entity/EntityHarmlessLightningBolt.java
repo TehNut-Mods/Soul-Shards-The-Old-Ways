@@ -81,17 +81,17 @@ public class EntityHarmlessLightningBolt extends EntityWeatherEffect{
               this.lightningState = 1;
               this.boltVertex = this.rand.nextLong();
 
-              if (!this.worldObj.isRemote && this.worldObj.getGameRules().getGameRuleBooleanValue("doFireTick") && this.worldObj.doChunksNearChunkExist(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ), 10))
-              {
-                  int i = MathHelper.floor_double(this.posX);
-                  int j = MathHelper.floor_double(this.posY);
-                  int k = MathHelper.floor_double(this.posZ);
-
-                  if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(this.worldObj, i, j, k))
-                  {
-                      this.worldObj.setBlock(i, j, k, Blocks.fire);
-                  }
-              }
+          //    if (!this.worldObj.isRemote && this.worldObj.getGameRules().getGameRuleBooleanValue("doFireTick") && this.worldObj.doChunksNearChunkExist(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ), 10))
+        //      {
+      //            int i = MathHelper.floor_double(this.posX);
+    //              int j = MathHelper.floor_double(this.posY);
+  //                int k = MathHelper.floor_double(this.posZ);
+//
+              //    if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && Blocks.fire.canPlaceBlockAt(this.worldObj, i, j, k))
+                 // {
+               //       this.worldObj.setBlock(i, j, k, Blocks.fire);
+             //     }
+           //   }
           }
       }
 
@@ -103,15 +103,15 @@ public class EntityHarmlessLightningBolt extends EntityWeatherEffect{
           }
           else
           {
-              double d0 = 3.0D;
-              List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(this.posX - d0, this.posY - d0, this.posZ - d0, this.posX + d0, this.posY + 6.0D + d0, this.posZ + d0));
-
-              for (int l = 0; l < list.size(); ++l)
-              {
-                  Entity entity = (Entity)list.get(l);
-                  if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, new EntityLightningBolt(this.worldObj,this.posX, this.posY, this.posZ)));
-                      entity.onStruckByLightning(new EntityLightningBolt(this.worldObj,this.posX, this.posY, this.posZ));
-              }
+	//        double d0 = 3.0D;
+	//        List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, AxisAlignedBB.getBoundingBox(this.posX - d0, this.posY - d0, this.posZ - d0, this.posX + d0, this.posY + 6.0D + d0, this.posZ + d0));
+	//
+	//        for (int l = 0; l < list.size(); ++l)
+	//        {
+	//            Entity entity = (Entity)list.get(l);
+	//            if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, new EntityLightningBolt(this.worldObj,this.posX, this.posY, this.posZ)));
+	//                entity.onStruckByLightning(new EntityLightningBolt(this.worldObj,this.posX, this.posY, this.posZ));
+	//        }
           }
       }
   }
