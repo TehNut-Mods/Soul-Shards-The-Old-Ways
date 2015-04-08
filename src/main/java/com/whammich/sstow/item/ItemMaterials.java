@@ -15,7 +15,17 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-    private static String[] names = { "nugget.iron", "nugget.soulium", "ingot.soulium", "dust.vile", "essence.corrupted", "petrified.stick" };
+    private static String[] names = { 
+    
+    	"nugget.iron",			// 0
+    	"nugget.soulium", 		// 1
+    	"ingot.soulium", 		// 2
+    	"dust.vile", 			// 3
+    	"essence.corrupted", 	// 4
+    	"petrified.stick" 		// 5
+    	
+    };
+    
     private IIcon[] icon = new IIcon[16];
 
     public ItemMaterials() {
