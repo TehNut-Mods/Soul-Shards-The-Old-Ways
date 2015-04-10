@@ -1,6 +1,6 @@
 package com.whammich.sstow.entity;
 
-import net.minecraft.entity.effect.EntityWeatherEffect;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 

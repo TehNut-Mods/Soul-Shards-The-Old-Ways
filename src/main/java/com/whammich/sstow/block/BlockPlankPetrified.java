@@ -58,6 +58,11 @@ public class BlockPlankPetrified extends Block {
 		}
 	}
 
+    @Override
+    public int damageDropped(int meta) {
+        return meta;
+    }
+
 	@Override
 	public IIcon getIcon(int side, int meta) {
 		if (meta > 6)

@@ -100,7 +100,6 @@ public class ContainerForge extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int par2) {
-		System.out.println("SlotNumber: " + par2);
 		ItemStack itemstack = null;
 
 		Slot slot = (Slot) this.inventorySlots.get(par2);
