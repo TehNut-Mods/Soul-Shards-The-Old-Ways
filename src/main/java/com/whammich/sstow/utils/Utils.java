@@ -289,6 +289,22 @@ public final class Utils {
 		}
 	}
 
+	public static void setShardBoundPlayer(ItemStack shard, EntityPlayer player) {
+		shard.stackTagCompound.setString("owner", player.getDisplayName());
+	}
+
+	public static String getShardBoundPlayer(ItemStack shard) {
+		if (!shard.hasTagCompound()) {
+			return null;
+		}
+
+		if (shard.stackTagCompound.hasKey("owner")) {
+			return shard.stackTagCompound.getString("owner");
+		}
+
+		return null;
+	}
+	
 	public static String localize(String key) {
 		return StatCollector.translateToLocal(key);
 	}
