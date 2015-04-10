@@ -321,6 +321,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		if (inventory != null) {
 			tier = Utils.getShardTier(inventory);
 			entName = Utils.getShardBoundEnt(inventory);
+			owner = Utils.getShardBoundPlayer(inventory);
 		}
 		active = nbt.getBoolean("active");
 	}
