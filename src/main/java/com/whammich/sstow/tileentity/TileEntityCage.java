@@ -365,6 +365,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				this.zCoord, 1, 2);
 		this.tier = Utils.getShardTier(this.inventory);
 		this.entName = Utils.getShardBoundEnt(this.inventory);
+		this.owner = Utils.getShardBoundPlayer(inventory);
 	}
 
 	@Override
