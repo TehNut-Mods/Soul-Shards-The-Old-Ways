@@ -67,10 +67,12 @@ public class ItemShardSoul extends Item {
 				if(!Utils.isShardBound(stack)){
 					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.unbound")));
 				} else if(Utils.getShardTier(stack) == 0){
+					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.owner") + " " + Utils.getShardBoundPlayer(stack)));
 					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.level") + " " + level));
 					player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
 					player.addChatComponentMessage(new ChatComponentText("This shard cannot be used in a soul cage, you must level it up"));
 				} else {
+					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.owner") + " " + Utils.getShardBoundPlayer(stack)));
 					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.level") + " " + level));
 					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.bound") + " " + Utils.getShardBoundEnt(stack)));
 					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.player") + " " + TierHandler.getChecksPlayer((int) tier - 1)));
