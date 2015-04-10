@@ -74,7 +74,7 @@ public class Register {
 	public static Block BlockPetrified = new BlockPetrified();
     public static Block BlockPetrified2 = new BlockPetrified2();
     public static Block BlockPetrifiedPlanks = new BlockPlankPetrified();
-    public static Block BlockObsidianGlass = new BlockGlassObsidian(Material.rock, false);
+    public static Block BlockObsidianGlass = new BlockGlassObsidian();
     
 	public static void registerObjs() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance, new GuiHandler());
