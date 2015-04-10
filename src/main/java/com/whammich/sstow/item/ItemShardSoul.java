@@ -65,22 +65,22 @@ public class ItemShardSoul extends Item {
 		if (!world.isRemote){
 			if(player.isSneaking()){
 				if(!Utils.isShardBound(stack)){
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.unbound")));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.unbound","")));
 				} else if(Utils.getShardTier(stack) == 0){
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.owner") + " " + Utils.getShardBoundPlayer(stack)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.level") + " " + level));
-					player.addChatComponentMessage(new ChatComponentText("Bound to: " + Utils.getShardBoundEnt(stack)));
-					player.addChatComponentMessage(new ChatComponentText("This shard cannot be used in a soul cage, you must level it up"));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.owner", "" + Utils.getShardBoundPlayer(stack))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.level", "" + level)));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.bound", "" + Utils.getShardBoundEnt(stack))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.levelup", "")));
 				} else {
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.owner") + " " + Utils.getShardBoundPlayer(stack)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.level") + " " + level));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.bound") + " " + Utils.getShardBoundEnt(stack)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.player") + " " + TierHandler.getChecksPlayer((int) tier - 1)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.light") + " " + TierHandler.getChecksLight((int) tier - 1)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.dimension") + " " + TierHandler.getChecksWorld((int) tier - 1)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.redstone") + " " + TierHandler.getChecksRedstone((int) tier - 1)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.quantity") + " " + TierHandler.getNumSpawns((int) tier - 1)));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.rate") + " " + TierHandler.getCooldown((int) tier - 1)));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.level", "" + level)));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.owner", "" + Utils.getShardBoundPlayer(stack))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.bound", "" + Utils.getShardBoundEnt(stack))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.player", "" + TierHandler.getChecksPlayer((int) tier - 1))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.light", "" + TierHandler.getChecksLight((int) tier - 1))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.dimension", "" + TierHandler.getChecksWorld((int) tier - 1))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.redstone", "" + TierHandler.getChecksRedstone((int) tier - 1))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.quantity", "" + TierHandler.getNumSpawns((int) tier - 1))));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.rate", "" + TierHandler.getCooldown((int) tier - 1))));
 				}
 			}
 		}
