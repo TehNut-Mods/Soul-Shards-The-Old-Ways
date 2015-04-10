@@ -42,11 +42,11 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	private static final int[] slot = new int[] { 0, 1, 2, 3, 4, 5 };
 
 	private String entName;
+	private String owner;
 	private boolean redstoneActive;
 	private boolean initChecks;
 	private boolean active;
 
-	String Owner;
 
 	public TileEntityCage() {
 		counter = 0;
@@ -56,9 +56,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		active = false;
 	}
 
-	public void addOwner(String playerName) {
-		Owner = playerName;
-	}
 
 	//@SuppressWarnings("rawtypes")
 	@Override
@@ -218,7 +215,14 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	}
 
 	private boolean isPlayerClose(int x, int y, int z) {
-		return worldObj.getClosestPlayer(x, y, z, 16.0D) != null;
+		EntityPlayer entityPlayer = worldObj.getClosestPlayer(x, y, z, 16.0D);
+		if ((Config.PERSONALSHARD && entityPlayer != null 
+				&& entityPlayer.getDisplayName().equals(owner))
+				|| (!Config.PERSONALSHARD && entityPlayer != null)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private boolean canSpawnInWorld(EntityLiving ent) {
