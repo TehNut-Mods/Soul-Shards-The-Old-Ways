@@ -24,6 +24,7 @@ public final class Config {
 	public static boolean ENABLE_FLOOD_PREVENTION;
 	public static boolean ENABLE_DEBUG;
 	public static boolean RITUAL;
+	public static boolean PERSONALSHARD;
 	// recipes Section
 	public static int COOK_TIME;
 	public static int SHARDS;
@@ -111,7 +112,8 @@ public final class Config {
 			ENABLE_FLOOD_PREVENTION = config.getBoolean("Flood Prevention", "general", true, "Soul cages will stop when too many entities have been spawned");
 			ENABLE_DEBUG = config.getBoolean("Enable Debug", "general", false, "This will enable debug mode, where the console will inform you when a mob is spawned");
 			RITUAL = config.getBoolean("Enable Ritual", "general", false, "RESTART REQUIRED: This will revert the shard creation to the structure method");
-			
+			PERSONALSHARD = config.getBoolean("Personal shards", "general", false, "The soulcage will only function if the original shard creator is nearby, not just anyone.");
+
 			// recipes Section
 			COOK_TIME = config.getInt("Cooking Time", "recipes", 12800, 0, 999999, "Time (In Ticks) it takes to create Soulium and Soul Shards");
 			SHARDS = config.getInt("Shard Amount", "recipes", 3, 1, 8, "RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
