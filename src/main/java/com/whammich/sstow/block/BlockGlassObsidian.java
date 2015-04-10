@@ -30,7 +30,7 @@ public class BlockGlassObsidian extends Block {
     @Override
     public boolean isOpaqueCube()
     {
-        return true;
+        return false;
     }
     
     @Override
