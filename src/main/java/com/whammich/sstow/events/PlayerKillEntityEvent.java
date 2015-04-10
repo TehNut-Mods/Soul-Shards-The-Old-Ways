@@ -66,6 +66,7 @@ public class PlayerKillEntityEvent {
 			if (!Utils.isShardBound(shard)) {
 				Utils.setShardBoundEnt(shard, entName);
 				Utils.writeEntityHeldItem(shard, dead);
+				Utils.setShardBoundPlayer(shard, player);
 			}
 			Utils.writeEntityArmor(shard, dead);
 
