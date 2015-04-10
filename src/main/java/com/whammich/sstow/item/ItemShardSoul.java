@@ -65,12 +65,12 @@ public class ItemShardSoul extends Item {
 		if (!world.isRemote){
 			if(player.isSneaking()){
 				if(!Utils.isShardBound(stack)){
-					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.unbound","")));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.unbound")));
 				} else if(Utils.getShardTier(stack) == 0){
 					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.owner", "" + Utils.getShardBoundPlayer(stack))));
 					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.level", "" + level)));
 					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.bound", "" + Utils.getShardBoundEnt(stack))));
-					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.levelup", "")));
+					player.addChatComponentMessage(new ChatComponentText(Utils.localize("chat.sstow.shard.levelup")));
 				} else {
 					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.level", "" + level)));
 					player.addChatComponentMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.shard.owner", "" + Utils.getShardBoundPlayer(stack))));
