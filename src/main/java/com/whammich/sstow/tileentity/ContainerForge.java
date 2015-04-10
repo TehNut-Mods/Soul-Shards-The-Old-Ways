@@ -109,9 +109,9 @@ public class ContainerForge extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (par2 == 2) {
+			if (par2 == 2 || par2 == 3) {
 
-				if (!this.mergeItemStack(itemstack1, 4, 40, true)) {
+				if (!this.mergeItemStack(itemstack1, 4, 40, false)) {
 					return null;
 				}
 
@@ -131,11 +131,11 @@ public class ContainerForge extends Container {
 						return null;
 					}
 
-				} else if (par2 >= 3 && par2 < 30) {
+				} else if (par2 >= 4 && par2 < 31) {
 					if (!this.mergeItemStack(itemstack1, 31, 40, false)) {
 						return null;
 					}
-				} else if (par2 >= 30 && par2 < 39
+				} else if (par2 >= 30 && par2 < 40
 
 				&& !this.mergeItemStack(itemstack1, 4, 31, false)) {
 					return null;
