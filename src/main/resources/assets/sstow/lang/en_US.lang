@@ -20,7 +20,8 @@ item.sstow.soultool.spade.name=Soul Spade
 
 # Blocks
 tile.sstow.block.forge.name=Soul Forge
-tile.sstow.block.soulium.name=Block of Soulium
+tile.sstow.block.material.soulium.name=Block of Soulium
+tile.sstow.block.material.ender.name=Block of Ender
 tile.sstow.block.cage.name=Soul Cage
 tile.sstow.block.obsidian.glass.name=Obsidian Glass
 

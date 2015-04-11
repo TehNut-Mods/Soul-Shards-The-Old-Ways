@@ -26,14 +26,14 @@ public class Remap {
 
 	public static String[] oldBlockNames = { 
 		//"sstow_forge",
-		"sstow_soulium_block",
+		//"sstow_soulium_block",
 		"sstow_soul_cage"
 		
 	};
 
 	public static Block[] newBlockNames = { 
 		//Register.BlockForge,
-		Register.BlockSoulium, 
+		//Register.BlockMaterials, 
 		Register.BlockCage
 		
 	};

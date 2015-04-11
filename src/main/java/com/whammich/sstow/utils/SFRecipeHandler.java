@@ -45,7 +45,7 @@ public class SFRecipeHandler {
 
 	public ItemStack IngotBlock() {
 		if (Config.INGOTS == 9) {
-			return new ItemStack(Register.BlockSoulium, 1);
+			return new ItemStack(Register.BlockMaterials, 1, 0);
 		} else {
 			return new ItemStack(Register.ItemMaterials, Config.INGOTS, 2);
 		}

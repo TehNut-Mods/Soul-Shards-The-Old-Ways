@@ -4,18 +4,18 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-import com.whammich.sstow.block.BlockPlankPetrified;
+import com.whammich.sstow.block.BlockMaterials;
 
-public class ItemBlockPlankPetrified extends ItemBlock {
-
-	public ItemBlockPlankPetrified(Block block) {
+public class ItemBlockMaterials extends ItemBlock {
+	
+	public ItemBlockMaterials(Block block) {
 		super(block);
 		setHasSubtypes(true);
 	}
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName() + "." + BlockPlankPetrified.names[stack.getItemDamage() % BlockPlankPetrified.names.length];
+		return getUnlocalizedName() + "." + BlockMaterials.names[stack.getItemDamage() % BlockMaterials.names.length];
 	}
 
 	@Override
