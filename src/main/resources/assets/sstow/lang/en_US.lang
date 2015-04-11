@@ -75,5 +75,37 @@ chat.sstow.shard.redstone=Uses Redstone: %s
 chat.sstow.shard.quantity=Spawn Amount: %s
 chat.sstow.shard.rate=Spawn Rate: %s
 
+# Debug
+chat.sstow.debug.tileerror=ERROR: no tile entity found at coords: %s
+chat.sstow.debug.nounlocname=Player killed entity with no unlocalized name: %s
+chat.sstow.debug.successspawn=Successfully spawned: %s
+chat.sstow.debug.tierkillsfail=Custom tier kill settings are incorrect, resetting defaults.
+chat.sstow.debug.tierkillssuccess=Loaded custom tier kill settings!
+chat.sstow.debug.shardkillerror=Soul shard has an incorrect kill counter of: %s
 
-# 
+# Commands
+chat.sstow.command.help=--- Showing SSTOW help page 1 of 1 ---
+chat.sstow.command.killall=/sstow killall to kill all the sstow entities
+chat.sstow.command.settier=/sstow settier x to set tier of the shard
+chat.sstow.command.addkills=/sstow addkills x to add kills
+chat.sstow.command.removekills=/sstow removekills x to remove kills
+chat.sstow.command.notfound=No spawned entities were found!
+chat.sstow.command.killed=Mobs Killed: %s
+chat.sstow.command.setwrong=Wrong use of command, /sstow settier x
+chat.sstow.command.addkillwrong=Wrong use of command, /sstow addkills x
+chat.sstow.command.remkillwrong=Wrong use of command, /sstow removekills x
+chat.sstow.command.wrongcommand=Command not recognised, use /sstow help for a list of all the available commands
+
+# Shard Creation Ritual
+chat.sstow.ritual.creep1=You hear whispering around you,
+chat.sstow.ritual.creep2=but as you try to listen; silence falls
+
+# Utils
+chat.sstow.util.configupdate=Updating config...
+chat.sstow.util.configload=Loaded configuration file!
+chat.sstow.util.configloadfail=Failed to load configuration file!
+chat.sstow.util.entitylistload=Soul Shards Loaded Entity List
+chat.sstow.util.entitylistloadfail=Soul Shards had a problem loading Entity List
+chat.sstow.util.entitymapskip1=Already Mapped, skipping: %s
+chat.sstow.util.entitymapskip2=Boss Detected, skipping %s
+chat.sstow.util.entitymapdone=Finished Mapping, Entities Found: %s

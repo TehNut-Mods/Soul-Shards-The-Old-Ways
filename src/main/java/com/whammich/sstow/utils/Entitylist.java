@@ -24,9 +24,9 @@ public class Entitylist {
 				if (val)
 					bList.add(name);
 			}
-			ModLogger.logInfo("Soul Shards Loaded Entity Blacklist");
+			ModLogger.logInfo(Utils.localize("chat.sstow.util.entitylistload"));
 		} catch (Exception e) {
-			ModLogger.logFatal("Soul Shards had a problem loading Entity Blacklist");
+			ModLogger.logFatal(Utils.localize("chat.sstow.util.entitylistloadfail"));
 			e.printStackTrace();
 		} finally {
 			if (config.hasChanged())

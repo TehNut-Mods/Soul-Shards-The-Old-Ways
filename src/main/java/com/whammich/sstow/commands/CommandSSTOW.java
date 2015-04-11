@@ -37,18 +37,11 @@ public class CommandSSTOW extends CommandBase {
 
 		if ((params.length > 0) && (params.length <= 7)) {
 			if (params[0].equals("help")) {
-				sender.addChatMessage(new ChatComponentText(
-						"--- Showing SSTOW help page 1 of 1 ---")
-						.setChatStyle(new ChatStyle()
-								.setColor(EnumChatFormatting.GREEN)));
-				sender.addChatMessage(new ChatComponentText(
-						"/sstow killall to kill all the sstow entities"));
-				sender.addChatMessage(new ChatComponentText(
-						"/sstow settier x to set tier of the shard"));
-				sender.addChatMessage(new ChatComponentText(
-						"/sstow addkills x to add kills"));
-				sender.addChatMessage(new ChatComponentText(
-						"/sstow removekills x to remove kills"));
+				sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.help")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+				sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.killall")));
+				sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.settier")));
+				sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.addkills")));
+				sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.removekills")));
 
 			} else if (params[0].equals("killall")) {
 				int killCounter = 0;
@@ -61,13 +54,9 @@ public class CommandSSTOW extends CommandBase {
 				}
 
 				if (killCounter == 0) {
-					sender.addChatMessage(new ChatComponentText(
-							EnumChatFormatting.RED
-									+ "No spawned entities were found!"));
+					sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.notfound")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 				} else {
-					sender.addChatMessage(new ChatComponentText(
-							EnumChatFormatting.GREEN + "Killed " + killCounter
-									+ " entities!"));
+					sender.addChatMessage(new ChatComponentText(Utils.localizeFormatted("chat.sstow.command.killed","" + killCounter)).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
 				}
 			} else if (params[0].equals("settier")) {
 
@@ -87,9 +76,7 @@ public class CommandSSTOW extends CommandBase {
 						}
 					}
 				} else {
-					sender.addChatMessage(new ChatComponentText(
-							EnumChatFormatting.RED
-									+ "Wrong use of command, /sstow settier x"));
+					sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.setwrong")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 				}
 			} else if (params[0].equals("addkills")) {
 
@@ -99,9 +86,7 @@ public class CommandSSTOW extends CommandBase {
 					killAmount = Integer.parseInt(params[1]);
 
 				} else {
-					sender.addChatMessage(new ChatComponentText(
-							EnumChatFormatting.RED
-									+ "Wrong use of command, /sstow addkills x"));
+					sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.addkillwrong")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 				}
 
 				if (((EntityPlayerMP) sender).getHeldItem() != null
@@ -117,15 +102,10 @@ public class CommandSSTOW extends CommandBase {
 					int killAmount = Integer.parseInt(params[1]);
 
 				} else {
-					sender.addChatMessage(new ChatComponentText(
-							EnumChatFormatting.RED
-									+ "Wrong use of command, /sstow removekills x"));
+					sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.remkillwrong")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 				}
 			} else {
-				sender.addChatMessage(new ChatComponentText(
-						"Command not recognised, use /sstow help for a list of all the available commands")
-						.setChatStyle(new ChatStyle()
-								.setColor(EnumChatFormatting.RED)));
+				sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.wrongcommand")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 			}
 		}
 	}

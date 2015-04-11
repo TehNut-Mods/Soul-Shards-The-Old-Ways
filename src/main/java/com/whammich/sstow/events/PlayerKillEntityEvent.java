@@ -47,7 +47,7 @@ public class PlayerKillEntityEvent {
 		}
 		
 		if (entName == null || entName.isEmpty()) {
-			ModLogger.logFatal("Player killed entity with no unlocalized name: " + dead);
+			ModLogger.logFatal(Utils.localizeFormatted("chat.sstow.debug.nounlocname", "" + dead));
 			return;
 		}
 

@@ -16,6 +16,7 @@ public final class Config {
 	public static int ENCHANT_ID;
 	public static int ENCHANT_WEIGHT;
 	public static int ENCHANT_KILL_BONUS;
+	
 	// general Section
 	public static int SPAWNER_ABSORB_BONUS;
 	public static int MAX_NUM_ENTITIES;
@@ -25,6 +26,7 @@ public final class Config {
 	public static boolean ENABLE_DEBUG;
 	public static boolean RITUAL;
 	public static boolean PERSONALSHARD;
+	
 	// recipes Section
 	//public static int COOK_TIME;
 	public static int SHARDS;
@@ -90,7 +92,7 @@ public final class Config {
 	@SubscribeEvent
 	public void onConfigChanged(OnConfigChangedEvent event) {
 		if (event.modID.equals(Reference.MOD_ID)) {
-			ModLogger.logInfo("Updating config...");
+			ModLogger.logInfo(Utils.localize("chat.sstow.util.configupdate"));
 			syncConfig();
 		}
 	}
@@ -135,9 +137,9 @@ public final class Config {
 
 			TierHandler.setTierReqKills(minKills);
 
-			ModLogger.logInfo("Loaded configuration file!");
+			ModLogger.logInfo(Utils.localize("chat.sstow.util.configload"));
 		} catch (Exception e) {
-			ModLogger.logFatal("Failed to load configuration file!");
+			ModLogger.logFatal(Utils.localize("chat.sstow.util.configloadfail"));
 			e.printStackTrace();
 		} finally {
 			if (config.hasChanged()) {

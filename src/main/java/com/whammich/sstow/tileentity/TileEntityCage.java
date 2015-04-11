@@ -106,7 +106,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 		if (counter >= TierHandler.getCooldown(tier - 1) * 20 - 1) {
 			if (Config.ENABLE_DEBUG) {
-				ModLogger.logInfo("Successfully spawned: " + entName);
+				ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.debug.successspawn", "" + entName));
 			}
 
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler

@@ -85,8 +85,7 @@ public class BlockCage extends BlockContainer {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
 			if (tile == null) {
-				ModLogger.logFatal("ERROR: no tile entity found at coords: "
-						+ x + " " + y + " " + " " + z);
+				ModLogger.logFatal(Utils.localizeFormatted("chat.sstow.debug.tileerror", "" + x + " " + y + " " + " " + z));
 				return false;
 			}
 
@@ -158,8 +157,7 @@ public class BlockCage extends BlockContainer {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
 			if (tile == null) {
-				ModLogger.logFatal("ERROR: no tile entity found at coords: "
-						+ x + " " + y + " " + " " + z);
+				ModLogger.logFatal(Utils.localizeFormatted("chat.sstow.debug.tileerror", "" + x + " " + y + " " + " " + z));
 				return;
 			}
 
