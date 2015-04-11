@@ -202,7 +202,7 @@ public class Register {
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 2, 3), Blocks.soul_sand, "dustGlowstone"));
 			GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), new ItemStack(ItemMaterials, 1, 4), 0.35F);
 		} else {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 1, 4), "dustGlowstone", "dustVile"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 2, 4), "dustGlowstone", "dustVile"));
 			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
 		}
 	}
