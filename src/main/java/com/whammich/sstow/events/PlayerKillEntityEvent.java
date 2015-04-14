@@ -23,26 +23,62 @@ public class PlayerKillEntityEvent {
 	@SubscribeEvent
 	public void onEntityKill(LivingDeathEvent event) {
 		World world = event.entity.worldObj;
-		
-		if (event.source.getEntity() instanceof FakePlayer)
-			return;
-		
-		
 		if (world.isRemote || !(event.entity instanceof EntityLiving) || !(event.source.getEntity() instanceof EntityPlayer)) {
 			return;
 		}
-
 		EntityLiving dead = (EntityLiving) event.entity;
+		EntityPlayer player = (EntityPlayer) event.source.getEntity();
+		String entName = EntityList.getEntityString(dead);
+		if ( dead.getEntityData()!=null && dead.getEntityData().hasKey("SSTOW")) {
+			if(player instanceof FakePlayer){
+			try {
+				Class entityLivingClass = EntityLiving.class;
+				Field xpValue;
 
-		if (dead.getEntityData().getBoolean("SSTOW")) {
+				try {
+					xpValue = entityLivingClass
+							.getDeclaredField("field_70728_aV");
+				} catch (Exception e) {
+					xpValue = entityLivingClass
+							.getDeclaredField("experienceValue");
+
+				}
+
+				xpValue.setAccessible(true);
+				float modifierFakePlayer = 0.0F;
+				xpValue.setInt(dead,(int)(xpValue.getInt(dead)* modifierFakePlayer));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				Class entityLivingClass = EntityLiving.class;
+				Field xpValue;
+
+				try {
+					xpValue = entityLivingClass
+							.getDeclaredField("field_70728_aV");
+				} catch (Exception e) {
+					xpValue = entityLivingClass
+							.getDeclaredField("experienceValue");
+
+				}
+
+				xpValue.setAccessible(true);
+				float modifierPlayer = 0.0F;
+				xpValue.setInt(dead,(int)(xpValue.getInt(dead)* modifierPlayer));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 			return;
 		}
 
-		EntityPlayer player = (EntityPlayer) event.source.getEntity();
 
-		String entName = EntityList.getEntityString(dead);
-		
-		if (Entitylist.bList.contains(entName)){
+
+
+
+		if (Entitylist.bList.contains(entName)) {
 			return;
 		}
 		
