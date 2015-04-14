@@ -11,6 +11,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public final class Config {
+	
+	// XP Section
+	public static float FakePlayerXP;
+	public static float PlayerXP;
 
 	// Enchant Section
 	public static int ENCHANT_ID;
@@ -101,6 +105,10 @@ public final class Config {
 	public static void syncConfig() {
 		try {
 
+			// XP Section
+			FakePlayerXP = config.getFloat("Mob Farm XP", "general", 1.0F, 0F, 3.0F, "Set the XP amount for xp farms");
+			PlayerXP = config.getFloat("Player Kill XP", "general", 1.0F, 0F, 3.0F, "Set the XP amount for player kills");
+			
 			// Soul Stealer Section
 			ENCHANT_ID = config.getInt("ID", "enchantment", 52, 1, 128, "Soul-Stealer enchant id");
 			ENCHANT_WEIGHT = config.getInt("Weight", "enchantment", 8, 1, 10, "Soul-Stealer enchant probability");
