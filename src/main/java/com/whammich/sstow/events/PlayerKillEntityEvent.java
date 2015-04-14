@@ -36,43 +36,44 @@ public class PlayerKillEntityEvent {
 		EntityPlayer player = (EntityPlayer) event.source.getEntity();
 		String entName = EntityList.getEntityString(dead);
 		
-		if ( dead.getEntityData()!=null && dead.getEntityData().hasKey("SSTOW")) {
+		if (dead.getEntityData() != null && dead.getEntityData().hasKey("SSTOW")) {
 			if(player instanceof FakePlayer){
 			try {
 				Class entityLivingClass = EntityLiving.class;
 				Field xpValue;
-
+				
 				try {
-					xpValue = entityLivingClass
-							.getDeclaredField("field_70728_aV");
+					xpValue = entityLivingClass.getDeclaredField("field_70728_aV");
+					
 				} catch (Exception e) {
-					xpValue = entityLivingClass
-							.getDeclaredField("experienceValue");
-
+					xpValue = entityLivingClass.getDeclaredField("experienceValue");
+					
 				}
 
 				xpValue.setAccessible(true);
-				
 				xpValue.setInt(dead,(int)(xpValue.getInt(dead)* Config.FakePlayerXP));
+				ModLogger.logInfo("FakePlayer XP Drop Value: " + Config.FakePlayerXP);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else{
+		} else {
 			try {
 				Class entityLivingClass = EntityLiving.class;
 				Field xpValue;
-
+				
 				try {
-					xpValue = entityLivingClass
-							.getDeclaredField("field_70728_aV");
+					xpValue = entityLivingClass.getDeclaredField("field_70728_aV");
+					
 				} catch (Exception e) {
-					xpValue = entityLivingClass
-							.getDeclaredField("experienceValue");
-
+					xpValue = entityLivingClass.getDeclaredField("experienceValue");
+					
 				}
 
 				xpValue.setAccessible(true);
 				xpValue.setInt(dead,(int)(xpValue.getInt(dead)* Config.PlayerXP));
+				ModLogger.logInfo("Player XP Drop Value: " + Config.PlayerXP);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
