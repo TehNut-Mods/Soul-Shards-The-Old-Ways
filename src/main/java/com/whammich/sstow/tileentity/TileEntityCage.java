@@ -68,8 +68,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			return;
 		}
 		
-		this.worldObj.func_147453_f(this.xCoord, this.yCoord, this.zCoord,
-				Register.BlockCage);
 		if (!initChecks) {
 			checkRedstone();
 			initChecks = true;
