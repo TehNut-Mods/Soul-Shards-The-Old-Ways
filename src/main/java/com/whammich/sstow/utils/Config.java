@@ -12,6 +12,9 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public final class Config {
 	
+	// New Stuff Section
+	public static boolean newStuff;
+	
 	// XP Section
 	public static float FakePlayerXP;
 	public static float PlayerXP;
@@ -105,6 +108,9 @@ public final class Config {
 	public static void syncConfig() {
 		try {
 
+			// New stuff section
+			newStuff = config.getBoolean("Disable New Stuff?", "general", false, "Disables the new blocks, items and recipes");
+			
 			// XP Section
 			FakePlayerXP = config.getFloat("Mob Farm XP", "general", 1.0F, 0F, 3.0F, "Set the XP amount for xp farms");
 			PlayerXP = config.getFloat("Player Kill XP", "general", 1.0F, 0F, 3.0F, "Set the XP amount for player kills");

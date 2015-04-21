@@ -1,6 +1,5 @@
 package com.whammich.sstow.utils;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class Remap {
@@ -21,20 +20,6 @@ public class Remap {
 		Register.ItemHoeSoul,
 		Register.ItemSpadeSoul,
 		Register.ItemShardSoul 
-		
-	};;
-
-	public static String[] oldBlockNames = { 
-		//"sstow_forge",
-		//"sstow_soulium_block",
-		"sstow_soul_cage"
-		
-	};
-
-	public static Block[] newBlockNames = { 
-		//Register.BlockForge,
-		//Register.BlockMaterials, 
-		Register.BlockCage
 		
 	};
 }

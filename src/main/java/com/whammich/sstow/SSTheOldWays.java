@@ -59,11 +59,6 @@ public class SSTheOldWays {
 					m.remap(Remap.newItemNames[i]);
 				}
 			}
-			for(int i = 0; i < Remap.oldBlockNames.length; i++){
-				if (m.type == GameRegistry.Type.ITEM && m.name.contains(Remap.oldBlockNames[i])) {
-					m.remap(Remap.newBlockNames[i]);
-				}
-			}
 		}
 	}
 

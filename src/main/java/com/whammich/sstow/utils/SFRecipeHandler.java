@@ -52,27 +52,24 @@ public class SFRecipeHandler {
 	}
 
 	private SFRecipeHandler() {
-		// Fuel
 		this.addFuel(new ItemStack(Register.ItemMaterials, 1, 4), 1);
 
-		// Items		
 		if (!Config.RITUAL){
 			addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 12600, 1F);
 		}
-		addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
+		if(Config.newStuff){
+			addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
+			addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 2, 1600, 1F);
+			addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
+			addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
+			addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);
+			addRecipe(new ItemStack(Blocks.log, 1, 3), new ItemStack(Register.BlockPetrified, 1, 3), null, 1, 1600, 2F);
+			addRecipe(new ItemStack(Blocks.log2, 1, 0), new ItemStack(Register.BlockPetrified2, 1, 0), null, 1, 1600, 2F);
+			addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
+			addRecipe(new ItemStack(Blocks.obsidian, 1), new ItemStack(Register.BlockObsidianGlass), null, 10, 1600, 3F);
+		}
 		addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.NUGGETS, 0), 2, 6000, 0.9F);
-		
-		// Blocks
 		addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), new ItemStack(Items.iron_ingot, 9 - Config.INGOTS), 5, 12000, 0.9F);
-		addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 2, 1600, 1F);
-		addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
-		addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
-		addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);
-		addRecipe(new ItemStack(Blocks.log, 1, 3), new ItemStack(Register.BlockPetrified, 1, 3), null, 1, 1600, 2F);
-		addRecipe(new ItemStack(Blocks.log2, 1, 0), new ItemStack(Register.BlockPetrified2, 1, 0), null, 1, 1600, 2F);
-		addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
-		addRecipe(new ItemStack(Blocks.obsidian, 1), new ItemStack(Register.BlockObsidianGlass), null, 10, 1600, 3F);
-		
 	}
 
 	public void addRecipe(ItemStack input, ItemStack output, ItemStack byproduct, int fuelCost, int burnTime, float experience) {
