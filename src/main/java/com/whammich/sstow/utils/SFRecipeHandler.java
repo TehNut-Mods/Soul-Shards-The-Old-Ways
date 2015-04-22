@@ -57,9 +57,14 @@ public class SFRecipeHandler {
 		if (!Config.RITUAL){
 			addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 12600, 1F);
 		}
-		if(!Config.newStuff){
+		if(Config.newStuff){
 			addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
+			addRecipe(new ItemStack(Items.gold_ingot), new ItemStack(Register.ItemMaterials, 3, 1), null, 1, 1200, 0.5F);
 			addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 2, 1600, 1F);
+			addRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.netherrack), null, 1, 1600, 0.5F);
+			addRecipe(new ItemStack(Blocks.brick_block), new ItemStack(Blocks.nether_brick), null, 2, 3200, 1F);
+			addRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Register.ItemMaterials, 3, 1), null, 1, 1200, 0.5F);
+			addRecipe(new ItemStack(Blocks.iron_ore), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.NUGGETS, 0), 2, 6000, 0.9F);
 			addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
 			addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
 			addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);

@@ -103,10 +103,10 @@ public class Register {
 		GameRegistry.registerBlock(BlockForge, ItemBlockForge.class, "BlockForge");
 		GameRegistry.registerBlock(BlockForgeActive, BlockForgeActive.getUnlocalizedName());
 		GameRegistry.registerBlock(BlockMaterials, ItemBlockMaterials.class, "BlockMaterials");
+		GameRegistry.registerBlock(BlockCage, "BlockCage");
 		
-		if(!Config.newStuff){
+		if(Config.newStuff){
 			GameRegistry.registerBlock(BlockXenoLight, "BlockXenoLight");
-			GameRegistry.registerBlock(BlockCage, "sstow_soul_cage");
 			GameRegistry.registerBlock(BlockObsidianGlass, "BlockObsidGlass");
 			GameRegistry.registerBlock(BlockXenolith, ItemBlockXenolith.class, "BlockXenolith");
 			GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");
@@ -123,7 +123,7 @@ public class Register {
 		OreDictionary.registerOre("dustVile", new ItemStack(ItemMaterials, 1, 3));
 		OreDictionary.registerOre("essenceCorrupted", new ItemStack(ItemMaterials, 1, 4));
 		
-		if(!Config.newStuff){
+		if(Config.newStuff){
 			OreDictionary.registerOre("stickPetrified", new ItemStack(ItemMaterials, 1, 5));
 			OreDictionary.registerOre("stickWood", new ItemStack(ItemMaterials, 1, 5));
 			OreDictionary.registerOre("blockEnder", new ItemStack(BlockMaterials, 1, 1));
@@ -162,8 +162,8 @@ public class Register {
 	}
 
 	private static void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityForge.class, "sstow_soul_forge_tile");
-		GameRegistry.registerTileEntity(TileEntityCage.class, "sstow_soul_cage_tile");
+		GameRegistry.registerTileEntity(TileEntityForge.class, "TileEnitityForge");
+		GameRegistry.registerTileEntity(TileEntityCage.class, "TileEnitityCage");
 	}
 
 	private static void registerRecipes() {
@@ -171,7 +171,7 @@ public class Register {
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 1), "ingotSoulium"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 0), "ingotIron"));
 		
-		if(!Config.newStuff){
+		if(Config.newStuff){
 			GameRegistry.addSmelting(new ItemStack(BlockXenolith, 1, 0), new ItemStack(BlockXenolith, 1, 1), 0.5F);
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Items.ender_pearl, 9), new ItemStack(BlockMaterials, 1, 1)));
 			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(BlockPetrifiedPlanks, 4, 0), new ItemStack(BlockPetrified, 1, 0)));
@@ -192,7 +192,7 @@ public class Register {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockMaterials, 1, 1), "AAA", "AAA", "AAA", 'A', "pearlEnder"));
 		}		
 		
-		if(!Config.newStuff) {
+		if(Config.newStuff) {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "stickPetrified"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "stickPetrified"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "stickPetrified"));

@@ -28,6 +28,7 @@ public final class Config {
 	public static int SPAWNER_ABSORB_BONUS;
 	public static int MAX_NUM_ENTITIES;
 	public static boolean ALLOW_SPAWNER_ABSORB;
+	public static boolean BIND_ON_ABSORB;
 	public static boolean INVERT_REDSTONE;
 	public static boolean ENABLE_FLOOD_PREVENTION;
 	public static boolean ENABLE_DEBUG;
@@ -35,7 +36,7 @@ public final class Config {
 	public static boolean PERSONALSHARD;
 	
 	// recipes Section
-	public static int COOK_TIME;
+	public static int COOKING_MOD;
 	public static int SHARDS;
 	public static int NUGGETS;
 	public static int INGOTS;
@@ -109,7 +110,7 @@ public final class Config {
 		try {
 
 			// New stuff section
-			newStuff = config.getBoolean("Disable New Stuff?", "general", false, "Disables the new blocks, items and recipes");
+			newStuff = config.getBoolean("Enable New Stuff", "general", true, "Enables the new blocks, items and recipes");
 			
 			// XP Section
 			FakePlayerXP = config.getFloat("Mob Farm XP", "general", 1.0F, 0F, 3.0F, "Set the XP amount for xp farms");
@@ -122,6 +123,7 @@ public final class Config {
 			
 			// general Section
 			SPAWNER_ABSORB_BONUS = config.getInt("Vanilla Spawner Bonus", "general", 64, 1, 400, "Amount of kills added to the shard when right-clicking a spawner");
+			BIND_ON_ABSORB = config.getBoolean("Bind Shard", "general", false, "Bind an unbound shard when right-clicking a mob spawner?");
 			MAX_NUM_ENTITIES = config.getInt("Max Entities Spawned", "general", 80, 1, 200, "Max number of Entities soul cages can spawn in an area");
 			ALLOW_SPAWNER_ABSORB = config.getBoolean("Vanilla Spawner Absorbing", "general", true, "Allow absorbing of vanilla spawners for a kill bonus");
 			INVERT_REDSTONE = config.getBoolean("Invert Redstone", "general", false, "Active redstone stops a soul cage");
@@ -131,7 +133,7 @@ public final class Config {
 			PERSONALSHARD = config.getBoolean("Personal shards", "general", false, "The soulcage will only function if the original shard creator is nearby, not just anyone.");
 
 			// recipes Section
-			COOK_TIME = config.getInt("Cooking Time", "recipes", 10, 0, 100, "Modifier for cook times");
+			COOKING_MOD = config.getInt("Cooking Time Modifier", "recipes", 10, 0, 30, "Modify the speed of the soul forge, higher the number the faster it smelts");
 			SHARDS = config.getInt("Shard Amount", "recipes", 3, 1, 8, "RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
 			NUGGETS = config.getInt("Nugget Amount", "recipes", 8, 1, 9, "RESTART REQUIRED: How many Soulium Nuggets do you want to get by smelting 1 iron ingot");
 			INGOTS = config.getInt("Ingot Amount", "recipes", 7, 1, 9, "RESTART REQUIRED: How many Soulium Ingots do you want to get by smelting 1 iron block");

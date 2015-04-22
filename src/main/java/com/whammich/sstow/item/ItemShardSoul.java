@@ -119,13 +119,13 @@ public class ItemShardSoul extends Item {
 			}
 
 			if (Utils.isShardBound(stack)) {
+				
 				if (Utils.getShardBoundEnt(stack).equals(name)) {
-					Utils.increaseShardKillCount(stack,
-							(short) Config.SPAWNER_ABSORB_BONUS);
+					Utils.increaseShardKillCount(stack, (short) Config.SPAWNER_ABSORB_BONUS);
 //					Utils.checkForAchievements(player, stack);
-					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ,
-							false);
+					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, false);
 				}
+				
 			} else if (EntityMapper.isEntityValid(name)) {
 				if (stack.stackSize > 1) {
 					stack.stackSize--;
@@ -148,19 +148,18 @@ public class ItemShardSoul extends Item {
 						}
 						counter++;
 					}
-
+					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, true);
 					if (!emptySpot) {
-						player.worldObj.spawnEntityInWorld(new EntityItem(
-								player.worldObj, player.posX, player.posY,
-								player.posZ, newStack));
+						player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY,player.posZ, newStack));
 					}
 				} else {
-					Utils.setShardBoundEnt(stack, name);
-					Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
-					Utils.increaseShardKillCount(stack,
-							(short) Config.SPAWNER_ABSORB_BONUS);
+					if(Config.BIND_ON_ABSORB){
+						Utils.setShardBoundEnt(stack, name);
+						Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
+						Utils.increaseShardKillCount(stack, (short) Config.SPAWNER_ABSORB_BONUS);
+					}
 				}
-				world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, true);
+				
 			}
 		}
 
