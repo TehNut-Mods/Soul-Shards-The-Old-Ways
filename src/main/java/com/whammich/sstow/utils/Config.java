@@ -35,7 +35,7 @@ public final class Config {
 	public static boolean PERSONALSHARD;
 	
 	// recipes Section
-	//public static int COOK_TIME;
+	public static int COOK_TIME;
 	public static int SHARDS;
 	public static int NUGGETS;
 	public static int INGOTS;
@@ -131,7 +131,7 @@ public final class Config {
 			PERSONALSHARD = config.getBoolean("Personal shards", "general", false, "The soulcage will only function if the original shard creator is nearby, not just anyone.");
 
 			// recipes Section
-			// COOK_TIME = config.getInt("Cooking Time", "recipes", 12800, 0, 999999, "Time (In Ticks) it takes to create Soulium and Soul Shards");
+			COOK_TIME = config.getInt("Cooking Time", "recipes", 10, 0, 100, "Modifier for cook times");
 			SHARDS = config.getInt("Shard Amount", "recipes", 3, 1, 8, "RESTART REQUIRED: How many Soul Shards do you want to get by smelting 1 diamond");
 			NUGGETS = config.getInt("Nugget Amount", "recipes", 8, 1, 9, "RESTART REQUIRED: How many Soulium Nuggets do you want to get by smelting 1 iron ingot");
 			INGOTS = config.getInt("Ingot Amount", "recipes", 7, 1, 9, "RESTART REQUIRED: How many Soulium Ingots do you want to get by smelting 1 iron block");
