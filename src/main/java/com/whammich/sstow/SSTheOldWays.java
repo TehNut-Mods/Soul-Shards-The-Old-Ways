@@ -48,7 +48,7 @@ public class SSTheOldWays {
 	public void postInit(FMLPostInitializationEvent event) {
 		Register.registerObjs();
 		EntityMapper.init();
-		Entitylist.init(new File(Config.configDirectory + "/entitylist.cfg"));
+		Entitylist.init(new File(Config.configDirectory + "/Soul-Shards-TOW-Entitylist.cfg"));
 	}
 	
 	@EventHandler
