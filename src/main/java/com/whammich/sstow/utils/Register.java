@@ -56,6 +56,7 @@ import com.whammich.sstow.item.blocks.ItemBlockMaterials;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
 import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
+import com.whammich.sstow.item.blocks.ItemBlockSoulCrystal;
 import com.whammich.sstow.item.blocks.ItemBlockXenolith;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityForge;
@@ -169,7 +170,7 @@ public class Register {
 			GameRegistry.registerBlock(BlockPetrified2, ItemBlockPetrified2.class, "BlockPetrifiedLog2");
 			GameRegistry.registerBlock(BlockPetrifiedPlanks, ItemBlockPlankPetrified.class, "BlockPetrifiedPlanks");
 			GameRegistry.registerBlock(BlockSoulAnvil, "BlockSoulAnvil");
-			GameRegistry.registerBlock(BlockSoulCrystal, "BlockSoulCrystal");
+			GameRegistry.registerBlock(BlockSoulCrystal, ItemBlockSoulCrystal.class, "BlockSoulCrystal").setBlockName(Reference.modID.toLowerCase() + ".block.soulcrystal");
 		}
 
 	}

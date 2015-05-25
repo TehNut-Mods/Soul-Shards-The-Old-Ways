@@ -1,8 +1,9 @@
 package com.whammich.sstow.proxies;
 
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.whammich.sstow.entity.mob.hostile.EntityZombieWitch;
 import com.whammich.sstow.entity.mob.hostile.render.RenderZombieWitch;
@@ -13,9 +14,11 @@ import com.whammich.sstow.renderer.RenderSoulCrystal;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntitySoulAnvil;
 import com.whammich.sstow.tileentity.TileEntitySoulCrystal;
+import com.whammich.sstow.utils.Register;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
 	
@@ -23,20 +26,18 @@ public class ClientProxy extends CommonProxy {
 		registerRenderers();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void registerRenderers() {
 		// Zombie Witch
-		RenderManager.instance.entityRenderMap.put(EntityZombieWitch.class, new RenderZombieWitch());
+		RenderingRegistry.registerEntityRenderingHandler(EntityZombieWitch.class, new RenderZombieWitch());
 
-		// Soul Anvil
-		TileEntitySpecialRenderer anvilRender = new RenderSoulAnvil();
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulAnvil.class, anvilRender);
+		// Soul Anvil		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulAnvil.class, new RenderSoulAnvil());
 		
 		// Soul Crystal
-		TileEntitySpecialRenderer crystalRender = new RenderSoulCrystal();
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulCrystal.class, crystalRender);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulCrystal.class, new RenderSoulCrystal());
+		
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Register.BlockSoulCrystal), new RenderSoulCrystal());
 		
 		// Soul Cage
 		TileEntitySpecialRenderer cageRender = new RenderSoulCage();
