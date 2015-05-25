@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 
 import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.EntityMapper;
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.TierHandler;
 import com.whammich.sstow.utils.Utils;
@@ -54,9 +55,14 @@ public class ItemShardSoul extends Item {
 			stack.setTagCompound(new NBTTagCompound());
 		}
 
+		if(stack.stackTagCompound.getBoolean("Anviled")) {
+			EntityPlayer player = (EntityPlayer) entity;
+			player.inventory.decrStackSize(slot, 0);
+		}
+		
 		Utils.checkAndFixShard(stack);
 	}
-
+	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		byte level = Utils.getShardTier(stack);
@@ -85,7 +91,7 @@ public class ItemShardSoul extends Item {
 			}
 		}
 
-		if (world.isRemote || (Utils.hasMaxedKills(stack)) || !Config.ALLOW_SPAWNER_ABSORB) {
+		if (world.isRemote || (Utils.hasMaxedKills(stack)) || !Config.allowAbsorb) {
 			return stack;
 		}
 		
@@ -119,13 +125,13 @@ public class ItemShardSoul extends Item {
 			}
 
 			if (Utils.isShardBound(stack)) {
-				
 				if (Utils.getShardBoundEnt(stack).equals(name)) {
-					Utils.increaseShardKillCount(stack, (short) Config.SPAWNER_ABSORB_BONUS);
+					Utils.increaseShardKillCount(stack,
+							(short) Config.spawnerBonus);
 //					Utils.checkForAchievements(player, stack);
-					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, false);
+					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ,
+							false);
 				}
-				
 			} else if (EntityMapper.isEntityValid(name)) {
 				if (stack.stackSize > 1) {
 					stack.stackSize--;
@@ -134,7 +140,7 @@ public class ItemShardSoul extends Item {
 					Utils.setShardBoundEnt(newStack, name);
 					Utils.writeEntityHeldItem(newStack, (EntityLiving) ent);
 					Utils.increaseShardKillCount(newStack,
-							(short) Config.SPAWNER_ABSORB_BONUS);
+							(short) Config.spawnerBonus);
 
 					boolean emptySpot = false;
 					int counter = 0;
@@ -150,16 +156,17 @@ public class ItemShardSoul extends Item {
 					}
 					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, true);
 					if (!emptySpot) {
-						player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY,player.posZ, newStack));
+						player.worldObj.spawnEntityInWorld(new EntityItem(
+								player.worldObj, player.posX, player.posY,
+								player.posZ, newStack));
 					}
 				} else {
-					if(Config.BIND_ON_ABSORB){
+					if(Config.bindingAbsorb){
 						Utils.setShardBoundEnt(stack, name);
 						Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
-						Utils.increaseShardKillCount(stack, (short) Config.SPAWNER_ABSORB_BONUS);
+						Utils.increaseShardKillCount(stack, (short) Config.spawnerBonus);
 					}
 				}
-				
 			}
 		}
 
@@ -198,12 +205,17 @@ public class ItemShardSoul extends Item {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List list,
-			boolean bool) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
+		
+//		if (Utils.displayShiftForDetail && !Utils.isShiftKeyDown())
+//		list.add(Utils.shiftForDetails());
+//
+//	if (Utils.isShiftKeyDown()) {
+//            list.add(Utils.localize("info.sstow.tooltip.tool.charge"));
+//    }
+		
 		if (Utils.isShardBound(stack)) {
-			list.add("Bound to: "
-					+ Utils.getEntityNameTransltated(Utils
-							.getShardBoundEnt(stack)));
+			list.add("Bound to: " + Utils.getEntityNameTransltated(Utils.getShardBoundEnt(stack)));
 		}
 
 		if (Utils.getShardKillCount(stack) >= 0) {
@@ -232,10 +244,10 @@ public class ItemShardSoul extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
-		unbound = register.registerIcon("sstow:unbound");
+		unbound = register.registerIcon(Reference.modID + ":shardUnbound");
 		icons = new IIcon[6];
 		for (int i = 0; i <= 5; i++) {
-			icons[i] = register.registerIcon("sstow:tier" + i);
+			icons[i] = register.registerIcon(Reference.modID + ":shardTier" + i);
 		}
 	}
 }

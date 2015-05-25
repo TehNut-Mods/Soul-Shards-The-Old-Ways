@@ -48,8 +48,8 @@ public class BlockPetrified2 extends BlockRotatedPillar {
         this.topIcon = new IIcon[names.length];
 
         for (int i = 0; i < this.sideIcon.length; ++i) {
-            this.sideIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":petrified_logs/petrified_log_" + names[i]);
-            this.topIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":petrified_logs/petrified_log_" + names[i] + "_top");
+            this.sideIcon[i] = iconRegister.registerIcon(Reference.modID + ":petrified_logs/petrified_log_" + names[i]);
+            this.topIcon[i] = iconRegister.registerIcon(Reference.modID + ":petrified_logs/petrified_log_" + names[i] + "_top");
         }
     }
 

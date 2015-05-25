@@ -54,7 +54,7 @@ public class BlockPlankPetrified extends Block {
 		this.blockIcon = new IIcon[names.length];
 
 		for (int i = 0; i < this.blockIcon.length; ++i) {
-			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":petrified_planks/petrified_planks_" + names[i]);
+			this.blockIcon[i] = iconRegister.registerIcon(Reference.modID + ":petrified_planks/petrified_planks_" + names[i]);
 		}
 	}
 

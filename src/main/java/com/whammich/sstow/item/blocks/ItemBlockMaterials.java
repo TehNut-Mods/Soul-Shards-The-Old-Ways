@@ -15,7 +15,7 @@ public class ItemBlockMaterials extends ItemBlock {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName() + "." + BlockMaterials.names[stack.getItemDamage() % BlockMaterials.names.length];
+		return getUnlocalizedName() + "." + BlockMaterials.names[stack.getItemDamage() % BlockMaterials.names.length].toLowerCase();
 	}
 
 	@Override

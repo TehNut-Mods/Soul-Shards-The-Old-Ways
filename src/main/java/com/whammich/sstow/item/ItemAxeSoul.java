@@ -24,6 +24,6 @@ public class ItemAxeSoul extends ItemAxe {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":axesoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":axeSoul");
 	}
 }

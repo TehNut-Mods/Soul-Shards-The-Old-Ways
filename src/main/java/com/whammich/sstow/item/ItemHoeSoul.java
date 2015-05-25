@@ -25,6 +25,6 @@ public class ItemHoeSoul extends ItemHoe {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":hoesoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":hoeSoul");
 	}
 }

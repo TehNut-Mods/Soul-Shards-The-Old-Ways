@@ -32,22 +32,26 @@ if (new File(projectDir, '.git').exists()) {
 }
 
 repositories {
+	maven { url "http://tehnut.info/maven/" }
 	maven { url "http://chickenbones.net/maven/" }
 	maven {	url "http://mobiusstrip.eu/maven" }
-	
-	ivy {
-			name "CoFHCore"
-			artifactPattern "http://addons-origin.cursecdn.com/files/2229/839/[module]-[revision].[ext]"
-	}
+    maven { url 'http://dvs1.progwml6.com/files/maven' }
+
+    ivy {
+        name "Baubles"
+        artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-deobf-1.7.10-[revision].[ext]"
+    }
 }
 
 dependencies {
+    compile name: 'Baubles', version: "${baubles_version}", ext: 'jar'
+	compile "info.amerifrance.guideapi:Guide-API:${mc_version}-${guideapi_version}:deobf"
 	compile "mcp.mobius.waila:Waila:${waila_version}_${mc_version}:dev"
-	compile "codechicken:CodeChickenLib:${mc_version}-${ccl_version}:dev"
+	// compile "codechicken:CodeChickenLib:${mc_version}-${ccl_version}:dev"
 	compile "codechicken:CodeChickenCore:${mc_version}-${ccc_version}:dev"
 	compile "codechicken:NotEnoughItems:${mc_version}-${nei_version}:dev"
-	compile name: 'CoFHCore', version: "${cofhcore_version}", ext: 'jar'
-	compile fileTree(dir: 'libs', include: ['*.jar'])
+	compile "tconstruct:TConstruct:${mc_version}-${tcon_version}:deobf"
+	compile fileTree(dir: 'libs', include: ['*jar'])
 }
 
 minecraft {
@@ -79,6 +83,10 @@ processResources {
 
 jar {
     classifier = ''
+    manifest {
+        attributes 'FMLCorePlugin': 'com.whammich.sstow.asm.LoadingPlugin'
+        attributes 'FMLCorePluginContainsFMLMod': 'true'
+    }
     manifest.mainAttributes(
             "Built-By": System.getProperty('user.name'),
             "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",

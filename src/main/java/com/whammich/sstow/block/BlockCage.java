@@ -2,15 +2,11 @@ package com.whammich.sstow.block;
 
 import java.util.Random;
 
-import com.whammich.sstow.tileentity.TileEntityCage;
-import com.whammich.sstow.utils.HolidayHelper;
-import com.whammich.sstow.utils.ModLogger;
-import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.utils.Utils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,15 +16,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+
+import com.whammich.sstow.SSTheOldWays;
+import com.whammich.sstow.entity.particle.EntityPurpleFlameFX;
+import com.whammich.sstow.tileentity.TileEntityCage;
+import com.whammich.sstow.utils.ModLogger;
+import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
+import com.whammich.sstow.utils.Utils;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCage extends BlockContainer {
 
 	public IIcon[] icons = new IIcon[5];
-	@SuppressWarnings("unused")
-	private IIcon front;
 
 	public BlockCage() {
 		super(Material.iron);
@@ -37,6 +39,7 @@ public class BlockCage extends BlockContainer {
 		this.blockHardness = 3.0F;
 		this.blockResistance = 3.0F;
 	}
+
 
 	@Override
 	public boolean hasComparatorInputOverride() {
@@ -78,52 +81,9 @@ public class BlockCage extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int side, float f1, float f2, float f3) {
-		// System.out.println("Block Activated");
-		if (!world.isRemote) {
-			TileEntity tile = world.getTileEntity(x, y, z);
-
-			if (tile == null) {
-				ModLogger.logFatal(Utils.localizeFormatted("chat.sstow.debug.tileerror", "" + x + " " + y + " " + " " + z));
-				return false;
-			}
-
-			if (player.isSneaking()) {
-				if (world.getBlockMetadata(x, y, z) == 0) {
-					return false;
-				}
-
-				ForgeDirection dir = ForgeDirection.getOrientation(side);
-
-				world.spawnEntityInWorld(new EntityItem(world, x
-						+ (dir.offsetX * 1.75D), y + (dir.offsetY * 1.75D)
-						+ 0.5D, z + (dir.offsetZ * 1.75D), ((IInventory) tile)
-						.decrStackSize(0, 1)));
-			} else {
-				if (world.getBlockMetadata(x, y, z) != 0) {
-					return false;
-				}
-
-				ItemStack stack = player.getHeldItem();
-
-				if (stack == null || stack.getItem() != Register.ItemShardSoul
-						|| !Utils.isShardBound(stack)
-						|| Utils.getShardTier(stack) == 0) {
-					return false;
-				}
-
-				ItemStack newShard = stack.copy();
-				newShard.stackSize = 1;
-				((IInventory) tile).setInventorySlotContents(0, newShard);
-
-				if (!player.capabilities.isCreativeMode) {
-					stack.stackSize--;
-				}
-			}
-		}
-
-		return false;
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float f1, float f2, float f3) {
+		player.openGui(SSTheOldWays.modInstance, 1, world, x, y, z);
+		return true;
 	}
 
 	@Override
@@ -136,11 +96,6 @@ public class BlockCage extends BlockContainer {
 				((TileEntityCage) tile).checkRedstone();
 			}
 		}
-	}
-
-	public void onBlockPlacedBy(World world, int xCoord, int yCoord,
-			int zCoord, EntityPlayer entity, ItemStack itemstack) {
-		entity.getDisplayName();
 	}
 
 	@Override
@@ -184,71 +139,28 @@ public class BlockCage extends BlockContainer {
 		return 0;
 	}
 
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		if (HolidayHelper.isChristmas()) {
-			icons = new IIcon[4];
-			for (int i = 0; i < 4; i++) {
-				icons[i] = iconRegister.registerIcon("sstow:cage_" + i
-						+ "_xmas");
-			}
-		} else {
-			icons = new IIcon[5];
-			for (int i = 0; i < 5; i++) {
-				icons[i] = iconRegister.registerIcon("sstow:cage_" + i);
-			}
-		}
+		blockIcon = iconRegister.registerIcon(Reference.modID + ":soulCage");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int sideInt, int meta) {
-		ForgeDirection dir = ForgeDirection.getOrientation(sideInt);
-		if (HolidayHelper.isChristmas()) {
-			// Check block direction
-			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-				// meta 2 == block activated
-				return icons[3];
-			} else {
-				// meta 2 == block activated
-				if (meta == 2) {
-					return icons[1];
-					// meta 1 == block has shard
-				} else if (meta == 1) {
-					return icons[1];
-					// meta 0 == block is empty
-				} else {
-					return icons[0];
-				}
-			}
+		return blockIcon;
+	}
 
-		} else {
-			// Check block direction
-			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-				// meta 2 == block activated
-				if (meta == 2) {
-					return icons[4];
-				} else {
-					return icons[3];
-				}
-			} else {
-				// meta 2 == block activated
-				if (meta == 2) {
-					return icons[2];
-					// meta 1 == block has shard
-				} else if (meta == 1) {
-					return icons[1];
-					// meta 0 == block is empty
-				} else {
-					return icons[0];
-				}
-			}
+	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		if (TileEntityCage.active) {
+			EntityFX fire = new EntityPurpleFlameFX(world, x - 0.5, y + 0.5, z + 0.5, 0, 0.1, 0, 68, 0, 152);
+			Minecraft.getMinecraft().effectRenderer.addEffect(fire);
 		}
 	}
+
 }

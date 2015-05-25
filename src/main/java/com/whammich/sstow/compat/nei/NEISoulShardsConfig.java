@@ -12,20 +12,22 @@ public class NEISoulShardsConfig implements IConfigureNEI {
 
 	@Override
 	public String getName() {
-		return Reference.MOD_NAME;
+		return Reference.modName;
 	}
 
 	@Override
 	public String getVersion() {
-		return Reference.MOD_VERSION;
+		return Reference.modVersion;
 	}
 
 	@Override
 	public void loadConfig() {
-		API.hideItem(new ItemStack(Register.BlockForgeActive));
-		if(!Config.newStuff) {
+		if(Config.oldWaysOption){
 			API.hideItem(new ItemStack(Register.ItemMaterials, 1, 5));
+			API.hideItem(new ItemStack(Register.BlockMaterials, 1, 1));
 		}
+		API.hideItem(new ItemStack(Register.BlockForgeActive));
+		
 		ForgeRecipeHandler handler = new ForgeRecipeHandler();
 		API.registerRecipeHandler(handler);
 		API.registerUsageHandler(handler);

@@ -224,7 +224,7 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 			return 200;
 		} else {
 			int smeltTime = (int) (SFRecipeHandler.smelting().getSmeltingTime(
-					this.furnaceItemStacks[0]) * 0.1 * Config.COOKING_MOD);
+					this.furnaceItemStacks[0]) * 0.1 * Config.cookingModifier);
 			if (smeltTime == 0) {
 				return 200;
 			}

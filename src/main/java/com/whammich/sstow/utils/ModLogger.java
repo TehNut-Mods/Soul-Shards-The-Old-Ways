@@ -5,7 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class ModLogger {
-	private static Logger logger = LogManager.getLogger(Reference.MOD_ID);
+	private static Logger logger = LogManager.getLogger(Reference.modID);
 
 	public static void logInfo(String message) {
 		logger.log(Level.INFO, message);

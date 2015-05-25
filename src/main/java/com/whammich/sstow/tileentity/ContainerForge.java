@@ -18,15 +18,12 @@ public class ContainerForge extends Container {
 	private int lastBurnTime;
 	private int lastItemBurnTime;
 
-	public ContainerForge(InventoryPlayer player,
-			TileEntityForge tileEntityFurnace) {
+	public ContainerForge(InventoryPlayer player, TileEntityForge tileEntityFurnace) {
 		this.tileFurnace = tileEntityFurnace;
 		this.addSlotToContainer(new Slot(tileEntityFurnace, 0, 56, 17));
 		this.addSlotToContainer(new Slot(tileEntityFurnace, 1, 56, 53));
-		this.addSlotToContainer(new SlotFurnace(player.player,
-				tileEntityFurnace, 2, 116, 17));
-		this.addSlotToContainer(new SlotFurnace(player.player,
-				tileEntityFurnace, 3, 116, 53));
+		this.addSlotToContainer(new SlotFurnace(player.player, tileEntityFurnace, 2, 116, 17));
+		this.addSlotToContainer(new SlotFurnace(player.player, tileEntityFurnace, 3, 116, 53));
 
 		int i;
 		for (i = 0; i < 3; ++i) {

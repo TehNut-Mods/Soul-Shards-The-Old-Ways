@@ -24,6 +24,6 @@ public class ItemSpadeSoul extends ItemSpade {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":spadesoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":spadeSoul");
 	}
 }

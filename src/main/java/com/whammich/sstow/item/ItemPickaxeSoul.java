@@ -24,6 +24,6 @@ public class ItemPickaxeSoul extends ItemPickaxe {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.MOD_ID + ":pickaxesoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":pickaxeSoul");
 	}
 }

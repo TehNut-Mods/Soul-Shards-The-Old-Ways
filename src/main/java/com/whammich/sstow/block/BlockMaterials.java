@@ -29,8 +29,8 @@ public class BlockMaterials extends Block {
 	}
 
 	public static final String[] names = new String[] { 
-		"soulium",		// 0 
-		"ender",		// 1 
+		"Soulium",		// 0 
+		"Ender",		// 1 
 	};
 	
 	@Override
@@ -48,7 +48,7 @@ public class BlockMaterials extends Block {
 		this.blockIcon = new IIcon[names.length];
 
 		for (int i = 0; i < this.blockIcon.length; ++i) {
-			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID + ":" + names[i]);
+			this.blockIcon[i] = iconRegister.registerIcon(Reference.modID + ":block" + names[i]);
 		}
 	}
 

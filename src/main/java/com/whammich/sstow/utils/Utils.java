@@ -2,6 +2,8 @@ package com.whammich.sstow.utils;
 
 import java.util.Random;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -61,7 +63,7 @@ public final class Utils {
 
 				int soulStealer = EnchantmentHelper.getEnchantmentLevel(
 						Register.SOUL_STEALER.effectId, player.getHeldItem());
-				soulStealer *= Config.ENCHANT_KILL_BONUS;
+				soulStealer *= Config.enchantBonus;
 				Utils.increaseShardKillCount(newShard,
 						(short) (1 + soulStealer));
 				// Utils.checkForAchievements(player, newShard);
@@ -142,8 +144,7 @@ public final class Utils {
 			return 0;
 		}
 
-		return (byte) MathHelper.clamp_int(
-				shard.stackTagCompound.getByte("Tier"), 0, 5);
+		return (byte) MathHelper.clamp_int(shard.stackTagCompound.getByte("Tier"), 0, 5);
 	}
 
 	public static void setShardTier(ItemStack shard, byte tier) {
@@ -151,8 +152,7 @@ public final class Utils {
 			shard.setTagCompound(new NBTTagCompound());
 		}
 
-		shard.stackTagCompound.setByte("Tier",
-				(byte) MathHelper.clamp_int(tier, 0, 5));
+		shard.stackTagCompound.setByte("Tier", (byte) MathHelper.clamp_int(tier, 0, 5));
 	}
 
 	/*
@@ -305,11 +305,52 @@ public final class Utils {
 		return null;
 	}
 	
-	public static String localize(String key) {
+    public static final String BLACK = (char) 167 + "0";
+    public static final String BLUE = (char) 167 + "1";
+    public static final String GREEN = (char) 167 + "2";
+    public static final String TEAL = (char) 167 + "3";
+    public static final String RED = (char) 167 + "4";
+    public static final String PURPLE = (char) 167 + "5";
+    public static final String ORANGE = (char) 167 + "6";
+    public static final String LIGHT_GRAY = (char) 167 + "7";
+    public static final String GRAY = (char) 167 + "8";
+    public static final String LIGHT_BLUE = (char) 167 + "9";
+    public static final String BRIGHT_GREEN = (char) 167 + "a";
+    public static final String BRIGHT_BLUE = (char) 167 + "b";
+    public static final String LIGHT_RED = (char) 167 + "c";
+    public static final String PINK = (char) 167 + "d";
+    public static final String YELLOW = (char) 167 + "e";
+    public static final String WHITE = (char) 167 + "f";
+
+    public static final String OBFUSCATED = (char) 167 + "k";
+    public static final String BOLD = (char) 167 + "l";
+    public static final String STRIKETHROUGH = (char) 167 + "m";
+    public static final String UNDERLINE = (char) 167 + "n";
+    public static final String ITALIC = (char) 167 + "o";
+    public static final String END = (char) 167 + "r";
+    
+    public static boolean displayShiftForDetail = true;
+	
+    public static String localize(String key) {
 		return StatCollector.translateToLocal(key);
 	}
 	
 	public static String localizeFormatted(String key, String keyFormat) {
 		return String.format(localize(key), localize(keyFormat));
+	}
+	
+	public static boolean isShiftKeyDown() {
+		return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+	}
+	
+	public static String shiftForDetails() {
+		return LIGHT_GRAY + localize("info.sstow.tooltip.hold") + " " + YELLOW + ITALIC + localize("info.sstow.tooltip.shift") + " " + END + LIGHT_GRAY + localize("info.sstow.tooltip.forDetails") + END;
+	}
+	
+	
+	public static int pageSelector(int pages) {
+		Random rand = new Random();
+		int randomNum = rand.nextInt((pages));
+		return randomNum;
 	}
 }

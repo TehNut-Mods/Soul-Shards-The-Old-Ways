@@ -2,6 +2,13 @@
 # Shards
 item.sstow.shard.unbound.name=Unbound Soul Shard
 item.sstow.shard.name=Soul Shard
+item.guide.book.missing.name=Torn Page
+
+# Modules
+item.sstow.modules.redstone.name=Mark of Redstone
+item.sstow.modules.detection.name=Mark of Presence
+item.sstow.modules.light.name=Mark of Illumine
+item.sstow.modules.dimension.name=Mark of Ender
 
 # Materials
 item.sstow.material.nugget.iron.name=Iron Nugget
@@ -17,14 +24,18 @@ item.sstow.soultool.pickaxe.name=Soul Pickaxe
 item.sstow.soultool.axe.name=Soul Axe
 item.sstow.soultool.hoe.name=Soul Hoe
 item.sstow.soultool.spade.name=Soul Spade
+item.sstow.soultool.bucket.soulium.name=Bucket of Soulium
 
 # Blocks
 tile.sstow.block.forge.name=Soul Forge
 tile.sstow.block.material.soulium.name=Block of Soulium
 tile.sstow.block.material.ender.name=Block of Ender
 tile.sstow.block.cage.name=Soul Cage
-tile.sstow.block.obsidian.glass.name=Obsidian Glass
 
+tile.sstow.block.soulanvil.name=Soul Anvil
+tile.sstow.block.soulcrystal.name=Soul Crystal
+
+tile.sstow.block.obsidian.glass.name=Obsidian Glass
 tile.sstow.block.xenolith.raw.name=Raw Xenolith
 tile.sstow.block.xenolith.polished.name=Polished Xenolith
 tile.sstow.block.xenolith.decorative.name=Decorative Xenolith
@@ -32,6 +43,8 @@ tile.sstow.block.xenolith.nether.name=Nether Xenolith
 tile.sstow.block.xenolith.soulium.name=Soulium infused Xenolith
 tile.sstow.block.xenolith.redstone.name=Redstone infused Xenolith
 tile.sstow.block.xenolith.ender.name=Ender infused Xenolith
+tile.sstow.block.xenolith.bricks.name=Xenolith Bricks
+tile.sstow.block.xenolith.brickssmall.name=Small Xenolith Bricks
 tile.sstow.block.xenolith.light.name=Glowing Xenolith
 
 # Petrified Blocks
@@ -48,18 +61,12 @@ tile.sstow.petrified.plank.acacia.name=Petrified Acacia Planks
 tile.sstow.petrified.log.big_oak.name=Petrified Dark Oak Log
 tile.sstow.petrified.plank.big_oak.name=Petrified Dark Oak Planks
 
-# WAILA Support
-sstow.waila.soulcage.mob=Entity: 
-sstow.waila.soulcage.tier=Tier: 
-sstow.waila.soulcage.activated=Status: Activated
-sstow.waila.soulcage.deactivated=Status: Deactivated
-sstow.waila.soulcage.empty=Status: Empty
-
 # Enchantment
 enchantment.soul_stealer=Soul Stealer
 
 # GUI
 container.soulforge=Soul Forge
+container.soulcage=Soul Cage
 itemGroup.sstow=Soul Shards The Old Ways
 
 # Soul Shard Details
@@ -109,3 +116,102 @@ chat.sstow.util.entitylistloadfail=Soul Shards had a problem loading Entity List
 chat.sstow.util.entitymapskip1=Already Mapped, skipping: %s
 chat.sstow.util.entitymapskip2=Boss Detected, skipping %s
 chat.sstow.util.entitymapdone=Finished Mapping, Entities Found: %s
+
+# Tooltips
+info.sstow.tooltip.book=Book
+info.sstow.tooltip.page=Page
+info.sstow.tooltip.hold=Hold
+info.sstow.tooltip.shift=Shift
+info.sstow.tooltip.forDetails=For Details
+
+# Mod Compat
+
+# Tinkers Construct
+tile.sstow.fluidblock.soulium.name=Molten Soulium
+fluid.tile.sstow.fluidblock.soulium=Molten Soulium
+material.soulium=Soulium
+modifier.tool.shard=Soul Stealer %s
+
+# WAILA Support
+sstow.waila.soulcage.mob=Entity: 
+sstow.waila.soulcage.tier=Tier: 
+sstow.waila.soulcage.activated=Status: Activated
+sstow.waila.soulcage.deactivated=Status: Deactivated
+sstow.waila.soulcage.empty=Status: Empty
+
+# Baubles
+item.sstow.bauble.gem.immundus.name=Immundus Crystal
+
+item.sstow.bauble.gem.animus.name=Animus Gem
+item.sstow.socket.animus.name=Animus Crystal Socket
+item.sstow.bauble.gem.animussocket.name=Animus Crystal
+item.sstow.bauble.animus.name=Amulet of Animus
+
+item.sstow.bauble.gem.conservo.name=Conservo Gem
+item.sstow.socket.conservo.name=Conservo Crystal Socket
+item.sstow.bauble.gem.conservosocket.name=Conservo Crystal
+item.sstow.bauble.conservo.name=Amulet of Conservo
+
+######################### Game Manual #########################
+guide.book.manual.name=Soul Shards Manual
+guide.book.manual.title=The Old Ways
+guide.book.manual.welcomeMessage=Welcome to the player guide and lore
+guide.book.manual.forging=Soul Forge Recipes
+guide.book.manual.smelting=Soul Forge
+guide.book.manual.forge.opening=The following pages are the Soul Forge Recipes
+guide.book.manual.crafting=Crafting Recipes
+
+######################### Journal Book #########################
+guide.book.journal.title=Petrified Studies, A Forest Gone
+guide.book.journal.message=Welcome Reader, to the strangest of my adventures as a Biologist, I make note that it is all real indeed
+guide.book.journal.name=Prof. Richland's Journal
+guide.book.journal.notes=Notes
+guide.book.journal.note1=Note 1
+guide.book.journal.note1.page01=I am Prof. Richland, Plant Biologist for the area. I’m writing these reports to take note of events that have unfolded in the last few days. First, there have been rumours of a forest being strange, supernatural even. Legends from nearby villages told the story of a strange portal to another world hidden away. Simple fairy tales I’m sure, I’ll be meeting with some locals who contacted me asking for help understanding what has happened there.
+
+guide.book.journal.note1.page02=A strange phenomena occurred it seems, the forest suddenly underwent mass petrification, such a mystery is worth my time indeed, if this turns out to be a ruse I’ll be sorely upset. Regardless, I’m packing my things and heading out on horseback, I shall continue with the next note when I’ve arrived.
+
+guide.book.journal.note2=Note 2
+guide.book.journal.note2.page01=I, Doctor Richland, have arrived, it has been a few hours and I’ve had time to process everything as I write at this poorly crafted wooden desk. This place is rife with diseases the rest of the world cured, most of the locals in town distrust me and some even think I may upset their gods. I must be careful if I am to not arouse a mob of them after my head. Anyway, I arrived and was greeted by a young man, the village chieftain’s son, Akawo, he
+
+guide.book.journal.note2.page02=seemed rather jubilant to meet me. It seems as the son of the chieftain he was allowed to see things from the outside world and came across my studies. Quite the fan, that one. He was the one to send the requisition of help and I obliged, he seems off though, I can’t tell what it is about him. Regardless, the village sits on the edge of the forest, so even as I came into town via horseback, I saw just how serious this problem was. Hundreds upon 
+
+guide.book.journal.note2.page03=hundreds of trees, it was like a plague, they were all petrified, leaves dead and frozen in time on the once lively wood. This is indeed strange, unlike anything I’ve ever seen before, I fear I won’t be able to do anything and when I told Akawo this in private he assured me that any help I could provide would be grand. Maybe even life saving. I didn’t know what he meant until he told me, without the trees one half of their source of food, the 
+
+guide.book.journal.note2.page04=animals that lived in the forest, are leaving it or dying from a lack of food. It’s an entire ecosystem that’s failing and I don’t understand, people in the village are conserving their food and some haven’t eaten much more than a loaf of bread in the last two days. I have to do something, I will continue writing my findings as they come up.
+
+guide.book.journal.note3=Note 3
+guide.book.journal.note3.page01=It has been a few days since I’ve arrived and written in this blasted thing, well, better late than never. Food has been sparse in the village and yet with the customs I have not gone hungry as their guest, it saddens me to see such distrust even now with most of the village but unavoidable. My research so far has done nothing to discover the problem so I am forced to go further in. After a heated conversation with the chieftain I found that
+
+guide.book.journal.note3.page02=going farther than what I have gone in is a rather faux pau outside of the chieftain and son. I need to find a way to get out of the village and into the forest without them knowing, it’ll be hard to do but...ugh, maybe if I had an inside source.
+
+guide.book.journal.note4=Note 4
+guide.book.journal.note4.page01=I feel it is the utmost importance to write this down, I have made much progress since last I wrote. Akawo came to me the night after the argument I had with the chieftain, he explained to me that while tradition dictated his father couldn’t publicly allow my entrance into the forest, he issued Akawo to do it at the dead of night while none were around. He assured me his father would cover my reasoning for disappearing and dissuade others from 
+
+guide.book.journal.note4.page02=assuming I entered the forest. We left immediately, I had -pre packed in hopes that the chieftain had agreed as luck would have it. We travelled into the forest and as we went I felt the forest was still alive in some way, somehow, despite being so devoid of life. Along our travel into the forest we made many discoveries of animals who were in various stages of decay, the strange thing about it is, they had all undergone some stage of 
+
+guide.book.journal.note4.page03=petrification as well. Strange, this constitutes further study that I cannot acquire from a quick glance at the animals. Akawo didn’t like that. He made his thoughts known whilst I collected a sample, a petrified rabbit’s foot from a recently dead one, poor thing died recently from starvation by my guess. Anyways, Akawo made sure to inform me that I should take care in not agitating the graves of the dead, especially with undue reasons. I assured 
+
+guide.book.journal.note4.page04=him that it may solve the mystery if I could inspect it further and test the sample with some of my chemicals. That seemed to quiet him, but it still felt like he had more to say. Akawo and I have made camp now, we’ve got a fire going and I take the first watch while Akawo sleeps. I have a strange feeling that, since Akawo first came to me that he’s been hiding something, like he hadn’t told the full truth when we left. Regardless, I don’t have 
+
+guide.book.journal.note4.page05=much of an option if I am to save these people. Hold on a moment, I think I hear something.
+
+######################### Cultist Book #########################
+guide.book.cultist.name=NAME
+guide.book.cultist.title=TITLE
+guide.book.cultist.message=MESSAGE
+
+guide.book.cultist.lore.entry=LORE ENTRY
+guide.book.cultist.lore.category=LORE CATEGORY
+
+guide.book.cultist.item.entry=ITEM ENTRY
+guide.book.cultist.item.category=ITEM CATEGORY
+
+guide.book.cultist.block.entry=BLOCK ENTRY
+guide.book.cultist.block.category=BLOCK CATEGORY
+
+guide.book.cultist.ritual.entry=RITUAL ENTRY
+guide.book.cultist.ritual.category=RITUAL CATEGORY
+
+guide.book.cultist.journal.entry=JOURNAL ENTRY
+guide.book.cultist.journal.category=JOURNAL CATEGORY

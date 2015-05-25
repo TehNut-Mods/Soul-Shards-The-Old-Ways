@@ -36,13 +36,15 @@ public class BlockXenolith extends Block {
 	}
 
 	public static final String[] names = new String[] {
-		"raw",			// 0
-		"polished",		// 1
-		"decorative",	// 2
-		"nether",		// 3
-		"soulium",		// 4
-		"redstone",		// 5
-		"ender",		// 6
+		"Raw",			// 0
+		"Polished",		// 1
+		"Decorative",	// 2
+		"Nether",		// 3
+		"Soulium",		// 4
+		"Redstone",		// 5
+		"Ender",		// 6
+		"Bricks",		// 7
+		"BricksSmall"	// 8
 	};
 
 	@Override
@@ -65,12 +67,12 @@ public class BlockXenolith extends Block {
 
 		this.blockIcon = new IIcon[names.length];
 		this.bottomIcon = iconRegister.registerIcon("nether_brick");
-		this.topIcon = iconRegister.registerIcon(Reference.MOD_ID
-				+ ":xenolith/xenolith_raw");
+		this.topIcon = iconRegister.registerIcon(Reference.modID
+				+ ":xenolith/xenolithRaw");
 
 		for (int i = 0; i < this.blockIcon.length; ++i) {
-			this.blockIcon[i] = iconRegister.registerIcon(Reference.MOD_ID
-					+ ":xenolith/xenolith_" + names[i]);
+			this.blockIcon[i] = iconRegister.registerIcon(Reference.modID
+					+ ":xenolith/xenolith" + names[i]);
 		}
 	}
 
@@ -86,7 +88,7 @@ public class BlockXenolith extends Block {
 			}
 		}
 
-		if (meta > 6) {
+		if (meta > 8) {
 			meta = 0;
 		}
 		return blockIcon[meta];

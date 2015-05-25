@@ -220,7 +220,7 @@ public class ForgeRecipeHandler extends FurnaceRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
-		return Reference.MOD_ID + ":textures/gui/container/forge.png";
+		return Reference.modID + ":textures/gui/container/forge.png";
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

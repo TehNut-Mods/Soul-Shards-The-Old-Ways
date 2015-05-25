@@ -104,6 +104,14 @@ public class CommandSSTOW extends CommandBase {
 				} else {
 					sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.remkillwrong")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 				}
+			} else if (params[0].equals("xp")) {
+				int xp = 0;
+				if (((EntityPlayerMP) sender).experienceTotal > 0) {
+					xp = ((EntityPlayerMP) sender).experienceTotal;
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "You have " + xp + " of xp"));
+				} else {
+					sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You do not have any xp"));
+				}
 			} else {
 				sender.addChatMessage(new ChatComponentText(Utils.localize("chat.sstow.command.wrongcommand")).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
 			}

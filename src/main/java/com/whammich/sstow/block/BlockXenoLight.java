@@ -30,6 +30,6 @@ public class BlockXenoLight extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon(Reference.MOD_ID + ":xenolith/xenolith_glowstone");
+		blockIcon = iconRegister.registerIcon(Reference.modID + ":xenolith/xenolithGlowstone");
 	}
 }

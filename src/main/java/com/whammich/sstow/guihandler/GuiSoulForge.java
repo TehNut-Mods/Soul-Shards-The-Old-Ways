@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiSoulForge extends GuiContainer {
 
 	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation(
-			Reference.MOD_ID + ":textures/gui/container/forge.png");
+			Reference.modID + ":textures/gui/container/forge.png");
 	private TileEntityForge tileFurnace;
 
 	public GuiSoulForge(InventoryPlayer invPlayer, TileEntityForge tile) {

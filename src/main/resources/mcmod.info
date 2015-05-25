@@ -17,7 +17,8 @@
             "MinecraftForge",
             "NotEnoughItems",
             "Waila",
-            "CoFHCore"
+			"Baubles",
+			"guideapi"
         ],
         "useDependencyInformation": "true"
     }

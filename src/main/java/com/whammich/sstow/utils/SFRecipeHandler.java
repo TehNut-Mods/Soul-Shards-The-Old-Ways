@@ -26,45 +26,54 @@ public class SFRecipeHandler {
 	public Map<ItemStack, ItemStack> getSmeltingList() {
 		return smeltingList;
 	}
-	
+
 	public Map<ItemStack, ItemStack> getByProductList() {
 		return secondaryList;
 	}
-	
+
 	public Map<ItemStack, Integer> getFuelList() {
 		return fuelList;
 	}
-	
+
 	public ItemStack NuggetIngot() {
-		if (Config.NUGGETS == 9) {
+		if (Config.nuggetsReturn == 9) {
 			return new ItemStack(Register.ItemMaterials, 1, 2);
 		} else {
-			return new ItemStack(Register.ItemMaterials, Config.NUGGETS, 1);
+			return new ItemStack(Register.ItemMaterials, Config.nuggetsReturn, 1);
 		}
 	}
 
 	public ItemStack IngotBlock() {
-		if (Config.INGOTS == 9) {
+		if (Config.ingotsReturn == 9) {
 			return new ItemStack(Register.BlockMaterials, 1, 0);
 		} else {
-			return new ItemStack(Register.ItemMaterials, Config.INGOTS, 2);
+			return new ItemStack(Register.ItemMaterials, Config.ingotsReturn, 2);
 		}
 	}
 
 	private SFRecipeHandler() {
-		this.addFuel(new ItemStack(Register.ItemMaterials, 1, 4), 1);
-
-		if (!Config.RITUAL){
-			addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.ItemShardSoul, Config.SHARDS), null, 8, 12600, 1F);
-		}
-		if(Config.newStuff){
+		addFuel(new ItemStack(Register.ItemMaterials, 1, 4), 1);
+		if(Config.oldWaysOption) {
+			addRecipe(new ItemStack(Items.diamond), new ItemStack(Items.diamond, Config.immundusReturn, 0), null, 8, 12600, 1F);
 			addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
 			addRecipe(new ItemStack(Items.gold_ingot), new ItemStack(Register.ItemMaterials, 3, 1), null, 1, 1200, 0.5F);
-			addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 2, 1600, 1F);
+			addRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Register.ItemMaterials, 3, 1), null, 1, 1200, 0.5F);
+			addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.nuggetsReturn, 0), 2, 6000, 0.9F);
+			addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), new ItemStack(Items.iron_ingot, 9 - Config.ingotsReturn), 5, 12000, 0.9F);
+			addRecipe(new ItemStack(Blocks.iron_ore), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.nuggetsReturn, 0), 2, 6000, 0.9F);
 			addRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.netherrack), null, 1, 1600, 0.5F);
 			addRecipe(new ItemStack(Blocks.brick_block), new ItemStack(Blocks.nether_brick), null, 2, 3200, 1F);
+		} else {
+			addRecipe(new ItemStack(Items.diamond), new ItemStack(Register.baubleGems, Config.immundusReturn, 0), null, 8, 12600, 1F);
+			addRecipe(new ItemStack(Items.wheat_seeds), new ItemStack(Items.nether_wart), null, 1, 1200, 0.5F);
+			addRecipe(new ItemStack(Items.gold_ingot), new ItemStack(Register.ItemMaterials, 3, 1), null, 1, 1200, 0.5F);
 			addRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Register.ItemMaterials, 3, 1), null, 1, 1200, 0.5F);
-			addRecipe(new ItemStack(Blocks.iron_ore), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.NUGGETS, 0), 2, 6000, 0.9F);
+			addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.nuggetsReturn, 0), 2, 6000, 0.9F);
+			addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), new ItemStack(Items.iron_ingot, 9 - Config.ingotsReturn), 5, 12000, 0.9F);
+			addRecipe(new ItemStack(Blocks.iron_ore), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.nuggetsReturn, 0), 2, 6000, 0.9F);
+			addRecipe(new ItemStack(Blocks.cobblestone), new ItemStack(Blocks.netherrack), null, 1, 1600, 0.5F);
+			addRecipe(new ItemStack(Blocks.brick_block), new ItemStack(Blocks.nether_brick), null, 2, 3200, 1F);
+			addRecipe(new ItemStack(Blocks.stone), new ItemStack(Register.BlockXenolith), null, 2, 1600, 1F);
 			addRecipe(new ItemStack(Blocks.log, 1, 0), new ItemStack(Register.BlockPetrified, 1, 0), null, 1, 1600, 2F);
 			addRecipe(new ItemStack(Blocks.log, 1, 1), new ItemStack(Register.BlockPetrified, 1, 1), null, 1, 1600, 2F);
 			addRecipe(new ItemStack(Blocks.log, 1, 2), new ItemStack(Register.BlockPetrified, 1, 2), null, 1, 1600, 2F);
@@ -73,8 +82,6 @@ public class SFRecipeHandler {
 			addRecipe(new ItemStack(Blocks.log2, 1, 1), new ItemStack(Register.BlockPetrified2, 1, 1), null, 1, 1600, 2F);
 			addRecipe(new ItemStack(Blocks.obsidian, 1), new ItemStack(Register.BlockObsidianGlass), null, 10, 1600, 3F);
 		}
-		addRecipe(new ItemStack(Items.iron_ingot), NuggetIngot(), new ItemStack(Register.ItemMaterials, 9 - Config.NUGGETS, 0), 2, 6000, 0.9F);
-		addRecipe(new ItemStack(Blocks.iron_block), IngotBlock(), new ItemStack(Items.iron_ingot, 9 - Config.INGOTS), 5, 12000, 0.9F);
 	}
 
 	public void addRecipe(ItemStack input, ItemStack output, ItemStack byproduct, int fuelCost, int burnTime, float experience) {
@@ -153,7 +160,7 @@ public class SFRecipeHandler {
 	private boolean canBeSmelted(ItemStack itemstack, ItemStack itemstack2) {
 		return itemstack2.getItem() == itemstack.getItem()
 				&& (itemstack2.getItemDamage() == 32767 || itemstack2
-						.getItemDamage() == itemstack.getItemDamage());
+				.getItemDamage() == itemstack.getItemDamage());
 	}
 
 	public float giveExperience(ItemStack itemstack) {

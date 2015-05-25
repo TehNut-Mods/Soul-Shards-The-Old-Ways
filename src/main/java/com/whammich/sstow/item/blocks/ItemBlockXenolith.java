@@ -15,7 +15,7 @@ public class ItemBlockXenolith extends ItemBlock {
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName() + "." + BlockXenolith.names[stack.getItemDamage() % BlockXenolith.names.length];
+		return getUnlocalizedName() + "." + BlockXenolith.names[stack.getItemDamage() % BlockXenolith.names.length].toLowerCase();
 	}
 
 	@Override
