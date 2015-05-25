@@ -34,6 +34,8 @@ tile.sstow.block.cage.name=Soul Cage
 
 tile.sstow.block.soulanvil.name=Soul Anvil
 tile.sstow.block.soulcrystal.name=Soul Crystal
+tile.sstow.block.infuser.name=Soul Infuser
+tile.sstow.block.diffuser.name=Soul Diffuser
 
 tile.sstow.block.obsidian.glass.name=Obsidian Glass
 tile.sstow.block.xenolith.raw.name=Raw Xenolith
@@ -67,6 +69,7 @@ enchantment.soul_stealer=Soul Stealer
 # GUI
 container.soulforge=Soul Forge
 container.soulcage=Soul Cage
+container.souldiffuser=Soul Infuser
 itemGroup.sstow=Soul Shards The Old Ways
 
 # Soul Shard Details

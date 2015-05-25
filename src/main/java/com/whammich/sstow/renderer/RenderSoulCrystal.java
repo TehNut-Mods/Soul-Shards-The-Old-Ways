@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
-import org.lwjgl.opengl.GL11;
+import static org.lwjgl.opengl.GL11.*;
 
 import com.whammich.sstow.models.ModelSoulCrystal;
 import com.whammich.sstow.utils.Reference;
@@ -38,12 +38,12 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 		
 		Random rand = new Random(te.xCoord * te.yCoord + te.zCoord);
 
-		GL11.glPushMatrix();
+		glPushMatrix();
 
-		GL11.glEnable(2977);
-		GL11.glEnable(3042);
-		GL11.glEnable(32826);
-		GL11.glBlendFunc(770, 771);
+		glEnable(2977);
+		glEnable(3042);
+		glEnable(32826);
+		glBlendFunc(770, 771);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(220);
 
@@ -51,21 +51,21 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 
 		for (int a = 0; a < 4; a++) {
 			float pulse = MathHelper.sin(p.ticksExisted / (10.0F + a)) * 0.1F;
-			GL11.glPushMatrix();
-			GL11.glTranslatef((float) x + 0.5F, (float) y + bob, (float) z + 0.5F);
-			GL11.glRotatef((rand.nextInt(5) + 45) * a + f + p.ticksExisted % 360, 0.0F, 1.0F, 0.0F);
-			GL11.glColor4f(0.9F + pulse, 0.2F + pulse, 0.9F + pulse, 1.0F);
-			GL11.glScalef(0.35F + rand.nextFloat() * 0.05F, 0.9F + rand.nextFloat() * 0.1F, 0.35F + rand.nextFloat() * 0.05F);
+			glPushMatrix();
+			glTranslatef((float) x + 0.5F, (float) y + bob, (float) z + 0.5F);
+			glRotatef((rand.nextInt(5) + 45) * a + f + p.ticksExisted % 360, 0.0F, 1.0F, 0.0F);
+			glColor4f(0.9F + pulse, 0.2F + pulse, 0.9F + pulse, 1.0F);
+			glScalef(0.35F + rand.nextFloat() * 0.05F, 0.9F + rand.nextFloat() * 0.1F, 0.35F + rand.nextFloat() * 0.05F);
 			this.model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-			GL11.glScalef(1.0F, 1.0F, 1.0F);
-			GL11.glPopMatrix();
+			glScalef(1.0F, 1.0F, 1.0F);
+			glPopMatrix();
 		}
 
-		GL11.glDisable(32826);
-		GL11.glDisable(3042);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		glDisable(32826);
+		glDisable(3042);
+		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		GL11.glPopMatrix();
+		glPopMatrix();
 	}
 
 
@@ -77,29 +77,36 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-		return true;
+		return helper == ItemRendererHelper.INVENTORY_BLOCK || helper == ItemRendererHelper.ENTITY_BOBBING || helper == ItemRendererHelper.ENTITY_ROTATION;
 	}
 
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		GL11.glPushMatrix();
-		GL11.glScalef(-1F, -1F, 1F);
 		switch (type) {
 		case ENTITY:
-		case INVENTORY:
-			GL11.glTranslatef(0, -0.5F, 0);
+			glTranslatef(-0.5f, 0F, 0.5f);
 			break;
 		case EQUIPPED:
-			GL11.glTranslatef(-0.5F,-1F, 0.5F);
+			glRotatef(20F, 0F, 1F, 0F);
+			glRotatef(-15, 1, 0, -1);
+			glScalef(0.65f, 0.65f, 0.65f);
+			glTranslatef(0.75f, -0.5f, 1.25f);
 			break;
 		case EQUIPPED_FIRST_PERSON:
-			GL11.glTranslatef(-0.3F, -1.1F, 0.5F);
+			glRotatef(20, 0, 0, 1);
+			glRotatef(30, 0, 1, 0);
+			glTranslatef(0.2f, 0, -0.1f);
+			glScalef(0.5f, 0.5f, 0.5f);
 			break;
-		default:
+		case FIRST_PERSON_MAP:
+			break;
+		case INVENTORY:
+			glTranslatef(-0.5f, -0.5f, 0.5f);
+			break;
 		}
+
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		model.render(null, 0, 0, 0, 0, 0, 0.0625F);
-		GL11.glPopMatrix();
+		model.renderAll();
 	}
 }

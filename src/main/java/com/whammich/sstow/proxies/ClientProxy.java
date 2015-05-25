@@ -37,7 +37,11 @@ public class ClientProxy extends CommonProxy {
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulCrystal.class, new RenderSoulCrystal());
 		
+		//RenderingRegistry.registerBlockHandler(new BlockRendererSoulCrystal());
+		
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Register.BlockSoulCrystal), new RenderSoulCrystal());
+		
+		
 		
 		// Soul Cage
 		TileEntitySpecialRenderer cageRender = new RenderSoulCage();

@@ -24,8 +24,10 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.block.BlockDarkstone;
+import com.whammich.sstow.block.BlockDiffuser;
 import com.whammich.sstow.block.BlockForge;
 import com.whammich.sstow.block.BlockGlassObsidian;
+import com.whammich.sstow.block.BlockInfuser;
 import com.whammich.sstow.block.BlockMaterials;
 import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockPetrified2;
@@ -56,7 +58,6 @@ import com.whammich.sstow.item.blocks.ItemBlockMaterials;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
 import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
-import com.whammich.sstow.item.blocks.ItemBlockSoulCrystal;
 import com.whammich.sstow.item.blocks.ItemBlockXenolith;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityForge;
@@ -109,6 +110,9 @@ public class Register {
 	public static Block BlockPetrifiedPlanks = new BlockPlankPetrified();
 	public static Block BlockObsidianGlass = new BlockGlassObsidian();
 
+	public static Block BlockDiffuser = new BlockDiffuser(); 
+	public static Block BlockInfuser = new BlockInfuser();
+	
 	// Custom Blocks
 	public static Block BlockSoulAnvil = new BlockSoulAnvil();
 	public static Block BlockSoulCrystal = new BlockSoulCrystal();
@@ -170,7 +174,9 @@ public class Register {
 			GameRegistry.registerBlock(BlockPetrified2, ItemBlockPetrified2.class, "BlockPetrifiedLog2");
 			GameRegistry.registerBlock(BlockPetrifiedPlanks, ItemBlockPlankPetrified.class, "BlockPetrifiedPlanks");
 			GameRegistry.registerBlock(BlockSoulAnvil, "BlockSoulAnvil");
-			GameRegistry.registerBlock(BlockSoulCrystal, ItemBlockSoulCrystal.class, "BlockSoulCrystal").setBlockName(Reference.modID.toLowerCase() + ".block.soulcrystal");
+			GameRegistry.registerBlock(BlockSoulCrystal, "BlockSoulCrystal").setBlockName(Reference.modID.toLowerCase() + ".block.soulcrystal");
+			GameRegistry.registerBlock(BlockDiffuser, "BlockDiffuser");
+			GameRegistry.registerBlock(BlockInfuser, "BlockInfuser");
 		}
 
 	}
@@ -300,25 +306,25 @@ public class Register {
 	}
 	public static int pageCount = 0;
 	public static ItemStack addNBTToLootPage(ItemStack stack) {
-		System.out.println("Method Called");
+		//System.out.println("Method Called");
 		if(stack.stackTagCompound == null){
 			System.out.println("Applying NBTTagCompound()");
 			stack.setTagCompound(new NBTTagCompound());
 		}
-		System.out.println("pageNBTHelper stuff");
+		//System.out.println("pageNBTHelper stuff");
 		pageNBTHelper = new String[PageNBTHelper.pages.length];
 		for(int i = 0; i < PageNBTHelper.pages.length; i++){
-			System.out.println("Loop: " + i++);
+			//System.out.println("Loop: " + i++);
 			String[] split = PageNBTHelper.pages[i].split("|");
-			System.out.println("Splitting");
+			//System.out.println("Splitting");
 			switch (split.length) {
 			case 3:
-				System.out.println("Before Tags");
+				//System.out.println("Before Tags");
 				stack.stackTagCompound.setString("key", split[0]);
 				stack.stackTagCompound.setString("book", split[1]);
 				stack.stackTagCompound.setString("page", split[2]);
 				stack.stackTagCompound.setInteger("TI", Utils.pageSelector(10));
-				System.out.println(split[0]+" | "+split[1]+" | "+split[2]);
+				//System.out.println(split[0]+" | "+split[1]+" | "+split[2]);
 				pageCount++;
 				return stack;
 			}
