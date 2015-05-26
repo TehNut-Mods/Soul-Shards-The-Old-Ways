@@ -30,8 +30,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCage extends BlockContainer {
 
-	public IIcon[] icons = new IIcon[5];
-
 	public BlockCage() {
 		super(Material.iron);
 		this.setBlockName("sstow.block.cage");

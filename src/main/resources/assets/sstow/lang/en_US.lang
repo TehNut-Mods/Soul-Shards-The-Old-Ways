@@ -28,9 +28,9 @@ item.sstow.soultool.bucket.soulium.name=Bucket of Soulium
 
 # Blocks
 tile.sstow.block.forge.name=Soul Forge
+tile.sstow.block.cage.name=Soul Cage
 tile.sstow.block.material.soulium.name=Block of Soulium
 tile.sstow.block.material.ender.name=Block of Ender
-tile.sstow.block.cage.name=Soul Cage
 
 tile.sstow.block.soulcrystal.name=Soul Crystal
 tile.sstow.block.infuser.name=Soul Infuser
@@ -68,7 +68,8 @@ enchantment.soul_stealer=Soul Stealer
 # GUI
 container.soulforge=Soul Forge
 container.soulcage=Soul Cage
-container.souldiffuser=Soul Infuser
+container.souldiffuser=Soul Diffuser
+container.soulinfuser=Soul Infuser
 itemGroup.sstow=Soul Shards The Old Ways
 
 # Soul Shard Details

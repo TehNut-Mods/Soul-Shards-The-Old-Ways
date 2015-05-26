@@ -18,13 +18,16 @@ public class ContainerInfuser extends Container {
 	}
 
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 9; j++) {
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+		int i;
+		for (i = 0; i < 3; ++i) {
+			for (int j = 0; j < 9; ++j) {
+				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, i * 18 + 51));
 			}
 		}
-		for (int i = 0; i < 9; i++)
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+
+		for (i = 0; i < 9; ++i) {
+			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 58 + 51));
+		}
 	}
 
 	@Override
@@ -32,6 +35,6 @@ public class ContainerInfuser extends Container {
 		return this.tileInfuser.isUseableByPlayer(player);
 	}
 
-	
+
 
 }
