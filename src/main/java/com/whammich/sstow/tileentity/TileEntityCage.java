@@ -339,8 +339,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			if (this.modules[var1].stackSize <= var2) {
 				itemstack = this.modules[var1];
 				this.modules[var1] = null;
-				this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord,
-						zCoord, 0, 2);
+				this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 2);
 				this.tier = 0;
 				this.entName = null;
 				return itemstack;

@@ -1,14 +1,14 @@
 package com.whammich.sstow.block;
 
-import com.whammich.sstow.SSTheOldWays;
-import com.whammich.sstow.tileentity.TileEntityDiffuser;
-import com.whammich.sstow.utils.Register;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.whammich.sstow.SSTheOldWays;
+import com.whammich.sstow.tileentity.TileEntityInfuser;
+import com.whammich.sstow.utils.Register;
 
 public class BlockInfuser extends BlockContainer {
 
@@ -20,7 +20,7 @@ public class BlockInfuser extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int var1) {
-		return new TileEntityDiffuser();
+		return new TileEntityInfuser();
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class BlockInfuser extends BlockContainer {
 		if(world.isRemote){
 			return true;
 		}
-		player.openGui(SSTheOldWays.modInstance, 3, world, x, y, z);
+		player.openGui(SSTheOldWays.modInstance, 0, world, x, y, z);
 		return true;
 		
 	}
