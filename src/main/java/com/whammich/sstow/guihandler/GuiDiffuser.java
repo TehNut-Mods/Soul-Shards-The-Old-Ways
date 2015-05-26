@@ -7,12 +7,12 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.whammich.sstow.tileentity.ContainerDiffuser;
+import com.whammich.sstow.guihandler.containers.ContainerDiffuser;
 import com.whammich.sstow.tileentity.TileEntityDiffuser;
 import com.whammich.sstow.utils.Utils;
 
 public class GuiDiffuser extends GuiContainer {
-	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("textures/gui/container/furnace.png");
+	private static final ResourceLocation furnaceGuiTextures = new ResourceLocation("textures/gui/container/fusers.png");
 	
 	TileEntityDiffuser tileDiffuser;
 

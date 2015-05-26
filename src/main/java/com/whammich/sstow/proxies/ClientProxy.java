@@ -8,11 +8,9 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import com.whammich.sstow.entity.mob.hostile.EntityZombieWitch;
 import com.whammich.sstow.entity.mob.hostile.render.RenderZombieWitch;
 import com.whammich.sstow.entity.particle.EntityPurpleFlameFX;
-import com.whammich.sstow.renderer.RenderSoulAnvil;
 import com.whammich.sstow.renderer.RenderSoulCage;
 import com.whammich.sstow.renderer.RenderSoulCrystal;
 import com.whammich.sstow.tileentity.TileEntityCage;
-import com.whammich.sstow.tileentity.TileEntitySoulAnvil;
 import com.whammich.sstow.tileentity.TileEntitySoulCrystal;
 import com.whammich.sstow.utils.Register;
 
@@ -30,9 +28,6 @@ public class ClientProxy extends CommonProxy {
 		// Zombie Witch
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieWitch.class, new RenderZombieWitch());
 
-		// Soul Anvil		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulAnvil.class, new RenderSoulAnvil());
-		
 		// Soul Crystal
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulCrystal.class, new RenderSoulCrystal());

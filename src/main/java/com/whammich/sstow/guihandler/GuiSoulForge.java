@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.whammich.sstow.tileentity.ContainerForge;
+import com.whammich.sstow.guihandler.containers.ContainerForge;
 import com.whammich.sstow.tileentity.TileEntityForge;
 import com.whammich.sstow.utils.Reference;
 

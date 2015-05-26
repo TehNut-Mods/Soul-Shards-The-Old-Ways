@@ -1,5 +1,6 @@
-package com.whammich.sstow.tileentity;
+package com.whammich.sstow.guihandler.containers;
 
+import com.whammich.sstow.tileentity.TileEntityForge;
 import com.whammich.sstow.utils.SFRecipeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;

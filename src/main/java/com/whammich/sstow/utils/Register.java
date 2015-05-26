@@ -32,7 +32,6 @@ import com.whammich.sstow.block.BlockMaterials;
 import com.whammich.sstow.block.BlockPetrified;
 import com.whammich.sstow.block.BlockPetrified2;
 import com.whammich.sstow.block.BlockPlankPetrified;
-import com.whammich.sstow.block.BlockSoulAnvil;
 import com.whammich.sstow.block.BlockSoulCrystal;
 import com.whammich.sstow.block.BlockXenoLight;
 import com.whammich.sstow.block.BlockXenolith;
@@ -114,7 +113,6 @@ public class Register {
 	public static Block BlockInfuser = new BlockInfuser();
 	
 	// Custom Blocks
-	public static Block BlockSoulAnvil = new BlockSoulAnvil();
 	public static Block BlockSoulCrystal = new BlockSoulCrystal();
 	
 	public static IRecipe soulCage, soulForge;
@@ -173,7 +171,6 @@ public class Register {
 			GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");
 			GameRegistry.registerBlock(BlockPetrified2, ItemBlockPetrified2.class, "BlockPetrifiedLog2");
 			GameRegistry.registerBlock(BlockPetrifiedPlanks, ItemBlockPlankPetrified.class, "BlockPetrifiedPlanks");
-			GameRegistry.registerBlock(BlockSoulAnvil, "BlockSoulAnvil");
 			GameRegistry.registerBlock(BlockSoulCrystal, "BlockSoulCrystal").setBlockName(Reference.modID.toLowerCase() + ".block.soulcrystal");
 			GameRegistry.registerBlock(BlockDiffuser, "BlockDiffuser");
 			GameRegistry.registerBlock(BlockInfuser, "BlockInfuser");

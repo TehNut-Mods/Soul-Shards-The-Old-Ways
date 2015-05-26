@@ -4,10 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.whammich.sstow.tileentity.ContainerCage;
-import com.whammich.sstow.tileentity.ContainerDiffuser;
-import com.whammich.sstow.tileentity.ContainerForge;
-import com.whammich.sstow.tileentity.ContainerInfuser;
+import com.whammich.sstow.guihandler.containers.ContainerCage;
+import com.whammich.sstow.guihandler.containers.ContainerDiffuser;
+import com.whammich.sstow.guihandler.containers.ContainerForge;
+import com.whammich.sstow.guihandler.containers.ContainerInfuser;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityDiffuser;
 import com.whammich.sstow.tileentity.TileEntityForge;

@@ -28,9 +28,8 @@ public class BlockDiffuser extends BlockContainer {
 		if(world.isRemote){
 			return true;
 		}
-		player.openGui(SSTheOldWays.modInstance, 2, world, x, y, z);
+		player.openGui(SSTheOldWays.modInstance, 0, world, x, y, z);
 		return true;
-		
 	}
 	
 }

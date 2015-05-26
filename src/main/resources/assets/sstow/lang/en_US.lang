@@ -19,11 +19,11 @@ item.sstow.material.essence.corrupted.name=Corrupted Essence
 item.sstow.material.petrified.stick.name=Petrified Stick
 
 # Tools
-item.sstow.soultool.sword.name=Soul Sword
-item.sstow.soultool.pickaxe.name=Soul Pickaxe
-item.sstow.soultool.axe.name=Soul Axe
-item.sstow.soultool.hoe.name=Soul Hoe
-item.sstow.soultool.spade.name=Soul Spade
+item.sstow.soultool.sword.name=Soulium Sword
+item.sstow.soultool.pickaxe.name=Soulium Pickaxe
+item.sstow.soultool.axe.name=Soulium Axe
+item.sstow.soultool.hoe.name=Soulium Hoe
+item.sstow.soultool.spade.name=Soulium Spade
 item.sstow.soultool.bucket.soulium.name=Bucket of Soulium
 
 # Blocks
@@ -32,7 +32,6 @@ tile.sstow.block.material.soulium.name=Block of Soulium
 tile.sstow.block.material.ender.name=Block of Ender
 tile.sstow.block.cage.name=Soul Cage
 
-tile.sstow.block.soulanvil.name=Soul Anvil
 tile.sstow.block.soulcrystal.name=Soul Crystal
 tile.sstow.block.infuser.name=Soul Infuser
 tile.sstow.block.diffuser.name=Soul Diffuser

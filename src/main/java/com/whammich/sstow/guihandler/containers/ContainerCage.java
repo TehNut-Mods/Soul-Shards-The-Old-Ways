@@ -1,8 +1,9 @@
-package com.whammich.sstow.tileentity;
+package com.whammich.sstow.guihandler.containers;
 
 import com.whammich.sstow.guihandler.slots.SlotLocked;
 import com.whammich.sstow.guihandler.slots.SlotModule;
 import com.whammich.sstow.guihandler.slots.SlotShard;
+import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.Register;
 import com.whammich.sstow.utils.Utils;
