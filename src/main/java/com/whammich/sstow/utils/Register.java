@@ -51,21 +51,24 @@ import com.whammich.sstow.compat.tcon.TCon;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
 import com.whammich.sstow.entity.mob.hostile.EntityZombieWitch;
 import com.whammich.sstow.guihandler.GuiHandler;
-import com.whammich.sstow.item.ItemAxeSoul;
-import com.whammich.sstow.item.ItemHoeSoul;
 import com.whammich.sstow.item.ItemLootPage;
 import com.whammich.sstow.item.ItemMaterials;
 import com.whammich.sstow.item.ItemModules;
-import com.whammich.sstow.item.ItemPickaxeSoul;
 import com.whammich.sstow.item.ItemShardSoul;
-import com.whammich.sstow.item.ItemSpadeSoul;
-import com.whammich.sstow.item.ItemSwordSoul;
 import com.whammich.sstow.item.blocks.ItemBlockForge;
 import com.whammich.sstow.item.blocks.ItemBlockMaterials;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
 import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockXenolith;
+import com.whammich.sstow.item.tools.ItemAxeShadow;
+import com.whammich.sstow.item.tools.ItemAxeSoul;
+import com.whammich.sstow.item.tools.ItemPickaxeShadow;
+import com.whammich.sstow.item.tools.ItemPickaxeSoul;
+import com.whammich.sstow.item.tools.ItemSpadeShadow;
+import com.whammich.sstow.item.tools.ItemSpadeSoul;
+import com.whammich.sstow.item.tools.ItemSwordShadow;
+import com.whammich.sstow.item.tools.ItemSwordSoul;
 import com.whammich.sstow.tileentity.TileEntityCage;
 import com.whammich.sstow.tileentity.TileEntityDiffuser;
 import com.whammich.sstow.tileentity.TileEntityForge;
@@ -83,6 +86,7 @@ public class Register {
 
 	// Tool material for the soul tools/sword
 	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", 3, 3122, 12.0F, 6F, 30);
+	public static ToolMaterial SHADOW = EnumHelper.addToolMaterial("SHADOW", 3, 4000, 20F, 12F, 60);
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Config.enchantID, Config.enchantWeight);
@@ -94,12 +98,16 @@ public class Register {
 	public static Item ItemMaterials = new ItemMaterials();
 	public static Item ItemModules = new ItemModules();
 	public static Item ItemShardSoul = new ItemShardSoul();
+	public static Item ItemLootPage = new ItemLootPage();
 	public static Item ItemSwordSoul = new ItemSwordSoul(SOULIUM);
 	public static Item ItemPickaxeSoul = new ItemPickaxeSoul(SOULIUM);
 	public static Item ItemAxeSoul = new ItemAxeSoul(SOULIUM);
-	public static Item ItemHoeSoul = new ItemHoeSoul(SOULIUM);
 	public static Item ItemSpadeSoul = new ItemSpadeSoul(SOULIUM);
-	public static Item ItemLootPage = new ItemLootPage();
+	
+	public static Item ItemSwordShadow = new ItemSwordShadow(SHADOW);
+	public static Item ItemPickaxeShadow = new ItemPickaxeShadow(SHADOW);
+	public static Item ItemAxeShadow = new ItemAxeShadow(SHADOW);
+	public static Item ItemSpadeShadow = new ItemSpadeShadow(SHADOW);
 
 	// Set up bauble items
 	public static Item animusBauble = new BaubleAnimus();
@@ -155,19 +163,23 @@ public class Register {
 	private static void registerItems() {
 		GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
 		GameRegistry.registerItem(ItemModules, "ItemModulesSoul");
+		GameRegistry.registerItem(ItemShardSoul, "ItemShardSoul");
 		GameRegistry.registerItem(ItemSwordSoul, "ItemSwordSoul");
 		GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
 		GameRegistry.registerItem(ItemAxeSoul, "ItemAxeSoul");
-		GameRegistry.registerItem(ItemHoeSoul, "ItemHoeSoul");
 		GameRegistry.registerItem(ItemSpadeSoul, "ItemSpadeSoul");
-		GameRegistry.registerItem(ItemShardSoul, "ItemShardSoul");
-
+		
 		if(!Config.oldWaysOption) {
 			GameRegistry.registerItem(ItemLootPage, "ItemLootPage");
 			GameRegistry.registerItem(animusBauble, animusBauble.getUnlocalizedName());
 			GameRegistry.registerItem(conservoBauble, conservoBauble.getUnlocalizedName());
 			GameRegistry.registerItem(baubleGems, baubleGems.getUnlocalizedName());
 			GameRegistry.registerItem(baubleSockets, baubleSockets.getUnlocalizedName());
+			GameRegistry.registerItem(ItemSwordShadow, "ItemSwordShadow");
+			GameRegistry.registerItem(ItemPickaxeShadow, "ItemPickaxeShadow");
+			GameRegistry.registerItem(ItemAxeShadow, "ItemAxeShadow");
+			GameRegistry.registerItem(ItemSpadeShadow, "ItemSpadeShadow");
+			
 		}
 
 	}
@@ -286,14 +298,12 @@ public class Register {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "stickPetrified"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "stickPetrified"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "stickPetrified"));
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHoeSoul), "AA", "CB", "CB", 'A', "ingotSoulium", 'B', "stickPetrified"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "stickPetrified"));
 
 		} else {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHoeSoul), "AA", "CB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
 		}
 

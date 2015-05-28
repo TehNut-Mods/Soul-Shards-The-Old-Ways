@@ -1,30 +1,29 @@
-package com.whammich.sstow.item;
+package com.whammich.sstow.item.tools;
+
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
 
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemHoeSoul extends ItemHoe {
-
-	public ItemHoeSoul(ToolMaterial Material) {
+public class ItemPickaxeSoul extends ItemPickaxe {
+	public ItemPickaxeSoul(ToolMaterial Material) {
 		super(Material);
-		this.setUnlocalizedName("soul_hoe");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soultool.hoe";
+			return "item.sstow.soultool.pickaxe";
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.modID + ":hoeSoul");
+			itemIcon = iconRegister.registerIcon(Reference.modID + ":pickaxeSoul");
 	}
 }

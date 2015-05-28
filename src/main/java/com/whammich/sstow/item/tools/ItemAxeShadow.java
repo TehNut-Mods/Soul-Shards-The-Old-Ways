@@ -1,37 +1,40 @@
-package com.whammich.sstow.item;
+package com.whammich.sstow.item.tools;
+
+import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import com.whammich.sstow.utils.Reference;
-import com.whammich.sstow.utils.Register;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemPickaxeSoul extends ItemPickaxe {
+public class ItemAxeShadow extends ItemAxe {
 
-	public ItemPickaxeSoul(ToolMaterial Material) {
+	public ItemAxeShadow(ToolMaterial Material) {
 		super(Material);
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.setMaxStackSize(1);
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		return "item.sstow.soultool.pickaxe";
+		return "item.sstow.shadowtool.axe";
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.modID + ":pickaxeSoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":axeShadow");
 	}
-
+	
+	static Material[] materials = new Material[] {
+		Material.gourd, Material.leaves, Material.wood, Material.vine
+	};
+	@SuppressWarnings("static-access")
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving) {
 		if (entityLiving.isSneaking()) {
@@ -44,15 +47,18 @@ public class ItemPickaxeSoul extends ItemPickaxe {
 					if (blk == null) {
 						continue;
 					}
-					
-					if (block.getMaterial() == Material.rock) {
-						world.func_147480_a(x2, y2, z2, true);
-						stack.damageItem(1, entityLiving);
-					}
 
+					for (int i = 0; i < this.materials.length; ++i) {
+						if (block.getMaterial() == materials[i]) {
+							world.func_147480_a(x2, y2, z2, true);
+							stack.damageItem(1, entityLiving);
+						}
+					}
 				}
 			}
 		}
+
 		return true;
 	}
+	
 }

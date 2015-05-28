@@ -1,4 +1,4 @@
-package com.whammich.sstow.item;
+package com.whammich.sstow.item.tools;
 
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;

@@ -22,9 +22,18 @@ item.sstow.material.petrified.stick.name=Petrified Stick
 item.sstow.soultool.sword.name=Soulium Sword
 item.sstow.soultool.pickaxe.name=Soulium Pickaxe
 item.sstow.soultool.axe.name=Soulium Axe
-item.sstow.soultool.hoe.name=Soulium Hoe
-item.sstow.soultool.spade.name=Soulium Spade
+item.sstow.soultool.spade.name=Soulium Shovel
 item.sstow.soultool.bucket.soulium.name=Bucket of Soulium
+
+item.sstow.shadowtool.sword.name=Shadow Sword
+item.sstow.shadowtool.pickaxe.name=Shadow Pickaxe
+item.sstow.shadowtool.axe.name=Shadow Axe
+item.sstow.shadowtool.spade.name=Shadow Shovel
+
+item.sstow.tool.sword.name=Sword
+item.sstow.tool.pickaxe.name=Pickaxe
+item.sstow.tool.axe.name=Axe
+item.sstow.tool.spade.name=Shovel
 
 # Blocks
 tile.sstow.block.forge.name=Soul Forge
