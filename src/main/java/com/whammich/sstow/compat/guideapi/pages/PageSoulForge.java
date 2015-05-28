@@ -6,7 +6,10 @@ import amerifrance.guideapi.api.base.Book;
 import amerifrance.guideapi.api.base.PageBase;
 import amerifrance.guideapi.api.util.GuiHelper;
 import amerifrance.guideapi.gui.GuiBase;
+
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.SFRecipeHandler;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -30,7 +33,7 @@ public class PageSoulForge extends PageBase {
 
     @SideOnly(Side.CLIENT)
     public void draw(Book book, CategoryAbstract category, EntryAbstract entry, int guiLeft, int guiTop, int mouseX, int mouseY, GuiBase guiBase, FontRenderer fontRenderer) {
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("sstow:textures/gui/recipe_elements.png"));
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(Reference.modID + ":textures/gui/recipe_elements.png"));
         guiBase.drawTexturedModalRect(guiLeft + 30, guiTop + 60, 0, 58, 110, 52);
         guiBase.drawCenteredString(fontRenderer, StatCollector.translateToLocal("guide.forge.smelting"), guiLeft + guiBase.xSize / 2, guiTop + 12, 0);
 

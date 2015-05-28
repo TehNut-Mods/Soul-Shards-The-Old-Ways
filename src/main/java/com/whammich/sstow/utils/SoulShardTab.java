@@ -9,7 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class SoulShardTab extends CreativeTabs {
 
 	public SoulShardTab() {
-		super("sstow");
+		super(Reference.modID);
 	}
 
 	@Override

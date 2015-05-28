@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 
 import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.tileentity.TileEntityInfuser;
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
 public class BlockInfuser extends BlockContainer {
@@ -15,7 +16,7 @@ public class BlockInfuser extends BlockContainer {
 	public BlockInfuser() {
 		super(Material.rock);
 		setCreativeTab(Register.CREATIVE_TAB);
-		setBlockName("sstow.block.infuser");
+		setBlockName(Reference.modID + ".block.infuser");
 	}
 
 	@Override

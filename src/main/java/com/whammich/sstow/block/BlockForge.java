@@ -40,7 +40,7 @@ public class BlockForge extends BlockContainer {
 
 	public BlockForge(boolean isActive) {
 		super(Material.rock);
-		this.setBlockName("sstow.block.forge");
+		this.setBlockName(Reference.modID + ".block.forge");
 		this.setHardness(3.5F);
 		isBurning2 = isActive;
 	}

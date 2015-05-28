@@ -30,7 +30,7 @@ public class ItemGems extends Item {
 
 	public ItemGems() {
 		super();
-		setUnlocalizedName("sstow.bauble.gem");
+		setUnlocalizedName(Reference.modID + ".bauble.gem");
 		setCreativeTab(Register.CREATIVE_TAB);
 		setHasSubtypes(true);
 	}

@@ -14,7 +14,7 @@ public class BlockGlassObsidian extends Block {
 
 	public BlockGlassObsidian() {
 		super(Material.rock);
-        setBlockName("sstow.block.obsidian.glass");
+        setBlockName(Reference.modID + ".block.obsidian.glass");
         setBlockTextureName(Reference.modID + ":glassObsidian");
         setCreativeTab(Register.CREATIVE_TAB);
         setLightOpacity(255);

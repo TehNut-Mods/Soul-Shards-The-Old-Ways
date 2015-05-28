@@ -13,6 +13,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.whammich.sstow.tileentity.TileEntityCage;
+import com.whammich.sstow.utils.Reference;
 
 public class SoulCageWailaProvider implements IWailaDataProvider {
 
@@ -29,18 +30,18 @@ public class SoulCageWailaProvider implements IWailaDataProvider {
 		TileEntityCage teSoulCage = (TileEntityCage) accessor.getTileEntity();
 		if (teSoulCage != null) {
 			if (teSoulCage.getStackInSlot(0) != null) {
-				// currenttip.add(StatCollector.translateToLocal("sstow.waila.soulcage.filled"));
-				currenttip.add(StatCollector.translateToLocal("sstow.waila.soulcage.mob") + teSoulCage.getEntityName());
-				currenttip.add(StatCollector.translateToLocal("sstow.waila.soulcage.tier") + teSoulCage.getTier());
+				// currenttip.add(StatCollector.translateToLocal(Reference.modID + ".waila.soulcage.filled"));
+				currenttip.add(StatCollector.translateToLocal(Reference.modID + ".waila.soulcage.mob") + teSoulCage.getEntityName());
+				currenttip.add(StatCollector.translateToLocal(Reference.modID + ".waila.soulcage.tier") + teSoulCage.getTier());
 				NBTTagCompound tag = (NBTTagCompound) accessor.getNBTData();
 
 				if (tag.getBoolean("active")) {
-					currenttip.add(StatCollector.translateToLocal("sstow.waila.soulcage.activated"));
+					currenttip.add(StatCollector.translateToLocal(Reference.modID + ".waila.soulcage.activated"));
 				} else {
-					currenttip.add(StatCollector.translateToLocal("sstow.waila.soulcage.deactivated"));
+					currenttip.add(StatCollector.translateToLocal(Reference.modID + ".waila.soulcage.deactivated"));
 				}
 			} else {
-				currenttip.add(StatCollector.translateToLocal("sstow.waila.soulcage.empty"));
+				currenttip.add(StatCollector.translateToLocal(Reference.modID + ".waila.soulcage.empty"));
 			}
 		}
 		return currenttip;

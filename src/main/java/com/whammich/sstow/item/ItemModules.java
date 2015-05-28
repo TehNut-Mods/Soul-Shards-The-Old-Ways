@@ -23,7 +23,7 @@ public class ItemModules extends Item {
 	public ItemModules() {
 		super();
 
-		setUnlocalizedName("sstow.modules");
+		setUnlocalizedName(Reference.modID + ".modules");
 		setCreativeTab(Register.CREATIVE_TAB);
 		setHasSubtypes(true);
 	}

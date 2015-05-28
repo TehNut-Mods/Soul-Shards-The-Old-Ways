@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.whammich.sstow.tileentity.TileEntitySoulCrystal;
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Utils;
 
 public class SoulCrystalWailaProvider implements IWailaDataProvider {
@@ -29,7 +30,7 @@ public class SoulCrystalWailaProvider implements IWailaDataProvider {
 		TileEntitySoulCrystal teSoulCrystal = (TileEntitySoulCrystal) accessor.getTileEntity();
 		if(teSoulCrystal != null) {
 			if(teSoulCrystal.getEntityName() == null) {
-				currenttip.add(Utils.localize("sstow.waila.soulcage.empty"));
+				currenttip.add(Utils.localize(Reference.modID + ".waila.soulcage.empty"));
 			} else {
 				currenttip.add(Utils.localize("") + teSoulCrystal.getEntityName());
 				currenttip.add(Utils.localize("") + teSoulCrystal.getSoulCount());

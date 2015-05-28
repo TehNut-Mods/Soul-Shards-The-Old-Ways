@@ -27,7 +27,7 @@ public class BlockPlankPetrified extends Block {
 		useNeighborBrightness = true;
 		blockHardness = 3.0F;
 		blockResistance = 3.0F;
-		setBlockName("sstow.petrified.plank");
+		setBlockName(Reference.modID + ".petrified.plank");
 	}
 
 	public static final String[] names = new String[] { 

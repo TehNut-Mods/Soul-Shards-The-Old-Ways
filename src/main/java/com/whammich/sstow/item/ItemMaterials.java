@@ -31,7 +31,7 @@ public class ItemMaterials extends Item {
     public ItemMaterials() {
         super();
 
-        setUnlocalizedName("sstow.material");
+        setUnlocalizedName(Reference.modID + ".material");
         setCreativeTab(Register.CREATIVE_TAB);
         setHasSubtypes(true);
     }

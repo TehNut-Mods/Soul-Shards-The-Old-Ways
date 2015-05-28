@@ -25,7 +25,7 @@ public class BaubleConservo  extends Item implements IBauble {
 		super();
 		this.maxStackSize = 1;
 		this.setCreativeTab(Register.CREATIVE_TAB);
-		this.setUnlocalizedName("sstow.bauble.conservo");
+		this.setUnlocalizedName(Reference.modID + ".bauble.conservo");
 		this.setTextureName(Reference.modID + ":gemConservoBauble");
 	}
 

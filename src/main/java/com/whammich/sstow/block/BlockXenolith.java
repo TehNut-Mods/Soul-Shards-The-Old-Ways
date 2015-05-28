@@ -32,7 +32,7 @@ public class BlockXenolith extends Block {
 		useNeighborBrightness = true;
 		blockHardness = 3.0F;
 		blockResistance = 3.0F;
-		setBlockName("sstow.block.xenolith");
+		setBlockName(Reference.modID + ".block.xenolith");
 	}
 
 	public static final String[] names = new String[] {
@@ -67,12 +67,10 @@ public class BlockXenolith extends Block {
 
 		this.blockIcon = new IIcon[names.length];
 		this.bottomIcon = iconRegister.registerIcon("nether_brick");
-		this.topIcon = iconRegister.registerIcon(Reference.modID
-				+ ":xenolith/xenolithRaw");
+		this.topIcon = iconRegister.registerIcon(Reference.modID + ":xenolith/xenolithRaw");
 
 		for (int i = 0; i < this.blockIcon.length; ++i) {
-			this.blockIcon[i] = iconRegister.registerIcon(Reference.modID
-					+ ":xenolith/xenolith" + names[i]);
+			this.blockIcon[i] = iconRegister.registerIcon(Reference.modID + ":xenolith/xenolith" + names[i]);
 		}
 	}
 

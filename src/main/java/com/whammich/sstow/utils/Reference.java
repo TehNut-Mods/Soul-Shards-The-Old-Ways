@@ -1,7 +1,7 @@
 package com.whammich.sstow.utils;
 
 public class Reference {
-	public static final String modID = "SSTOW";
+	public static final String modID = "sstow";
 	public static final String modName = "Soul Shards: The Old Ways";
 	public static final String modVersion = "@VERSION@";
 	public static final String guiFactory_class = "com.whammich.sstow.guihandler.GuiFactory";

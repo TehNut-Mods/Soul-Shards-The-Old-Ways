@@ -26,7 +26,7 @@ public class ItemSockets extends Item {
 
 	public ItemSockets() {
 		super();
-		setUnlocalizedName("sstow.socket");
+		setUnlocalizedName(Reference.modID + ".socket");
 		setCreativeTab(Register.CREATIVE_TAB);
 		setHasSubtypes(true);
 	}

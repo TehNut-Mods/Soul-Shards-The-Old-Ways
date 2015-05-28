@@ -14,13 +14,13 @@ import com.whammich.sstow.utils.Utils;
 
 public class GuiDiffuser extends GuiContainer {
 	private static final ResourceLocation texture = new ResourceLocation(Reference.modID + ":textures/gui/container/fusers.png");
-	
+
 	TileEntityDiffuser tileDiffuser;
 
 	public GuiDiffuser(InventoryPlayer par1InventoryPlayer, TileEntityDiffuser tileDiffuser) {
 		super(new ContainerDiffuser(par1InventoryPlayer, tileDiffuser));
 		this.tileDiffuser = tileDiffuser;
-        this.ySize = 133;
+		this.ySize = 133;
 	}
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
@@ -29,10 +29,10 @@ public class GuiDiffuser extends GuiContainer {
 	}
 
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(texture);
-        int k = (this.width - this.xSize) / 2;
-        int l = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.mc.getTextureManager().bindTexture(texture);
+		int k = (this.width - this.xSize) / 2;
+		int l = (this.height - this.ySize) / 2;
+		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 	}
 }

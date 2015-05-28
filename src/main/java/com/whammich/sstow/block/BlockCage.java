@@ -32,7 +32,7 @@ public class BlockCage extends BlockContainer {
 
 	public BlockCage() {
 		super(Material.iron);
-		this.setBlockName("sstow.block.cage");
+		this.setBlockName(Reference.modID + ".block.cage");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.blockHardness = 3.0F;
 		this.blockResistance = 3.0F;

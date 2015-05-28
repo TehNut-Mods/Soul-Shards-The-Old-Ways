@@ -48,7 +48,6 @@ tile.sstow.block.xenolith.bricks.name=Xenolith Bricks
 tile.sstow.block.xenolith.brickssmall.name=Small Xenolith Bricks
 tile.sstow.block.xenolith.light.name=Glowing Xenolith
 
-# Petrified Blocks
 tile.sstow.petrified.log.oak.name=Petrified Oak Log
 tile.sstow.petrified.plank.oak.name=Petrified Oak Planks
 tile.sstow.petrified.log.spruce.name=Petrified Spruce Log
@@ -61,6 +60,9 @@ tile.sstow.petrified.log.acacia.name=Petrified Acacia Log
 tile.sstow.petrified.plank.acacia.name=Petrified Acacia Planks
 tile.sstow.petrified.log.big_oak.name=Petrified Dark Oak Log
 tile.sstow.petrified.plank.big_oak.name=Petrified Dark Oak Planks
+
+# Entities
+entity.sstow.EntityZombieWitch.name=Zombie Witch
 
 # Enchantment
 enchantment.soul_stealer=Soul Stealer

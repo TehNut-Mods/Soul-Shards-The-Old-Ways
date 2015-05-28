@@ -13,6 +13,6 @@ public class ItemSouliumBucket extends ItemBucket {
         this.setContainerItem(Items.bucket);
         this.setTextureName(Reference.modID + ":bucketSoulium");
         this.setCreativeTab(Register.CREATIVE_TAB);
-        this.setUnlocalizedName("sstow.soultool.bucket.soulium");
+        this.setUnlocalizedName(Reference.modID + ".soultool.bucket.soulium");
     }
 }

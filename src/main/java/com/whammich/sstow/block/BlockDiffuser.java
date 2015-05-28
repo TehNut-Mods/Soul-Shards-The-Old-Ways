@@ -2,6 +2,7 @@ package com.whammich.sstow.block;
 
 import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.tileentity.TileEntityDiffuser;
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
 import net.minecraft.block.BlockContainer;
@@ -15,7 +16,7 @@ public class BlockDiffuser extends BlockContainer {
 	public BlockDiffuser() {
 		super(Material.rock);
 		setCreativeTab(Register.CREATIVE_TAB);
-		setBlockName("sstow.block.diffuser");
+		setBlockName(Reference.modID + ".block.diffuser");
 	}
 
 	@Override

@@ -1,13 +1,20 @@
 package com.whammich.sstow.utils;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -42,6 +49,7 @@ import com.whammich.sstow.compat.baubles.ItemSockets;
 import com.whammich.sstow.compat.guideapi.pages.PageNBTHelper;
 import com.whammich.sstow.compat.tcon.TCon;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
+import com.whammich.sstow.entity.mob.hostile.EntityZombieWitch;
 import com.whammich.sstow.guihandler.GuiHandler;
 import com.whammich.sstow.item.ItemAxeSoul;
 import com.whammich.sstow.item.ItemHoeSoul;
@@ -59,11 +67,14 @@ import com.whammich.sstow.item.blocks.ItemBlockPetrified2;
 import com.whammich.sstow.item.blocks.ItemBlockPlankPetrified;
 import com.whammich.sstow.item.blocks.ItemBlockXenolith;
 import com.whammich.sstow.tileentity.TileEntityCage;
+import com.whammich.sstow.tileentity.TileEntityDiffuser;
 import com.whammich.sstow.tileentity.TileEntityForge;
+import com.whammich.sstow.tileentity.TileEntitySoulCrystal;
 import com.whammich.sstow.world.generation.biome.BiomeGenPetForest;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Register {
@@ -99,10 +110,12 @@ public class Register {
 	// Set up the mod blocks
 	public static Block BlockCage = new BlockCage();
 	public static Block BlockForge = new BlockForge(false).setCreativeTab(CREATIVE_TAB);
-	public static Block BlockForgeActive = new BlockForge(true).setBlockName("sstow.forge_block_active");
+	public static Block BlockForgeActive = new BlockForge(true).setBlockName(Reference.modID + ".BlockForgeActive");
 	public static Block BlockMaterials = new BlockMaterials();
 	public static Block BlockXenoLight = new BlockXenoLight();
+	
 	public static Block BlockDarkstone = new BlockDarkstone();
+	
 	public static Block BlockXenolith = new BlockXenolith();
 	public static Block BlockPetrified = new BlockPetrified();
 	public static Block BlockPetrified2 = new BlockPetrified2();
@@ -111,16 +124,17 @@ public class Register {
 
 	public static Block BlockDiffuser = new BlockDiffuser(); 
 	public static Block BlockInfuser = new BlockInfuser();
-	
+
 	// Custom Blocks
 	public static Block BlockSoulCrystal = new BlockSoulCrystal();
-	
-	public static IRecipe soulCage, soulForge;
 
 	// Set up Biomes
 	public static BiomeGenBase biomePetrifiedForest = new BiomeGenPetForest(137)
 	.setBiomeName("Petrified Forest").setTemperatureRainfall(0.95F, 0.9F).setColor(000000);
 
+	// Set up Custom Entities
+	private static final Class<? extends EntityMob> entityZombieWitch = EntityZombieWitch.class; 
+	
 	public static void registerObjs() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance, new GuiHandler());
 		registerItems();
@@ -133,6 +147,7 @@ public class Register {
 			if(Config.petrifiedForest){
 				registerBiomes();
 			}
+			registerEntities();
 			registerLoot();
 		}
 	}
@@ -171,7 +186,7 @@ public class Register {
 			GameRegistry.registerBlock(BlockPetrified, ItemBlockPetrified.class, "BlockPetrifiedLog");
 			GameRegistry.registerBlock(BlockPetrified2, ItemBlockPetrified2.class, "BlockPetrifiedLog2");
 			GameRegistry.registerBlock(BlockPetrifiedPlanks, ItemBlockPlankPetrified.class, "BlockPetrifiedPlanks");
-			GameRegistry.registerBlock(BlockSoulCrystal, "BlockSoulCrystal").setBlockName(Reference.modID.toLowerCase() + ".block.soulcrystal");
+			GameRegistry.registerBlock(BlockSoulCrystal, "BlockSoulCrystal");
 			GameRegistry.registerBlock(BlockDiffuser, "BlockDiffuser");
 			GameRegistry.registerBlock(BlockInfuser, "BlockInfuser");
 		}
@@ -227,6 +242,8 @@ public class Register {
 	private static void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityForge.class, "TileEntityForge");
 		GameRegistry.registerTileEntity(TileEntityCage.class, "TileEntityCage");
+		GameRegistry.registerTileEntity(TileEntitySoulCrystal.class, "TileEntitySouLCrystal");
+		GameRegistry.registerTileEntity(TileEntityDiffuser.class, "TileEntityDiffuser");
 	}
 
 	private static void registerRecipes() {
@@ -289,11 +306,48 @@ public class Register {
 		}
 	}
 
+	private static void registerEntities() {
+		EntityRegistry.registerModEntity(EntityZombieWitch.class, "EntityZombieWitch", 1, SSTheOldWays.modInstance, 30, 3, true);
+		registerEntityEgg(entityZombieWitch, 0x44975, 0x5349438);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static void registerEntityEgg(Class<? extends Entity> entity, int colPrim, int colSec){
+		int id = getUniqueEntityID();
+		EntityList.IDtoClassMapping.put(id, entity);
+		EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, colPrim, colSec));
+	}
+	
+	private static int getUniqueEntityID(){
+		int startEID = 300;
+		do {
+			startEID++;
+		} while (EntityList.getStringFromID(startEID) != null);
+		return startEID;
+	}
+	
 	@SuppressWarnings("deprecation")
 	private static void registerBiomes() {
 		BiomeDictionary.registerBiomeType(biomePetrifiedForest, Type.FOREST);
 		BiomeManager.addSpawnBiome(biomePetrifiedForest);
 		BiomeManager.desertBiomes.add(new BiomeEntry(biomePetrifiedForest, 1000000000));
+
+		List<BiomeDictionary.Type> blacklistedBiomes = new ArrayList<BiomeDictionary.Type>();
+		blacklistedBiomes.add(BiomeDictionary.Type.MUSHROOM);
+
+		List<BiomeGenBase> biomes = new LinkedList<BiomeGenBase>();
+		label: for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray())
+			if (biome != null) {
+				for (BiomeDictionary.Type type : BiomeDictionary.getTypesForBiome(biome))
+					if (blacklistedBiomes.contains(type))
+						continue label;
+				biomes.add(biome);
+			}
+
+		
+		
+		EntityRegistry.addSpawn(EntityZombieWitch.class, 80, 4, 4, EnumCreatureType.monster, biomes.toArray(new BiomeGenBase[biomes.size()]));
+
 	}
 
 	public static void registerFluids() {

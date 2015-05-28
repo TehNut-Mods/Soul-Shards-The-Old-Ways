@@ -22,7 +22,7 @@ public class BlockMaterials extends Block {
 	
 	public BlockMaterials() {
 		super(Material.iron);
-		this.setBlockName("sstow.block.material");
+		this.setBlockName(Reference.modID + ".block.material");
 		this.setCreativeTab(Register.CREATIVE_TAB);
 		this.blockHardness = 3.0F;
 		this.blockResistance = 3.0F;

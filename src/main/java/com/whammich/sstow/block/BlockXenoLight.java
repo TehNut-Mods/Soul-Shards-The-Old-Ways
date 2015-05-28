@@ -14,7 +14,7 @@ public class BlockXenoLight extends Block {
 
 	public BlockXenoLight() {
 		super(Material.glass);
-		setBlockName("sstow.block.xenolith.light");
+		setBlockName(Reference.modID + ".block.xenolith.light");
 		setCreativeTab(Register.CREATIVE_TAB);
 		blockHardness = 3.0F;
 		blockResistance = 3.0F;

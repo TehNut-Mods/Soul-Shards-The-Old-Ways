@@ -6,15 +6,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.Constants;
-
-import com.whammich.sstow.utils.ModLogger;
 
 public class TileEntityDiffuser extends TileEntity implements IInventory {
 	public ItemStack[] invSize;
 	public TileEntityDiffuser() {
-		this.invSize = new ItemStack[36];
+		this.invSize = new ItemStack[1];
 	}
+	
 	@Override
 	public int getSizeInventory() {
 		return invSize.length;
@@ -28,26 +26,26 @@ public class TileEntityDiffuser extends TileEntity implements IInventory {
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
 		if (this.invSize[slot] != null) {
-            ItemStack itemstack;
+			ItemStack itemstack;
 
-            if (this.invSize[slot].stackSize <= amount) {
-                itemstack = this.invSize[slot];
-                this.invSize[slot] = null;
-                this.markDirty();
-                return itemstack;
-            } else {
-                itemstack = this.invSize[slot].splitStack(amount);
+			if (this.invSize[slot].stackSize <= amount) {
+				itemstack = this.invSize[slot];
+				this.invSize[slot] = null;
+				this.markDirty();
+				return itemstack;
+			} else {
+				itemstack = this.invSize[slot].splitStack(amount);
 
-                if (this.invSize[slot].stackSize == 0) {
-                    this.invSize[slot] = null;
-                }
+				if (this.invSize[slot].stackSize == 0) {
+					this.invSize[slot] = null;
+				}
 
-                this.markDirty();
-                return itemstack;
-            }
-        } else {
-            return null;
-        }
+				this.markDirty();
+				return itemstack;
+			}
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -66,6 +64,7 @@ public class TileEntityDiffuser extends TileEntity implements IInventory {
 		this.invSize[slot] = stack;
 		if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 			stack.stackSize = this.getInventoryStackLimit();
+			this.markDirty();
 		}
 	}
 
@@ -87,7 +86,7 @@ public class TileEntityDiffuser extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+	public boolean isUseableByPlayer(EntityPlayer player) {
 		return true;
 	}
 
@@ -98,41 +97,35 @@ public class TileEntityDiffuser extends TileEntity implements IInventory {
 	public void closeInventory() {}
 
 	@Override
-	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		return true;
 	}
 
-	public void readFromNBT(NBTTagCompound compound) {
-		NBTTagList items = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		for (int i = 0; i < items.tagCount(); ++i) {
-			NBTTagCompound item = items.getCompoundTagAt(i);
-			ModLogger.logDebug("Pre-Slot: " + i + " :" + item.toString());
-			int slot = item.getInteger("Slot");
-			ModLogger.logDebug("Post-Slot: " + i + " :" + item.toString());			
-			if (slot >= 0 && slot < this.invSize.length) {
-				ModLogger.logDebug("If-Slot: " + i + " :" + item.toString());
-				this.invSize[slot] = ItemStack.loadItemStackFromNBT(item);
-				ModLogger.logDebug("Done-Slot: " + i + " :" + item.toString());
+	public void readFromNBT(NBTTagCompound tagCompound) {
+		super.readFromNBT(tagCompound);
+		NBTTagList tagList = tagCompound.getTagList("Items", 10);
+		this.invSize = new ItemStack[this.getSizeInventory()];
+		for (int i = 0; i < tagList.tagCount(); ++i) {
+			NBTTagCompound tabCompound1 = tagList.getCompoundTagAt(i);
+			byte byte0 = tabCompound1.getByte("Slot");
+			if (byte0 >= 0 && byte0 < this.invSize.length) {
+				this.invSize[byte0] = ItemStack.loadItemStackFromNBT(tabCompound1);
 			}
 		}
 	}
 
-	public void writeToNBT(NBTTagCompound nbt) {
-		NBTTagList items = new NBTTagList();
-
-		for (int i = 0; i < getSizeInventory(); ++i) {
-			ModLogger.logDebug("Null-Slot: " + i + " :" + items.toString());
-			if (getStackInSlot(i) != null) {
-				ModLogger.logDebug("Tag-Slot: " + i + " :" + items.toString());
-				NBTTagCompound item = new NBTTagCompound();
-				item.setInteger("Slot", i);
-				ModLogger.logDebug("Pre-Slot: " + i + " :" + items.toString());
-				getStackInSlot(i).writeToNBT(item);
-				items.appendTag(item);
-				ModLogger.logDebug("Post-Slot: " + i + " :" + items.toString());
+	public void writeToNBT(NBTTagCompound tagCompound) {
+		super.writeToNBT(tagCompound);
+		NBTTagList tagList = new NBTTagList();
+		for (int i = 0; i < this.invSize.length; ++i) {
+			if (this.invSize[i] != null) {
+				NBTTagCompound tagCompound1 = new NBTTagCompound();
+				tagCompound1.setByte("Slot", (byte) i);
+				this.invSize[i].writeToNBT(tagCompound1);
+				tagList.appendTag(tagCompound1);
 			}
 		}
-		ModLogger.logDebug("Saving Item: " + items.toString());
-		nbt.setTag("Items", items);
+		tagCompound.setTag("Items", tagList);
+
 	}
 }
