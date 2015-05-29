@@ -9,7 +9,10 @@ import com.whammich.sstow.tileentity.TileEntitySoulCrystal;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
+
 public class BlockSoulCrystal extends BlockContainer {
+	public static int renderID = RenderingRegistry.getNextAvailableRenderId();
 	public BlockSoulCrystal() {
 		super(Material.glass);
 		this.setHardness(2.0F);
@@ -36,7 +39,7 @@ public class BlockSoulCrystal extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return -1;
+		return renderID;
 	}
 
 	@Override

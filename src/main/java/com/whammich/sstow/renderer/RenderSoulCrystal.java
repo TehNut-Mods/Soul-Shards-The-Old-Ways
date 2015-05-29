@@ -1,5 +1,15 @@
 package com.whammich.sstow.renderer;
 
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glColor4f;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslatef;
+
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
@@ -7,6 +17,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -14,10 +25,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 
-import static org.lwjgl.opengl.GL11.*;
+import org.lwjgl.opengl.GL11;
 
 import com.whammich.sstow.models.ModelSoulCrystal;
 import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IItemRenderer {
 
@@ -26,7 +40,7 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 	private ModelSoulCrystal model = new ModelSoulCrystal();
 
 	private final RenderItem customRenderItem = new RenderItem();
-	
+
 	public RenderSoulCrystal() {
 		customRenderItem.setRenderManager(RenderManager.instance);
 	}
@@ -35,7 +49,7 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float f) {
 		EntityPlayer p = Minecraft.getMinecraft().thePlayer;
 		float bob = MathHelper.sin(p.ticksExisted / 14.0F) * 0.066F;
-		
+
 		Random rand = new Random(te.xCoord * te.yCoord + te.zCoord);
 
 		glPushMatrix();
@@ -69,6 +83,17 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 	}
 
 
+	public void renderModel(TileEntity tile, double x, double y, double z) {
+        float scale = 1F;
+        GL11.glPushMatrix();
+        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+        GL11.glScalef(scale, scale, scale);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        GL11.glRotatef(180F, 90.0F, 0.0F, 90.0F);
+        model.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        GL11.glPopMatrix();
+    }
+	
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return true;
@@ -77,36 +102,47 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-		return helper == ItemRendererHelper.INVENTORY_BLOCK || helper == ItemRendererHelper.ENTITY_BOBBING || helper == ItemRendererHelper.ENTITY_ROTATION;
+		return true;
 	}
 
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
-		case ENTITY:
-			glTranslatef(-0.5f, 0F, 0.5f);
-			break;
-		case EQUIPPED:
-			glRotatef(20F, 0F, 1F, 0F);
-			glRotatef(-15, 1, 0, -1);
-			glScalef(0.65f, 0.65f, 0.65f);
-			glTranslatef(0.75f, -0.5f, 1.25f);
-			break;
-		case EQUIPPED_FIRST_PERSON:
-			glRotatef(20, 0, 0, 1);
-			glRotatef(30, 0, 1, 0);
-			glTranslatef(0.2f, 0, -0.1f);
-			glScalef(0.5f, 0.5f, 0.5f);
-			break;
-		case FIRST_PERSON_MAP:
-			break;
-		case INVENTORY:
-			glTranslatef(-0.5f, -0.5f, 0.5f);
-			break;
+		case ENTITY: { //item entity
+			if (item.getItem() == new ItemStack(Register.BlockSoulCrystal).getItem())
+				render(0.5F, 15F, -0.5F, 0.1F);
+			return;
 		}
-
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		model.renderAll();
+		case EQUIPPED: { //third person in hand
+			if (item.getItem() == new ItemStack(Register.BlockSoulCrystal).getItem())
+				render(2F, 15F, 5F, 0.1F);
+			return;
+		}
+		case EQUIPPED_FIRST_PERSON: { //first person in hand
+			if (item.getItem() == new ItemStack(Register.BlockSoulCrystal).getItem())
+				render(1F, 19F, 7F, 0.1F);
+			return;
+		}
+		case INVENTORY: { //the item in inventories
+			if (item.getItem() == new ItemStack(Register.BlockSoulCrystal).getItem())
+				render(-0.01F, 10F, 0.0F, 0.1F);
+			return;
+		}
+		default:
+			return;
+		}
 	}
+	
+    private void render(float x, float y, float z, float size) {
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        GL11.glPushMatrix(); // start
+        GL11.glScalef(size, size, size);
+        GL11.glTranslatef(x, y, z); // size
+        GL11.glRotatef(180, 1, 0, 0);
+        GL11.glRotatef(-90, 0, 1, 0);
+        model.renderAll();
+        GL11.glPopMatrix(); // end
+    }
+	
 }

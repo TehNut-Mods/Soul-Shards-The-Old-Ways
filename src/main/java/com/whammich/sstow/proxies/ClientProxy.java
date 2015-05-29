@@ -29,10 +29,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityZombieWitch.class, new RenderZombieWitch());
 
 		// Soul Crystal
-		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySoulCrystal.class, new RenderSoulCrystal());
-		
-		//RenderingRegistry.registerBlockHandler(new BlockRendererSoulCrystal());
 		
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Register.BlockSoulCrystal), new RenderSoulCrystal());
 		
