@@ -51,6 +51,11 @@ public class BlockCage extends BlockContainer {
 	}
 	
 	@Override
+    public int getRenderType() {
+        return 0;
+    }
+	
+	@Override
 	public int getComparatorInputOverride(World world, int xPos, int yPos,
 			int zPos, int p_149736_5_) {
 		TileEntityCage tile = (TileEntityCage) world.getTileEntity(xPos, yPos, zPos);
