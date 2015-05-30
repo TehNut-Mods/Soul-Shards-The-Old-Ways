@@ -1,5 +1,7 @@
 package com.whammich.sstow.tileentity;
 
+import com.whammich.sstow.utils.Register;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -128,4 +130,34 @@ public class TileEntityDiffuser extends TileEntity implements IInventory {
 		tagCompound.setTag("Items", tagList);
 
 	}
+	
+	public void updateEntity() {
+		TileEntity t = this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord);
+		if((t == null) || (!(t instanceof TileEntitySoulCrystal) || (this.invSize[0] == null) || 
+				(!this.invSize[0].getItem().equals(Register.ItemShardSoul)))){
+			return;
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

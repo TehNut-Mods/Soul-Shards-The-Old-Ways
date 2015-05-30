@@ -16,6 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.whammich.sstow.SSTheOldWays;
 import com.whammich.sstow.entity.particle.EntityPurpleFlameFX;
@@ -44,6 +45,11 @@ public class BlockCage extends BlockContainer {
 		return true;
 	}
 
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return true;
+	}
+	
 	@Override
 	public int getComparatorInputOverride(World world, int xPos, int yPos,
 			int zPos, int p_149736_5_) {
@@ -142,6 +148,11 @@ public class BlockCage extends BlockContainer {
         return false;
     }
 
+    @Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+    
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
