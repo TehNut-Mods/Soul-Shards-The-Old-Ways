@@ -1,12 +1,12 @@
 package com.whammich.sstow.block;
 
-import com.whammich.sstow.utils.Reference;
-import com.whammich.sstow.utils.Register;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
+
+import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,12 +23,6 @@ public class BlockDarkstone extends Block {
 
 	public BlockDarkstone(Material material) {
 		super(material);
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		return blockIcon;
 	}
 
 	@Override

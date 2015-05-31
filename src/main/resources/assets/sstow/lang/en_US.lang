@@ -9,6 +9,8 @@ item.sstow.modules.redstone.name=Mark of Redstone
 item.sstow.modules.detection.name=Mark of Presence
 item.sstow.modules.light.name=Mark of Illumine
 item.sstow.modules.dimension.name=Mark of Ender
+item.sstow.modules.xp.name=Mark of Irritum
+item.sstow.modules.item.name=Mark of Guttae
 
 # Materials
 item.sstow.material.nugget.iron.name=Iron Nugget

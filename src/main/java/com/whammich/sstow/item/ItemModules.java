@@ -14,11 +14,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 public class ItemModules extends Item {
-	private static String[] names = { "redstone", "light",
-			 "dimension", "detection"//, "t5controller",
+	private static String[] names = { "Redstone", "Light",
+			 "Dimension", "Detection", "XP", "Item"
 
 	};
-	private IIcon[] icon = new IIcon[4];
+	private IIcon[] icon;
 
 	public ItemModules() {
 		super();
@@ -30,8 +30,7 @@ public class ItemModules extends Item {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return getUnlocalizedName() + "."
-				+ names[stack.getItemDamage() % names.length];
+		return getUnlocalizedName() + "." + names[stack.getItemDamage() % names.length].toLowerCase();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -41,11 +40,11 @@ public class ItemModules extends Item {
 
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister) {
-		this.icon[0] = iconRegister.registerIcon(Reference.modID + ":moduleRedstone");
-		this.icon[1] = iconRegister.registerIcon(Reference.modID + ":moduleLight");
-		this.icon[2] = iconRegister.registerIcon(Reference.modID + ":moduleDimension");
-		this.icon[3] = iconRegister.registerIcon(Reference.modID + ":modulePlayer");
-		//this.icon[4] = iconRegister.registerIcon(Reference.modID + ":moduleController");
+		this.icon = new IIcon[names.length];
+
+		for (int i = 0; i < this.icon.length; ++i) {
+			this.icon[i] = iconRegister.registerIcon(Reference.modID + ":module" + names[i]);
+		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

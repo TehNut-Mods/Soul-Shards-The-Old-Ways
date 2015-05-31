@@ -5,8 +5,11 @@ import com.whammich.sstow.tileentity.TileEntityDiffuser;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -31,6 +34,12 @@ public class BlockDiffuser extends BlockContainer {
 		}
 		player.openGui(SSTheOldWays.modInstance, 0, world, x, y, z);
 		return true;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		blockIcon = iconRegister.registerIcon(Reference.modID + ":diffuser");
 	}
 	
 }
