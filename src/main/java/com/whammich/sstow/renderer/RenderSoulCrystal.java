@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -81,18 +80,6 @@ public class RenderSoulCrystal extends TileEntitySpecialRenderer implements IIte
 
 		glPopMatrix();
 	}
-
-
-	public void renderModel(TileEntity tile, double x, double y, double z) {
-        float scale = 1F;
-        GL11.glPushMatrix();
-        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        GL11.glScalef(scale, scale, scale);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
-        GL11.glRotatef(180F, 90.0F, 0.0F, 90.0F);
-        model.render((Entity) null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-        GL11.glPopMatrix();
-    }
 	
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {

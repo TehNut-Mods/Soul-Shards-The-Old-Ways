@@ -149,6 +149,7 @@ public class Register {
 		registerBlocks();
 		registerOreDictEntries();
 		registerTileEntities();
+		removeRecipes();
 		registerRecipes();
 		registerFluids();
 		if(!Config.oldWaysOption) {
@@ -316,6 +317,20 @@ public class Register {
 		}
 	}
 
+	private static void removeRecipes() {
+//		ItemStack input = new ItemStack(Blocks.soul_sand, 1, 0);
+//		ItemStack output = new ItemStack(NContent.netherGlass, 1, 0);
+//		Map<ItemStack, ItemStack> smeltingList = FurnaceRecipes.smelting().getSmeltingList();
+//		for(Entry<ItemStack, ItemStack> entry : smeltingList.entrySet()){
+//			
+//			if((entry.getKey() == input) && (entry.getValue() == output)) {
+//				smeltingList.remove(entry.getValue());
+//			}
+//			
+//			System.out.println(entry.getKey() + " / " + entry.getValue());
+//		}
+	}
+	
 	private static void registerEntities() {
 		EntityRegistry.registerModEntity(EntityZombieWitch.class, "EntityZombieWitch", 1, SSTheOldWays.modInstance, 30, 3, true);
 		registerEntityEgg(entityZombieWitch, 0x44975, 0x5349438);
@@ -369,7 +384,7 @@ public class Register {
 	public static ItemStack addNBTToLootPage(ItemStack stack) {
 		//System.out.println("Method Called");
 		if(stack.stackTagCompound == null){
-			System.out.println("Applying NBTTagCompound()");
+			//System.out.println("Applying NBTTagCompound()");
 			stack.setTagCompound(new NBTTagCompound());
 		}
 		//System.out.println("pageNBTHelper stuff");

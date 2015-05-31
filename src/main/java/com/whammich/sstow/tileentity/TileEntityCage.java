@@ -128,7 +128,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				toSpawn[i].getEntityData().setBoolean("SSTOW", true);
 				toSpawn[i].forceSpawn = true;
 				toSpawn[i].func_110163_bv();
-				toSpawn[i].spawnExplosionParticle();
 			}
 			spawnEntities(toSpawn);
 			counter = 0;
