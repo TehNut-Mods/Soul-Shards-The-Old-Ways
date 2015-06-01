@@ -320,8 +320,8 @@ public class Register {
 			Map.Entry<ItemStack, ItemStack> entry = itr.next();
 			if (entry.getKey().isItemEqual(new ItemStack(Blocks.soul_sand))) {
 				itr.remove();
-				ModLogger.logInfo(": Changed Soul Glass Recipe from Natura");
-				GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), entry.getValue(), 0.35F);
+				ModLogger.logInfo(": Changed Soul Sand Smelting Recipe(s)");
+				GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), entry.getValue(), 0.3f);
 				break; 
 			}
 		}
