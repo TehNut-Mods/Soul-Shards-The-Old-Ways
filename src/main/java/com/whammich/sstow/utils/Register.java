@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import mods.natura.common.NContent;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -316,14 +315,16 @@ public class Register {
 
 	@SuppressWarnings("unchecked")
 	private static void removeRecipes() {
-		for (Iterator<Map.Entry<ItemStack, ItemStack>> itr = FurnaceRecipes.smelting().getSmeltingList().entrySet().iterator(); itr.hasNext();){
-			if (itr.next().getKey().isItemEqual(new ItemStack(Blocks.soul_sand))) {
+		for (Iterator<Map.Entry<ItemStack, ItemStack>> 
+		itr = FurnaceRecipes.smelting().getSmeltingList().entrySet().iterator(); itr.hasNext();){
+			Map.Entry<ItemStack, ItemStack> entry = itr.next();
+			if (entry.getKey().isItemEqual(new ItemStack(Blocks.soul_sand))) {
 				itr.remove();
-				ModLogger.logInfo(Reference.modID.toUpperCase() + ": Changed Soul Glass Recipe from Natura");
+				ModLogger.logInfo(": Changed Soul Glass Recipe from Natura");
+				GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), entry.getValue(), 0.35F);
 				break; 
 			}
 		}
-		GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), new ItemStack(NContent.netherGlass, 1, 0), 0.35F);
 	}
 
 	private static void registerEntities() {
