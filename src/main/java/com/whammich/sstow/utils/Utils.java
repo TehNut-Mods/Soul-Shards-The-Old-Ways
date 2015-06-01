@@ -2,8 +2,6 @@ package com.whammich.sstow.utils;
 
 import java.util.Random;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -15,6 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.input.Keyboard;
+
+import com.whammich.sstow.events.Achievements;
 
 public final class Utils {
 
@@ -78,31 +80,31 @@ public final class Utils {
 		return lastResort;
 	}
 
-	// public static void checkForAchievements(EntityPlayer player, ItemStack
-	// shard) {
-	// int tier = (int) getShardTier(shard);
-	// switch (tier) {
-	// case 0:
-	// break;
-	// case 1:
-	// player.addStat(Achievements.shardt1, 1);
-	// break;
-	// case 2:
-	// player.addStat(Achievements.shardt2, 1);
-	// break;
-	// case 3:
-	// player.addStat(Achievements.shardt3, 1);
-	// break;
-	// case 4:
-	// player.addStat(Achievements.shardt4, 1);
-	// break;
-	// case 5:
-	// player.addStat(Achievements.shardt5, 1);
-	// break;
-	// default:
-	// break;
-	// }
-	// }
+	public static void checkForAchievements(EntityPlayer player, ItemStack
+			shard) {
+		int tier = (int) getShardTier(shard);
+		switch (tier) {
+		case 0:
+			break;
+		case 1:
+			player.addStat(Achievements.shardt1, 1);
+			break;
+		case 2:
+			player.addStat(Achievements.shardt2, 1);
+			break;
+		case 3:
+			player.addStat(Achievements.shardt3, 1);
+			break;
+		case 4:
+			player.addStat(Achievements.shardt4, 1);
+			break;
+		case 5:
+			player.addStat(Achievements.shardt5, 1);
+			break;
+		default:
+			break;
+		}
+	}
 
 	public static short getShardKillCount(ItemStack shard) {
 		if (!shard.hasTagCompound()) {

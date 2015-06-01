@@ -78,6 +78,37 @@ entity.sstow.EntityZombieWitch.name=Zombie Witch
 # Enchantment
 enchantment.soul_stealer=Soul Stealer
 
+# Achievements
+achievement.createShard=Create a Soul Shard
+achievement.createShard.desc=Created your first Soul Shard
+
+achievement.tier1Shard=You have blood on your hands
+achievement.tier1Shard.desc=Gained a Tier 1 Shard
+
+achievement.tier2Shard=Murderer
+achievement.tier2Shard.desc=Gained a Tier 2 Shard
+
+achievement.tier3Shard=Monster
+achievement.tier3Shard.desc=Gained a Tier 3 Shard
+
+achievement.tier4Shard=What is wrong with you?
+achievement.tier4Shard.desc=Gained a Tier 4 Shard
+
+achievement.tier5Shard=Genocidal Maniac
+achievement.tier5Shard.desc=Maxed out a Soul Shard
+
+achievement.createCage=These are the Soul Cages
+achievement.createCage.desc=Crafted a Soul Cage
+
+achievement.vile_dust=Vile Dusting
+achievement.vile_dust.desc=Smelted Soul Sand
+
+achievement.corrupted_essence=Essence of Corruption
+achievement.corrupted_essence.desc=Created Corrupted Essence
+
+achievement.soulForge=Forge Of Souls
+achievement.soulForge.desc=Crafted the Soul Forge
+
 # GUI
 container.soulforge=Soul Forge
 container.soulcage=Soul Cage

@@ -8,6 +8,8 @@ import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.compat.guideapi.CultistBook;
 import com.whammich.sstow.compat.guideapi.GameManual;
 import com.whammich.sstow.compat.guideapi.JournalBook;
+import com.whammich.sstow.events.AchievementEvents;
+import com.whammich.sstow.events.Achievements;
 import com.whammich.sstow.events.AnvilEvent;
 import com.whammich.sstow.events.BaubleEvents;
 import com.whammich.sstow.events.CreateAnimusEvent;
@@ -22,6 +24,7 @@ import com.whammich.sstow.utils.ModLogger;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -62,6 +65,10 @@ public class SSTheOldWays {
 
 		ModLogger.logDebug("Registering CreateShard Event");
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
+		
+		Achievements.Get();
+		FMLCommonHandler.instance().bus().register(new AchievementEvents());
+		
 		
 		if(!Config.oldWaysOption) {
 			ModLogger.logDebug("Registering Anvil Events");
