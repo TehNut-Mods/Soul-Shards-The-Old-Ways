@@ -1,9 +1,12 @@
 package com.whammich.sstow.utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import mods.natura.common.NContent;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -15,6 +18,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -103,7 +107,7 @@ public class Register {
 	public static Item ItemPickaxeSoul = new ItemPickaxeSoul(SOULIUM);
 	public static Item ItemAxeSoul = new ItemAxeSoul(SOULIUM);
 	public static Item ItemSpadeSoul = new ItemSpadeSoul(SOULIUM);
-	
+
 	public static Item ItemSwordShadow = new ItemSwordShadow(SHADOW);
 	public static Item ItemPickaxeShadow = new ItemPickaxeShadow(SHADOW);
 	public static Item ItemAxeShadow = new ItemAxeShadow(SHADOW);
@@ -121,9 +125,9 @@ public class Register {
 	public static Block BlockForgeActive = new BlockForge(true).setBlockName(Reference.modID + ".BlockForgeActive");
 	public static Block BlockMaterials = new BlockMaterials();
 	public static Block BlockXenoLight = new BlockXenoLight();
-	
+
 	public static Block BlockDarkstone = new BlockDarkstone();
-	
+
 	public static Block BlockXenolith = new BlockXenolith();
 	public static Block BlockPetrified = new BlockPetrified();
 	public static Block BlockPetrified2 = new BlockPetrified2();
@@ -142,14 +146,16 @@ public class Register {
 
 	// Set up Custom Entities
 	private static final Class<? extends EntityMob> entityZombieWitch = EntityZombieWitch.class; 
-	
+
 	public static void registerObjs() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(SSTheOldWays.modInstance, new GuiHandler());
 		registerItems();
 		registerBlocks();
 		registerOreDictEntries();
 		registerTileEntities();
-		removeRecipes();
+		if (Loader.isModLoaded("Natura")) {
+			removeRecipes();
+		}
 		registerRecipes();
 		registerFluids();
 		if(!Config.oldWaysOption) {
@@ -169,7 +175,7 @@ public class Register {
 		GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
 		GameRegistry.registerItem(ItemAxeSoul, "ItemAxeSoul");
 		GameRegistry.registerItem(ItemSpadeSoul, "ItemSpadeSoul");
-		
+
 		if(!Config.oldWaysOption) {
 			GameRegistry.registerItem(ItemLootPage, "ItemLootPage");
 			GameRegistry.registerItem(animusBauble, animusBauble.getUnlocalizedName());
@@ -180,7 +186,7 @@ public class Register {
 			GameRegistry.registerItem(ItemPickaxeShadow, "ItemPickaxeShadow");
 			GameRegistry.registerItem(ItemAxeShadow, "ItemAxeShadow");
 			GameRegistry.registerItem(ItemSpadeShadow, "ItemSpadeShadow");
-			
+
 		}
 
 	}
@@ -268,8 +274,8 @@ public class Register {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.iron_ingot), "AAA", "AAA", "AAA", 'A', "nuggetIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockMaterials, 1, 0), "AAA", "AAA", "AAA", 'A', "ingotSoulium"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockCage), "SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S', "ingotSoulium"));
-
-
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 2, 4), "dustGlowstone", "dustVile"));
+		GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
 
 		if(!Config.oldWaysOption) {
 			GameRegistry.addSmelting(new ItemStack(BlockXenolith, 1, 0), new ItemStack(BlockXenolith, 1, 1), 0.5F);
@@ -300,49 +306,38 @@ public class Register {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "stickPetrified"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "stickPetrified"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "stickPetrified"));
-
 		} else {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
 		}
-
-		if (Loader.isModLoaded("Natura")) {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 2, 3), Blocks.soul_sand, "dustGlowstone"));
-			GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), new ItemStack(ItemMaterials, 1, 4), 0.35F);
-		} else {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 2, 4), "dustGlowstone", "dustVile"));
-			GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
-		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void removeRecipes() {
-//		ItemStack input = new ItemStack(Blocks.soul_sand, 1, 0);
-//		ItemStack output = new ItemStack(NContent.netherGlass, 1, 0);
-//		Map<ItemStack, ItemStack> smeltingList = FurnaceRecipes.smelting().getSmeltingList();
-//		for(Entry<ItemStack, ItemStack> entry : smeltingList.entrySet()){
-//			
-//			if((entry.getKey() == input) && (entry.getValue() == output)) {
-//				smeltingList.remove(entry.getValue());
-//			}
-//			
-//			System.out.println(entry.getKey() + " / " + entry.getValue());
-//		}
+		for (Iterator<Map.Entry<ItemStack, ItemStack>> itr = FurnaceRecipes.smelting().getSmeltingList().entrySet().iterator(); itr.hasNext();){
+			if (itr.next().getKey().isItemEqual(new ItemStack(Blocks.soul_sand))) {
+				itr.remove();
+				ModLogger.logInfo(Reference.modID.toUpperCase() + ": Changed Soul Glass Recipe from Natura");
+				break; 
+			}
+		}
+		GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), new ItemStack(NContent.netherGlass, 1, 0), 0.35F);
 	}
-	
+
 	private static void registerEntities() {
 		EntityRegistry.registerModEntity(EntityZombieWitch.class, "EntityZombieWitch", 1, SSTheOldWays.modInstance, 30, 3, true);
 		registerEntityEgg(entityZombieWitch, 0x44975, 0x5349438);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private static void registerEntityEgg(Class<? extends Entity> entity, int colPrim, int colSec){
 		int id = getUniqueEntityID();
 		EntityList.IDtoClassMapping.put(id, entity);
 		EntityList.entityEggs.put(id, new EntityList.EntityEggInfo(id, colPrim, colSec));
 	}
-	
+
 	private static int getUniqueEntityID(){
 		int startEID = 300;
 		do {
@@ -350,7 +345,7 @@ public class Register {
 		} while (EntityList.getStringFromID(startEID) != null);
 		return startEID;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	private static void registerBiomes() {
 		BiomeDictionary.registerBiomeType(biomePetrifiedForest, Type.FOREST);
@@ -368,11 +363,7 @@ public class Register {
 						continue label;
 				biomes.add(biome);
 			}
-
-		
-		
 		EntityRegistry.addSpawn(EntityZombieWitch.class, 80, 4, 4, EnumCreatureType.monster, biomes.toArray(new BiomeGenBase[biomes.size()]));
-
 	}
 
 	public static void registerFluids() {
