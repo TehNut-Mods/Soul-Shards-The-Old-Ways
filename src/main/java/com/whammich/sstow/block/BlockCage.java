@@ -49,12 +49,12 @@ public class BlockCage extends BlockContainer {
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		return true;
 	}
-	
+
 	@Override
-    public int getRenderType() {
-        return 0;
-    }
-	
+	public int getRenderType() {
+		return 0;
+	}
+
 	@Override
 	public int getComparatorInputOverride(World world, int xPos, int yPos,
 			int zPos, int p_149736_5_) {
@@ -148,16 +148,16 @@ public class BlockCage extends BlockContainer {
 		return 0;
 	}
 
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-    @Override
+	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-    
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
@@ -172,7 +172,11 @@ public class BlockCage extends BlockContainer {
 
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
 		if (TileEntityCage.active) {
-			EntityFX fire = new EntityPurpleFlameFX(world, x - 0.5, y + 0.5, z + 0.5, 0, 0.1, 0, 68, 0, 152);
+			double d0 = (double)((float) x + world.getTileEntity(x, y, z).getWorldObj().rand.nextFloat());
+			double d1 = (double)((float) y + world.getTileEntity(x, y, z).getWorldObj().rand.nextFloat());
+			double d2 = (double)((float) z + world.getTileEntity(x, y, z).getWorldObj().rand.nextFloat());
+			world.getTileEntity(x, y, z).getWorldObj().spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			EntityFX fire = new EntityPurpleFlameFX(world, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 			Minecraft.getMinecraft().effectRenderer.addEffect(fire);
 		}
 	}

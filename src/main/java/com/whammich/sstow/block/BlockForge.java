@@ -51,10 +51,8 @@ public class BlockForge extends BlockContainer {
 	}
 
 	@Override
-	public int getComparatorInputOverride(World world, int xCoord, int yCoord,
-			int zCoord, int side) {
-		return Container.calcRedstoneFromInventory((IInventory) world
-				.getTileEntity(xCoord, yCoord, zCoord));
+	public int getComparatorInputOverride(World world, int xCoord, int yCoord, int zCoord, int side) {
+		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(xCoord, yCoord, zCoord));
 	}
 
 	@Override
@@ -117,10 +115,8 @@ public class BlockForge extends BlockContainer {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z,
-			EntityLivingBase entity, ItemStack itemstack) {
-		int dir = MathHelper
-				.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemstack) {
+		int dir = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (dir == 0) {
 			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
@@ -139,8 +135,7 @@ public class BlockForge extends BlockContainer {
 		}
 
 		if (itemstack.hasDisplayName()) {
-			((TileEntityForge) world.getTileEntity(x, y, z)).furnaceName(itemstack
-					.getDisplayName());
+			((TileEntityForge) world.getTileEntity(x, y, z)).furnaceName(itemstack.getDisplayName());
 		}
 	}
 
@@ -163,8 +158,7 @@ public class BlockForge extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int meta) {
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		if (!isBurning) {
 			TileEntityForge forgeTile = (TileEntityForge) world.getTileEntity(x, y, z);
 			if (forgeTile != null) {

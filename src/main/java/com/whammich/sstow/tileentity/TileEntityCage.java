@@ -23,6 +23,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 
 import com.whammich.sstow.utils.Config;
 import com.whammich.sstow.utils.EntityMapper;
@@ -58,6 +59,10 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		active = false;
 	}
 
+	public World getSpawnerWorld() {
+        return TileEntityCage.this.worldObj;
+    }
+	
 	public void cageName(String string) {
 		this.cageName = string;
 	}

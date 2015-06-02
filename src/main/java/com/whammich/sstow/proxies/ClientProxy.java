@@ -48,7 +48,7 @@ public class ClientProxy extends CommonProxy {
         double d1 = (double)((float) y + world.rand.nextFloat());
         double d2 = (double)((float) z + world.rand.nextFloat());
 	
-		EntityPurpleFlameFX particle = new EntityPurpleFlameFX(world, x, y, z, d0, d1, d2, red, green, blue);
+		EntityPurpleFlameFX particle = new EntityPurpleFlameFX(world, x, y, z, d0, d1, d2);
         FMLClientHandler.instance().getClient().effectRenderer.addEffect(particle);
 	}
 }

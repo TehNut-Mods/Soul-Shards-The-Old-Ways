@@ -8,11 +8,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class EntityPurpleFlameFX extends EntityFlameFX {
 
-	public EntityPurpleFlameFX(World world, double x, double y, double z, double movX, double movY, double movZ, float red, float green, float blue) {
+	public EntityPurpleFlameFX(World world, double x, double y, double z, double movX, double movY, double movZ) {
         super(world, x, y, z, movX, movY, movZ);
-        this.particleRed = red / 255.0F;
-        this.particleGreen = green / 255.0F;
-        this.particleBlue = blue / 255.0F;
+        this.particleRed = 68 / 255.0F;
+        this.particleGreen = 0 / 255.0F;
+        this.particleBlue = 152 / 255.0F;
 		this.motionX = this.motionX * 0.009999999776482582D + 0;
 		this.motionY = this.motionY * 0.009999999776482582D + 0;
 		this.motionZ = this.motionZ * 0.009999999776482582D + 0;
