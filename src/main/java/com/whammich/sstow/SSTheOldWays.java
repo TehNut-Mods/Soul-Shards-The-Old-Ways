@@ -55,6 +55,7 @@ public class SSTheOldWays {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Config.load(event);
+		Achievements.Get();
 	}
 
 	@EventHandler
@@ -66,7 +67,7 @@ public class SSTheOldWays {
 		ModLogger.logDebug("Registering CreateShard Event");
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
 		
-		Achievements.Get();
+		MinecraftForge.EVENT_BUS.register(new AchievementEvents());
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
 		
 		

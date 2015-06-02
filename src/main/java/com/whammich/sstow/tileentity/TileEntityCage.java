@@ -68,7 +68,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			return;
 		}
 
-		if (Entitylist.bList.contains(entName)) {
+		if (!Entitylist.wList.contains(entName)) {
 			return;
 		}
 

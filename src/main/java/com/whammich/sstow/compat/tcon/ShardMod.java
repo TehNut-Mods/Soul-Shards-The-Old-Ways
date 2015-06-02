@@ -1,5 +1,9 @@
 package com.whammich.sstow.compat.tcon;
 
+/*
+ * FIGURE OUT AND FINISH TINKERS CONSTRUCT MODIFIER SPRITE SYSTEM
+ * 
+*/
 import java.util.*;
 
 import com.whammich.sstow.utils.Register;

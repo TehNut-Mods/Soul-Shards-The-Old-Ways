@@ -26,10 +26,10 @@ public final class EntityMapper {
 				continue;
 			}
 
-			if (IBossDisplayData.class.isAssignableFrom(entry.getKey())) {
-				ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.util.entitymapskip2", "" + entry.getValue()));
-				continue;
-			}
+//			if (IBossDisplayData.class.isAssignableFrom(entry.getKey())) {
+//				ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.util.entitymapskip2", "" + entry.getValue()));
+//				continue;
+//			}
 
 			if (EntityLiving.class.isAssignableFrom(entry.getKey())) {
 				entityList.add(entry.getValue());

@@ -6,11 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
-import com.whammich.sstow.utils.EntityMapper;
 
 public class Entitylist {
 
-	public static List<String> bList = new ArrayList<String>();
+	public static List<String> wList = new ArrayList<String>();
 
 	public static void init(File configFile) {
 		Configuration config = new Configuration(configFile);
@@ -20,9 +19,10 @@ public class Entitylist {
 			Iterator<String> iter = EntityMapper.entityList.iterator();
 			while (iter.hasNext()) {
 				String name = iter.next();
-				boolean val = config.get("entitylist", name, false).getBoolean(false);
-				if (val)
-					bList.add(name);
+				boolean val = config.get("entitylist", name, true).getBoolean(true);
+				if (val){
+					wList.add(name);
+				}
 			}
 			ModLogger.logInfo(Utils.localize("chat.sstow.util.entitylistload"));
 		} catch (Exception e) {

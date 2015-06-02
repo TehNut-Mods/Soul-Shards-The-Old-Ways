@@ -32,7 +32,7 @@ public class PlayerKillEntityEvent {
 		EntityLiving dead = (EntityLiving) event.entity;
 		EntityPlayer player = (EntityPlayer) event.source.getEntity();
 		String entName = EntityList.getEntityString(dead);
-		if (Entitylist.bList.contains(entName)) {
+		if (!Entitylist.wList.contains(entName)) {
 			return;
 		}
 		
