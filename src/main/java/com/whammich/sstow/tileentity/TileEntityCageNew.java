@@ -1,15 +1,15 @@
 package com.whammich.sstow.tileentity;
 
-import com.whammich.sstow.utils.Config;
-
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityCageNew extends TileEntity implements ISidedInventory {
+import com.whammich.sstow.utils.Config;
+
+public class TileEntityCageNew extends TileEntity implements IInventory {
 
 	private ItemStack[] inventory;
 //	private String owner;
@@ -118,21 +118,6 @@ public class TileEntityCageNew extends TileEntity implements ISidedInventory {
 		return false;
 	}
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side) {
-		return null;
-	}
-
-	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return this.isItemValidForSlot(slot, stack);
-	}
-
-	@Override
-	public boolean canExtractItem(int slot, ItemStack stack, int side) {
-		return true;
-	}
-	
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
 		NBTTagList tagList = tagCompound.getTagList("Items", 10);
