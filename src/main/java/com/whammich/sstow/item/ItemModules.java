@@ -14,8 +14,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 public class ItemModules extends Item {
-	private static String[] names = { "Redstone", "Light",
-			 "Dimension", "Detection", "XP", "Item"
+	private static String[] names = { 
+		"Redstone",  
+		"Light", 
+		"Dimension", 
+		"Detection", 
+		"XP", 
+		"Item"
 
 	};
 	private IIcon[] icon;

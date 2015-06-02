@@ -52,6 +52,8 @@ public final class Config {
 	public static boolean lightModule;
 	public static boolean dimensionModule;
 	public static boolean playerModule;
+	public static boolean voidXPModule;
+	public static boolean voidItemsModule;
 
 	// Recipes Section
 	public static int cookingModifier;
@@ -172,6 +174,8 @@ public final class Config {
 				lightModule = config.getBoolean("Enable Light Module", "cage modules", true, "Enable the Light Module?");
 				dimensionModule = config.getBoolean("Enable Dimension Module", "cage modules", true, "Enable the Dimension Module?");
 				playerModule = config.getBoolean("Enable Player Module","cage modules", false, "Enable the Player Module?");
+				voidXPModule = config.getBoolean("Enable Void XP Module","cage modules", true, "This will void XP, perfect for a drop farm");
+				voidItemsModule = config.getBoolean("Enable Void Items Module","cage modules", true, "This will void items, perfect for an XP farm");
 			}
 			
 			// General Section
