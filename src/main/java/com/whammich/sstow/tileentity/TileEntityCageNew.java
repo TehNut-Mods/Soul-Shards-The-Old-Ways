@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.Register;
 
 public class TileEntityCageNew extends TileEntity implements IInventory {
 
@@ -114,8 +115,11 @@ public class TileEntityCageNew extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		// TODO Auto-generated method stub
-		return false;
+		if(slot == 1){
+			return stack.getItem() == Register.ItemShardSoul;
+		} else {
+			return stack.getItem() == Register.ItemModules;
+		}
 	}
 
 	public void readFromNBT(NBTTagCompound tagCompound) {
