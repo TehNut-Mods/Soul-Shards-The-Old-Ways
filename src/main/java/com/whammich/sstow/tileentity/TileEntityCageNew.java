@@ -20,9 +20,8 @@ public class TileEntityCageNew extends TileEntity implements IInventory {
 	public TileEntityCageNew() {
 		if(Config.redstoneModule) invSize++;
 		if(Config.dimensionModule) invSize++;
-		if(Config.voidItemsModule) invSize++;
-		if(Config.voidXPModule) invSize++;
 		if(Config.lightModule) invSize++;
+		if(Config.voidItemsModule || Config.voidXPModule) invSize++;
 		if(Config.playerModule) invSize++;
 		this.inventory = new ItemStack[invSize];
 		
@@ -115,7 +114,7 @@ public class TileEntityCageNew extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		if(slot == 1){
+		if(slot == 1) {
 			return stack.getItem() == Register.ItemShardSoul;
 		} else {
 			return stack.getItem() == Register.ItemModules;
