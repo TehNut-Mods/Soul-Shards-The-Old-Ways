@@ -8,6 +8,7 @@ import java.util.Map;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
+//import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.world.World;
@@ -22,14 +23,12 @@ public final class EntityMapper {
 				.entrySet()) {
 
 			if (entityList.contains(entry.getValue())) {
-				ModLogger.logInfo("Skipping mapping for " + entry.getValue()
-						+ ": already mapped.");
+				ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.util.entitymapskip1", "" + entry.getValue()));
 				continue;
 			}
 
 			if (IBossDisplayData.class.isAssignableFrom(entry.getKey())) {
-				ModLogger.logInfo("Skipped mapping for " + entry.getValue()
-						+ ": detected as boss.");
+				ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.util.entitymapskip2", "" + entry.getValue()));
 				continue;
 			}
 
@@ -40,8 +39,7 @@ public final class EntityMapper {
 
 		entityList.add("Wither Skeleton");
 
-		ModLogger.logInfo("Finished entity mapping (" + entityList.size()
-				+ " entries).");
+		ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.util.entitymapdone", "" + entityList.size()));
 	}
 
 	public static boolean isEntityValid(String entName) {

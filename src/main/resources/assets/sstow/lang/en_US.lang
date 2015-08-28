@@ -1,61 +1,130 @@
-item.sstow.shard_unbound.name=Unbound Soul Shard
+# Items
+# Shards
+item.sstow.shard.unbound.name=Unbound Soul Shard
 item.sstow.shard.name=Soul Shard
+
+# Materials
 item.sstow.material.nugget.iron.name=Iron Nugget
 item.sstow.material.nugget.soulium.name=Soulium Nugget
 item.sstow.material.ingot.soulium.name=Soulium Ingot
 item.sstow.material.dust.vile.name=Vile Dust
 item.sstow.material.essence.corrupted.name=Corrupted Essence
-item.sstow.soul_sword.name=Soul Sword
-item.sstow.soul_pickaxe.name=Soul Pickaxe
-item.sstow.soul_axe.name=Soul Axe
-item.sstow.soul_hoe.name=Soul Hoe
-item.sstow.soul_spade.name=Soul Spade
+item.sstow.material.petrified.stick.name=Petrified Stick
 
+# Tools
+item.sstow.soultool.sword.name=Soulium Sword
+item.sstow.soultool.pickaxe.name=Soulium Pickaxe
+item.sstow.soultool.axe.name=Soulium Axe
+item.sstow.soultool.spade.name=Soulium Shovel
+item.sstow.soultool.bucket.soulium.name=Bucket of Soulium
+
+# Blocks
+tile.sstow.block.forge.name=Soul Forge
+tile.sstow.block.cage.name=Soul Cage
+tile.sstow.block.material.soulium.name=Block of Soulium
+tile.sstow.block.material.ender.name=Block of Ender
+
+tile.sstow.block.obsidian.glass.name=Obsidian Glass
+tile.sstow.block.xenolith.raw.name=Raw Xenolith
+tile.sstow.block.xenolith.polished.name=Polished Xenolith
+tile.sstow.block.xenolith.decorative.name=Decorative Xenolith
+tile.sstow.block.xenolith.nether.name=Nether Xenolith
+tile.sstow.block.xenolith.soulium.name=Soulium infused Xenolith
+tile.sstow.block.xenolith.redstone.name=Redstone infused Xenolith
+tile.sstow.block.xenolith.ender.name=Ender infused Xenolith
+tile.sstow.block.xenolith.bricks.name=Xenolith Bricks
+tile.sstow.block.xenolith.brickssmall.name=Small Xenolith Bricks
+tile.sstow.block.xenolith.light.name=Glowing Xenolith
+
+tile.sstow.petrified.log.oak.name=Petrified Oak Log
+tile.sstow.petrified.plank.oak.name=Petrified Oak Planks
+tile.sstow.petrified.log.spruce.name=Petrified Spruce Log
+tile.sstow.petrified.plank.spruce.name=Petrified Spruce Planks
+tile.sstow.petrified.log.birch.name=Petrified Birch Log
+tile.sstow.petrified.plank.birch.name=Petrified Birch Planks
+tile.sstow.petrified.log.jungle.name=Petrified Jungle Log
+tile.sstow.petrified.plank.jungle.name=Petrified Jungle Planks
+tile.sstow.petrified.log.acacia.name=Petrified Acacia Log
+tile.sstow.petrified.plank.acacia.name=Petrified Acacia Planks
+tile.sstow.petrified.log.big_oak.name=Petrified Dark Oak Log
+tile.sstow.petrified.plank.big_oak.name=Petrified Dark Oak Planks
+
+# Enchantment
+enchantment.soul_stealer=Soul Stealer
+
+# GUI
 container.soulforge=Soul Forge
+container.soulcage=Soul Cage
+itemGroup.sstow=Soul Shards The Old Ways
 
-tile.sstow.forge_block.name=Soul Forge
-tile.sstow.soulium_block.name=Block of Soulium
-tile.sstow.cage_block.name=Soul Cage
+# Soul Shard Details
+chat.sstow.shard.owner=Owned by: %s
+chat.sstow.shard.unbound=You need to bind the shard to a mob type
+chat.sstow.shard.levelup=You need to level the shard to tier 1 before you can use it in a cage
+chat.sstow.shard.level=Soul Shard Tier %s
+chat.sstow.shard.bound=Bound to: %s
+chat.sstow.shard.player=Checks Player: %s
+chat.sstow.shard.light=Checks Lightlevels: %s
+chat.sstow.shard.dimension=Checks Dimension: %s
+chat.sstow.shard.redstone=Uses Redstone: %s
+chat.sstow.shard.quantity=Spawn Amount: %s
+chat.sstow.shard.rate=Spawn Rate: %s
 
+# Debug
+chat.sstow.debug.tileerror=ERROR: no tile entity found at coords: %s
+chat.sstow.debug.nounlocname=Player killed entity with no unlocalized name: %s
+chat.sstow.debug.successspawn=Successfully spawned: %s
+chat.sstow.debug.tierkillsfail=Custom tier kill settings are incorrect, resetting defaults.
+chat.sstow.debug.tierkillssuccess=Loaded custom tier kill settings!
+chat.sstow.debug.shardkillerror=Soul shard has an incorrect kill counter of: %s
+
+# Commands
+chat.sstow.command.help=--- Showing SSTOW help page 1 of 1 ---
+chat.sstow.command.killall=/sstow killall to kill all the sstow entities
+chat.sstow.command.settier=/sstow settier x to set tier of the shard
+chat.sstow.command.addkills=/sstow addkills x to add kills
+chat.sstow.command.removekills=/sstow removekills x to remove kills
+chat.sstow.command.notfound=No spawned entities were found!
+chat.sstow.command.killed=Mobs Killed: %s
+chat.sstow.command.setwrong=Wrong use of command, /sstow settier x
+chat.sstow.command.addkillwrong=Wrong use of command, /sstow addkills x
+chat.sstow.command.remkillwrong=Wrong use of command, /sstow removekills x
+chat.sstow.command.wrongcommand=Command not recognised, use /sstow help for a list of all the available commands
+
+# Utils
+chat.sstow.util.configupdate=Updating config...
+chat.sstow.util.configload=Loaded configuration file!
+chat.sstow.util.configloadfail=Failed to load configuration file!
+chat.sstow.util.entitylistload=Soul Shards Loaded Entity List
+chat.sstow.util.entitylistloadfail=Soul Shards had a problem loading Entity List
+chat.sstow.util.entitymapskip1=Already Mapped, skipping: %s
+chat.sstow.util.entitymapskip2=Boss Detected, skipping %s
+chat.sstow.util.entitymapdone=Finished Mapping, Entities Found: %s
+
+# Mod Compat
+
+# Tinkers Construct
+tile.sstow.fluidblock.soulium.name=Molten Soulium
+fluid.tile.sstow.fluidblock.soulium=Molten Soulium
+material.soulium=Soulium
+modifier.tool.shard=Soul Stealer %s
+
+# WAILA Support
 sstow.waila.soulcage.mob=Entity: 
 sstow.waila.soulcage.tier=Tier: 
 sstow.waila.soulcage.activated=Status: Activated
 sstow.waila.soulcage.deactivated=Status: Deactivated
 sstow.waila.soulcage.empty=Status: Empty
 
-enchantment.soul_stealer=Soul Stealer
+# Baubles
+item.sstow.bauble.gem.immundus.name=Immundus Crystal
 
-itemGroup.soul_shards_the_old_ways=Soul Shards The Old Ways
+item.sstow.bauble.gem.animus.name=Animus Gem
+item.sstow.socket.animus.name=Animus Crystal Socket
+item.sstow.bauble.gem.animussocket.name=Animus Crystal
+item.sstow.bauble.animus.name=Amulet of Animus
 
-achievement.createShard=Create a Soul Shard
-achievement.createShard.desc=Created your first Soul Shard
-
-achievement.tier1Shard=Whoops
-achievement.tier1Shard.desc=You have blood on your hands
-
-achievement.tier2Shard=Murderer
-achievement.tier2Shard.desc=Your soul is stained
-
-achievement.tier3Shard=Serial Killer
-achievement.tier3Shard.desc=You've become the monster
-
-achievement.tier4Shard=Psychopath
-achievement.tier4Shard.desc=What is wrong with you?
-
-achievement.tier5Shard=Genocidal Maniac
-achievement.tier5Shard.desc=You have no soul
-
-achievement.createCage=These are the Soul Cages
-achievement.createCage.desc=Where is the goat?
-
-achievement.vile_dust=Vile Dusting
-achievement.vile_dust.desc=It smells kinda... vile
-
-achievement.corrupted_essence=Essence of Corruption
-achievement.corrupted_essence.desc=Slightly more corrupt than a politician!
-
-achievement.soulForge=Forge Of Souls
-achievement.soulForge.desc=It's like a normal forge, but for souls
-
-achievement.fixed=Fixed it!
-achievement.fixed.desc=Attempting to Exploit
+item.sstow.bauble.gem.conservo.name=Conservo Gem
+item.sstow.socket.conservo.name=Conservo Crystal Socket
+item.sstow.bauble.gem.conservosocket.name=Conservo Crystal
+item.sstow.bauble.conservo.name=Amulet of Conservo

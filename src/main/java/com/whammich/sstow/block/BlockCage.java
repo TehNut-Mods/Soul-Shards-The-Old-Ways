@@ -108,7 +108,7 @@ public class BlockCage extends BlockContainer {
 
 				ItemStack stack = player.getHeldItem();
 
-				if (stack == null || stack.getItem() != Register.SOUL_SHARD
+				if (stack == null || stack.getItem() != Register.ItemShardSoul
 						|| !Utils.isShardBound(stack)
 						|| Utils.getShardTier(stack) == 0) {
 					return false;

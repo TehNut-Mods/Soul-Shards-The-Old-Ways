@@ -1,11 +1,5 @@
 package com.whammich.sstow.events;
 
-import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.EntityMapper;
-import com.whammich.sstow.utils.ModLogger;
-import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.utils.Utils;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -14,37 +8,36 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import cofh.core.entity.CoFHFakePlayer;
-import cpw.mods.fml.common.Loader;
+
+import com.whammich.sstow.utils.Config;
+import com.whammich.sstow.utils.EntityMapper;
+import com.whammich.sstow.utils.Entitylist;
+import com.whammich.sstow.utils.ModLogger;
+import com.whammich.sstow.utils.Register;
+import com.whammich.sstow.utils.Utils;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerKillEntityEvent {
+
 	@SubscribeEvent
 	public void onEntityKill(LivingDeathEvent event) {
+		
 		World world = event.entity.worldObj;
-		if (Loader.isModLoaded("CoFHCore")
-				&& (event.source.getEntity() instanceof CoFHFakePlayer)) {
+		
+		if (world.isRemote || !(event.entity instanceof EntityLiving) || !(event.source.getEntity() instanceof EntityPlayer)) {
 			return;
 		}
-		if (world.isRemote || !(event.entity instanceof EntityLiving)
-				|| !(event.source.getEntity() instanceof EntityPlayer)) {
-			return;
-		}
-
+		
 		EntityLiving dead = (EntityLiving) event.entity;
-
-		if (dead.getEntityData().getBoolean("SSTOW")) {
+		EntityPlayer player = (EntityPlayer) event.source.getEntity();
+		String entName = EntityList.getEntityString(dead);
+		if (!Entitylist.wList.contains(entName)) {
 			return;
 		}
-
-		EntityPlayer player = (EntityPlayer) event.source.getEntity();
-
-		String entName = EntityList.getEntityString(dead);
-
+		
 		if (entName == null || entName.isEmpty()) {
-			ModLogger
-					.logFatal("Player killed entity with no unlocalized name: "
-							+ dead);
+			ModLogger.logFatal(Utils.localizeFormatted("chat.sstow.debug.nounlocname", "" + dead));
 			return;
 		}
 
@@ -63,15 +56,16 @@ public class PlayerKillEntityEvent {
 			if (!Utils.isShardBound(shard)) {
 				Utils.setShardBoundEnt(shard, entName);
 				Utils.writeEntityHeldItem(shard, dead);
+				Utils.setShardBoundPlayer(shard, player);
 			}
 			Utils.writeEntityArmor(shard, dead);
 
 			int soulStealer = EnchantmentHelper.getEnchantmentLevel(
 					Register.SOUL_STEALER.effectId, player.getHeldItem());
-			soulStealer *= Config.ENCHANT_KILL_BONUS;
+			soulStealer *= Config.enchantBonus;
 
 			Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
-			Utils.checkForAchievements(player, shard);
+//			Utils.checkForAchievements(player, shard);
 		}
 	}
 }

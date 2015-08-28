@@ -2,6 +2,8 @@ package com.whammich.sstow.guihandler;
 
 import java.util.Set;
 
+import com.whammich.sstow.guihandler.config.GuiOldWaysConfig;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import cpw.mods.fml.client.IModGuiFactory;

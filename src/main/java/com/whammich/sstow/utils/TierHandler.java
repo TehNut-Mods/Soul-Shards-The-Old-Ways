@@ -98,12 +98,12 @@ public final class TierHandler {
 
 		if (error) {
 			ModLogger
-					.logFatal("Custom tier kill settings are incorrect, resetting defaults.");
+					.logFatal(Utils.localize("chat.sstow.debug.tierkillsfail"));
 		} else {
 			MIN_KILLS = tempMin;
 			MAX_KILLS = tempMax;
 
-			ModLogger.logInfo("Loaded custom tier kill settings!");
+			ModLogger.logInfo(Utils.localize("chat.sstow.debug.tierkillssuccess"));
 		}
 
 		ModLogger.logInfo("Min kills: " + arrayToString(MIN_KILLS));
@@ -126,8 +126,7 @@ public final class TierHandler {
 			}
 		}
 
-		ModLogger.logFatal("Soul shard has an incorrect kill counter of: "
-				+ kills);
+		ModLogger.logFatal(Utils.localizeFormatted("chat.sstow.debug.shardkillerror", "" + kills));
 		return 0;
 	}
 

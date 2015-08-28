@@ -2,10 +2,6 @@ package com.whammich.sstow.block;
 
 import java.util.Random;
 
-import com.whammich.sstow.tileentity.TileEntityForge;
-import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.SSTheOldWays;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -22,6 +18,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.whammich.sstow.SSTheOldWays;
+import com.whammich.sstow.tileentity.TileEntityForge;
+import com.whammich.sstow.utils.HolidayHelper;
+import com.whammich.sstow.utils.Reference;
+import com.whammich.sstow.utils.Register;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,31 +40,40 @@ public class BlockForge extends BlockContainer {
 
 	public BlockForge(boolean isActive) {
 		super(Material.rock);
-		this.setBlockName("sstow.forge_block");
+		this.setBlockName(Reference.modID + ".block.forge");
 		this.setHardness(3.5F);
 		isBurning2 = isActive;
 	}
 
+	@Override
 	public boolean hasComparatorInputOverride() {
 		return true;
 	}
 
-	public int getComparatorInputOverride(World world, int xCoord, int yCoord,
-			int zCoord, int side) {
-		return Container.calcRedstoneFromInventory((IInventory) world
-				.getTileEntity(xCoord, yCoord, zCoord));
+	@Override
+	public int getComparatorInputOverride(World world, int xCoord, int yCoord, int zCoord, int side) {
+		return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(xCoord, yCoord, zCoord));
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		this.blockIcon = iconRegister.registerIcon("sstow:soulForge_side");
-		this.front = iconRegister
-				.registerIcon(this.isBurning2 ? "sstow:soulForge_active"
-						: "sstow:soulForge_idle");
-		this.top = iconRegister.registerIcon("furnace_top");
-		this.bottom = iconRegister.registerIcon("obsidian");
+		if (HolidayHelper.isHalloween()) {
+			this.blockIcon = iconRegister.registerIcon("minecraft:pumpkin_side");
+			this.front = iconRegister.registerIcon(this.isBurning2 ? Reference.modID + ":soulforge/soulForge_active_halloween" : Reference.modID + ":soulforge/soulForge_idle_halloween");
+			this.top = iconRegister.registerIcon("minecraft:pumpkin_top");
+			this.bottom = iconRegister.registerIcon("minecraft:pumpkin_top");
+		} else {
+			this.blockIcon = iconRegister.registerIcon(Reference.modID + ":soulforge/soulForge_side");
+			this.front = iconRegister.registerIcon(this.isBurning2 ? Reference.modID + ":soulforge/soulForge_active" : Reference.modID + ":soulforge/soulForge_idle");
+			this.top = iconRegister.registerIcon("furnace_top");
+			this.bottom = iconRegister.registerIcon("obsidian");
+		}
 	}
 
+
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		if (side == 1) {
@@ -75,33 +87,36 @@ public class BlockForge extends BlockContainer {
 		}
 	}
 
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int par6, float par7, float par8, float par9) {
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
 		player.openGui(SSTheOldWays.modInstance, 0, world, x, y, z);
 		return true;
 	}
 
+	@Override
 	public Item getItemDropped(int par1, Random random, int par3) {
-		return Item.getItemFromBlock(Register.SOUL_FORGE);
+		return Item.getItemFromBlock(Register.BlockForge);
 	}
 
+	@Override
 	public Item getItem(World world, int par2, int par3, int par4) {
-		return Item.getItemFromBlock(Register.SOUL_FORGE);
+		return Item.getItemFromBlock(Register.BlockForge);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
 	}
 
+	@Override
 	public TileEntity createNewTileEntity(World world, int var1) {
 		return new TileEntityForge();
 	}
 
-	public void onBlockPlacedBy(World world, int x, int y, int z,
-			EntityLivingBase entity, ItemStack itemstack) {
-		int dir = MathHelper
-				.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemstack) {
+		int dir = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (dir == 0) {
 			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
@@ -120,20 +135,18 @@ public class BlockForge extends BlockContainer {
 		}
 
 		if (itemstack.hasDisplayName()) {
-			((TileEntityForge) world.getTileEntity(x, y, z)).furnaceName(itemstack
-					.getDisplayName());
+			((TileEntityForge) world.getTileEntity(x, y, z)).furnaceName(itemstack.getDisplayName());
 		}
 	}
 
-	public static void updateBlockstate(boolean burning, World world, int x,
-			int y, int z) {
+	public static void updateBlockstate(boolean burning, World world, int x, int y, int z) {
 		int dir = world.getBlockMetadata(x, y, z);
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 		isBurning = true;
 		if (burning) {
-			world.setBlock(x, y, z, Register.SOUL_FORGE_ACTIVE);
+			world.setBlock(x, y, z, Register.BlockForgeActive);
 		} else {
-			world.setBlock(x, y, z, Register.SOUL_FORGE);
+			world.setBlock(x, y, z, Register.BlockForge);
 		}
 		isBurning = false;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 2);
@@ -144,8 +157,8 @@ public class BlockForge extends BlockContainer {
 		}
 	}
 
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int meta) {
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
 		if (!isBurning) {
 			TileEntityForge forgeTile = (TileEntityForge) world.getTileEntity(x, y, z);
 			if (forgeTile != null) {
@@ -191,9 +204,9 @@ public class BlockForge extends BlockContainer {
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(World world, int x, int y, int z,
-			Random random) {
+	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
 		if (this.isBurning2) {
 			int direction = world.getBlockMetadata(x, y, z);
 
@@ -204,25 +217,17 @@ public class BlockForge extends BlockContainer {
 			float xx2 = 0.5F;
 
 			if (direction == 4) {
-				world.spawnParticle("smoke", (double) (xx - xx2), (double) yy,
-						(double) (zz + zz2), 0.0F, 0.0F, 0.0F);
-				world.spawnParticle("flame", (double) (xx - xx2), (double) yy,
-						(double) (zz + zz2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("smoke", (double) (xx - xx2), (double) yy, (double) (zz + zz2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("flame", (double) (xx - xx2), (double) yy, (double) (zz + zz2), 0.0F, 0.0F, 0.0F);
 			} else if (direction == 5) {
-				world.spawnParticle("smoke", (double) (xx + xx2), (double) yy,
-						(double) (zz + zz2), 0.0F, 0.0F, 0.0F);
-				world.spawnParticle("flame", (double) (xx + xx2), (double) yy,
-						(double) (zz + zz2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("smoke", (double) (xx + xx2), (double) yy, (double) (zz + zz2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("flame", (double) (xx + xx2), (double) yy, (double) (zz + zz2), 0.0F, 0.0F, 0.0F);
 			} else if (direction == 3) {
-				world.spawnParticle("smoke", (double) (xx + zz2), (double) yy,
-						(double) (zz + xx2), 0.0F, 0.0F, 0.0F);
-				world.spawnParticle("flame", (double) (xx + zz2), (double) yy,
-						(double) (zz + xx2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("smoke", (double) (xx + zz2), (double) yy, (double) (zz + xx2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("flame", (double) (xx + zz2), (double) yy, (double) (zz + xx2), 0.0F, 0.0F, 0.0F);
 			} else if (direction == 2) {
-				world.spawnParticle("smoke", (double) (xx + zz2), (double) yy,
-						(double) (zz - xx2), 0.0F, 0.0F, 0.0F);
-				world.spawnParticle("flame", (double) (xx + zz2), (double) yy,
-						(double) (zz - xx2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("smoke", (double) (xx + zz2), (double) yy, (double) (zz - xx2), 0.0F, 0.0F, 0.0F);
+				world.spawnParticle("flame", (double) (xx + zz2), (double) yy, (double) (zz - xx2), 0.0F, 0.0F, 0.0F);
 			}
 		}
 	}

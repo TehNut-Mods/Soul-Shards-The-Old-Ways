@@ -3,21 +3,21 @@
         "modid": "SSTOW",
         "name": "Soul Shards: The Old Ways",
         "description": "Continuation of Moze_Intel’s Soul Shards: Reborn mod.",
-        "version": "RC9",
+        "version": "${version}",
         "mcversion": "1.7.10",
         "url": "",
         "updateUrl": "",
         "authorList": [
             "Team Whammich"
         ],
-        "credits": "Moze_Intel, Nenivar, RetiredNavyVet, ShadwDrgn",
-        "logoFile": "",
+        "credits": "ShadwDrgn, Moze_Intel, Nenivar, RetiredNavyVet, TehNut, BBoldt",
+        "logoFile": "/logo.png",
         "screenshots": [],
         "dependencies": [
             "MinecraftForge",
             "NotEnoughItems",
             "Waila",
-            "CoFHCore"
+			"Baubles"
         ],
         "useDependencyInformation": "true"
     }

@@ -99,7 +99,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		}
 
 		if (counter >= TierHandler.getCooldown(tier - 1) * 20 - 1) {
-			if (Config.ENABLE_DEBUG) {
+			if (Config.debug) {
 				ModLogger.logInfo("Successfully spawned: " + entName);
 			}
 
@@ -155,12 +155,12 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	}
 
 	private boolean canEntitySpawn(EntityLiving ent) {
-		if ((Config.ENABLE_FLOOD_PREVENTION) && (hasReachedSpawnLimit(ent))) {
+		if ((Config.floodPrevention) && (hasReachedSpawnLimit(ent))) {
 			return false;
 		}
 
 		if ((TierHandler.getChecksRedstone(tier - 1))
-				&& (redstoneActive == Config.INVERT_REDSTONE)) {
+				&& (redstoneActive == Config.invertRedstone)) {
 			return false;
 		}
 
@@ -239,7 +239,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				mobCount++;
 			}
 		}
-		return mobCount >= Config.MAX_NUM_ENTITIES;
+		return mobCount >= Config.maxEntities;
 	}
 
 	private void spawnEntities(EntityLiving[] ents) {
@@ -367,7 +367,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
-		return stack != null && stack.getItem() == Register.SOUL_SHARD
+		return stack != null && stack.getItem() == Register.ItemShardSoul
 				&& Utils.isShardBound(stack) && Utils.getShardTier(stack) > 0;
 	}
 

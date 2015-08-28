@@ -5,18 +5,20 @@ import java.io.File;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.whammich.sstow.commands.CommandSSTOW;
-import com.whammich.sstow.events.AchievementEvents;
-import com.whammich.sstow.events.Achievements;
+import com.whammich.sstow.events.BaubleEvents;
+import com.whammich.sstow.events.CreateAnimusEvent;
+import com.whammich.sstow.events.CreateConservoEvent;
 import com.whammich.sstow.events.CreateShardEvent;
 import com.whammich.sstow.events.PlayerKillEntityEvent;
 import com.whammich.sstow.utils.Config;
-import com.whammich.sstow.utils.EntityBlackList;
 import com.whammich.sstow.utils.EntityMapper;
+import com.whammich.sstow.utils.Entitylist;
+import com.whammich.sstow.utils.ModLogger;
 import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
@@ -24,10 +26,17 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, guiFactory = Reference.GuiFactory_class)
+@Mod(
+		modid = Reference.modID, 
+		name = Reference.modName, 
+		version = Reference.modVersion, 
+		guiFactory = Reference.guiFactory_class, 
+		dependencies = Reference.requiredDependencies
+	)
+
 public class SSTheOldWays {
 
-	@Instance(Reference.MOD_ID)
+	@Instance(Reference.modID)
 	public static SSTheOldWays modInstance;
 
 	@Mod.EventHandler
@@ -35,29 +44,39 @@ public class SSTheOldWays {
 		Config.load(event);
 	}
 
-	@Mod.EventHandler
+	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		Register.registerObjs();
-		// System.out.println("Achievements Loading");
-		Achievements.Get();
-		// System.out.println("Achievements Loaded");
+		ModLogger.logDebug("Registering PlayerKill Event");
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
+
+		ModLogger.logDebug("Registering CreateShard Event");
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
-		// System.out.println("Registering Achievement Events");
-		FMLCommonHandler.instance().bus().register(new AchievementEvents());
-		// System.out.println("Achievement Events Registed");
-		FMLInterModComms.sendMessage("Waila", "register",
-				Reference.Waila_callBack);
+
+		ModLogger.logDebug("Registering CreateConservo Event");
+		MinecraftForge.EVENT_BUS.register(new CreateConservoEvent());
+
+		ModLogger.logDebug("Registering CreateAnimus Event");
+		MinecraftForge.EVENT_BUS.register(new CreateAnimusEvent());
+
+		ModLogger.logDebug("Registering Bauble Events");
+		MinecraftForge.EVENT_BUS.register(new BaubleEvents());
+		
+		FMLInterModComms.sendMessage("Waila", "register", Reference.wailaCallBack);
 	}
 
-	@Mod.EventHandler
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		ModLogger.logDebug("Registering Objects");
+		Register.registerObjs();
+
+		ModLogger.logDebug("Registering EntityMapper");
 		EntityMapper.init();
-		EntityBlackList
-				.init(new File(Config.configDirectory + "/BlackList.cfg"));
+
+		ModLogger.logDebug("Reading/Writing Entity List");
+		Entitylist.init(new File(Config.configDirectory + "/Soul-Shards-TOW-Entitylist.cfg"));
 	}
 
-	@Mod.EventHandler
+	@EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandSSTOW());
 

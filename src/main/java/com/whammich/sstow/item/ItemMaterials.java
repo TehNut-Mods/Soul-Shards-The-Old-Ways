@@ -1,6 +1,8 @@
 package com.whammich.sstow.item;
 
+import com.whammich.sstow.utils.Reference;
 import com.whammich.sstow.utils.Register;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,13 +15,23 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-    private static String[] names = { "nugget.iron", "nugget.soulium", "ingot.soulium", "dust.vile", "essence.corrupted" };
+    private static String[] names = { 
+    
+    	"nugget.iron",			// 0
+    	"nugget.soulium", 		// 1
+    	"ingot.soulium", 		// 2
+    	"dust.vile", 			// 3
+    	"essence.corrupted", 	// 4
+    	"petrified.stick" 		// 5
+    	
+    };
+    
     private IIcon[] icon = new IIcon[16];
 
     public ItemMaterials() {
         super();
 
-        setUnlocalizedName("sstow.material");
+        setUnlocalizedName(Reference.modID + ".material");
         setCreativeTab(Register.CREATIVE_TAB);
         setHasSubtypes(true);
     }
@@ -36,11 +48,12 @@ public class ItemMaterials extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        this.icon[0] = iconRegister.registerIcon("sstow:iron_nugget");
-        this.icon[1] = iconRegister.registerIcon("sstow:soulium_nugget");
-        this.icon[2] = iconRegister.registerIcon("sstow:soulium_ingot");
-        this.icon[3] = iconRegister.registerIcon("sstow:vile_dust");
-        this.icon[4] = iconRegister.registerIcon("sstow:corrupted_essence");
+        this.icon[0] = iconRegister.registerIcon(Reference.modID + ":nuggetIron");
+        this.icon[1] = iconRegister.registerIcon(Reference.modID + ":nuggetSoulium");
+        this.icon[2] = iconRegister.registerIcon(Reference.modID + ":ingotSoulium");
+        this.icon[3] = iconRegister.registerIcon(Reference.modID + ":dustVile");
+        this.icon[4] = iconRegister.registerIcon(Reference.modID + ":essenceCorrupted");
+        this.icon[5] = iconRegister.registerIcon(Reference.modID + ":stickPetrified");
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})

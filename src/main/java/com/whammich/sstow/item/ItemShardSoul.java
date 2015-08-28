@@ -57,7 +57,7 @@ public class ItemShardSoul extends Item {
 	public ItemStack onItemRightClick(ItemStack stack, World world,
 			EntityPlayer player) {
 		if (world.isRemote || (Utils.hasMaxedKills(stack))
-				|| !Config.ALLOW_SPAWNER_ABSORB) {
+				|| !Config.allowAbsorb) {
 			return stack;
 		}
 
@@ -97,20 +97,19 @@ public class ItemShardSoul extends Item {
 			if (Utils.isShardBound(stack)) {
 				if (Utils.getShardBoundEnt(stack).equals(name)) {
 					Utils.increaseShardKillCount(stack,
-							(short) Config.SPAWNER_ABSORB_BONUS);
-					Utils.checkForAchievements(player, stack);
+							(short) Config.spawnerBonus);
 					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ,
 							false);
 				}
 			} else if (EntityMapper.isEntityValid(name)) {
 				if (stack.stackSize > 1) {
 					stack.stackSize--;
-					ItemStack newStack = new ItemStack(Register.SOUL_SHARD, 1);
+					ItemStack newStack = new ItemStack(Register.ItemShardSoul, 1);
 
 					Utils.setShardBoundEnt(newStack, name);
 					Utils.writeEntityHeldItem(newStack, (EntityLiving) ent);
 					Utils.increaseShardKillCount(newStack,
-							(short) Config.SPAWNER_ABSORB_BONUS);
+							(short) Config.spawnerBonus);
 
 					boolean emptySpot = false;
 					int counter = 0;
@@ -134,7 +133,7 @@ public class ItemShardSoul extends Item {
 					Utils.setShardBoundEnt(stack, name);
 					Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
 					Utils.increaseShardKillCount(stack,
-							(short) Config.SPAWNER_ABSORB_BONUS);
+							(short) Config.spawnerBonus);
 				}
 				world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, true);
 			}

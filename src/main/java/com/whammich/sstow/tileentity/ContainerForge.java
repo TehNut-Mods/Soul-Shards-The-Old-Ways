@@ -1,6 +1,6 @@
 package com.whammich.sstow.tileentity;
 
-import com.whammich.sstow.guihandler.SFRecipeHandler;
+import com.whammich.sstow.utils.SFRecipeHandler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
