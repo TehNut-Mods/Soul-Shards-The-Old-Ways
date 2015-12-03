@@ -57,6 +57,14 @@ public final class EntityMapper {
 			VillagerRegistry.applyRandomTrade(villager, villager.worldObj.rand);
 			return villager;
 		}
-		return (EntityLiving) EntityList.createEntityByName(ent, world);
+		
+		EntityLiving spawnedEntity = (EntityLiving)EntityList.createEntityByName(ent, world);  
+		
+		// This will ensure custom handlers from other mods
+		// that have custom initialization logic will be called
+		// properly.
+		spawnedEntity.onSpawnWithEgg(null);
+		
+		return spawnedEntity;
 	}
 }
