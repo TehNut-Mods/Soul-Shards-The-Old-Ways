@@ -1,66 +1,56 @@
 package com.whammich.sstow.item;
 
-import com.whammich.sstow.utils.Reference;
-import com.whammich.sstow.utils.Register;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.registry.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import tehnut.lib.annot.ModItem;
+import tehnut.lib.annot.Used;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@ModItem(name = "ItemMaterials")
+@Used
 public class ItemMaterials extends Item {
 
-    private static String[] names = { 
-    
-    	"nugget.iron",			// 0
-    	"nugget.soulium", 		// 1
-    	"ingot.soulium", 		// 2
-    	"dust.vile", 			// 3
-    	"essence.corrupted", 	// 4
-    	"petrified.stick" 		// 5
-    	
-    };
-    
-    private IIcon[] icon = new IIcon[16];
+    public static final String INGOT_SOULIUM = "ingotSoulium";
+
+    private static List<String> names = new ArrayList<String>();
 
     public ItemMaterials() {
         super();
 
-        setUnlocalizedName(Reference.modID + ".material");
-        setCreativeTab(Register.CREATIVE_TAB);
+        setUnlocalizedName(SoulShardsTOW.MODID + ".material.");
+        setCreativeTab(SoulShardsTOW.soulShardsTab);
         setHasSubtypes(true);
+
+        buildItems();
+    }
+
+    private void buildItems() {
+        names.add(0, INGOT_SOULIUM);
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return getUnlocalizedName() + "." + names[stack.getItemDamage() % names.length];
+        return getUnlocalizedName() + names.get(stack.getItemDamage());
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage(int meta) {
-        return this.icon[meta];
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister iconRegister) {
-        this.icon[0] = iconRegister.registerIcon(Reference.modID + ":nuggetIron");
-        this.icon[1] = iconRegister.registerIcon(Reference.modID + ":nuggetSoulium");
-        this.icon[2] = iconRegister.registerIcon(Reference.modID + ":ingotSoulium");
-        this.icon[3] = iconRegister.registerIcon(Reference.modID + ":dustVile");
-        this.icon[4] = iconRegister.registerIcon(Reference.modID + ":essenceCorrupted");
-        this.icon[5] = iconRegister.registerIcon(Reference.modID + ":stickPetrified");
-    }
-
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tabs, List list) {
-        for (int i = 0; i < names.length; i++) {
+    public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
+        for (int i = 0; i < names.size(); i++)
             list.add(new ItemStack(this, 1, i));
-        }
+    }
+
+    public static ItemStack getStack(String name, int amount) {
+        return new ItemStack(ModItems.getItem(ItemMaterials.class), amount, names.indexOf(name));
+    }
+
+    public static ItemStack getStack(String name) {
+        return getStack(name, 1);
     }
 }

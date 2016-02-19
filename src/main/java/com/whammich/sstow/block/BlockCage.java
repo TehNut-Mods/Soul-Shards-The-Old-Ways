@@ -1,279 +1,117 @@
 package com.whammich.sstow.block;
 
-import java.util.Random;
-
-import com.whammich.sstow.tileentity.TileEntityCage;
-import com.whammich.sstow.utils.HolidayHelper;
-import com.whammich.sstow.utils.ModLogger;
-import com.whammich.sstow.utils.Register;
-import com.whammich.sstow.utils.Utils;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.item.ItemSoulShard;
+import com.whammich.sstow.registry.ModItems;
+import tehnut.lib.annot.ModBlock;
+import tehnut.lib.annot.Used;
+import tehnut.lib.block.base.BlockBoolean;
+import com.whammich.sstow.tile.TileEntityCage;
+import com.whammich.sstow.util.Utils;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCage extends BlockContainer {
+@ModBlock(name = "BlockCage", tileEntity = TileEntityCage.class)
+@Used
+public class BlockCage extends BlockBoolean {
 
-	public IIcon[] icons = new IIcon[5];
-	@SuppressWarnings("unused")
-	private IIcon front;
+    public BlockCage() {
+        super(Material.iron, "shard");
+        setUnlocalizedName(SoulShardsTOW.MODID + ".cage");
+        setCreativeTab(SoulShardsTOW.soulShardsTab);
+        blockHardness = 3.0F;
+        blockResistance = 3.0F;
+    }
 
-	public BlockCage() {
-		super(Material.iron);
-		this.setBlockName("sstow.cage_block");
-		this.setCreativeTab(Register.CREATIVE_TAB);
-		this.blockHardness = 3.0F;
-		this.blockResistance = 3.0F;
-	}
+    @Override
+    public boolean hasComparatorInputOverride() {
+        return true;
+    }
 
-	@Override
-	public boolean hasComparatorInputOverride() {
-		return true;
-	}
+    @Override
+    public int getComparatorInputOverride(World world, BlockPos pos) {
+        TileEntityCage tile = (TileEntityCage) world.getTileEntity(pos);
+        if (tile.getStackInSlot(0) != null) {
+            ItemStack shard = tile.getStackInSlot(0);
+            int tier = Utils.getShardTier(shard);
+            switch (tier) {
+                case 1:
+                    return 2;
+                case 2:
+                    return 5;
+                case 3:
+                    return 7;
+                case 4:
+                    return 10;
+                case 5:
+                    return 15;
 
-	@Override
-	public int getComparatorInputOverride(World world, int xPos, int yPos,
-			int zPos, int p_149736_5_) {
-		TileEntityCage tile = (TileEntityCage) world.getTileEntity(xPos, yPos, zPos);
-		if (tile.getStackInSlot(0) != null) {
-			ItemStack shard = tile.getStackInSlot(0);
-			int tier = Utils.getShardTier(shard);
-			switch (tier) {
-			case 1:
-				return 2;
-			case 2:
-				return 5;
-			case 3:
-				return 7;
-			case 4:
-				return 10;
-			case 5:
-				return 15;
+                default:
+                    return 0;
+            }
 
-			default:
-				return 0;
-			}
+        } else {
+            return 0;
+        }
+    }
 
-		} else {
-			return 0;
-		}
-	}
+    @Override
+    public boolean canConnectRedstone(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+        return true;
+    }
 
-	@Override
-	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z,
-			int side) {
-		return true;
-	}
+    @Override
+    public void breakBlock(World world, BlockPos blockPos, IBlockState blockState)
+    {
+        TileEntityCage tileCage = (TileEntityCage) world.getTileEntity(blockPos);
+        if (tileCage != null)
+            tileCage.dropItems();
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer player, int side, float f1, float f2, float f3) {
-		// System.out.println("Block Activated");
-		if (!world.isRemote) {
-			TileEntity tile = world.getTileEntity(x, y, z);
+        super.breakBlock(world, blockPos, blockState);
+    }
 
-			if (tile == null) {
-				ModLogger.logFatal("ERROR: no tile entity found at coords: "
-						+ x + " " + y + " " + " " + z);
-				return false;
-			}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        TileEntity tile = world.getTileEntity(pos);
 
-			if (player.isSneaking()) {
-				if (world.getBlockMetadata(x, y, z) == 0) {
-					return false;
-				}
+        if (tile != null && tile instanceof TileEntityCage) {
+            TileEntityCage cage = (TileEntityCage) tile;
 
-				ForgeDirection dir = ForgeDirection.getOrientation(side);
+            return cage.insertItem(player, 0);
+        }
 
-				world.spawnEntityInWorld(new EntityItem(world, x
-						+ (dir.offsetX * 1.75D), y + (dir.offsetY * 1.75D)
-						+ 0.5D, z + (dir.offsetZ * 1.75D), ((IInventory) tile)
-						.decrStackSize(0, 1)));
-			} else {
-				if (world.getBlockMetadata(x, y, z) != 0) {
-					return false;
-				}
+        return false;
+    }
 
-				ItemStack stack = player.getHeldItem();
+    @Override
+    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
+        TileEntity tile = world.getTileEntity(pos);
 
-				if (stack == null || stack.getItem() != Register.ItemShardSoul
-						|| !Utils.isShardBound(stack)
-						|| Utils.getShardTier(stack) == 0) {
-					return false;
-				}
+        if (tile instanceof TileEntityCage)
+            ((TileEntityCage) tile).checkRedstone();
+    }
 
-				ItemStack newShard = stack.copy();
-				newShard.stackSize = 1;
-				((IInventory) tile).setInventorySlotContents(0, newShard);
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
-				if (!player.capabilities.isCreativeMode) {
-					stack.stackSize--;
-				}
-			}
-		}
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
 
-		return false;
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z,
-			Block block) {
-		if (!world.isRemote) {
-			TileEntity tile = world.getTileEntity(x, y, z);
-
-			if (tile instanceof TileEntityCage) {
-				((TileEntityCage) tile).checkRedstone();
-			}
-		}
-	}
-
-	public void onBlockPlacedBy(World world, int xCoord, int yCoord,
-			int zCoord, EntityPlayer entity, ItemStack itemstack) {
-		entity.getDisplayName();
-	}
-
-	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		if (!world.isRemote && world.getBlockMetadata(x, y, z) != 0) {
-			world.setBlockMetadataWithNotify(x, y, z, 0, 2);
-
-		}
-	}
-
-	@Override
-	public void onBlockPreDestroy(World world, int x, int y, int z, int meta) {
-		if (!world.isRemote && meta != 0) {
-			TileEntity tile = world.getTileEntity(x, y, z);
-
-			if (tile == null) {
-				ModLogger.logFatal("ERROR: no tile entity found at coords: "
-						+ x + " " + y + " " + " " + z);
-				return;
-			}
-
-			ItemStack stack = ((IInventory) tile).decrStackSize(0, 1);
-
-			if (stack != null) {
-				world.spawnEntityInWorld(new EntityItem(world, x, y, z, stack));
-			}
-		}
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityCage();
-	}
-
-	@Override
-	public int quantityDropped(Random par1Random) {
-		return 1;
-	}
-
-	@Override
-	public int damageDropped(int par1) {
-		return 0;
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister iconRegister) {
-		if (HolidayHelper.isChristmas()) {
-			icons = new IIcon[4];
-			for (int i = 0; i < 4; i++) {
-				icons[i] = iconRegister.registerIcon("sstow:cage_" + i
-						+ "_xmas");
-			}
-			// } else if (HolidayHelper.isHalloween()) {
-			// icons = new IIcon[4];
-			// this.front = iconRegister.registerIcon("sstow:cage_1_spooky");
-			// for (int i = 0; i < 4; i++) {
-			// icons[i] = iconRegister.registerIcon("sstow:cage_" + i
-			// + "_spooky");
-			// }
-		} else {
-			icons = new IIcon[5];
-			for (int i = 0; i < 5; i++) {
-				icons[i] = iconRegister.registerIcon("sstow:cage_" + i);
-			}
-		}
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int sideInt, int meta) {
-		ForgeDirection dir = ForgeDirection.getOrientation(sideInt);
-		if (HolidayHelper.isChristmas()) {
-			// Check block direction
-			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-				// meta 2 == block activated
-				return icons[3];
-			} else {
-				// meta 2 == block activated
-				if (meta == 2) {
-					return icons[1];
-					// meta 1 == block has shard
-				} else if (meta == 1) {
-					return icons[1];
-					// meta 0 == block is empty
-				} else {
-					return icons[0];
-				}
-			}
-			// } else if (HolidayHelper.isHalloween()) {
-			// // Check block direction
-			// if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-			// // meta 2 == block activated
-			// return icons[3];
-			// } else {
-			// // meta 2 == block activated
-			// if (meta == 2) {
-			// return icons[2];
-			// // meta 1 == block has shard
-			// } else if (meta == 1) {
-			// return icons[1];
-			// // meta 0 == block is empty
-			// } else {
-			// return icons[0];
-			// }
-			// }
-		} else {
-			// Check block direction
-			if (dir == ForgeDirection.UP || dir == ForgeDirection.DOWN) {
-				// meta 2 == block activated
-				if (meta == 2) {
-					return icons[4];
-				} else {
-					return icons[3];
-				}
-			} else {
-				// meta 2 == block activated
-				if (meta == 2) {
-					return icons[2];
-					// meta 1 == block has shard
-				} else if (meta == 1) {
-					return icons[1];
-					// meta 0 == block is empty
-				} else {
-					return icons[0];
-				}
-			}
-		}
-	}
+        @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityCage();
+    }
 }

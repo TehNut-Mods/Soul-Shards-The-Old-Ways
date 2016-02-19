@@ -1,17 +1,21 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url = "http://files.minecraftforge.net/maven" }
-        maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "http://files.minecraftforge.net/maven" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
 
-apply plugin: 'forge'
-apply plugin: 'curseforge'
+plugins {
+	id "net.minecraftforge.gradle.forge" version "2.0.2"
+    id 'com.matthewprenger.cursegradle' version '1.0.7'
+	id 'net.franz-becker.gradle-lombok' version '1.5'
+}
+
 apply plugin: 'maven-publish'
 
 def build_number = 'CUSTOM'
@@ -19,45 +23,45 @@ def build_number = 'CUSTOM'
 if (System.getenv('BUILD_NUMBER') != null)
     build_number = System.getenv('BUILD_NUMBER')
 
+def username = 'SoulShardsDev'
+
+if (project.hasProperty('dev_username'))
+    username = "${dev_username}"
+
 group = package_group
 archivesBaseName = mod_name
 version = "${mc_version}-${mod_version}-${build_number}"
 
-import org.ajoberstar.grgit.Grgit
+if (project.hasProperty('gitpush'))
+    version += "-ss"
 
+import org.ajoberstar.grgit.*
+
+ext.repo = Grgit.open(project.file('.'))
 def gitHash = 'unknown'
-if (new File(projectDir, '.git').exists()) {
-    def repo = Grgit.open(project.file('.'))
+
+if (new File(projectDir, '.git').exists())
     gitHash = repo.log().find().abbreviatedId
-}
 
 repositories {
-	maven { url "http://chickenbones.net/maven/" }
-	maven { url "http://mobiusstrip.eu/maven" }
-    maven { url 'http://dvs1.progwml6.com/files/maven' }
-
-    ivy {
-        name "Baubles"
-        artifactPattern "https://dl.dropboxusercontent.com/u/47135879/[module]-deobf-1.7.10-[revision].[ext]"
-    }
+    maven { url "http://dvs1.progwml6.com/files/maven" }
+    maven {	url "http://mobiusstrip.eu/maven" }
 }
 
 dependencies {
-    compile name: 'Baubles', version: "${baubles_version}", ext: 'jar'
-	compile "mcp.mobius.waila:Waila:${waila_version}_${mc_version}:dev"
-	compile "codechicken:CodeChickenCore:${mc_version}-${ccc_version}:dev"
-	compile "codechicken:NotEnoughItems:${mc_version}-${nei_version}:dev"
-	compile "tconstruct:TConstruct:${mc_version}-${tcon_version}:deobf"
-	compile fileTree(dir: 'libs', include: ['*jar'])
+    deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
+	deobfCompile "mcp.mobius.waila:Waila:${waila_version}_1.8.8"
 }
 
 minecraft {
     version = "${mc_version}-${forge_version}"
     runDir = "run"
 
-	replaceIn "Reference.java"
     replace "@VERSION@", project.version
-	
+    replaceIn "SoulShardsTOW.java"
+
+    clientRunArgs += "--username=${username}"
+
     if (project.hasProperty('mappings_version'))
         mappings = project.mappings_version
 }
@@ -72,31 +76,52 @@ processResources {
 
         expand 'version': project.version, 'mcversion': project.minecraft.version
     }
+
     from(sourceSets.main.resources.srcDirs) {
         exclude '**/*.info'
         exclude '**/*.properties'
     }
 }
 
+if (JavaVersion.current().isJava8Compatible()) {
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
+    }
+}
+
+lombok {
+    version = "1.16.6"
+    sha256 = "e0a471be03e1e6b02bf019480cec7a3ac9801702bf7bf62f15d077ad4df8dd5d"
+}
+
+import net.franz_becker.gradle.lombok.task.DelombokTask
+
+task delombok(type: DelombokTask) {
+    args("src/main/java", "-d", "build/sources/delomboked/java")
+}
+
+tasks.eclipse.dependsOn installLombok
+
 jar {
     classifier = ''
-    manifest {
-        attributes 'FMLCorePlugin': 'com.whammich.sstow.asm.LoadingPlugin'
-        attributes 'FMLCorePluginContainsFMLMod': 'true'
-    }
     manifest.mainAttributes(
-            "Built-By": System.getProperty('user.name'),
-            "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
-            "Implementation-Title": project.name,
-            "Implementation-Version": project.version,
-            "Git-Hash": gitHash
+        "Built-By": System.getProperty('user.name'),
+        "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+        "Implementation-Title": project.name,
+        "Implementation-Version": project.version,
+        "Git-Hash": gitHash,
+        "Built-On": "${mc_version}-${forge_version}"
     )
 }
 
-// Source jar
-task sourceJar(type: Jar) {
+// API jar
+task apiJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    from sourceSets.main.output
+	include 'com/whammich/sstow/**/*'
+    classifier = 'api'
 }
 
 // Javadoc jar
@@ -105,13 +130,12 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
 }
 
-// Deobf jar
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
+javadoc {
+    source = projectDir.path + "/build/sources/delomboked/java"
 }
 
-tasks.build.dependsOn sourceJar, javadocJar, deobfJar
+tasks.javadoc.dependsOn delombok
+tasks.build.dependsOn javadoc, javadocJar, apiJar
 
 tasks.withType(JavaCompile) { task ->
     task.options.encoding = 'UTF-8'
@@ -122,9 +146,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
-            artifact sourceJar
             artifact javadocJar
-            artifact deobfJar
+            artifact sourceJar
+            artifact apiJar
         }
     }
     repositories {
@@ -136,13 +160,48 @@ publishing {
     }
 }
 
-curse {
-    projectId = '226958'
-	if (project.hasProperty('curse_key'))
-		apiKey = project.curse_key
-    releaseType = 'release'
+String getChangelogText() {
+    def changelogFile = new File('changelog.txt')
+    String str = ''
+    String separator = '---'
+    int lineCount = 0
+    boolean done = false
+    changelogFile.eachLine {
+        if (done || it == null) {
+            return
+        }
+        if (lineCount < 3) {
+            lineCount++
+            if (it.startsWith(separator)) {return}
+        }
+        if (!it.startsWith(separator)) {
+            str += "$it" + (lineCount < 3 ? ':\n\n' : '\n')
+            return
+        }
+        done = true // once we go past the first version block, parse no more
+    }
+    return str
+}
 
-    changelog = project.hasProperty('changelog') ? project.changelog : ''
-    relatedProject 'notenoughitems': 'optionalLibrary'
-    relatedProject 'waila': 'optionalLibrary'
+def curseRelations = {
+    optionalLibrary 'waila'
+}
+
+curseforge {
+    if (project.hasProperty('curse_key'))
+        apiKey = project.curse_key
+
+    project {
+        id = "${curse_id}"
+        changelog = getChangelogText()
+        releaseType = 'beta'
+
+        addGameVersion '1.8.9'
+
+        relations curseRelations
+
+        addArtifact javadocJar
+        addArtifact sourceJar
+        addArtifact apiJar
+    }
 }
