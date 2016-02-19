@@ -1,8 +1,6 @@
 package com.whammich.sstow.block;
 
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.item.ItemSoulShard;
-import com.whammich.sstow.registry.ModItems;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.Used;
 import tehnut.lib.block.base.BlockBoolean;
@@ -10,9 +8,7 @@ import com.whammich.sstow.tile.TileEntityCage;
 import com.whammich.sstow.util.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -44,21 +40,13 @@ public class BlockCage extends BlockBoolean {
             ItemStack shard = tile.getStackInSlot(0);
             int tier = Utils.getShardTier(shard);
             switch (tier) {
-                case 1:
-                    return 2;
-                case 2:
-                    return 5;
-                case 3:
-                    return 7;
-                case 4:
-                    return 10;
-                case 5:
-                    return 15;
-
-                default:
-                    return 0;
+                case 1: return 2;
+                case 2: return 5;
+                case 3: return 7;
+                case 4: return 10;
+                case 5: return 15;
+                default: return 0;
             }
-
         } else {
             return 0;
         }

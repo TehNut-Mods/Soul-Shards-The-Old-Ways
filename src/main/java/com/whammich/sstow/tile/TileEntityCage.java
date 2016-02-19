@@ -2,6 +2,8 @@ package com.whammich.sstow.tile;
 
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.block.BlockCage;
+import com.whammich.sstow.item.ItemSoulShard;
+import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -213,5 +215,10 @@ public class TileEntityCage extends TileInventory implements ITickable {
             if (!ent.isDead)
                 getWorld().spawnEntityInWorld(ent);
         }
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return stack.getItem() == ModItems.getItem(ItemSoulShard.class);
     }
 }
