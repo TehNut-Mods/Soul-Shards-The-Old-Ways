@@ -38,6 +38,8 @@ public class ConfigHandler {
         soulStealerID = config.getInt("soulStealerID", category, 70, 63, 256, "ID for the Soul Stealer enchantment. If you have Enchantment ID conflicts, change this.");
         soulStealerWeight = config.getInt("soulStealerWeight", category, 3, 1, 10, "Weight of the Soul Stealer enchantment. Higher values make it more common.");
 
+        config.setCategoryComment("EntityList", "Set an entity to false to disable it's ability to be spawned.");
+
         if (config.hasChanged())
             config.save();
     }

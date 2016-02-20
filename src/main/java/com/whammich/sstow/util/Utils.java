@@ -12,8 +12,10 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import tehnut.lib.util.TextHelper;
 
 import javax.annotation.Nullable;
@@ -246,7 +248,7 @@ public final class Utils {
         return StatCollector.translateToLocal(key);
     }
 
-    public static String localizeFormatted(String key, String keyFormat) {
-        return String.format(localize(key), localize(keyFormat));
+    public static int getBlockLightLevel (World world, BlockPos pos, boolean day) {
+        return world.getChunkFromChunkCoords(pos.getX() >> 4, pos.getZ() >> 4).getLightSubtracted(pos, day ? 0 : 16);
     }
 }

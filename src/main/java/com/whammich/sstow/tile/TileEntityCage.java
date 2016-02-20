@@ -63,11 +63,19 @@ public class TileEntityCage extends TileInventory implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
+
+        this.tier = tagCompound.getInteger("tier");
+        this.entName = tagCompound.getString("entName");
+        this.activeTime = tagCompound.getInteger("activeTime");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
+
+        tagCompound.setInteger("tier", tier);
+        tagCompound.setString("entName", entName);
+        tagCompound.setInteger("activeTime", activeTime);
     }
 
     @Override
@@ -117,7 +125,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
     }
 
     private boolean canSpawnInLight(EntityLiving entityLiving) {
-        return !(entityLiving instanceof EntityMob || entityLiving instanceof IMob) || getWorld().getLight(getPos()) <= 8;
+        return !(entityLiving instanceof EntityMob || entityLiving instanceof IMob) || Utils.getBlockLightLevel(getWorld(), getPos(), getWorld().isDaytime()) <= 8;
     }
 
     private boolean isPlayerClose() {
