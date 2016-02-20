@@ -37,6 +37,9 @@ public class TileEntityCage extends TileInventory implements ITickable {
         if (tier == 0 || Strings.isNullOrEmpty(entName))
             return;
 
+        if (!ConfigHandler.entityList.contains(entName) && !ConfigHandler.enableBlacklistedSpawning)
+            return;
+
         if (TierHandler.getChecksRedstone(tier - 1) && isRedstoned())
             return;
 
