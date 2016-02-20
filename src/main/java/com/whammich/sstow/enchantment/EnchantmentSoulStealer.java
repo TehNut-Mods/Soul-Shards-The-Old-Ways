@@ -9,6 +9,8 @@ public class EnchantmentSoulStealer extends Enchantment {
 
     public EnchantmentSoulStealer(int id, int weight) {
         super(id, new ResourceLocation(SoulShardsTOW.MODID, "soulStealer"), weight, EnumEnchantmentType.WEAPON);
+
+        setName("soulStealer");
     }
 
     @Override

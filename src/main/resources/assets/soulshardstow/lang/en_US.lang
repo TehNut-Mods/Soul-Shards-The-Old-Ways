@@ -14,3 +14,6 @@ tile.SoulShardsTOW.cage.name=Soul Cage
 tooltip.SoulShardsTOW.bound=Bound to: %s
 tooltip.SoulShardsTOW.kills=Kills: %d
 tooltip.SoulShardsTOW.tier=Tier: %d
+
+# Enchantment
+enchantment.soulStealer=Soul Stealer
