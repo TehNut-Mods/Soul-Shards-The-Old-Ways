@@ -4,11 +4,13 @@ import com.whammich.sstow.util.EntityMapper;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tehnut.lib.annot.Handler;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+@Handler
 public class ConfigHandler {
 
     public static Configuration config;

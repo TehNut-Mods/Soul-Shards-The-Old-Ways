@@ -1,12 +1,14 @@
 package com.whammich.sstow.client.gui;
 
-import com.whammich.sstow.client.gui.config.GuiOldWaysConfig;
+import com.whammich.sstow.client.gui.config.ConfigGuiSoulShards;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
+import tehnut.lib.annot.Used;
 
 import java.util.Set;
 
+@Used
 public class GuiFactory implements IModGuiFactory {
 
     @Override
@@ -16,7 +18,7 @@ public class GuiFactory implements IModGuiFactory {
 
     @Override
     public Class<? extends GuiScreen> mainConfigGuiClass() {
-        return GuiOldWaysConfig.class;
+        return ConfigGuiSoulShards.class;
     }
 
     @Override
