@@ -1,6 +1,7 @@
 package com.whammich.sstow.util;
 
 import com.google.common.base.Strings;
+import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -22,12 +23,12 @@ public final class EntityMapper {
     public static void init() {
         for (Map.Entry<Class<? extends Entity>, String> entry : EntityList.classToStringMapping.entrySet()) {
             if (entityList.contains(entry.getValue())) {
-                SoulShardsTOW.instance.getLogHelper().info("Already mapped, skipping %s", entry.getValue());
+                SoulShardsTOW.instance.getLogHelper().info("Already mapped, skipping {}", entry.getValue());
                 continue;
             }
 
-            if (IBossDisplayData.class.isAssignableFrom(entry.getKey())) {
-                SoulShardsTOW.instance.getLogHelper().info("Boss detected, skipping %s", entry.getValue());
+            if (IBossDisplayData.class.isAssignableFrom(entry.getKey()) && !ConfigHandler.enableBosses) {
+                SoulShardsTOW.instance.getLogHelper().info("Boss detected, skipping {}", entry.getValue());
                 continue;
             }
 
@@ -37,11 +38,12 @@ public final class EntityMapper {
 
         entityList.add("Wither Skeleton");
 
-        SoulShardsTOW.instance.getLogHelper().info("Finished mapping, entities found: %d", entityList.size());
+        SoulShardsTOW.instance.getLogHelper().info("Finished mapping, entities found: {}", entityList.size());
+        ConfigHandler.handleEntityList("Entity List");
     }
 
     public static boolean isEntityValid(String entName) {
-        return entityList.contains(entName);
+        return ConfigHandler.entityList.contains(entName);
     }
 
     public static EntityLiving getNewEntityInstance(World world, String ent) {

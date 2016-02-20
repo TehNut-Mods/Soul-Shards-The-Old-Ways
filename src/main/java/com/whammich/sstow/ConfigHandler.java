@@ -18,6 +18,8 @@ public class ConfigHandler {
     public static int soulStealerID;
     public static int soulStealerWeight;
 
+    public static boolean enableBosses;
+
     public static void init(File file) {
         config = new Configuration(file);
         syncConfig();
@@ -26,8 +28,8 @@ public class ConfigHandler {
     public static void syncConfig() {
         String category;
 
-        category = "Entity List";
-        handleEntityList(category);
+        category = "Balancing";
+        enableBosses = config.getBoolean("enableBosses", category, false, "Allows bosses to be spawned. This is probably the worst thing you can do to your instance.");
 
         category = "General";
         spawnCap = config.getInt("spawnCap", category, 30, 0, 256, "Max amount of mobs spawned by a given spawner in a 16 block radius.");
@@ -40,9 +42,11 @@ public class ConfigHandler {
             config.save();
     }
 
-    private static void handleEntityList(String category) {
+    public static void handleEntityList(String category) {
         for (String name : EntityMapper.entityList)
             if (config.get(category, name, true).getBoolean(true))
                 entityList.add(name);
+
+        config.save();
     }
 }
