@@ -35,8 +35,8 @@ public class DataProviderCage implements IWailaDataProvider {
 
                 if (cage.getStackInSlot(0) != null) {
                     ItemStack shardStack = cage.getStackInSlot(0);
-                    currenttip.add(String.format("Spawning: %s", Utils.getShardBoundEnt(shardStack)));
-                    currenttip.add(String.format("Tier: %d", Utils.getShardTier(shardStack)));
+                    currenttip.add(String.format("Spawning: %s", cage.getEntName()));
+                    currenttip.add(String.format("Tier: %d", cage.getTier()));
                     currenttip.add(String.format("Kills: %d", Utils.getShardKillCount(shardStack)));
                 }
             }

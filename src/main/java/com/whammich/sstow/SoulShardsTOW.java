@@ -51,7 +51,8 @@ public class SoulShardsTOW {
         @Override
         public ItemStack getIconItemStack() {
             ItemStack shard = new ItemStack(ModItems.getItem(ItemSoulShard.class));
-            Utils.setShardKillCount(shard, Short.MAX_VALUE);
+            Utils.setMaxedKills(shard);
+            Utils.setShardBoundEnt(shard, "Pig");
             return shard;
         }
     };

@@ -1,5 +1,6 @@
 package com.whammich.sstow.util;
 
+import com.google.common.base.Strings;
 import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -44,6 +45,9 @@ public final class EntityMapper {
     }
 
     public static EntityLiving getNewEntityInstance(World world, String ent) {
+        if (Strings.isNullOrEmpty(ent))
+            return null;
+
         if (ent.equals("Wither Skeleton")) {
             EntitySkeleton skele = new EntitySkeleton(world);
             skele.setSkeletonType(1);

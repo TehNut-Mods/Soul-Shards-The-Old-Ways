@@ -136,6 +136,11 @@ public final class Utils {
         return isShardBound(shard) && getShardKillCount(shard) >= TierHandler.getMaxKills(5);
     }
 
+    public static ItemStack setMaxedKills(ItemStack shard) {
+        setShardKillCount(shard, TierHandler.getMaxKills(5));
+        return shard;
+    }
+
     public static String getEntityNameTransltated(String unlocName) {
         if (unlocName.equals("Wither Skeleton"))
             return unlocName;

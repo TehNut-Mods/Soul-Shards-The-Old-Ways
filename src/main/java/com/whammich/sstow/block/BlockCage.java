@@ -1,6 +1,9 @@
 package com.whammich.sstow.block;
 
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.item.ItemSoulShard;
+import com.whammich.sstow.registry.ModItems;
+import net.minecraft.entity.item.EntityItem;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.Used;
 import tehnut.lib.block.base.BlockBoolean;
@@ -58,8 +61,7 @@ public class BlockCage extends BlockBoolean {
     }
 
     @Override
-    public void breakBlock(World world, BlockPos blockPos, IBlockState blockState)
-    {
+    public void breakBlock(World world, BlockPos blockPos, IBlockState blockState) {
         TileEntityCage tileCage = (TileEntityCage) world.getTileEntity(blockPos);
         if (tileCage != null)
             tileCage.dropItems();
@@ -73,20 +75,35 @@ public class BlockCage extends BlockBoolean {
 
         if (tile != null && tile instanceof TileEntityCage) {
             TileEntityCage cage = (TileEntityCage) tile;
-
-            return cage.insertItem(player, 0);
+            if (player.getHeldItem() != null && cage.getStackInSlot(0) == null && cage.isItemValidForSlot(0, player.getHeldItem()) && !player.isSneaking()) {
+                cage.setInventorySlotContents(0, player.getHeldItem().copy());
+                cage.setTier(Utils.getShardTier(player.getHeldItem()));
+                cage.setEntName(Utils.getShardBoundEnt(player.getHeldItem()));
+                player.getHeldItem().stackSize--;
+                return true;
+            } else if ( cage.getStackInSlot(0) != null && player.getHeldItem() == null && player.isSneaking()) {
+                cage.setTier(0);
+                cage.setEntName("");
+                cage.setActiveTime(0);
+                if (!world.isRemote) {
+                    EntityItem invItem = new EntityItem(world, player.posX, player.posY + 0.25, player.posZ, cage.getStackInSlot(0));
+                    world.spawnEntityInWorld(invItem);
+                }
+                cage.clear();
+                return true;
+            }
         }
 
         return false;
     }
 
-    @Override
-    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        TileEntity tile = world.getTileEntity(pos);
-
-        if (tile instanceof TileEntityCage)
-            ((TileEntityCage) tile).checkRedstone();
-    }
+//    @Override
+//    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
+//        TileEntity tile = world.getTileEntity(pos);
+//
+//        if (tile instanceof TileEntityCage)
+//            ((TileEntityCage) tile).checkRedstone();
+//    }
 
     @Override
     public boolean isOpaqueCube() {
