@@ -17,3 +17,9 @@ tooltip.SoulShardsTOW.tier=Tier: %d
 
 # Enchantment
 enchantment.soulStealer=Soul Stealer
+
+# Chat
+chat.sstow.command.killed=&2Killed %d entities
+chat.sstow.command.notfound=&cDid not find any spawned entities
+chat.sstow.command.setwrong=&cInvalid arguments
+chat.sstow.command.wrongcommand=&cInvalid command
