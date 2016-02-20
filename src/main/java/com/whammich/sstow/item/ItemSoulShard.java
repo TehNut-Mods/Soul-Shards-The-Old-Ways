@@ -1,10 +1,15 @@
 package com.whammich.sstow.item;
 
+import com.google.common.base.Strings;
+import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.*;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -16,9 +21,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tehnut.lib.annot.Handler;
 import tehnut.lib.annot.ModItem;
 import tehnut.lib.annot.Used;
 import tehnut.lib.util.TextHelper;
@@ -27,6 +36,7 @@ import java.util.List;
 
 @ModItem(name = "ItemSoulShard")
 @Used
+@Handler
 public class ItemSoulShard extends Item {
 
     public ItemSoulShard() {
@@ -138,5 +148,51 @@ public class ItemSoulShard extends Item {
             list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.kills", Utils.getShardKillCount(stack)));
 
         list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.tier", Utils.getShardTier(stack)));
+    }
+
+    @SubscribeEvent
+    public void onEntityKill(LivingDeathEvent event) {
+        World world = event.entity.worldObj;
+
+        if (world.isRemote || !(event.entity instanceof EntityLiving) || !(event.source.getEntity() instanceof EntityPlayer) || event.source.getEntity() instanceof FakePlayer)
+            return;
+
+        EntityLiving dead = (EntityLiving) event.entity;
+        EntityPlayer player = (EntityPlayer) event.source.getEntity();
+        String entName = EntityList.getEntityString(dead);
+
+        if (Strings.isNullOrEmpty(entName)) {
+            SoulShardsTOW.instance.getLogHelper().severe("Player killed an entity with no unlocalized name: %s", dead);
+            return;
+        }
+
+        if (!ConfigHandler.entityList.contains(entName))
+            return;
+
+        if (!EntityMapper.isEntityValid(entName))
+            return;
+
+        if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
+            entName = "Wither Skeleton";
+
+        ItemStack shard = Utils.getShardFromInv(player, entName);
+
+        if (shard != null) {
+            if (!Utils.isShardBound(shard)) {
+                Utils.setShardBoundEnt(shard, entName);
+                Utils.writeEntityHeldItem(shard, dead);
+                Utils.setShardBoundPlayer(shard, player);
+            }
+
+            Utils.writeEntityArmor(shard, dead);
+
+            int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
+            soulStealer *= Config.enchantBonus;
+
+            if (player.getHeldItem() != null && player.getHeldItem().getItem() == ModItems.getItem(ItemSoulSword.class))
+                soulStealer += 1;
+
+            Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
+        }
     }
 }
