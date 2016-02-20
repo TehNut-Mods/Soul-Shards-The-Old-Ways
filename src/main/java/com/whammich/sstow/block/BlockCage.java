@@ -3,6 +3,8 @@ package com.whammich.sstow.block;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.Used;
@@ -21,10 +23,10 @@ import net.minecraft.world.World;
 
 @ModBlock(name = "BlockCage", tileEntity = TileEntityCage.class)
 @Used
-public class BlockCage extends BlockBoolean {
+public class BlockCage extends Block {
 
     public BlockCage() {
-        super(Material.iron, "shard");
+        super(Material.iron);
         setUnlocalizedName(SoulShardsTOW.MODID + ".cage");
         setCreativeTab(SoulShardsTOW.soulShardsTab);
         blockHardness = 3.0F;
@@ -96,14 +98,6 @@ public class BlockCage extends BlockBoolean {
 
         return false;
     }
-
-//    @Override
-//    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-//        TileEntity tile = world.getTileEntity(pos);
-//
-//        if (tile instanceof TileEntityCage)
-//            ((TileEntityCage) tile).checkRedstone();
-//    }
 
     @Override
     public boolean isOpaqueCube() {
