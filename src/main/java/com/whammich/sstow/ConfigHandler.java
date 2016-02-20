@@ -12,6 +12,9 @@ public class ConfigHandler {
     public static Configuration config;
 
     public static List<String> entityList = new ArrayList<String>();
+
+    public static int spawnCap;
+
     public static int soulStealerID;
     public static int soulStealerWeight;
 
@@ -25,6 +28,9 @@ public class ConfigHandler {
 
         category = "Entity List";
         handleEntityList(category);
+
+        category = "General";
+        spawnCap = config.getInt("spawnCap", category, 30, 0, 256, "Max amount of mobs spawned by a given spawner in a 16 block radius.");
 
         category = "Enchantments";
         soulStealerID = config.getInt("soulStealerID", category, 70, 63, 256, "ID for the Soul Stealer enchantment. If you have Enchantment ID conflicts, change this.");
