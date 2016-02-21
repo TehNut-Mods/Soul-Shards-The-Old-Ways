@@ -1,7 +1,6 @@
 package com.whammich.sstow.compat.waila.provider;
 
 import com.whammich.sstow.tile.TileEntityCage;
-import com.whammich.sstow.util.Utils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -34,10 +33,8 @@ public class DataProviderCage implements IWailaDataProvider {
                 TileEntityCage cage = (TileEntityCage) accessor.getTileEntity();
 
                 if (cage.getStackInSlot(0) != null) {
-                    ItemStack shardStack = cage.getStackInSlot(0);
-                    currenttip.add(String.format("Spawning: %s", cage.getEntName()));
-                    currenttip.add(String.format("Tier: %d", cage.getTier()));
-                    currenttip.add(String.format("Kills: %d", Utils.getShardKillCount(shardStack)));
+                    currenttip.add(TextHelper.localizeEffect("waila.SoulShardsTOW.boundTo", cage.getEntName()));
+                    currenttip.add(TextHelper.localizeEffect("waila.SoulShardsTOW.tier", cage.getTier()));
                 }
             }
         } else {

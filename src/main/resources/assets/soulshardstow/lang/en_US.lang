@@ -23,3 +23,8 @@ chat.sstow.command.killed=&2Killed %d entities
 chat.sstow.command.notfound=&cDid not find any spawned entities
 chat.sstow.command.setwrong=&cInvalid arguments
 chat.sstow.command.wrongcommand=&cInvalid command
+
+# Waila
+waila.SoulShardsTOW.sneak=&oSneak for details
+waila.SoulShardsTOW.boundTo=Bound to: %s
+waila.SoulShardsTOW.tier=Tier: %d
