@@ -22,11 +22,8 @@ public class ConfigGuiSoulShards extends GuiConfig {
     private static List<IConfigElement> getConfigElements(GuiScreen parentScreen) {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
 
-        list.add(new ConfigElement(ConfigHandler.config.getCategory("Entity List".toLowerCase(Locale.ENGLISH))));
-        list.add(new ConfigElement(ConfigHandler.config.getCategory("Balancing".toLowerCase(Locale.ENGLISH))));
-        list.add(new ConfigElement(ConfigHandler.config.getCategory("General".toLowerCase(Locale.ENGLISH))));
-        list.add(new ConfigElement(ConfigHandler.config.getCategory("Enchantments".toLowerCase(Locale.ENGLISH))));
-        list.add(new ConfigElement(ConfigHandler.config.getCategory("Debug".toLowerCase(Locale.ENGLISH))));
+        for (String category : ConfigHandler.categories)
+            list.add(new ConfigElement(ConfigHandler.config.getCategory(category.toLowerCase(Locale.ENGLISH))));
 
         return list;
     }
