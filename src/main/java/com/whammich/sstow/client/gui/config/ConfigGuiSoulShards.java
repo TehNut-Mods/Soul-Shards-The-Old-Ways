@@ -2,8 +2,6 @@ package com.whammich.sstow.client.gui.config;
 
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.util.Config;
-import com.whammich.sstow.util.Config.Section;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.fml.client.config.GuiConfig;

@@ -1,5 +1,6 @@
 package com.whammich.sstow.util;
 
+import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.registry.ModItems;
@@ -59,7 +60,7 @@ public final class Utils {
             }
 
             int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
-            soulStealer *= Config.enchantBonus;
+            soulStealer *= ConfigHandler.soulStealerBonus;
             Utils.increaseShardKillCount(newShard, (short) (1 + soulStealer));
             player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, newShard));
             return null;

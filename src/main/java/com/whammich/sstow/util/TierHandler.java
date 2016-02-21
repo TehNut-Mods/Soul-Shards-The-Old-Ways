@@ -8,7 +8,6 @@ public final class TierHandler {
     private static short[] MAX_KILLS = {63, 127, 255, 511, 1023, 1024};
     private static boolean[] NEEDS_PLAYER = {true, true, false, false, false};
     private static boolean[] CHECKS_LIGHT = {true, true, true, true, false};
-    private static boolean[] CHECKS_WORLD = {true, true, true, false, false};
     private static boolean[] CHECKS_REDSTONE = {false, false, false, false, true};
     private static byte[] NUM_SPAWNS = {2, 4, 4, 4, 6};
     private static byte[] SPAWN_DELAY = {20, 10, 5, 5, 2};
@@ -19,10 +18,6 @@ public final class TierHandler {
 
     public static void setLightChecks(int tier, boolean value) {
         CHECKS_LIGHT[tier] = value;
-    }
-
-    public static void setWorldChecks(int tier, boolean value) {
-        CHECKS_WORLD[tier] = value;
     }
 
     public static void setRedstoneChecks(int tier, boolean value) {
@@ -43,10 +38,6 @@ public final class TierHandler {
 
     public static boolean getChecksLight(int tier) {
         return CHECKS_LIGHT[tier];
-    }
-
-    public static boolean getChecksWorld(int tier) {
-        return CHECKS_WORLD[tier];
     }
 
     public static boolean getChecksRedstone(int tier) {
@@ -104,8 +95,8 @@ public final class TierHandler {
             SoulShardsTOW.instance.getLogHelper().info("Loaded custom tier kill settings!");
         }
 
-        SoulShardsTOW.instance.getLogHelper().info("Min kills: %d", arrayToString(MIN_KILLS));
-        SoulShardsTOW.instance.getLogHelper().info("Max kills: %d", arrayToString(MAX_KILLS));
+        SoulShardsTOW.instance.getLogHelper().info("Min kills: {}", arrayToString(MIN_KILLS));
+        SoulShardsTOW.instance.getLogHelper().info("Max kills: {}", arrayToString(MAX_KILLS));
     }
 
     public static boolean isShardValid(ItemStack shard) {

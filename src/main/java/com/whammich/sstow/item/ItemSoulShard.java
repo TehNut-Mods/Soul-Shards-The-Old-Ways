@@ -50,7 +50,7 @@ public class ItemSoulShard extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (world.isRemote || (Utils.hasMaxedKills(stack)) || !Config.allowAbsorb)
+        if (world.isRemote || (Utils.hasMaxedKills(stack)) || !ConfigHandler.allowSpawnerAbsorption)
             return stack;
 
         MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, false);
@@ -75,7 +75,7 @@ public class ItemSoulShard extends Item {
 
             if (Utils.isShardBound(stack)) {
                 if (Utils.getShardBoundEnt(stack).equals(name)) {
-                    Utils.increaseShardKillCount(stack, (short) Config.spawnerBonus);
+                    Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
                     world.destroyBlock(mop.getBlockPos(), false);
                 }
             } else if (EntityMapper.isEntityValid(name)) {
@@ -84,7 +84,7 @@ public class ItemSoulShard extends Item {
                     ItemStack newStack = new ItemStack(ModItems.getItem(ItemSoulShard.class));
                     Utils.setShardBoundEnt(newStack, name);
                     Utils.writeEntityHeldItem(newStack, (EntityLiving) ent);
-                    Utils.increaseShardKillCount(newStack, (short) Config.spawnerBonus);
+                    Utils.increaseShardKillCount(newStack, (short) ConfigHandler.spawnerAbsorptionBonus);
 
                     boolean emptySpot = false;
                     int counter = 0;
@@ -104,7 +104,7 @@ public class ItemSoulShard extends Item {
                 } else {
                     Utils.setShardBoundEnt(stack, name);
                     Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
-                    Utils.increaseShardKillCount(stack, (short) Config.spawnerBonus);
+                    Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
                 }
                 world.destroyBlock(mop.getBlockPos(), true);
             }
@@ -115,8 +115,7 @@ public class ItemSoulShard extends Item {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        String bonus = Utils.isShardBound(stack) ? "" : ".unbound";
-        return super.getUnlocalizedName(stack) + bonus;
+        return super.getUnlocalizedName(stack) + (Utils.isShardBound(stack) ? "" : ".unbound");
     }
 
     @Override
@@ -187,7 +186,7 @@ public class ItemSoulShard extends Item {
             Utils.writeEntityArmor(shard, dead);
 
             int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
-            soulStealer *= Config.enchantBonus;
+            soulStealer *= ConfigHandler.soulStealerBonus;
 
             if (player.getHeldItem() != null && player.getHeldItem().getItem() == ModItems.getItem(ItemSoulSword.class))
                 soulStealer += 1;
