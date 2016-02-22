@@ -3,10 +3,7 @@ package com.whammich.sstow;
 import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.proxy.CommonProxy;
-import com.whammich.sstow.registry.ModBlocks;
-import com.whammich.sstow.registry.ModCompatibility;
-import com.whammich.sstow.registry.ModEnchantments;
-import com.whammich.sstow.registry.ModItems;
+import com.whammich.sstow.registry.*;
 import com.whammich.sstow.util.*;
 import lombok.Getter;
 import net.minecraft.creativetab.CreativeTabs;
@@ -76,6 +73,7 @@ public class SoulShardsTOW {
 
         ModItems.init();
         ModBlocks.init();
+        ModRecipes.init();
         ModEnchantments.init();
         ModCompatibility.registerModCompat();
         ModCompatibility.loadCompat(ICompatibility.InitializationPhase.PRE_INIT);

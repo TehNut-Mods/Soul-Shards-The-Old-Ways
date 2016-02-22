@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import tehnut.lib.annot.ModItem;
 import tehnut.lib.annot.Used;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class ItemMaterials extends Item {
 
     public static final String INGOT_SOULIUM = "ingotSoulium";
+    public static final String CORRUPTED_ESSENCE = "dustCorrupted";
 
     private static List<String> names = new ArrayList<String>();
 
@@ -33,6 +35,9 @@ public class ItemMaterials extends Item {
 
     private void buildItems() {
         names.add(0, INGOT_SOULIUM);
+        OreDictionary.registerOre(INGOT_SOULIUM, new ItemStack(this, 1, names.indexOf(INGOT_SOULIUM)));
+        names.add(1, CORRUPTED_ESSENCE);
+        OreDictionary.registerOre(CORRUPTED_ESSENCE, new ItemStack(this, 1, names.indexOf(CORRUPTED_ESSENCE)));
     }
 
     @Override

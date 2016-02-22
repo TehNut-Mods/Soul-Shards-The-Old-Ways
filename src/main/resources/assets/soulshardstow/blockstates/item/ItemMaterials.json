@@ -10,6 +10,11 @@
         "textures": {
           "layer0": "soulshardstow:items/ingotSoulium"
         }
+      },
+      "dustcorrupted": {
+        "textures": {
+          "layer0": "soulshardstow:items/essenceCorrupted"
+        }
       }
     }
   }
