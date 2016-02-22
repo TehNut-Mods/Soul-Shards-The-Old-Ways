@@ -1,21 +1,12 @@
 package com.whammich.sstow.util;
 
-import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.item.ItemSoulShard;
-import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.registry.ModItems;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import tehnut.lib.util.TextHelper;
 
@@ -37,33 +28,6 @@ public final class Utils {
                 else if (getShardBoundEnt(stack).equals(entity))
                     return stack;
             }
-        }
-
-        if (lastResort != null && lastResort.stackSize > 1) {
-            int counter = 0;
-
-            ItemStack newShard = new ItemStack(ModItems.getItem(ItemSoulShard.class), 1);
-            while (counter < 36) {
-                ItemStack inventoryStack = player.inventory.getStackInSlot(counter);
-                if (inventoryStack == null) {
-                    --lastResort.stackSize;
-                    player.inventory.addItemStackToInventory(newShard);
-                    return player.inventory.getStackInSlot(counter);
-                }
-                counter++;
-            }
-
-            --lastResort.stackSize;
-            if (!Utils.isShardBound(newShard)) {
-                Utils.setShardBoundEnt(newShard, entity);
-                Utils.writeEntityHeldItem(newShard, (EntityLiving) EntityList.createEntityByName(entity, player.worldObj));
-            }
-
-            int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
-            soulStealer *= ConfigHandler.soulStealerBonus;
-            Utils.increaseShardKillCount(newShard, (short) (1 + soulStealer));
-            player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, newShard));
-            return null;
         }
         return lastResort;
     }
@@ -163,90 +127,6 @@ public final class Utils {
             return Short.MAX_VALUE;
 
         return (short) value;
-    }
-
-    public static void writeEntityHeldItem(ItemStack shard, EntityLiving ent) {
-        if (ent instanceof EntityZombie || ent instanceof EntityEnderman)
-            return;
-
-        ItemStack held = ent.getHeldItem();
-
-        if (held != null) {
-            NBTTagCompound nbt = new NBTTagCompound();
-            held.writeToNBT(nbt);
-
-            if (nbt.hasKey("ench"))
-                nbt.removeTag("ench");
-
-            shard.getTagCompound().setTag("HeldItem", nbt);
-        }
-    }
-
-    @Nullable
-    public static ItemStack getEntityHeldItem(ItemStack shard) {
-        if (!shard.hasTagCompound())
-            return null;
-
-        if (shard.getTagCompound().hasKey("HeldItem"))
-            return ItemStack.loadItemStackFromNBT((NBTTagCompound) shard.getTagCompound().getTag("HeldItem"));
-
-        return null;
-    }
-
-    public static void writeEntityArmor(ItemStack shard, EntityLiving ent) {
-        for (int i = 1; i <= 4; i++) {
-            ItemStack armor = ent.getEquipmentInSlot(i);
-
-            if (armor != null) {
-                NBTTagCompound nbt = new NBTTagCompound();
-                armor.writeToNBT(nbt);
-
-                if (nbt.hasKey("ench"))
-                    nbt.removeTag("ench");
-
-                if (shard.getTagCompound().hasKey("armor" + i)) {
-                    if (shard.getTagCompound().getTag("armor" + i) != null) {
-                        NBTTagCompound oldnbt = (NBTTagCompound) shard.getTagCompound().getTag("armor" + i);
-                        ItemStack oldArmor = ItemStack.loadItemStackFromNBT(oldnbt);
-                        if (oldArmor.getItem() != armor.getItem())
-                            shard.getTagCompound().removeTag("armor" + i);
-                    }
-                } else {
-                    shard.getTagCompound().setTag("armor" + i, nbt);
-                }
-            } else {
-                shard.getTagCompound().removeTag("armor" + i);
-            }
-        }
-    }
-
-    @Nullable
-    public static ItemStack getEntityArmor(ItemStack shard, int armorSlot) {
-        if (shard.getTagCompound().hasKey("armor" + armorSlot) && shard.getTagCompound().getTag("armor" + armorSlot) != null) {
-            NBTTagCompound oldnbt = (NBTTagCompound) shard.getTagCompound().getTag("armor" + armorSlot);
-            return ItemStack.loadItemStackFromNBT(oldnbt);
-        }
-
-        return null;
-    }
-
-    public static void setShardBoundPlayer(ItemStack shard, EntityPlayer player) {
-        shard.getTagCompound().setString("owner", player.getDisplayNameString());
-    }
-
-    @Nullable
-    public static String getShardBoundPlayer(ItemStack shard) {
-        if (!shard.hasTagCompound())
-            return null;
-
-        if (shard.getTagCompound().hasKey("owner"))
-            return shard.getTagCompound().getString("owner");
-
-        return null;
-    }
-
-    public static String localize(String key) {
-        return StatCollector.translateToLocal(key);
     }
 
     public static int getBlockLightLevel (World world, BlockPos pos, boolean day) {

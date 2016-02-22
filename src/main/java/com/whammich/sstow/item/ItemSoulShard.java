@@ -83,7 +83,6 @@ public class ItemSoulShard extends Item {
                     stack.stackSize--;
                     ItemStack newStack = new ItemStack(ModItems.getItem(ItemSoulShard.class));
                     Utils.setShardBoundEnt(newStack, name);
-                    Utils.writeEntityHeldItem(newStack, (EntityLiving) ent);
                     Utils.increaseShardKillCount(newStack, (short) ConfigHandler.spawnerAbsorptionBonus);
 
                     boolean emptySpot = false;
@@ -103,7 +102,6 @@ public class ItemSoulShard extends Item {
 
                 } else {
                     Utils.setShardBoundEnt(stack, name);
-                    Utils.writeEntityHeldItem(stack, (EntityLiving) ent);
                     Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
                 }
                 world.destroyBlock(mop.getBlockPos(), true);
@@ -177,13 +175,8 @@ public class ItemSoulShard extends Item {
         ItemStack shard = Utils.getShardFromInv(player, entName);
 
         if (shard != null) {
-            if (!Utils.isShardBound(shard)) {
+            if (!Utils.isShardBound(shard))
                 Utils.setShardBoundEnt(shard, entName);
-                Utils.writeEntityHeldItem(shard, dead);
-                Utils.setShardBoundPlayer(shard, player);
-            }
-
-            Utils.writeEntityArmor(shard, dead);
 
             int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
             soulStealer *= ConfigHandler.soulStealerBonus;
