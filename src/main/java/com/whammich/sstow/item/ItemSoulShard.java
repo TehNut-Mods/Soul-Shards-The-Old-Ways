@@ -141,7 +141,7 @@ public class ItemSoulShard extends Item {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
         if (Utils.isShardBound(stack))
-            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.bound", Utils.getEntityNameTransltated(Utils.getShardBoundEnt(stack))));
+            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.bound", Utils.getEntityNameTranslated(Utils.getShardBoundEnt(stack))));
 
         if (Utils.getShardKillCount(stack) >= 0)
             list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.kills", Utils.getShardKillCount(stack)));

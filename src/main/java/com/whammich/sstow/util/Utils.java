@@ -144,7 +144,7 @@ public final class Utils {
         return shard;
     }
 
-    public static String getEntityNameTransltated(String unlocName) {
+    public static String getEntityNameTranslated(String unlocName) {
         if (unlocName.equals("Wither Skeleton"))
             return unlocName;
 
