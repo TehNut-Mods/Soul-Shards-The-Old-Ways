@@ -62,7 +62,7 @@ public class ItemSoulShard extends Item {
 
         if (tile instanceof TileEntityMobSpawner) {
             String name = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "mobID");
-            Entity ent = EntityMapper.getNewEntityInstance(world, name);
+            Entity ent = EntityMapper.getNewEntityInstance(world, name, mop.getBlockPos());
 
             if (ent == null)
                 return stack;

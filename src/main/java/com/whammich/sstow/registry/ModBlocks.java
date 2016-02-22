@@ -2,6 +2,7 @@ package com.whammich.sstow.registry;
 
 import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -36,11 +37,15 @@ public class ModBlocks {
         }
     }
 
-    public static Block getItem(String name) {
+    public static Block getBlock(String name) {
         return GameRegistry.findBlock(SoulShardsTOW.MODID, name);
     }
 
-    public static Block getItem(Class<? extends Block> blockClass) {
-        return getItem(classToName.get(blockClass));
+    public static Block getBlock(Class<? extends Block> blockClass) {
+        return getBlock(classToName.get(blockClass));
+    }
+
+    public static String getName(Class<? extends Block> blockClass) {
+        return classToName.get(blockClass);
     }
 }

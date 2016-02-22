@@ -2,6 +2,7 @@ package com.whammich.sstow.tile;
 
 import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
+import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.*;
@@ -12,18 +13,15 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.util.*;
 
 @Getter
 @Setter
 public class TileEntityCage extends TileInventory implements ITickable {
 
-    public int activeTime;
-    public int tier;
-    public String entName = "";
+    private int activeTime;
+    private int tier;
+    private String entName = "";
 
     public TileEntityCage() {
         super(1, "cage");
@@ -34,19 +32,28 @@ public class TileEntityCage extends TileInventory implements ITickable {
         if (getWorld().isRemote)
             return;
 
-        if (tier == 0 || Strings.isNullOrEmpty(entName))
+        if (tier == 0 || Strings.isNullOrEmpty(entName)) {
+            setActiveState(false);
             return;
+        }
 
-        if (!ConfigHandler.entityList.contains(entName) && !ConfigHandler.enableBlacklistedSpawning)
+        if (!ConfigHandler.entityList.contains(entName) && !ConfigHandler.enableBlacklistedSpawning) {
+            setActiveState(false);
             return;
+        }
 
-        if (TierHandler.getChecksRedstone(tier - 1) && isRedstoned())
+        if (TierHandler.getChecksRedstone(tier - 1) && isRedstoned()) {
+            setActiveState(false);
             return;
+        }
 
-        if (TierHandler.getChecksPlayer(tier - 1) && !isPlayerClose())
+        if (TierHandler.getChecksPlayer(tier - 1) && !isPlayerClose()) {
+            setActiveState(false);
             return;
+        }
 
         activeTime++;
+        setActiveState(true);
 
         if (activeTime % (TierHandler.getCooldown(tier - 1) * 20) == 0) {
             EntityLiving[] toSpawn = new EntityLiving[TierHandler.getNumSpawns(tier - 1)];
@@ -81,17 +88,12 @@ public class TileEntityCage extends TileInventory implements ITickable {
         tagCompound.setInteger("activeTime", activeTime);
     }
 
-    @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        this.readFromNBT(pkt.getNbtCompound());
-        this.getWorld().markBlockForUpdate(getPos());
+    public void setActiveState(boolean activeState) {
+        getWorld().setBlockState(getPos(), getWorld().getBlockState(getPos()).withProperty(BlockCage.ACTIVE, activeState));
     }
 
-    @Override
-    public Packet getDescriptionPacket() {
-        NBTTagCompound tag = new NBTTagCompound();
-        this.writeToNBT(tag);
-        return new S35PacketUpdateTileEntity(getPos(), 0, tag);
+    public boolean getActiveState() {
+        return getWorld().getBlockState(getPos()).getValue(BlockCage.ACTIVE);
     }
 
     private boolean canSpawnAtCoords(EntityLiving ent) {

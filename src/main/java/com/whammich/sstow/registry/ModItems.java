@@ -37,4 +37,8 @@ public class ModItems {
     public static Item getItem(Class<? extends Item> itemClass) {
         return getItem(classToName.get(itemClass));
     }
+
+    public static String getName(Class<? extends Item> itemClass) {
+        return classToName.get(itemClass);
+    }
 }

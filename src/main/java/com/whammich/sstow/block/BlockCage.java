@@ -1,14 +1,15 @@
 package com.whammich.sstow.block;
 
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.item.ItemSoulShard;
-import com.whammich.sstow.registry.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.Used;
-import tehnut.lib.block.base.BlockBoolean;
 import com.whammich.sstow.tile.TileEntityCage;
 import com.whammich.sstow.util.Utils;
 import net.minecraft.block.material.Material;
@@ -25,12 +26,41 @@ import net.minecraft.world.World;
 @Used
 public class BlockCage extends Block {
 
+    public static final PropertyBool ACTIVE = PropertyBool.create("active");
+
     public BlockCage() {
         super(Material.iron);
         setUnlocalizedName(SoulShardsTOW.MODID + ".cage");
         setCreativeTab(SoulShardsTOW.soulShardsTab);
+        setDefaultState(blockState.getBaseState().withProperty(ACTIVE, false));
+
         blockHardness = 3.0F;
         blockResistance = 3.0F;
+    }
+
+    @Override
+    protected BlockState createBlockState() {
+        return new BlockState(this, ACTIVE);
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        TileEntity tile = worldIn.getTileEntity(pos);
+        return state.withProperty(ACTIVE, ((TileEntityCage) tile).getActiveState());
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(ACTIVE) ? 1 : 0;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        switch (meta) {
+            case 0: return getDefaultState().withProperty(ACTIVE, false);
+            case 1: return getDefaultState().withProperty(ACTIVE, true);
+            default: return getDefaultState().withProperty(ACTIVE, false);
+        }
     }
 
     @Override
@@ -100,8 +130,32 @@ public class BlockCage extends Block {
     }
 
     @Override
+    public int damageDropped(IBlockState state) {
+        return 0;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public boolean isOpaqueCube() {
         return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isFullCube() {
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isVisuallyOpaque() {
+        return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public EnumWorldBlockLayer getBlockLayer() {
+        return EnumWorldBlockLayer.CUTOUT;
     }
 
     @Override
@@ -109,7 +163,7 @@ public class BlockCage extends Block {
         return true;
     }
 
-        @Override
+    @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileEntityCage();
     }

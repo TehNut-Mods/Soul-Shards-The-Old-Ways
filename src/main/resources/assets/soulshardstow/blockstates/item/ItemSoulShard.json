@@ -1,0 +1,46 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "builtin/generated",
+    "transform": "forge:default-tool"
+  },
+  "variants": {
+    "tier": {
+      "unbound": {
+        "textures": {
+          "layer0": "soulshardstow:items/shardUnbound"
+        }
+      },
+      "0": {
+        "textures": {
+          "layer0": "soulshardstow:items/shardTier0"
+        }
+      },
+      "1": {
+        "textures": {
+          "layer0": "soulshardstow:items/shardTier1"
+        }
+      },
+      "2": {
+        "textures": {
+          "layer0": "soulshardstow:items/shardTier2"
+        }
+      },
+      "3": {
+        "textures": {
+          "layer0": "soulshardstow:items/shardTier3"
+        }
+      },
+      "4": {
+        "textures": {
+          "layer0": "soulshardstow:items/shardTier4"
+        }
+      },
+      "5": {
+        "textures": {
+          "layer0": "soulshardstow:items/shardTier5"
+        }
+      }
+    }
+  }
+}
