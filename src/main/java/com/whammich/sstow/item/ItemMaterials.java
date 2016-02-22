@@ -35,9 +35,7 @@ public class ItemMaterials extends Item {
 
     private void buildItems() {
         names.add(0, INGOT_SOULIUM);
-        OreDictionary.registerOre(INGOT_SOULIUM, new ItemStack(this, 1, names.indexOf(INGOT_SOULIUM)));
         names.add(1, CORRUPTED_ESSENCE);
-        OreDictionary.registerOre(CORRUPTED_ESSENCE, new ItemStack(this, 1, names.indexOf(CORRUPTED_ESSENCE)));
     }
 
     @Override

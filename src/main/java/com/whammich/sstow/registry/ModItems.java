@@ -1,9 +1,12 @@
 package com.whammich.sstow.registry;
 
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.item.ItemMaterials;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import tehnut.lib.annot.ModItem;
 
 import java.util.HashMap;
@@ -28,6 +31,10 @@ public class ModItems {
                 SoulShardsTOW.instance.getLogHelper().error(String.format("Unable to register item for class %s", data.getClassName()));
             }
         }
+
+
+        OreDictionary.registerOre(ItemMaterials.INGOT_SOULIUM, new ItemStack(getItem(ItemMaterials.class), 1, 0));
+        OreDictionary.registerOre(ItemMaterials.CORRUPTED_ESSENCE, new ItemStack(getItem(ItemMaterials.class), 1, 1));
     }
 
     public static Item getItem(String name) {
