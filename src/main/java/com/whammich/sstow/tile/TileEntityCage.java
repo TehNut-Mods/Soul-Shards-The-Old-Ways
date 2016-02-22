@@ -59,7 +59,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
             EntityLiving[] toSpawn = new EntityLiving[TierHandler.getNumSpawns(tier - 1)];
 
             for (int i = 0; i < toSpawn.length; i++) {
-                toSpawn[i] = EntityMapper.getNewEntityInstance(getWorld(), entName);
+                toSpawn[i] = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
 
                 toSpawn[i].getEntityData().setBoolean("SSTOW", true);
                 toSpawn[i].forceSpawn = true;

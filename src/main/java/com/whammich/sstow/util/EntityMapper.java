@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
@@ -46,7 +47,7 @@ public final class EntityMapper {
         return ConfigHandler.entityList.contains(entName);
     }
 
-    public static EntityLiving getNewEntityInstance(World world, String ent) {
+    public static EntityLiving getNewEntityInstance(World world, String ent, BlockPos pos) {
         if (Strings.isNullOrEmpty(ent))
             return null;
 
@@ -64,7 +65,7 @@ public final class EntityMapper {
 
         EntityLiving spawnedEntity = (EntityLiving) EntityList.createEntityByName(ent, world);
         // This will ensure custom handlers from other mods that have custom initialization logic will be called properly.
-        spawnedEntity.onInitialSpawn(null, null);
+        spawnedEntity.onInitialSpawn(world.getDifficultyForLocation(pos), null);
 
         return spawnedEntity;
     }
