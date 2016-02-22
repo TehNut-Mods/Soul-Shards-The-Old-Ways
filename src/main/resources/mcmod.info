@@ -1,16 +1,16 @@
 [
-    {
-        "modid": "SoulShardsTOW",
-        "name": "Soul Shards: The Old Ways",
-        "description": "Continuation of Moze_Intel's Soul Shards: Reborn mod.",
-        "version": "${version}",
-        "mcversion": "${mc_version}",
-        "url": "",
-        "updateUrl": "",
-        "authorList": [ "TehNut" ],
-        "credits": "ShadwDrgn, Moze_Intel, Nenivar, RetiredNavyVet, Team Whammich, BBoldt",
-        "logoFile": "/logo.png",
-        "screenshots": [ ],
-        "dependencies": [ ]
-    }
+{
+  "modid": "SoulShardsTOW",
+  "name": "Soul Shards - The Old Ways",
+  "description": "Custom spawners for any mob!",
+  "version": "${version}",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [ "TehNut" ],
+  "credits": "ShadwDrgn, Moze_Intel, Nenivar, RetiredNavyVet, TeamWhammich, BBoldt",
+  "logoFile": "/logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
 ]
