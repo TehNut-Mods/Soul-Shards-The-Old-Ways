@@ -11,7 +11,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -73,38 +72,9 @@ public class ItemSoulShard extends Item {
             if (!EntityMapper.isEntityValid(name))
                 return stack;
 
-            if (Utils.isShardBound(stack)) {
-                if (Utils.getShardBoundEnt(stack).equals(name)) {
-                    Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
-                    world.destroyBlock(mop.getBlockPos(), false);
-                }
-            } else if (EntityMapper.isEntityValid(name)) {
-                if (stack.stackSize > 1) {
-                    stack.stackSize--;
-                    ItemStack newStack = new ItemStack(ModItems.getItem(ItemSoulShard.class));
-                    Utils.setShardBoundEnt(newStack, name);
-                    Utils.increaseShardKillCount(newStack, (short) ConfigHandler.spawnerAbsorptionBonus);
-
-                    boolean emptySpot = false;
-                    int counter = 0;
-
-                    while (!emptySpot && counter < 36) {
-                        ItemStack inventoryStack = player.inventory.getStackInSlot(counter);
-                        if (inventoryStack == null) {
-                            player.inventory.addItemStackToInventory(newStack);
-                            emptySpot = true;
-                        }
-                        counter++;
-                    }
-
-                    if (!emptySpot)
-                        player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, newStack));
-
-                } else {
-                    Utils.setShardBoundEnt(stack, name);
-                    Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
-                }
-                world.destroyBlock(mop.getBlockPos(), true);
+            if (Utils.isShardBound(stack) && Utils.getShardBoundEnt(stack).equals(name)) {
+                Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
+                world.destroyBlock(mop.getBlockPos(), false);
             }
         }
 

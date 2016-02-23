@@ -52,6 +52,7 @@ public class ConfigHandler {
         categories.add(category);
         enableBosses = config.getBoolean("enableBosses", category, false, "Allows bosses to be spawned. This is probably the worst thing you can do to your instance.");
         allowSpawnerAbsorption = config.getBoolean("allowSpawnerAbsorption", category, true, "Allows Shards to absorb spawners of the same entity type.");
+        spawnerAbsorptionBonus = config.getInt("spawnerAbsorptionBonus", category, 200, 0, 1024, "Amount of souls to add when absorbing a spawner.");
 
 
         category = "General";
