@@ -33,7 +33,7 @@ public class ModItems {
         }
 
 
-        OreDictionary.registerOre(ItemMaterials.INGOT_SOULIUM, new ItemStack(getItem(ItemMaterials.class), 1, 0));
+        OreDictionary.registerOre(ItemMaterials.INGOT_CORRUPTED, new ItemStack(getItem(ItemMaterials.class), 1, 0));
         OreDictionary.registerOre(ItemMaterials.CORRUPTED_ESSENCE, new ItemStack(getItem(ItemMaterials.class), 1, 1));
     }
 

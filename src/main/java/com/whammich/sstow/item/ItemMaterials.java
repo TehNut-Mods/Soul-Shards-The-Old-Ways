@@ -17,7 +17,7 @@ import java.util.List;
 @Used
 public class ItemMaterials extends Item {
 
-    public static final String INGOT_SOULIUM = "ingotSoulium";
+    public static final String INGOT_CORRUPTED = "ingotCorrupted";
     public static final String CORRUPTED_ESSENCE = "dustCorrupted";
 
     private static List<String> names = new ArrayList<String>();
@@ -33,7 +33,7 @@ public class ItemMaterials extends Item {
     }
 
     private void buildItems() {
-        names.add(0, INGOT_SOULIUM);
+        names.add(0, INGOT_CORRUPTED);
         names.add(1, CORRUPTED_ESSENCE);
     }
 

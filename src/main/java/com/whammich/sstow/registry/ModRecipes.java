@@ -14,8 +14,8 @@ public class ModRecipes {
     public static void init() {
         GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ModItems.getItem(ItemMaterials.class), 1, 1), 0.4F);
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemMaterials.class), 1, 0), "EEE", "EIE", "EEE", 'E', "dustCorrupted", 'I', "ingotIron"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemSoulSword.class)), "I", "I", "S", 'I', "ingotSoulium", 'S', "stickWood"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotSoulium", 'B', Blocks.iron_bars));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemSoulShard.class)), " I ", "IDI", " I ", 'I', "ingotSoulium", 'D', "gemDiamond"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemSoulSword.class)), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.iron_bars));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemSoulShard.class)), " I ", "IDI", " I ", 'I', "ingotCorrupted", 'D', "gemDiamond"));
     }
 }

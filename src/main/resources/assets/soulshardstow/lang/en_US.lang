@@ -4,7 +4,7 @@ itemGroup.soulShards=Soul Shards: The Old Ways
 # Items
 item.SoulShardsTOW.shard.name=Soul Shard
 item.SoulShardsTOW.shard.unbound.name=Unbound Soul Shard
-item.SoulShardsTOW.material.ingotSoulium.name=Soulium Ingot
+item.SoulShardsTOW.material.ingotSoulium.name=Corrupted Ingot
 item.SoulShardsTOW.material.dustCorrupted.name=Corrupted Essence
 item.SoulShardsTOW.soulSword.name=Vile Sword
 
