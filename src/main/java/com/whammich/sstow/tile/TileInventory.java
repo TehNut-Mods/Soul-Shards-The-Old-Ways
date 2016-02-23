@@ -16,7 +16,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
-import tehnut.lib.util.TextHelper;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 
 public class TileInventory extends TileEntity implements IInventory {
 

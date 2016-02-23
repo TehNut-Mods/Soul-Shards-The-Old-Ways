@@ -1,4 +1,4 @@
-package tehnut.lib.annot;
+package com.whammich.repack.tehnut.lib.annot;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;

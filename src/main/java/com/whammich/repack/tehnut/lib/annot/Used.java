@@ -1,4 +1,4 @@
-package tehnut.lib.annot;
+package com.whammich.repack.tehnut.lib.annot;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

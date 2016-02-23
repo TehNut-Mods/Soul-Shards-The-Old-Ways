@@ -1,4 +1,4 @@
-package tehnut.lib.util;
+package com.whammich.repack.tehnut.lib.util;
 
 import net.minecraft.util.StatCollector;
 import org.apache.commons.lang3.text.WordUtils;

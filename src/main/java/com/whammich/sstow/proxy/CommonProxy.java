@@ -8,8 +8,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.iface.IProxy;
+import com.whammich.repack.tehnut.lib.annot.Handler;
+import com.whammich.repack.tehnut.lib.iface.IProxy;
 
 public class CommonProxy implements IProxy {
 

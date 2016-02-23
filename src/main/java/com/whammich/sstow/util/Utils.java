@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import tehnut.lib.util.TextHelper;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 
 import javax.annotation.Nullable;
 import java.util.Random;

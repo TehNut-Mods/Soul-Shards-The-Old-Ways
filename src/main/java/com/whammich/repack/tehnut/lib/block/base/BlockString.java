@@ -1,7 +1,7 @@
-package tehnut.lib.block.base;
+package com.whammich.repack.tehnut.lib.block.base;
 
-import tehnut.lib.block.property.PropertyString;
-import tehnut.lib.block.property.UnlistedPropertyString;
+import com.whammich.repack.tehnut.lib.block.property.PropertyString;
+import com.whammich.repack.tehnut.lib.block.property.UnlistedPropertyString;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

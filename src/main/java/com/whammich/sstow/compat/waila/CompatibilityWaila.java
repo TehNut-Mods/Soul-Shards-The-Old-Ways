@@ -1,7 +1,7 @@
 package com.whammich.sstow.compat.waila;
 
 import net.minecraftforge.fml.common.event.FMLInterModComms;
-import tehnut.lib.iface.ICompatibility;
+import com.whammich.repack.tehnut.lib.iface.ICompatibility;
 
 public class CompatibilityWaila implements ICompatibility {
 

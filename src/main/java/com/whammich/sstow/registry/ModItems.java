@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import tehnut.lib.annot.ModItem;
+import com.whammich.repack.tehnut.lib.annot.ModItem;
 
 import java.util.HashMap;
 import java.util.Map;

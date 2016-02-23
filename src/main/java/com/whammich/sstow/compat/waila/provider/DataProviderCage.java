@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import tehnut.lib.util.TextHelper;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 
 import java.util.List;
 

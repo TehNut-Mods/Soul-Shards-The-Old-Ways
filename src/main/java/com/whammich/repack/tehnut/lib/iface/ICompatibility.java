@@ -1,4 +1,4 @@
-package tehnut.lib.iface;
+package com.whammich.repack.tehnut.lib.iface;
 
 /**
  * Implement on all primary compatibility classes.

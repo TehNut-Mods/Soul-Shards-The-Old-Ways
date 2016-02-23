@@ -1,4 +1,4 @@
-package tehnut.lib.block.property;
+package com.whammich.repack.tehnut.lib.block.property;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;

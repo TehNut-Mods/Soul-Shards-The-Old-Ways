@@ -26,10 +26,10 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.annot.ModItem;
-import tehnut.lib.annot.Used;
-import tehnut.lib.util.TextHelper;
+import com.whammich.repack.tehnut.lib.annot.Handler;
+import com.whammich.repack.tehnut.lib.annot.ModItem;
+import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 
 import java.util.List;
 

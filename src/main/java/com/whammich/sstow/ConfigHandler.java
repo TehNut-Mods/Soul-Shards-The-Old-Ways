@@ -5,7 +5,7 @@ import com.whammich.sstow.util.TierHandler;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tehnut.lib.annot.Handler;
+import com.whammich.repack.tehnut.lib.annot.Handler;
 
 import java.io.File;
 import java.util.ArrayList;

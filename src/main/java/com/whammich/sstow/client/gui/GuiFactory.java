@@ -4,7 +4,7 @@ import com.whammich.sstow.client.gui.config.ConfigGuiSoulShards;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
-import tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.annot.Used;
 
 import java.util.Set;
 

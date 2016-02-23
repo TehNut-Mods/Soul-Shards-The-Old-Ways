@@ -15,12 +15,12 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.*;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.annot.ModBlock;
-import tehnut.lib.annot.ModItem;
-import tehnut.lib.annot.Used;
-import tehnut.lib.iface.ICompatibility;
-import tehnut.lib.util.LogHelper;
+import com.whammich.repack.tehnut.lib.annot.Handler;
+import com.whammich.repack.tehnut.lib.annot.ModBlock;
+import com.whammich.repack.tehnut.lib.annot.ModItem;
+import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.iface.ICompatibility;
+import com.whammich.repack.tehnut.lib.util.LogHelper;
 
 import java.io.File;
 import java.util.Set;

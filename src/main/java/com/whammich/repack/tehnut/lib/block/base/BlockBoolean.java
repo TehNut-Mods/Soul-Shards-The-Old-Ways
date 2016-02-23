@@ -1,10 +1,10 @@
-package tehnut.lib.block.base;
+package com.whammich.repack.tehnut.lib.block.base;
 
-import tehnut.lib.block.property.UnlistedPropertyInteger;
+import com.whammich.repack.tehnut.lib.block.property.UnlistedPropertyBoolean;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,47 +21,51 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Creates a block that has multiple meta-based states.
  * 
- * These states will be numbered 0 through {@code maxMeta}.
+ * These states will be named true or false. Somewhere along the
+ * way, each value is {@code toLowerCase()}'ed, so the blockstate JSON needs all
+ * values to be lowercase.
  */
-public class BlockInteger extends Block
+public class BlockBoolean extends Block
 {
-    private final int maxMeta;
-    private final PropertyInteger metaProp;
-    private final IUnlistedProperty unlistedMetaProp;
+    private final List<Boolean> values;
+    private final PropertyBool boolProp;
+    private final IUnlistedProperty unlistedBooleanProp;
     private final BlockState realBlockState;
 
-    public BlockInteger(Material material, int maxMeta, String propName)
+    public BlockBoolean(Material material, String propName)
     {
         super(material);
 
-        this.maxMeta = maxMeta;
+        this.values = Arrays.asList(false, true);
 
-        this.metaProp = PropertyInteger.create(propName, 0, maxMeta);
-        this.unlistedMetaProp = new UnlistedPropertyInteger(maxMeta, propName);
+        this.boolProp = PropertyBool.create(propName);
+        this.unlistedBooleanProp = new UnlistedPropertyBoolean(propName);
         this.realBlockState = createRealBlockState();
         setupStates();
     }
 
-    public BlockInteger(Material material, int maxMeta)
+    public BlockBoolean(Material material)
     {
-        this(material, maxMeta, "meta");
+        this(material, "enabled");
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        return getBlockState().getBaseState().withProperty(metaProp, meta);
+        return getBlockState().getBaseState().withProperty(boolProp, values.get(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state)
     {
-        return (Integer) state.getValue(metaProp);
+        return values.indexOf(state.getValue(boolProp));
     }
 
     @Override
@@ -92,13 +96,13 @@ public class BlockInteger extends Block
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs creativeTabs, List<ItemStack> list)
     {
-        for (int i = 0; i < maxMeta + 1; i++)
-            list.add(new ItemStack(this, 1, i));
+        list.add(new ItemStack(this, 1, 0));
+        list.add(new ItemStack(this, 1, 1));
     }
 
     private void setupStates()
     {
-        this.setDefaultState(getExtendedBlockState().withProperty(unlistedMetaProp, 0).withProperty(metaProp, 0));
+        this.setDefaultState(getExtendedBlockState().withProperty(unlistedBooleanProp, values.get(0)).withProperty(boolProp, values.get(0)));
     }
 
     public ExtendedBlockState getBaseExtendedState()
@@ -113,19 +117,19 @@ public class BlockInteger extends Block
 
     private BlockState createRealBlockState()
     {
-        return new ExtendedBlockState(this, new IProperty[] { metaProp }, new IUnlistedProperty[] { unlistedMetaProp });
+        return new ExtendedBlockState(this, new IProperty[] {boolProp}, new IUnlistedProperty[] { unlistedBooleanProp });
     }
 
-    public int getMaxMeta() {
-        return maxMeta;
+    public List<Boolean> getValues() {
+        return new ArrayList<Boolean>(values);
     }
 
-    public PropertyInteger getMetaProp() {
-        return metaProp;
+    public PropertyBool getBoolProp() {
+        return boolProp;
     }
 
-    public IUnlistedProperty getUnlistedMetaProp() {
-        return unlistedMetaProp;
+    public IUnlistedProperty getUnlistedBooleanProp() {
+        return unlistedBooleanProp;
     }
 
     public BlockState getRealBlockState() {

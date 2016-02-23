@@ -1,4 +1,4 @@
-package tehnut.lib.util;
+package com.whammich.repack.tehnut.lib.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

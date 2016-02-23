@@ -11,7 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
-import tehnut.lib.util.TextHelper;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 
 public class CommandSSTOW extends CommandBase {
     @Override

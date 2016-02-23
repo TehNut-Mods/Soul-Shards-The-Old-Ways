@@ -1,4 +1,4 @@
-package tehnut.lib.iface;
+package com.whammich.repack.tehnut.lib.iface;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

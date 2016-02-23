@@ -1,4 +1,4 @@
-package tehnut.lib.block.property;
+package com.whammich.repack.tehnut.lib.block.property;
 
 import net.minecraftforge.common.property.IUnlistedProperty;
 

@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import tehnut.lib.annot.Handler;
+import com.whammich.repack.tehnut.lib.annot.Handler;
 
 public class ClientProxy extends CommonProxy {
 
