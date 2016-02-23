@@ -11,8 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
 import tehnut.lib.util.TextHelper;
 
 public class CommandSSTOW extends CommandBase {
@@ -68,7 +66,10 @@ public class CommandSSTOW extends CommandBase {
             } else if (params[0].equalsIgnoreCase("setent") && !Strings.isNullOrEmpty(params[1])) {
                 if (((EntityPlayerMP) sender).getHeldItem() != null && ((EntityPlayerMP) sender).getHeldItem().getItem() == ModItems.getItem(ItemSoulShard.class)) {
                     ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
-                    Utils.setShardBoundEnt(shard, params[1]);
+                    String entName = "";
+                    for (int i = 1; i < params.length; i++)
+                        entName += (entName.length() > 0 ? " " : "") + params[i];
+                    Utils.setShardBoundEnt(shard, entName);
                 }
             } else {
                 sender.addChatMessage(new ChatComponentText(TextHelper.localizeEffect("chat.sstow.command.wrongcommand")));
