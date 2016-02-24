@@ -142,12 +142,6 @@ public class BlockCage extends Block {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean isFullCube() {
-        return false;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
     public boolean isVisuallyOpaque() {
         return false;
     }
