@@ -8,7 +8,7 @@
     "type": {
       "ingotsoulium": {
         "textures": {
-          "layer0": "soulshardstow:items/ingotSoulium"
+          "layer0": "soulshardstow:items/ingotCorrupted"
         }
       },
       "dustcorrupted": {
