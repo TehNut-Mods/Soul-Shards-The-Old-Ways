@@ -18,7 +18,6 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemMaterials.class), 1, 0), "EEE", "EIE", "EEE", 'E', "dustCorrupted", 'I', "ingotIron"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemSoulSword.class)), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.iron_bars));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemSoulShard.class)), " I ", "IDI", " I ", 'I', "ingotCorrupted", 'D', "gemDiamond"));
 
         ForgeRecipeHandler.registerFuel(new ItemStack(ModItems.getItem(ItemMaterials.class), 1, 1), 1000);
         ForgeRecipeHandler.registerRecipe(new ForgeRecipeHandler.ForgeRecipe(new ItemStack(Items.diamond), new ItemStack(ModItems.getItem(ItemSoulShard.class)), 1000));

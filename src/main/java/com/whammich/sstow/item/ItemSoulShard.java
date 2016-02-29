@@ -1,6 +1,7 @@
 package com.whammich.sstow.item;
 
 import com.google.common.base.Strings;
+import com.whammich.repack.tehnut.lib.util.BlockStack;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.registry.ModEnchantments;
@@ -11,17 +12,22 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -31,12 +37,16 @@ import com.whammich.repack.tehnut.lib.annot.ModItem;
 import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.repack.tehnut.lib.util.TextHelper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @ModItem(name = "ItemSoulShard")
 @Used
 @Handler
 public class ItemSoulShard extends Item {
+
+    private static Map<BlockPos, BlockStack> multiblock = new HashMap<BlockPos, BlockStack>();
 
     public ItemSoulShard() {
         super();
@@ -48,37 +58,33 @@ public class ItemSoulShard extends Item {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (world.isRemote || (Utils.hasMaxedKills(stack)) || !ConfigHandler.allowSpawnerAbsorption)
-            return stack;
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!Utils.hasMaxedKills(stack) && ConfigHandler.allowSpawnerAbsorption) {
+            TileEntity tile = world.getTileEntity(pos);
 
-        MovingObjectPosition mop = this.getMovingObjectPositionFromPlayer(world, player, false);
+            if (tile instanceof TileEntityMobSpawner) {
+                String name = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "mobID");
+                Entity ent = EntityMapper.getNewEntityInstance(world, name, pos);
 
-        if (mop == null || mop.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK)
-            return stack;
+                if (ent == null)
+                    return false;
 
-        TileEntity tile = world.getTileEntity(mop.getBlockPos());
+                if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
+                    name = "Wither Skeleton";
 
-        if (tile instanceof TileEntityMobSpawner) {
-            String name = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "mobID");
-            Entity ent = EntityMapper.getNewEntityInstance(world, name, mop.getBlockPos());
+                if (!EntityMapper.isEntityValid(name))
+                    return false;
 
-            if (ent == null)
-                return stack;
-
-            if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
-                name = "Wither Skeleton";
-
-            if (!EntityMapper.isEntityValid(name))
-                return stack;
-
-            if (Utils.isShardBound(stack) && Utils.getShardBoundEnt(stack).equals(name)) {
-                Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
-                world.destroyBlock(mop.getBlockPos(), false);
+                if (Utils.isShardBound(stack) && Utils.getShardBoundEnt(stack).equals(name)) {
+                    if (!world.isRemote)
+                        Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
+                    world.destroyBlock(pos, false);
+                    return true;
+                }
             }
         }
 
-        return stack;
+        return false;
     }
 
     @Override
@@ -115,6 +121,18 @@ public class ItemSoulShard extends Item {
             list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.kills", Utils.getShardKillCount(stack)));
 
         list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.tier", Utils.getShardTier(stack)));
+    }
+
+    private void buildMultiblock() {
+        multiblock.put(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone));
+        multiblock.put(new BlockPos(1, 0, 0), new BlockStack(Blocks.end_stone));
+        multiblock.put(new BlockPos(0, 0, 1), new BlockStack(Blocks.end_stone));
+        multiblock.put(new BlockPos(0, 0, -1), new BlockStack(Blocks.end_stone));
+        multiblock.put(new BlockPos(-1, 0, 0), new BlockStack(Blocks.end_stone));
+        multiblock.put(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian));
+        multiblock.put(new BlockPos(-1, 0, -1), new BlockStack(Blocks.obsidian));
+        multiblock.put(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian));
+        multiblock.put(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian));
     }
 
     @SubscribeEvent
@@ -155,6 +173,32 @@ public class ItemSoulShard extends Item {
                 soulStealer += 1;
 
             Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
+        }
+    }
+
+    @SubscribeEvent
+    public void onInteract(PlayerInteractEvent event) {
+        if (multiblock.isEmpty())
+            buildMultiblock();
+
+        if (event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+            return;
+
+        if (event.entityPlayer.getHeldItem() != null && event.entityPlayer.getHeldItem().getItem() == Items.diamond && event.world.getBlockState(event.pos).getBlock() == Blocks.glowstone) {
+            for (BlockPos multiPos : multiblock.keySet()) {
+                BlockStack worldStack = BlockStack.getStackFromPos(event.world, event.pos.add(multiPos));
+                if (!multiblock.get(multiPos).equals(worldStack))
+                    return;
+            }
+
+            for (BlockPos multiPos : multiblock.keySet())
+                event.world.setBlockToAir(event.pos.add(multiPos));
+
+            if (!event.world.isRemote) {
+                EntityItem invItem = new EntityItem(event.world, event.entityPlayer.posX, event.entityPlayer.posY + 0.25, event.entityPlayer.posZ, new ItemStack(ModItems.getItem(getClass()), 1, 0));
+                event.world.spawnEntityInWorld(invItem);
+            }
+            event.entityPlayer.swingItem();
         }
     }
 }
