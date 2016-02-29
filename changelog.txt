@@ -5,3 +5,4 @@ Version 2.1.0
 - Changed
 
 Initial port to 1.8.9
+Re-license as MIT
