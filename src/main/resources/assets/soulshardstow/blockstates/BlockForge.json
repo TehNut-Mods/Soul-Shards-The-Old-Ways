@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "top": "minecraft:blocks/cobblestone",
+      "front": "minecraft:blocks/dirt",
+      "side": "minecraft:blocks/stone"
+    },
+    "model": "minecraft:orientable"
+  },
+  "variants": {
+    "active": {
+      "false": {
+        "facing": {
+          "east": {
+            "textures": {
+              "front": "minecraft:blocks/dirt"
+            }
+          }
+        }
+      }
+    }
+  }
+}
