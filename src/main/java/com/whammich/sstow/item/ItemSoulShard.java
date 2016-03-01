@@ -198,6 +198,8 @@ public class ItemSoulShard extends Item {
                 EntityItem invItem = new EntityItem(event.world, event.entityPlayer.posX, event.entityPlayer.posY + 0.25, event.entityPlayer.posZ, new ItemStack(ModItems.getItem(getClass()), 1, 0));
                 event.world.spawnEntityInWorld(invItem);
             }
+            if (!event.entityPlayer.capabilities.isCreativeMode)
+                event.entityPlayer.getHeldItem().stackSize--;
             event.entityPlayer.swingItem();
         }
     }
