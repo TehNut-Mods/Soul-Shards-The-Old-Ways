@@ -192,7 +192,7 @@ public class ItemSoulShard extends Item {
             }
 
             for (BlockPos multiPos : multiblock.keySet())
-                event.world.setBlockToAir(event.pos.add(multiPos));
+                event.world.destroyBlock(event.pos.add(multiPos), false);
 
             if (!event.world.isRemote) {
                 EntityItem invItem = new EntityItem(event.world, event.entityPlayer.posX, event.entityPlayer.posY + 0.25, event.entityPlayer.posZ, new ItemStack(ModItems.getItem(getClass()), 1, 0));
