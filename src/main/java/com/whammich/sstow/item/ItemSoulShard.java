@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.whammich.repack.tehnut.lib.util.BlockStack;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.ISoulWeapon;
 import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.*;
@@ -169,8 +170,8 @@ public class ItemSoulShard extends Item {
             int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
             soulStealer *= ConfigHandler.soulStealerBonus;
 
-            if (player.getHeldItem() != null && player.getHeldItem().getItem() == ModItems.getItem(ItemSoulSword.class))
-                soulStealer += 1;
+            if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ISoulWeapon)
+                soulStealer += ((ISoulWeapon) player.getHeldItem().getItem()).getBonusSouls(player.getHeldItem());
 
             Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
         }
