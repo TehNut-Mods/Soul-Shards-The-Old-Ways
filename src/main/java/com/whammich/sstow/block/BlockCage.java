@@ -112,12 +112,15 @@ public class BlockCage extends Block {
                 cage.setInventorySlotContents(0, player.getHeldItem().copy());
                 cage.setTier(ShardHelper.getTierFromShard(player.getHeldItem()));
                 cage.setEntName(ShardHelper.getBoundEntity(player.getHeldItem()));
+                if (!world.isRemote)
+                    cage.setOwner(player.getGameProfile().getId().toString());
                 player.getHeldItem().stackSize--;
                 return true;
             } else if ( cage.getStackInSlot(0) != null && player.getHeldItem() == null && player.isSneaking()) {
                 cage.setTier(0);
                 cage.setEntName("");
                 cage.setActiveTime(0);
+                cage.setOwner("");
                 if (!world.isRemote) {
                     EntityItem invItem = new EntityItem(world, player.posX, player.posY + 0.25, player.posZ, cage.getStackInSlot(0));
                     world.spawnEntityInWorld(invItem);

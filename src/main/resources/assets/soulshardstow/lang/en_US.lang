@@ -32,3 +32,4 @@ chat.sstow.command.wrongcommand=&cInvalid command
 waila.SoulShardsTOW.sneak=&oSneak for details
 waila.SoulShardsTOW.boundTo=Bound to: %s
 waila.SoulShardsTOW.tier=Tier: %d
+waila.SoulShardsTOW.owner=Owner: %s

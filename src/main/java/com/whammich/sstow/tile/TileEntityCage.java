@@ -28,11 +28,13 @@ public class TileEntityCage extends TileInventory implements ITickable {
     public static final String TIER = "tier";
     public static final String ACTIVE_TIME = "activeTime";
     public static final String ENT_NAME = "entName";
+    public static final String OWNER = "owner";
     public static final String SSTOW = "SSTOW";
 
     private int activeTime;
     private int tier;
     private String entName = "";
+    private String owner = "";
 
     public TileEntityCage() {
         super(1, "cage");
@@ -44,6 +46,11 @@ public class TileEntityCage extends TileInventory implements ITickable {
             return;
 
         if (tier == 0 || Strings.isNullOrEmpty(entName)) {
+            setActiveState(false);
+            return;
+        }
+
+        if (ConfigHandler.requireOwnerOnline && !Utils.isOwnerOnline(owner)) {
             setActiveState(false);
             return;
         }
@@ -93,6 +100,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
         this.tier = tagCompound.getInteger(TIER);
         this.entName = tagCompound.getString(ENT_NAME);
         this.activeTime = tagCompound.getInteger(ACTIVE_TIME);
+        this.owner = tagCompound.getString(OWNER);
     }
 
     @Override
@@ -102,6 +110,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
         tagCompound.setInteger(TIER, tier);
         tagCompound.setString(ENT_NAME, entName);
         tagCompound.setInteger(ACTIVE_TIME, activeTime);
+        tagCompound.setString(OWNER, owner);
     }
 
     public void setActiveState(boolean activeState) {

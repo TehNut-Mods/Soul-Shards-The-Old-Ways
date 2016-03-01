@@ -1,5 +1,6 @@
 package com.whammich.sstow.compat.waila.provider;
 
+import com.whammich.sstow.compat.waila.WailaCallbackHandler;
 import com.whammich.sstow.tile.TileEntityCage;
 import com.whammich.sstow.util.Utils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -36,6 +37,9 @@ public class DataProviderCage implements IWailaDataProvider {
                 if (cage.getStackInSlot(0) != null) {
                     currenttip.add(TextHelper.localizeEffect("waila.SoulShardsTOW.boundTo", Utils.getEntityNameTranslated(cage.getEntName())));
                     currenttip.add(TextHelper.localizeEffect("waila.SoulShardsTOW.tier", cage.getTier()));
+
+                    if (config.getConfig(WailaCallbackHandler.CONFIG_OWNER))
+                        currenttip.add(TextHelper.localizeEffect("waila.SoulShardsTOW.owner", cage.getOwner()));
                 }
             }
         } else {
