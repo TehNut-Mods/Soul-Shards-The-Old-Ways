@@ -120,7 +120,7 @@ jar {
 task apiJar(type: Jar) {
     from sourceSets.main.allSource
     from sourceSets.main.output
-	include 'com/whammich/sstow/**/*'
+	include 'com/whammich/sstow/api/**/*'
     classifier = 'api'
 }
 
