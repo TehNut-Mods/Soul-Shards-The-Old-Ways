@@ -2,11 +2,15 @@
 Version 2.1.2
 ------------------------------------------------------
 
+- Config to require the owner to be online for the cage to work. Owner = Person who put shard in cage.
+- Config to disable XP drops from spawned entities.
 - New textures. Completely re-textured by BBoldt to be thematically similar to the original.
 - Beginning of an API
   - Interface to allow specifying "Soul Weapons" (Like the Vile Sword) that provide a bonus to your kill obtaining.
   - API methods to allow mods to blacklist their entities. Overrides the config.
   - IMC handling for blacklisting entities. See API javadoc for details.
+  - Added a helper class for Shard related getters/setters.
+  - API jar now only contains the API packages and classes.
 
 ------------------------------------------------------
 Version 2.1.1
