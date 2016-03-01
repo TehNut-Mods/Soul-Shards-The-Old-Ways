@@ -3,6 +3,10 @@ Version 2.1.2
 ------------------------------------------------------
 
 - New textures. Completely re-textured by BBoldt to be thematically similar to the original.
+- Beginning of an API
+  - Interface to allow specifying "Soul Weapons" (Like the Vile Sword) that provide a bonus to your kill obtaining.
+  - API methods to allow mods to blacklist their entities. Overrides the config.
+  - IMC handling for blacklisting entities. See API javadoc for details.
 
 ------------------------------------------------------
 Version 2.1.1

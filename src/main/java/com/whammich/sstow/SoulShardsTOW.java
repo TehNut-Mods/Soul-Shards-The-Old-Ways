@@ -101,6 +101,12 @@ public class SoulShardsTOW {
 
     @EventHandler
     @Used
+    public void onIMCRecieved(FMLInterModComms.IMCEvent event) {
+        IMCHandler.handleIMC(event);
+    }
+
+    @EventHandler
+    @Used
     public void serverStart(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandSSTOW());
     }
