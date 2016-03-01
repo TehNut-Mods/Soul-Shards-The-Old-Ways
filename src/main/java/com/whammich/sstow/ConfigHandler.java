@@ -28,6 +28,7 @@ public class ConfigHandler {
     public static boolean enableBosses;
     public static boolean allowSpawnerAbsorption;
     public static int spawnerAbsorptionBonus;
+    public static boolean enableExperienceDrop;
 
     public static boolean enableBlacklistedSpawning;
 
@@ -53,7 +54,7 @@ public class ConfigHandler {
         enableBosses = config.getBoolean("enableBosses", category, false, "Allows bosses to be spawned. This is probably the worst thing you can do to your instance.");
         allowSpawnerAbsorption = config.getBoolean("allowSpawnerAbsorption", category, true, "Allows Shards to absorb spawners of the same entity type.");
         spawnerAbsorptionBonus = config.getInt("spawnerAbsorptionBonus", category, 200, 0, 1024, "Amount of souls to add when absorbing a spawner.");
-
+        enableExperienceDrop = config.getBoolean("enableExperienceDrop", category, true, "Mobs spawned via a Soul Cage will drop experience upon death.");
 
         category = "General";
         categories.add(category);

@@ -1,6 +1,7 @@
 package com.whammich.sstow.tile;
 
 import com.google.common.base.Strings;
+import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.block.BlockCage;
@@ -15,9 +16,12 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Getter
 @Setter
+@Handler
 public class TileEntityCage extends TileInventory implements ITickable {
 
     private int activeTime;
@@ -158,5 +162,11 @@ public class TileEntityCage extends TileInventory implements ITickable {
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         return stack.getItem() == ModItems.getItem(ItemSoulShard.class) && Utils.getShardTier(stack) > 0 && Utils.isShardBound(stack);
+    }
+
+    @SubscribeEvent
+    public void onDeath(LivingExperienceDropEvent event) {
+        if (!ConfigHandler.enableExperienceDrop && event.entityLiving.getEntityData().getBoolean("SSTOW"))
+            event.setDroppedExperience(0);
     }
 }
