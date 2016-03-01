@@ -5,13 +5,13 @@ import com.whammich.repack.tehnut.lib.util.BlockStack;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulWeapon;
+import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.*;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -77,7 +77,7 @@ public class ItemSoulShard extends Item {
                 if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
                     name = "Wither Skeleton";
 
-                if (Utils.isShardBound(stack) && Utils.getShardBoundEnt(stack).equals(name)) {
+                if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
                     if (!world.isRemote)
                         Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
                     world.destroyBlock(pos, false);
@@ -91,7 +91,7 @@ public class ItemSoulShard extends Item {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return super.getUnlocalizedName(stack) + (Utils.isShardBound(stack) ? "" : ".unbound");
+        return super.getUnlocalizedName(stack) + (ShardHelper.isBound(stack) ? "" : ".unbound");
     }
 
     @Override
@@ -106,8 +106,8 @@ public class ItemSoulShard extends Item {
         for (int i = 0; i <= 5; i++) {
             ItemStack stack = new ItemStack(item, 1);
 
-            Utils.setShardKillCount(stack, TierHandler.getMinKills(i));
-            Utils.setShardTier(stack, (byte) i);
+            ShardHelper.setKillsForShard(stack, TierHandler.getMinKills(i));
+            ShardHelper.setTierForShard(stack, (byte) i);
 
             list.add(stack);
         }
@@ -116,13 +116,13 @@ public class ItemSoulShard extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
-        if (Utils.isShardBound(stack))
-            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.bound", Utils.getEntityNameTranslated(Utils.getShardBoundEnt(stack))));
+        if (ShardHelper.isBound(stack))
+            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.bound", Utils.getEntityNameTranslated(ShardHelper.getBoundEntity(stack))));
 
-        if (Utils.getShardKillCount(stack) >= 0)
-            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.kills", Utils.getShardKillCount(stack)));
+        if (ShardHelper.getKillsFromShard(stack) >= 0)
+            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.kills", ShardHelper.getKillsFromShard(stack)));
 
-        list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.tier", Utils.getShardTier(stack)));
+        list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.tier", ShardHelper.getTierFromShard(stack)));
     }
 
     private void buildMultiblock() {
@@ -166,8 +166,8 @@ public class ItemSoulShard extends Item {
         if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
             entName = "Wither Skeleton";
 
-        if (!Utils.isShardBound(shard))
-            Utils.setShardBoundEnt(shard, entName);
+        if (!ShardHelper.isBound(shard))
+            ShardHelper.setBoundEntity(shard, entName);
 
         int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
         soulStealer *= ConfigHandler.soulStealerBonus;

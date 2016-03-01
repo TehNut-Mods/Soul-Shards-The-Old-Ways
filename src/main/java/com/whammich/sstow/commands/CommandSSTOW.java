@@ -1,10 +1,10 @@
 package com.whammich.sstow.commands;
 
 import com.google.common.base.Strings;
+import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.TierHandler;
-import com.whammich.sstow.util.Utils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -56,8 +56,8 @@ public class CommandSSTOW extends CommandBase {
                     if (((EntityPlayerMP) sender).getHeldItem() != null && ((EntityPlayerMP) sender).getHeldItem().getItem() == ModItems.getItem(ItemSoulShard.class)) {
                         ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
                         for (int i = 1; i <= tierAmount; i++) {
-                            Utils.setShardTier(shard, (byte) 1);
-                            Utils.setShardKillCount(shard, (short) minKills);
+                            ShardHelper.setTierForShard(shard, (byte) 1);
+                            ShardHelper.setKillsForShard(shard, (short) minKills);
                         }
                     }
                 } else {
@@ -69,7 +69,7 @@ public class CommandSSTOW extends CommandBase {
                     String entName = "";
                     for (int i = 1; i < params.length; i++)
                         entName += (entName.length() > 0 ? " " : "") + params[i];
-                    Utils.setShardBoundEnt(shard, entName);
+                    ShardHelper.setBoundEntity(shard, entName);
                 }
             } else {
                 sender.addChatMessage(new ChatComponentText(TextHelper.localizeEffect("chat.sstow.command.wrongcommand")));

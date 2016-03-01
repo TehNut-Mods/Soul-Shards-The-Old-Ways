@@ -1,5 +1,6 @@
 package com.whammich.sstow;
 
+import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.proxy.CommonProxy;
@@ -48,9 +49,9 @@ public class SoulShardsTOW {
         @Override
         public ItemStack getIconItemStack() {
             ItemStack shard = new ItemStack(ModItems.getItem(ItemSoulShard.class));
-            Utils.setShardTier(shard, (byte) 5);
+            ShardHelper.setTierForShard(shard, 5);
             Utils.setMaxedKills(shard);
-            Utils.setShardBoundEnt(shard, "Pig");
+            ShardHelper.setBoundEntity(shard, "Pig");
             return shard;
         }
     };

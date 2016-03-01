@@ -1,6 +1,7 @@
 package com.whammich.sstow.util;
 
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.ShardHelper;
 import net.minecraft.item.ItemStack;
 
 public final class TierHandler {
@@ -100,22 +101,20 @@ public final class TierHandler {
     }
 
     public static boolean isShardValid(ItemStack shard) {
-        int kills = Utils.getShardKillCount(shard);
-        byte tier = Utils.getShardTier(shard);
+        int kills = ShardHelper.getKillsFromShard(shard);
+        int tier = ShardHelper.getTierFromShard(shard);
 
         return kills >= MIN_KILLS[tier] && kills <= MAX_KILLS[tier];
     }
 
     public static byte getCorrectTier(ItemStack shard) {
-        short kills = Utils.getShardKillCount(shard);
+        int kills = ShardHelper.getKillsFromShard(shard);
 
-        for (byte i = 0; i <= 5; i++) {
-            if (kills >= MIN_KILLS[i] && kills <= MAX_KILLS[i]) {
+        for (byte i = 0; i <= 5; i++)
+            if (kills >= MIN_KILLS[i] && kills <= MAX_KILLS[i])
                 return i;
-            }
-        }
 
-        SoulShardsTOW.instance.getLogHelper().info("Soul shard has an incorrect kill counter of: %d", kills);
+        SoulShardsTOW.instance.getLogHelper().info("Soul shard has an incorrect kill counter of: {}", kills);
         return 0;
     }
 

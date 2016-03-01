@@ -3,6 +3,7 @@ package com.whammich.sstow.tile;
 import com.google.common.base.Strings;
 import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.sstow.ConfigHandler;
+import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.item.ItemSoulShard;
@@ -23,6 +24,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Setter
 @Handler
 public class TileEntityCage extends TileInventory implements ITickable {
+
+    public static final String TIER = "tier";
+    public static final String ACTIVE_TIME = "activeTime";
+    public static final String ENT_NAME = "entName";
+    public static final String SSTOW = "SSTOW";
 
     private int activeTime;
     private int tier;
@@ -71,7 +77,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
             for (int i = 0; i < toSpawn.length; i++) {
                 toSpawn[i] = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
 
-                toSpawn[i].getEntityData().setBoolean("SSTOW", true);
+                toSpawn[i].getEntityData().setBoolean(SSTOW, true);
                 toSpawn[i].forceSpawn = true;
                 toSpawn[i].enablePersistence();
             }
@@ -84,18 +90,18 @@ public class TileEntityCage extends TileInventory implements ITickable {
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
 
-        this.tier = tagCompound.getInteger("tier");
-        this.entName = tagCompound.getString("entName");
-        this.activeTime = tagCompound.getInteger("activeTime");
+        this.tier = tagCompound.getInteger(TIER);
+        this.entName = tagCompound.getString(ENT_NAME);
+        this.activeTime = tagCompound.getInteger(ACTIVE_TIME);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
 
-        tagCompound.setInteger("tier", tier);
-        tagCompound.setString("entName", entName);
-        tagCompound.setInteger("activeTime", activeTime);
+        tagCompound.setInteger(TIER, tier);
+        tagCompound.setString(ENT_NAME, entName);
+        tagCompound.setInteger(ACTIVE_TIME, activeTime);
     }
 
     public void setActiveState(boolean activeState) {
@@ -153,7 +159,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
         int mobCount = 0;
 
         for (EntityLiving entity : getWorld().getEntitiesWithinAABB(living.getClass(), box))
-            if (entity.getEntityData().getBoolean("SSTOW"))
+            if (Utils.isCageBorn(entity))
                 mobCount++;
 
         return mobCount > ConfigHandler.spawnCap;
@@ -161,12 +167,12 @@ public class TileEntityCage extends TileInventory implements ITickable {
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return stack.getItem() == ModItems.getItem(ItemSoulShard.class) && Utils.getShardTier(stack) > 0 && Utils.isShardBound(stack);
+        return stack.getItem() == ModItems.getItem(ItemSoulShard.class) && ShardHelper.getTierFromShard(stack) > 0 && ShardHelper.isBound(stack);
     }
 
     @SubscribeEvent
     public void onDeath(LivingExperienceDropEvent event) {
-        if (!ConfigHandler.enableExperienceDrop && event.entityLiving.getEntityData().getBoolean("SSTOW"))
+        if (!ConfigHandler.enableExperienceDrop && Utils.isCageBorn(event.entityLiving))
             event.setDroppedExperience(0);
     }
 }

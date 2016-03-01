@@ -1,5 +1,6 @@
 package com.whammich.sstow.client.mesh;
 
+import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.util.Utils;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -18,8 +19,8 @@ public class CustomMeshDefinition {
     public static class SoulShard implements ItemMeshDefinition {
         @Override
         public ModelResourceLocation getModelLocation(ItemStack stack) {
-            if (Utils.isShardBound(stack))
-                return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulShard"), "tier=" + Utils.getShardTier(stack));
+            if (ShardHelper.isBound(stack))
+                return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulShard"), "tier=" + ShardHelper.getTierFromShard(stack));
 
             return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulShard"), "tier=unbound");
         }

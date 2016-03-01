@@ -1,6 +1,7 @@
 package com.whammich.sstow.block;
 
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.ShardHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
@@ -73,7 +74,7 @@ public class BlockCage extends Block {
         TileEntityCage tile = (TileEntityCage) world.getTileEntity(pos);
         if (tile.getStackInSlot(0) != null) {
             ItemStack shard = tile.getStackInSlot(0);
-            int tier = Utils.getShardTier(shard);
+            int tier = ShardHelper.getTierFromShard(shard);
             switch (tier) {
                 case 1: return 2;
                 case 2: return 5;
@@ -109,8 +110,8 @@ public class BlockCage extends Block {
             TileEntityCage cage = (TileEntityCage) tile;
             if (player.getHeldItem() != null && cage.getStackInSlot(0) == null && cage.isItemValidForSlot(0, player.getHeldItem()) && !player.isSneaking()) {
                 cage.setInventorySlotContents(0, player.getHeldItem().copy());
-                cage.setTier(Utils.getShardTier(player.getHeldItem()));
-                cage.setEntName(Utils.getShardBoundEnt(player.getHeldItem()));
+                cage.setTier(ShardHelper.getTierFromShard(player.getHeldItem()));
+                cage.setEntName(ShardHelper.getBoundEntity(player.getHeldItem()));
                 player.getHeldItem().stackSize--;
                 return true;
             } else if ( cage.getStackInSlot(0) != null && player.getHeldItem() == null && player.isSneaking()) {
