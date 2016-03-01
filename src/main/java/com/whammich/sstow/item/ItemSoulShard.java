@@ -5,6 +5,7 @@ import com.whammich.repack.tehnut.lib.util.BlockStack;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulWeapon;
+import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.*;
@@ -65,16 +66,16 @@ public class ItemSoulShard extends Item {
 
             if (tile instanceof TileEntityMobSpawner) {
                 String name = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "mobID");
-                Entity ent = EntityMapper.getNewEntityInstance(world, name, pos);
+                EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
 
                 if (ent == null)
                     return false;
 
+                if (!EntityMapper.isEntityValid(name) || SoulShardsAPI.isEntityBlacklisted(ent))
+                    return false;
+
                 if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
                     name = "Wither Skeleton";
-
-                if (!EntityMapper.isEntityValid(name))
-                    return false;
 
                 if (Utils.isShardBound(stack) && Utils.getShardBoundEnt(stack).equals(name)) {
                     if (!world.isRemote)
@@ -146,13 +147,17 @@ public class ItemSoulShard extends Item {
         EntityLiving dead = (EntityLiving) event.entity;
         EntityPlayer player = (EntityPlayer) event.source.getEntity();
         String entName = EntityList.getEntityString(dead);
+        ItemStack shard = Utils.getShardFromInv(player, entName);
+
+        if (shard == null)
+            return;
 
         if (Strings.isNullOrEmpty(entName)) {
-            SoulShardsTOW.instance.getLogHelper().severe("Player killed an entity with no unlocalized name: %s", dead);
+            SoulShardsTOW.instance.getLogHelper().severe("Player killed an entity with no mapped name: {}", dead);
             return;
         }
 
-        if (!ConfigHandler.entityList.contains(entName))
+        if (!ConfigHandler.entityList.contains(entName) || SoulShardsAPI.isEntityBlacklisted(dead))
             return;
 
         if (!EntityMapper.isEntityValid(entName))
@@ -161,20 +166,16 @@ public class ItemSoulShard extends Item {
         if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
             entName = "Wither Skeleton";
 
-        ItemStack shard = Utils.getShardFromInv(player, entName);
+        if (!Utils.isShardBound(shard))
+            Utils.setShardBoundEnt(shard, entName);
 
-        if (shard != null) {
-            if (!Utils.isShardBound(shard))
-                Utils.setShardBoundEnt(shard, entName);
+        int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
+        soulStealer *= ConfigHandler.soulStealerBonus;
 
-            int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
-            soulStealer *= ConfigHandler.soulStealerBonus;
+        if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ISoulWeapon)
+            soulStealer += ((ISoulWeapon) player.getHeldItem().getItem()).getBonusSouls(player.getHeldItem());
 
-            if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ISoulWeapon)
-                soulStealer += ((ISoulWeapon) player.getHeldItem().getItem()).getBonusSouls(player.getHeldItem());
-
-            Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
-        }
+        Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
     }
 
     @SubscribeEvent

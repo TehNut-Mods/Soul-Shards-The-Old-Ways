@@ -2,6 +2,7 @@ package com.whammich.sstow.tile;
 
 import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
+import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
@@ -48,6 +49,11 @@ public class TileEntityCage extends TileInventory implements ITickable {
         }
 
         if (TierHandler.getChecksPlayer(tier - 1) && !isPlayerClose()) {
+            setActiveState(false);
+            return;
+        }
+
+        if (SoulShardsAPI.isEntityBlacklisted(EntityMapper.getNewEntityInstance(getWorld(), entName, getPos()))) {
             setActiveState(false);
             return;
         }
