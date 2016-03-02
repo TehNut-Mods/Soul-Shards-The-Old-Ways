@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.whammich.repack.tehnut.lib.util.BlockStack;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.ISoulShard;
 import com.whammich.sstow.api.ISoulWeapon;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
@@ -46,7 +47,7 @@ import java.util.Map;
 @ModItem(name = "ItemSoulShard")
 @Used
 @Handler
-public class ItemSoulShard extends Item {
+public class ItemSoulShard extends Item implements ISoulShard {
 
     private static Map<BlockPos, BlockStack> multiblock = new HashMap<BlockPos, BlockStack>();
 
