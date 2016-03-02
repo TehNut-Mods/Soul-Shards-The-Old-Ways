@@ -50,6 +50,11 @@ public class TileEntityCage extends TileInventory implements ITickable {
             return;
         }
 
+        if (TierHandler.getTier(tier).equals(TierHandler.BLANK_TIER)) {
+            setActiveState(false);
+            return;
+        }
+
         if (ConfigHandler.requireOwnerOnline && !Utils.isOwnerOnline(owner)) {
             setActiveState(false);
             return;
