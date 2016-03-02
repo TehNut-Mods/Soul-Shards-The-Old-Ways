@@ -1,7 +1,7 @@
 package com.whammich.sstow;
 
+import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.util.EntityMapper;
-import com.whammich.sstow.util.TierHandler;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -32,13 +32,6 @@ public class ConfigHandler {
     public static boolean requireOwnerOnline;
 
     public static boolean enableBlacklistedSpawning;
-
-    public static short[] defaultMinKills = {64, 128, 256, 512, 1024};
-    private static byte[] defaultSpawns = {2, 4, 4, 4, 6};
-    private static byte[] defaultDelay = {20, 10, 5, 5, 2};
-    private static boolean[] defaultPlayer = {true, true, false, false, false};
-    private static boolean[] defaultLight = {true, true, true, true, false};
-    private static boolean[] defaultRedstone = {false, false, false, false, true};
 
     public static void init(File file) {
         config = new Configuration(file);
@@ -71,22 +64,6 @@ public class ConfigHandler {
         category = "Debug";
         categories.add(category);
         enableBlacklistedSpawning = config.getBoolean("enableBlacklistedSpawning", category, false, "Allows disabled entities to still be spawned by the cage. They are, however, still not obtainable on a shard.");
-
-        short[] minKills = new short[5];
-
-        for (int i = 0; i < 5; i++) {
-            category = String.format("Tiers.Tier %d", i + 1);
-            categories.add(category);
-
-            minKills[i] = (short) config.getInt("minimumKills", category, defaultMinKills[i], 1, 8096, "Minimum kills for the tier");
-            TierHandler.setNumSpawns(i, (byte) config.getInt("amountToSpawn", category, defaultSpawns[i], 1, 10, "Number of spawns per operation"));
-            TierHandler.setSpawnDelay(i, (byte) config.getInt("spawnCooldown", category, defaultDelay[i], 1, 60, "Cooldown time for soul cages (in seconds)"));
-            TierHandler.setPlayerChecks(i, config.getBoolean("requirePlayer", category, defaultPlayer[i], "Needs a player nearby to spawn entities"));
-            TierHandler.setLightChecks(i, config.getBoolean("followLightLevel", category, defaultLight[i], "Needs appropriate light to spawn entities"));
-            TierHandler.setRedstoneChecks(i, config.getBoolean("redstoneControl", category, defaultRedstone[i], "Reacts to a redstone signal"));
-        }
-
-        TierHandler.setTierReqKills(minKills);
 
         config.setCategoryComment("Entity List", "Set an entity to false to disable it's ability to be spawned.");
         categories.add("Entity List");

@@ -1,5 +1,6 @@
 package com.whammich.sstow.proxy;
 
+import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.client.mesh.CustomMeshDefinition;
@@ -8,6 +9,7 @@ import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.item.ItemSoulSword;
 import com.whammich.sstow.registry.ModBlocks;
 import com.whammich.sstow.registry.ModItems;
+import com.whammich.sstow.util.TierHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -20,6 +22,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import com.whammich.repack.tehnut.lib.annot.Handler;
 
+@Used
 public class ClientProxy extends CommonProxy {
 
     @Override
@@ -45,12 +48,8 @@ public class ClientProxy extends CommonProxy {
 
         ModelLoader.setCustomMeshDefinition(ModItems.getItem(ItemSoulShard.class), new CustomMeshDefinition.SoulShard());
         registerItemVariant(ItemSoulShard.class, "tier=unbound");
-        registerItemVariant(ItemSoulShard.class, "tier=0");
-        registerItemVariant(ItemSoulShard.class, "tier=1");
-        registerItemVariant(ItemSoulShard.class, "tier=2");
-        registerItemVariant(ItemSoulShard.class, "tier=3");
-        registerItemVariant(ItemSoulShard.class, "tier=4");
-        registerItemVariant(ItemSoulShard.class, "tier=5");
+        for (int i = 0; i < TierHandler.tiers.size(); i++)
+            registerItemVariant(ItemSoulShard.class, "tier=" + i);
 
         registerItemModel(ItemMaterials.class, 0, "type=ingotsoulium");
         registerItemModel(ItemMaterials.class, 1, "type=dustcorrupted");

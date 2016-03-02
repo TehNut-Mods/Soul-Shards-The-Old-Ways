@@ -60,12 +60,12 @@ public class TileEntityCage extends TileInventory implements ITickable {
             return;
         }
 
-        if (TierHandler.getChecksRedstone(tier - 1) && isRedstoned()) {
+        if (TierHandler.checksRedstone(tier) && isRedstoned()) {
             setActiveState(false);
             return;
         }
 
-        if (TierHandler.getChecksPlayer(tier - 1) && !isPlayerClose()) {
+        if (TierHandler.checksPlayer(tier) && !isPlayerClose()) {
             setActiveState(false);
             return;
         }
@@ -78,8 +78,8 @@ public class TileEntityCage extends TileInventory implements ITickable {
         activeTime++;
         setActiveState(true);
 
-        if (activeTime % (TierHandler.getCooldown(tier - 1) * 20) == 0) {
-            EntityLiving[] toSpawn = new EntityLiving[TierHandler.getNumSpawns(tier - 1)];
+        if (activeTime % (TierHandler.getCooldown(tier) * 20) == 0) {
+            EntityLiving[] toSpawn = new EntityLiving[TierHandler.getSpawnAmount(tier)];
 
             for (int i = 0; i < toSpawn.length; i++) {
                 toSpawn[i] = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
@@ -129,7 +129,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
         for (EntityLiving ent : ents) {
             int counter = 0;
 
-            if (TierHandler.getChecksLight(tier - 1) && !canSpawnInLight(ent))
+            if (TierHandler.checksLight(tier) && !canSpawnInLight(ent))
                 break;
 
             do {

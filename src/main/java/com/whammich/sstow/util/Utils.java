@@ -1,6 +1,7 @@
 package com.whammich.sstow.util;
 
 import com.mojang.authlib.GameProfile;
+import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
@@ -46,8 +47,26 @@ public final class Utils {
     }
 
     public static void checkAndFixShard(ItemStack shard) {
-        if (!TierHandler.isShardValid(shard))
-            ShardHelper.setTierForShard(shard, TierHandler.getCorrectTier(shard));
+        if (!isShardValid(shard))
+            ShardHelper.setTierForShard(shard, getCorrectTier(shard));
+    }
+
+    public static boolean isShardValid(ItemStack shard) {
+        int kills = ShardHelper.getKillsFromShard(shard);
+        int tier = ShardHelper.getTierFromShard(shard);
+
+        return kills >= TierHandler.getMinKills(tier) && kills <= TierHandler.getMaxKills(tier);
+    }
+
+    public static int getCorrectTier(ItemStack shard) {
+        int kills = ShardHelper.getKillsFromShard(shard);
+
+        for (int i = 0; i <= TierHandler.tiers.size(); i++)
+            if (kills >= TierHandler.getMinKills(i) && kills <= TierHandler.getMaxKills(i))
+                return i;
+
+        SoulShardsTOW.instance.getLogHelper().error("Soul shard has an incorrect kill counter of: {}", kills);
+        return 0;
     }
 
     public static boolean hasMaxedKills(ItemStack shard) {

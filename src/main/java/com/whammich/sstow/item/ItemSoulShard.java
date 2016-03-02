@@ -103,11 +103,11 @@ public class ItemSoulShard extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= TierHandler.tiers.size() - 1; i++) {
             ItemStack stack = new ItemStack(item, 1);
 
             ShardHelper.setKillsForShard(stack, TierHandler.getMinKills(i));
-            ShardHelper.setTierForShard(stack, (byte) i);
+            ShardHelper.setTierForShard(stack, i);
 
             list.add(stack);
         }

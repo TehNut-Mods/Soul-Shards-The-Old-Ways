@@ -68,6 +68,7 @@ public class SoulShardsTOW {
         logHelper = new LogHelper(event.getModLog());
         configDir = new File(event.getModConfigurationDirectory(), "sstow");
         ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
+        JsonConfigHandler.init(new File(configDir, "ShardTiers.json"));
 
         modItems = event.getAsmData().getAll(ModItem.class.getCanonicalName());
         modBlocks = event.getAsmData().getAll(ModBlock.class.getCanonicalName());
