@@ -1,4 +1,16 @@
 ------------------------------------------------------
+Version 2.1.3
+------------------------------------------------------
+
+- Moved Shard configs to a JSON system
+  - Much cleaner code wise
+  - Less prone to errors
+  - Allows for custom tiers to be created
+    - Requires custom resources for textures and models. Works fine without these, however.
+- Fixed bug where an MCP name was called in an obfuscated environment.
+- [API] Added ISoulShard for instanceof checks. Currently no use other than that. May expand to have getters
+
+------------------------------------------------------
 Version 2.1.2
 ------------------------------------------------------
 
