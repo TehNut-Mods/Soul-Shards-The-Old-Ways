@@ -1,13 +1,11 @@
 package com.whammich.sstow.proxy;
 
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.client.gui.GuiHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.repack.tehnut.lib.iface.IProxy;
 
@@ -28,8 +26,6 @@ public class CommonProxy implements IProxy {
                 SoulShardsTOW.instance.getLogHelper().error(String.format("Unable to register event handler for class %s", data.getClassName()));
             }
         }
-
-        NetworkRegistry.INSTANCE.registerGuiHandler(SoulShardsTOW.instance, new GuiHandler());
     }
 
     @Override

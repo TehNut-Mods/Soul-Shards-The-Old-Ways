@@ -12,7 +12,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.whammich.repack.tehnut.lib.annot.ModBlock;
 import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.sstow.tile.TileEntityCage;
-import com.whammich.sstow.util.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
