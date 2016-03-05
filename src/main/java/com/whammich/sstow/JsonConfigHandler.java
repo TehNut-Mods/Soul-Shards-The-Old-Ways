@@ -35,13 +35,15 @@ public class JsonConfigHandler {
         try {
             if (!jsonConfig.exists() && jsonConfig.createNewFile()) {
                 Map<Integer, TierHandler.Tier> defaultMap = handleShardDefaults();
-                String json = gson.toJson(defaultMap, new TypeToken<Map<Integer, TierHandler.Tier>>() { }.getType());
+                String json = gson.toJson(defaultMap, new TypeToken<Map<Integer, TierHandler.Tier>>() {
+                }.getType());
                 FileWriter writer = new FileWriter(jsonConfig);
                 writer.write(json);
                 writer.close();
             }
 
-            TierHandler.tiers = gson.fromJson(new FileReader(jsonConfig), new TypeToken<Map<Integer, TierHandler.Tier>>() { }.getType());
+            TierHandler.tiers = gson.fromJson(new FileReader(jsonConfig), new TypeToken<Map<Integer, TierHandler.Tier>>() {
+            }.getType());
         } catch (IOException e) {
             SoulShardsTOW.instance.getLogHelper().severe("Failed to create a default Tier configuration file.");
         }
@@ -51,13 +53,15 @@ public class JsonConfigHandler {
         try {
             if (!jsonConfig.exists() && jsonConfig.createNewFile()) {
                 List<PosWithStack> defaultList = handleMultiblockDefaults();
-                String json = gson.toJson(defaultList, new TypeToken<ArrayList<PosWithStack>>() { }.getType());
+                String json = gson.toJson(defaultList, new TypeToken<ArrayList<PosWithStack>>() {
+                }.getType());
                 FileWriter writer = new FileWriter(jsonConfig);
                 writer.write(json);
                 writer.close();
             }
 
-            ItemSoulShard.multiblock = gson.fromJson(new FileReader(jsonConfig), new TypeToken<ArrayList<PosWithStack>>() { }.getType());
+            ItemSoulShard.multiblock = gson.fromJson(new FileReader(jsonConfig), new TypeToken<ArrayList<PosWithStack>>() {
+            }.getType());
             for (PosWithStack posWithStack : ItemSoulShard.multiblock)
                 if (posWithStack.getPos().equals(new BlockPos(0, 0, 0)))
                     ItemSoulShard.originBlock = posWithStack.getBlock();

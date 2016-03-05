@@ -1,5 +1,6 @@
 package com.whammich.sstow.registry;
 
+import com.whammich.repack.tehnut.lib.annot.ModItem;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.item.ItemMaterials;
 import net.minecraft.item.Item;
@@ -7,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import com.whammich.repack.tehnut.lib.annot.ModItem;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,11 @@
 package com.whammich.sstow.item;
 
 import com.google.common.base.Strings;
+import com.whammich.repack.tehnut.lib.annot.Handler;
+import com.whammich.repack.tehnut.lib.annot.ModItem;
+import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.repack.tehnut.lib.util.BlockStack;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulShard;
@@ -10,7 +14,10 @@ import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.registry.ModItems;
-import com.whammich.sstow.util.*;
+import com.whammich.sstow.util.EntityMapper;
+import com.whammich.sstow.util.PosWithStack;
+import com.whammich.sstow.util.TierHandler;
+import com.whammich.sstow.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
@@ -35,15 +42,9 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import com.whammich.repack.tehnut.lib.annot.Handler;
-import com.whammich.repack.tehnut.lib.annot.ModItem;
-import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.util.TextHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @ModItem(name = "ItemSoulShard")
 @Used

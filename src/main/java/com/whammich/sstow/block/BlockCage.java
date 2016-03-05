@@ -1,26 +1,26 @@
 package com.whammich.sstow.block;
 
-import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.api.ShardHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import com.whammich.repack.tehnut.lib.annot.ModBlock;
 import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.tile.TileEntityCage;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @ModBlock(name = "BlockCage", tileEntity = TileEntityCage.class)
 @Used
@@ -57,9 +57,12 @@ public class BlockCage extends Block {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         switch (meta) {
-            case 0: return getDefaultState().withProperty(ACTIVE, false);
-            case 1: return getDefaultState().withProperty(ACTIVE, true);
-            default: return getDefaultState().withProperty(ACTIVE, false);
+            case 0:
+                return getDefaultState().withProperty(ACTIVE, false);
+            case 1:
+                return getDefaultState().withProperty(ACTIVE, true);
+            default:
+                return getDefaultState().withProperty(ACTIVE, false);
         }
     }
 
@@ -75,12 +78,18 @@ public class BlockCage extends Block {
             ItemStack shard = tile.getStackInSlot(0);
             int tier = ShardHelper.getTierFromShard(shard);
             switch (tier) {
-                case 1: return 2;
-                case 2: return 5;
-                case 3: return 7;
-                case 4: return 10;
-                case 5: return 15;
-                default: return 0;
+                case 1:
+                    return 2;
+                case 2:
+                    return 5;
+                case 3:
+                    return 7;
+                case 4:
+                    return 10;
+                case 5:
+                    return 15;
+                default:
+                    return 0;
             }
         } else {
             return 0;
@@ -115,7 +124,7 @@ public class BlockCage extends Block {
                     cage.setOwner(player.getGameProfile().getId().toString());
                 player.getHeldItem().stackSize--;
                 return true;
-            } else if ( cage.getStackInSlot(0) != null && player.getHeldItem() == null && player.isSneaking()) {
+            } else if (cage.getStackInSlot(0) != null && player.getHeldItem() == null && player.isSneaking()) {
                 cage.setTier(0);
                 cage.setEntName("");
                 cage.setActiveTime(0);

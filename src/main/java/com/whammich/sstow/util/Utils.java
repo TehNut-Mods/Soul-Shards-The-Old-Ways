@@ -1,6 +1,7 @@
 package com.whammich.sstow.util;
 
 import com.mojang.authlib.GameProfile;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.item.ItemSoulShard;
@@ -13,7 +14,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import com.whammich.repack.tehnut.lib.util.TextHelper;
 import net.minecraftforge.common.UsernameCache;
 
 import javax.annotation.Nullable;

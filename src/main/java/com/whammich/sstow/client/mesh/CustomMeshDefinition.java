@@ -1,7 +1,6 @@
 package com.whammich.sstow.client.mesh;
 
 import com.whammich.sstow.api.ShardHelper;
-import com.whammich.sstow.util.Utils;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;

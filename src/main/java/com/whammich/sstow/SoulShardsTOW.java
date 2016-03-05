@@ -1,11 +1,19 @@
 package com.whammich.sstow;
 
+import com.whammich.repack.tehnut.lib.annot.Handler;
+import com.whammich.repack.tehnut.lib.annot.ModBlock;
+import com.whammich.repack.tehnut.lib.annot.ModItem;
+import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.iface.ICompatibility;
+import com.whammich.repack.tehnut.lib.util.LogHelper;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.proxy.CommonProxy;
 import com.whammich.sstow.registry.*;
-import com.whammich.sstow.util.*;
+import com.whammich.sstow.util.EntityMapper;
+import com.whammich.sstow.util.IMCHandler;
+import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -16,12 +24,6 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.*;
-import com.whammich.repack.tehnut.lib.annot.Handler;
-import com.whammich.repack.tehnut.lib.annot.ModBlock;
-import com.whammich.repack.tehnut.lib.annot.ModItem;
-import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.iface.ICompatibility;
-import com.whammich.repack.tehnut.lib.util.LogHelper;
 
 import java.io.File;
 import java.util.Set;

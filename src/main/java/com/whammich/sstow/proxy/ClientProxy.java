@@ -1,5 +1,6 @@
 package com.whammich.sstow.proxy;
 
+import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.block.BlockCage;
@@ -20,7 +21,6 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import com.whammich.repack.tehnut.lib.annot.Handler;
 
 @Used
 public class ClientProxy extends CommonProxy {

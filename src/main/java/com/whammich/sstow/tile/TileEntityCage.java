@@ -8,7 +8,9 @@ import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
-import com.whammich.sstow.util.*;
+import com.whammich.sstow.util.EntityMapper;
+import com.whammich.sstow.util.TierHandler;
+import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.entity.EntityLiving;
@@ -16,7 +18,8 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -118,12 +121,12 @@ public class TileEntityCage extends TileInventory implements ITickable {
         tagCompound.setString(OWNER, owner);
     }
 
-    public void setActiveState(boolean activeState) {
-        getWorld().setBlockState(getPos(), getWorld().getBlockState(getPos()).withProperty(BlockCage.ACTIVE, activeState));
-    }
-
     public boolean getActiveState() {
         return getWorld().getBlockState(getPos()).getValue(BlockCage.ACTIVE);
+    }
+
+    public void setActiveState(boolean activeState) {
+        getWorld().setBlockState(getPos(), getWorld().getBlockState(getPos()).withProperty(BlockCage.ACTIVE, activeState));
     }
 
     private boolean canSpawnAtCoords(EntityLiving ent) {

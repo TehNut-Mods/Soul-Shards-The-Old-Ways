@@ -10,7 +10,7 @@ public class SoulShardsAPI {
 
     /**
      * Blacklists an entity from being bound and spawned.
-     *
+     * <p/>
      * IMC: {@code FMLInterModComs.sendMessage("SoulShardsTOW", "blacklistEntity", EntityClass.getCanonicalName())}
      * Example: {@code FMLInterModComs.sendMessage("SoulShardsTOW", "blacklistEntity", EntityWolf.class.getCanonicalName())}
      *

@@ -1,14 +1,17 @@
 package com.whammich.sstow.util;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TierHandler {
 
-    public static Map<Integer, Tier> tiers = new HashMap<Integer, Tier>();
     public static final Tier BLANK_TIER = new TierHandler.Tier(0, 0, true, false, false, 0, 0);
+    public static Map<Integer, Tier> tiers = new HashMap<Integer, Tier>();
 
     public static Tier getTier(int tier) {
         return tiers.get(tier) == null ? BLANK_TIER : tiers.get(tier);

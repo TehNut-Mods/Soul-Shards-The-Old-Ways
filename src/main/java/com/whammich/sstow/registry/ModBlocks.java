@@ -1,12 +1,12 @@
 package com.whammich.sstow.registry;
 
+import com.whammich.repack.tehnut.lib.annot.ModBlock;
 import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import com.whammich.repack.tehnut.lib.annot.ModBlock;
 
 import java.util.HashMap;
 import java.util.Map;

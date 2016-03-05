@@ -1,5 +1,7 @@
 package com.whammich.sstow.item;
 
+import com.whammich.repack.tehnut.lib.annot.ModItem;
+import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.registry.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
@@ -7,8 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import com.whammich.repack.tehnut.lib.annot.ModItem;
-import com.whammich.repack.tehnut.lib.annot.Used;
 
 import java.util.ArrayList;
 import java.util.List;

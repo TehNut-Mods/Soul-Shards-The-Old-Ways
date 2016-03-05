@@ -9,7 +9,6 @@ public interface ISoulWeapon {
      * weapon provides per kill.
      *
      * @param stack - The weapon ItemStack
-     *
      * @return - The amount of bonus souls provided by the weapon.
      */
     int getBonusSouls(ItemStack stack);

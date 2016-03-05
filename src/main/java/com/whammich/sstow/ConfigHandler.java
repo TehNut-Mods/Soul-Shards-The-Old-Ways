@@ -1,11 +1,10 @@
 package com.whammich.sstow;
 
-import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.sstow.util.EntityMapper;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import com.whammich.repack.tehnut.lib.annot.Handler;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,6 +31,14 @@ public class ConfigHandler {
     public static boolean requireOwnerOnline;
 
     public static boolean enableBlacklistedSpawning;
+
+    @SubscribeEvent
+    public void configChanged(ConfigChangedEvent event) {
+        if (event.modID.equals(SoulShardsTOW.MODID)) {
+            syncConfig();
+            handleEntityList("Entity List");
+        }
+    }
 
     public static void init(File file) {
         config = new Configuration(file);
@@ -80,13 +87,5 @@ public class ConfigHandler {
                 entityList.add(name);
 
         config.save();
-    }
-
-    @SubscribeEvent
-    public void configChanged(ConfigChangedEvent event) {
-        if (event.modID.equals(SoulShardsTOW.MODID)) {
-            syncConfig();
-            handleEntityList("Entity List");
-        }
     }
 }

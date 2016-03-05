@@ -1,6 +1,7 @@
 package com.whammich.sstow.commands;
 
 import com.google.common.base.Strings;
+import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
@@ -11,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
-import com.whammich.repack.tehnut.lib.util.TextHelper;
 
 public class CommandSSTOW extends CommandBase {
     @Override
