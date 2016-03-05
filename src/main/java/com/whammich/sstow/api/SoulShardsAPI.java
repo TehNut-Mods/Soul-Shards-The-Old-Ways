@@ -22,7 +22,7 @@ public class SoulShardsAPI {
     }
 
     /**
-     * @see {@link #blacklistEntity(String)}
+     * {@link #blacklistEntity(String)}
      *
      * @param entityClass - The Entity class.
      */
