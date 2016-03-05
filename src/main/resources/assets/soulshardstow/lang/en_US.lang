@@ -33,3 +33,6 @@ waila.SoulShardsTOW.sneak=&oSneak for details
 waila.SoulShardsTOW.boundTo=Bound to: %s
 waila.SoulShardsTOW.tier=Tier: %d
 waila.SoulShardsTOW.owner=Owner: %s
+
+# JEI
+jei.SoulShards.soulshard.desc=A vessel for the Souls of the slain.\n\nObtained by creating a structure in the world and using a Diamond on the origin block.
