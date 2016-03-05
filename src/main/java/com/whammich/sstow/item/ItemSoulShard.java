@@ -66,7 +66,7 @@ public class ItemSoulShard extends Item implements ISoulShard {
             TileEntity tile = world.getTileEntity(pos);
 
             if (tile instanceof TileEntityMobSpawner) {
-                String name = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "mobID");
+                String name = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "mobID", "field_98288_a");
                 EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
 
                 if (ent == null)
