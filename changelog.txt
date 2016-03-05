@@ -7,6 +7,8 @@ Version 2.2.0
   - Limitations:
     - There must be an origin block at 0, 0, 0.
     - The origin block must be the one to be right clicked. You cannot completely surround it by other blocks.
+- Added a description to JEI for the Soul Shard
+- Removed all references to the Soul Forge in code. It's just a machine that will be used once then never again. Sticking with the in-world creation.
 
 ------------------------------------------------------
 Version 2.1.3
