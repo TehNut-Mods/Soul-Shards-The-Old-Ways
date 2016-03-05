@@ -40,6 +40,7 @@ import com.whammich.repack.tehnut.lib.annot.ModItem;
 import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.repack.tehnut.lib.util.TextHelper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,8 @@ import java.util.Map;
 @Handler
 public class ItemSoulShard extends Item implements ISoulShard {
 
-    private static Map<BlockPos, BlockStack> multiblock = new HashMap<BlockPos, BlockStack>();
+    public static List<PosWithStack> multiblock = new ArrayList<PosWithStack>();
+    public static BlockStack originBlock = new BlockStack(Blocks.glowstone);
 
     public ItemSoulShard() {
         super();
@@ -127,15 +129,15 @@ public class ItemSoulShard extends Item implements ISoulShard {
     }
 
     private void buildMultiblock() {
-        multiblock.put(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone));
-        multiblock.put(new BlockPos(1, 0, 0), new BlockStack(Blocks.end_stone));
-        multiblock.put(new BlockPos(0, 0, 1), new BlockStack(Blocks.end_stone));
-        multiblock.put(new BlockPos(0, 0, -1), new BlockStack(Blocks.end_stone));
-        multiblock.put(new BlockPos(-1, 0, 0), new BlockStack(Blocks.end_stone));
-        multiblock.put(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian));
-        multiblock.put(new BlockPos(-1, 0, -1), new BlockStack(Blocks.obsidian));
-        multiblock.put(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian));
-        multiblock.put(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian));
+        multiblock.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
+        multiblock.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.end_stone)));
+        multiblock.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.end_stone)));
+        multiblock.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.end_stone)));
+        multiblock.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.end_stone)));
+        multiblock.add(new PosWithStack(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(new PosWithStack(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(new PosWithStack(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(new PosWithStack(new BlockPos(-1, 0, -1), new BlockStack(Blocks.obsidian)));
     }
 
     @SubscribeEvent
@@ -187,15 +189,15 @@ public class ItemSoulShard extends Item implements ISoulShard {
         if (event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
             return;
 
-        if (event.entityPlayer.getHeldItem() != null && event.entityPlayer.getHeldItem().getItem() == Items.diamond && event.world.getBlockState(event.pos).getBlock() == Blocks.glowstone) {
-            for (BlockPos multiPos : multiblock.keySet()) {
-                BlockStack worldStack = BlockStack.getStackFromPos(event.world, event.pos.add(multiPos));
-                if (!multiblock.get(multiPos).equals(worldStack))
+        if (event.entityPlayer.getHeldItem() != null && event.entityPlayer.getHeldItem().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.world, event.pos))) {
+            for (PosWithStack posWithStack : multiblock) {
+                BlockStack worldStack = BlockStack.getStackFromPos(event.world, event.pos.add(posWithStack.getPos()));
+                if (!posWithStack.getBlock().equals(worldStack))
                     return;
             }
 
-            for (BlockPos multiPos : multiblock.keySet())
-                event.world.destroyBlock(event.pos.add(multiPos), false);
+            for (PosWithStack posWithStack : multiblock)
+                event.world.destroyBlock(event.pos.add(posWithStack.getPos()), false);
 
             if (!event.world.isRemote) {
                 EntityItem invItem = new EntityItem(event.world, event.entityPlayer.posX, event.entityPlayer.posY + 0.25, event.entityPlayer.posZ, new ItemStack(ModItems.getItem(getClass()), 1, 0));

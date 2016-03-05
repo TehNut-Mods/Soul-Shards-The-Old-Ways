@@ -1,4 +1,14 @@
 ------------------------------------------------------
+Version 2.2.0
+------------------------------------------------------
+
+- Moved multiblock recipe to JSON format
+  - The X, Y, and Z are an offset from the block the player right clicked
+  - Limitations:
+    - There must be an origin block at 0, 0, 0.
+    - The origin block must be the one to be right clicked. You cannot completely surround it by other blocks.
+
+------------------------------------------------------
 Version 2.1.3
 ------------------------------------------------------
 
