@@ -19,6 +19,7 @@ public class ItemMaterials extends Item {
 
     public static final String INGOT_CORRUPTED = "ingotCorrupted";
     public static final String CORRUPTED_ESSENCE = "dustCorrupted";
+    public static final String DUST_VILE = "dustVile";
 
     private static List<String> names = new ArrayList<String>();
 
@@ -35,6 +36,7 @@ public class ItemMaterials extends Item {
     private void buildItems() {
         names.add(0, INGOT_CORRUPTED);
         names.add(1, CORRUPTED_ESSENCE);
+        names.add(2, DUST_VILE);
     }
 
     @Override

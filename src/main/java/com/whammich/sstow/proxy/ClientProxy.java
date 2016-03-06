@@ -53,6 +53,7 @@ public class ClientProxy extends CommonProxy {
 
         registerItemModel(ItemMaterials.class, 0, "type=ingotsoulium");
         registerItemModel(ItemMaterials.class, 1, "type=dustcorrupted");
+        registerItemModel(ItemMaterials.class, 2, "type=dustvile");
 
         registerBlockModel(BlockCage.class, 0, "active=false");
         registerBlockModel(BlockCage.class, 1, "active=true");

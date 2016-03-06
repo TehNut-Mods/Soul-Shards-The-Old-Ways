@@ -32,9 +32,9 @@ public class ModItems {
             }
         }
 
-
-        OreDictionary.registerOre(ItemMaterials.INGOT_CORRUPTED, new ItemStack(getItem(ItemMaterials.class), 1, 0));
-        OreDictionary.registerOre(ItemMaterials.CORRUPTED_ESSENCE, new ItemStack(getItem(ItemMaterials.class), 1, 1));
+        OreDictionary.registerOre(ItemMaterials.INGOT_CORRUPTED, ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED));
+        OreDictionary.registerOre(ItemMaterials.CORRUPTED_ESSENCE, ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE));
+        OreDictionary.registerOre(ItemMaterials.DUST_VILE, ItemMaterials.getStack(ItemMaterials.DUST_VILE));
     }
 
     public static Item getItem(String name) {

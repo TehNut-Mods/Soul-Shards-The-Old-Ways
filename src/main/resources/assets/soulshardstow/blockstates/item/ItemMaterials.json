@@ -15,6 +15,11 @@
         "textures": {
           "layer0": "soulshardstow:items/essenceCorrupted"
         }
+      },
+      "dustvile": {
+        "textures": {
+          "layer0": "soulshardstow:items/dustVile"
+        }
       }
     }
   }

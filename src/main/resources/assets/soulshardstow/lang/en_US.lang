@@ -6,6 +6,7 @@ item.SoulShardsTOW.shard.name=Soul Shard
 item.SoulShardsTOW.shard.unbound.name=Unbound Soul Shard
 item.SoulShardsTOW.material.ingotCorrupted.name=Corrupted Ingot
 item.SoulShardsTOW.material.dustCorrupted.name=Corrupted Essence
+item.SoulShardsTOW.material.dustVile.name=Vile Dust
 item.SoulShardsTOW.soulSword.name=Vile Sword
 
 # Blocks
