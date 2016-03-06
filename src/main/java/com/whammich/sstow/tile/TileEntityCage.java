@@ -86,7 +86,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
         activeTime++;
         setActiveState(true);
 
-        if (activeTime % (TierHandler.getCooldown(tier) * 20) == 0) {
+        if (activeTime % (TierHandler.getCooldown(tier) * (ConfigHandler.cooldownUsesSeconds ? 20 : 1)) == 0) {
             EntityLiving[] toSpawn = new EntityLiving[TierHandler.getSpawnAmount(tier)];
 
             for (int i = 0; i < toSpawn.length; i++) {

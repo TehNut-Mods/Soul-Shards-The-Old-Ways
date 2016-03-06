@@ -29,6 +29,7 @@ public class ConfigHandler {
     public static int spawnerAbsorptionBonus;
     public static boolean enableExperienceDrop;
     public static boolean requireOwnerOnline;
+    public static boolean cooldownUsesSeconds;
 
     public static boolean enableBlacklistedSpawning;
 
@@ -57,6 +58,7 @@ public class ConfigHandler {
         spawnerAbsorptionBonus = config.getInt("spawnerAbsorptionBonus", category, 200, 0, 1024, "Amount of souls to add when absorbing a spawner.");
         enableExperienceDrop = config.getBoolean("enableExperienceDrop", category, true, "Mobs spawned via a Soul Cage will drop experience upon death.");
         requireOwnerOnline = config.getBoolean("requireOwnerOnline", category, false, "Requires the player who put the shard into the Soul Cage to be online for it to be active.");
+        cooldownUsesSeconds = config.getBoolean("cooldownUsesSeconds", category, true, "The cooldown time set in \"ShardTiers.json\" should use seconds instead of ticks. Allows finer control over tiers.\n1 second = 20 ticks\nI suggest not changing this unless you have edited the configs.");
 
         category = "General";
         categories.add(category);
