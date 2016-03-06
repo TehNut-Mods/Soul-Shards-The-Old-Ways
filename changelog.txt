@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.2.1
+------------------------------------------------------
+
+- Fixed third person models for items. They no longer look like a held tool.
+- Added Vile Dust and made some recipe tweaks to account for it.
+- Added config option to change the cooldown time to be considered in ticks instead of seconds. Useful for those who want finer control over timings.
+
+------------------------------------------------------
 Version 2.2.0
 ------------------------------------------------------
 
