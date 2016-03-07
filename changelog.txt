@@ -2,6 +2,14 @@
 Version 2.2.3
 ------------------------------------------------------
 
+- Fixed a few instances of hardcoding to a max of 5 tiers
+- Added a durability bar to Shards to display how close to max tier it is.
+  - Includes a config option for those who don't want it
+
+------------------------------------------------------
+Version 2.2.3
+------------------------------------------------------
+
 - Fixed NPE when setting repair material while Tinkers' Construct was installed
 
 ------------------------------------------------------
