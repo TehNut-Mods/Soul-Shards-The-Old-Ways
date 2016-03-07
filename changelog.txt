@@ -1,4 +1,14 @@
 ------------------------------------------------------
+Version 2.2.2
+------------------------------------------------------
+
+- Vile Sword can now be repaired with a Corrupted Ingot
+- Shards can now be combined in an anvil.
+  - Transfers the kills from the shard on the right to the one on the left
+  - Level cost is the output shard tier multiplied by 6.
+  - http://gfycat.com/HelplessShrillGalapagossealion
+
+------------------------------------------------------
 Version 2.2.1
 ------------------------------------------------------
 
