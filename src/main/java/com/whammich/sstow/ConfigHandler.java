@@ -19,6 +19,7 @@ public class ConfigHandler {
     public static List<String> entityList = new ArrayList<String>();
 
     public static int spawnCap;
+    public static boolean displayDurabilityBar;
 
     public static int soulStealerID;
     public static int soulStealerWeight;
@@ -63,6 +64,7 @@ public class ConfigHandler {
         category = "General";
         categories.add(category);
         spawnCap = config.getInt("spawnCap", category, 30, 0, 256, "Max amount of mobs spawned by a given spawner in a 16 block radius.");
+        displayDurabilityBar = config.getBoolean("displayDurabilityBar", category, true, "Displays a durability bar on the shard as an indicator on how close to maxed it is");
 
         category = "Enchantments";
         categories.add(category);

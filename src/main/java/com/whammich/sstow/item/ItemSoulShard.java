@@ -94,6 +94,16 @@ public class ItemSoulShard extends Item implements ISoulShard {
     }
 
     @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return ConfigHandler.displayDurabilityBar && ShardHelper.getKillsFromShard(stack) < TierHandler.getMaxKills(TierHandler.tiers.size() - 1);
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+        return 1.0D - ((double) ShardHelper.getKillsFromShard(stack) / (double) TierHandler.getTier(TierHandler.tiers.size() - 1).getMinKills());
+    }
+
+    @Override
     public String getUnlocalizedName(ItemStack stack) {
         return super.getUnlocalizedName(stack) + (ShardHelper.isBound(stack) ? "" : ".unbound");
     }
