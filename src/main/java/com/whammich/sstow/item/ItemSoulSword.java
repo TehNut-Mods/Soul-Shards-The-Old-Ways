@@ -12,7 +12,7 @@ import net.minecraftforge.common.util.EnumHelper;
 @Used
 public class ItemSoulSword extends ItemSword implements ISoulWeapon {
 
-    private static final ToolMaterial MATERIAL_SOUL = EnumHelper.addToolMaterial("SOUL", 2, 250, 6.0F, 2.0F, 14).setRepairItem(ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED));
+    public static final ToolMaterial MATERIAL_SOUL = EnumHelper.addToolMaterial("SOUL", 2, 250, 6.0F, 2.0F, 14);
 
     public ItemSoulSword() {
         super(MATERIAL_SOUL);

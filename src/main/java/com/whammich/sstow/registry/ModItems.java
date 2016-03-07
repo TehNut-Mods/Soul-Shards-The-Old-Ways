@@ -3,6 +3,7 @@ package com.whammich.sstow.registry;
 import com.whammich.repack.tehnut.lib.annot.ModItem;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.item.ItemMaterials;
+import com.whammich.sstow.item.ItemSoulSword;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -35,6 +36,8 @@ public class ModItems {
         OreDictionary.registerOre(ItemMaterials.INGOT_CORRUPTED, ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED));
         OreDictionary.registerOre(ItemMaterials.CORRUPTED_ESSENCE, ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE));
         OreDictionary.registerOre(ItemMaterials.DUST_VILE, ItemMaterials.getStack(ItemMaterials.DUST_VILE));
+
+        ItemSoulSword.MATERIAL_SOUL.setRepairItem(ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED));
     }
 
     public static Item getItem(String name) {
