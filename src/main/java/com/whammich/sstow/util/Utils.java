@@ -70,11 +70,11 @@ public final class Utils {
     }
 
     public static boolean hasMaxedKills(ItemStack shard) {
-        return ShardHelper.isBound(shard) && ShardHelper.getKillsFromShard(shard) >= TierHandler.getMaxKills(5);
+        return ShardHelper.isBound(shard) && ShardHelper.getKillsFromShard(shard) >= TierHandler.getMaxKills(TierHandler.tiers.size() - 1);
     }
 
     public static ItemStack setMaxedKills(ItemStack shard) {
-        ShardHelper.setKillsForShard(shard, TierHandler.getMaxKills(5));
+        ShardHelper.setKillsForShard(shard, TierHandler.getMaxKills(TierHandler.tiers.size() - 1));
         return shard;
     }
 
@@ -91,7 +91,7 @@ public final class Utils {
     }
 
     private static short getClampedKillCount(int amount) {
-        int value = MathHelper.clamp_int(amount, 0, TierHandler.getMaxKills(5));
+        int value = MathHelper.clamp_int(amount, 0, TierHandler.getMaxKills(TierHandler.tiers.size() - 1));
 
         if (value > Short.MAX_VALUE)
             return Short.MAX_VALUE;
