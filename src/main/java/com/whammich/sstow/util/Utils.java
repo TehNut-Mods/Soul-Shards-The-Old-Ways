@@ -38,7 +38,7 @@ public final class Utils {
         return lastResort;
     }
 
-    public static void increaseShardKillCount(ItemStack shard, short amount) {
+    public static void increaseShardKillCount(ItemStack shard, int amount) {
         if (!shard.hasTagCompound() || hasMaxedKills(shard))
             return;
 
