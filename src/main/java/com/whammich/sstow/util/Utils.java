@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
+import com.whammich.sstow.api.event.ShardTierChangeEvent;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.tile.TileEntityCage;
@@ -14,6 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.UsernameCache;
 
 import javax.annotation.Nullable;
@@ -47,8 +49,10 @@ public final class Utils {
     }
 
     public static void checkAndFixShard(ItemStack shard) {
-        if (!isShardValid(shard))
+        if (!isShardValid(shard)) {
             ShardHelper.setTierForShard(shard, getCorrectTier(shard));
+            MinecraftForge.EVENT_BUS.post(new ShardTierChangeEvent(shard, getCorrectTier(shard)));
+        }
     }
 
     public static boolean isShardValid(ItemStack shard) {
@@ -82,12 +86,7 @@ public final class Utils {
         if (unlocName.equals("Wither Skeleton"))
             return unlocName;
 
-        String result = TextHelper.localize("entity." + unlocName + ".name");
-
-        if (result == null)
-            return unlocName;
-
-        return result;
+        return TextHelper.localize("entity." + unlocName + ".name");
     }
 
     private static short getClampedKillCount(int amount) {

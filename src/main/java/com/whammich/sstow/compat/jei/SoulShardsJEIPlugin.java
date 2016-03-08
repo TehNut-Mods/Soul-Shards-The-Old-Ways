@@ -1,5 +1,6 @@
 package com.whammich.sstow.compat.jei;
 
+import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 @JEIPlugin
+@Used
 public class SoulShardsJEIPlugin extends BlankModPlugin {
 
     @Override
