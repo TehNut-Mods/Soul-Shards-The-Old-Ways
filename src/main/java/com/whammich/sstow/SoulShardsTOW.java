@@ -13,6 +13,7 @@ import com.whammich.sstow.proxy.CommonProxy;
 import com.whammich.sstow.registry.*;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.IMCHandler;
+import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import net.minecraft.creativetab.CreativeTabs;
@@ -51,7 +52,7 @@ public class SoulShardsTOW {
         @Override
         public ItemStack getIconItemStack() {
             ItemStack shard = new ItemStack(ModItems.getItem(ItemSoulShard.class));
-            ShardHelper.setTierForShard(shard, 5);
+            ShardHelper.setTierForShard(shard, TierHandler.tiers.size() - 1);
             Utils.setMaxedKills(shard);
             ShardHelper.setBoundEntity(shard, "Pig");
             return shard;
