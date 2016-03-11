@@ -6,12 +6,16 @@ import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIArrowAttack;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,15 +56,20 @@ public final class EntityMapper {
             return null;
 
         if (ent.equals("Wither Skeleton")) {
-            EntitySkeleton skele = new EntitySkeleton(world);
-            skele.setSkeletonType(1);
-            return skele;
+            EntitySkeleton skeleton = new EntitySkeleton(world);
+            skeleton.setSkeletonType(1);
+            skeleton.tasks.addTask(4, new EntityAIAttackOnCollide(skeleton, EntityPlayer.class, 1.2D, false));
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword));
+            skeleton.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+            return skeleton;
         }
 
-        if (ent.equals("Villager")) {
-            EntityVillager villager = new EntityVillager(world);
-            VillagerRegistry.setRandomProfession(villager, villager.worldObj.rand);
-            return villager;
+        if (ent.equals("Skeleton")) {
+            EntitySkeleton skeleton = new EntitySkeleton(world);
+            skeleton.setSkeletonType(0);
+            skeleton.tasks.addTask(4, new EntityAIArrowAttack(skeleton, 1.0D, 20, 60, 15.0F));
+            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+            return skeleton;
         }
 
         EntityLiving spawnedEntity = (EntityLiving) EntityList.createEntityByName(ent, world);
