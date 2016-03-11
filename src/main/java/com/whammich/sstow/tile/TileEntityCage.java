@@ -5,6 +5,7 @@ import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
+import com.whammich.sstow.api.event.CageSpawnEvent;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
@@ -14,12 +15,14 @@ import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -86,19 +89,8 @@ public class TileEntityCage extends TileInventory implements ITickable {
         activeTime++;
         setActiveState(true);
 
-        if (activeTime % (TierHandler.getCooldown(tier) * (ConfigHandler.cooldownUsesSeconds ? 20 : 1)) == 0) {
-            EntityLiving[] toSpawn = new EntityLiving[TierHandler.getSpawnAmount(tier)];
-
-            for (int i = 0; i < toSpawn.length; i++) {
-                toSpawn[i] = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
-
-                toSpawn[i].getEntityData().setBoolean(SSTOW, true);
-                toSpawn[i].forceSpawn = true;
-                toSpawn[i].enablePersistence();
-            }
-
-            spawnEntities(toSpawn);
-        }
+        if (activeTime % (TierHandler.getCooldown(tier) * (ConfigHandler.cooldownUsesSeconds ? 20 : 1)) == 0)
+            spawnEntities(TierHandler.getSpawnAmount(tier), getEntName());
     }
 
     @Override
@@ -129,33 +121,45 @@ public class TileEntityCage extends TileInventory implements ITickable {
         getWorld().setBlockState(getPos(), getWorld().getBlockState(getPos()).withProperty(BlockCage.ACTIVE, activeState));
     }
 
-    private boolean canSpawnAtCoords(EntityLiving ent) {
-        return worldObj.getCollidingBoundingBoxes(ent, ent.getEntityBoundingBox()).isEmpty();
-    }
+    private void spawnEntities(int amount, String entName) {
+        for (int i = 0; i < amount; i++) {
+            EntityLiving entityLiving = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
+            int attempts = 0;
 
-    private void spawnEntities(EntityLiving[] ents) {
-        for (EntityLiving ent : ents) {
-            int counter = 0;
+            if (entityLiving == null)
+                continue;
 
-            if (TierHandler.checksLight(tier) && !canSpawnInLight(ent))
+            if (TierHandler.checksLight(tier) && !canSpawnInLight(entityLiving))
                 break;
 
             do {
-                counter++;
-                if (counter >= 5) {
-                    ent.setDead();
+                attempts++;
+                if (attempts >= 5) {
+                    entityLiving.setDead();
                     break;
                 }
 
                 double x = getPos().getX() + (getWorld().rand.nextDouble() - getWorld().rand.nextDouble()) * 4.0D;
                 double y = getPos().getY() + getWorld().rand.nextInt(3) - 1;
                 double z = getPos().getZ() + (getWorld().rand.nextDouble() - getWorld().rand.nextDouble()) * 4.0D;
-                ent.setLocationAndAngles(x, y, z, getWorld().rand.nextFloat() * 360.0F, 0.0F);
-            } while (!canSpawnAtCoords(ent) || counter >= 5);
+                entityLiving.setLocationAndAngles(x, y, z, getWorld().rand.nextFloat() * 360.0F, 0.0F);
+                entityLiving.getEntityData().setBoolean(SSTOW, true);
+                entityLiving.forceSpawn = true;
+                entityLiving.enablePersistence();
+            } while (!canSpawnAtCoords(entityLiving) || attempts >= 5);
 
-            if (!ent.isDead && !hasReachedSpawnCap(ent))
-                getWorld().spawnEntityInWorld(ent);
+            if (!entityLiving.isDead || !hasReachedSpawnCap(entityLiving)) {
+                CageSpawnEvent event = new CageSpawnEvent(getStackInSlot(0), getTier(), getOwner(), entityLiving);
+                if (MinecraftForge.EVENT_BUS.post(event))
+                    continue;
+
+                getWorld().spawnEntityInWorld(entityLiving);
+            }
         }
+    }
+
+    private boolean canSpawnAtCoords(EntityLiving ent) {
+        return worldObj.getCollidingBoundingBoxes(ent, ent.getEntityBoundingBox()).isEmpty();
     }
 
     private boolean isRedstoned() {
