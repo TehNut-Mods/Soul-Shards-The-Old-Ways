@@ -1,4 +1,16 @@
 ------------------------------------------------------
+Version 2.2.4
+------------------------------------------------------
+
+- Added German translation
+- Cleaned up some Skeleton special casing
+- Removed Villager special casing. Standard method works just fine for them
+- Reworked the Soul Cage spawning mechanic to be less... silly
+- Fixed another instance of hardcoding to 5.
+- [API] Added a ShardTierChangeEvent that fires when a Shard's tier changes through normal means.
+- [API] Added a CageSpawnEvent (Cancellable) that fires right before a Soul Cage is about to spawn an entity
+
+------------------------------------------------------
 Version 2.2.3
 ------------------------------------------------------
 
