@@ -1,7 +1,6 @@
 package com.whammich.sstow.registry;
 
 import com.whammich.repack.tehnut.lib.iface.ICompatibility;
-import com.whammich.sstow.compat.bloodmagic.CompatibilityBloodMagic;
 import com.whammich.sstow.compat.waila.CompatibilityWaila;
 import net.minecraftforge.fml.common.Loader;
 
@@ -14,7 +13,6 @@ public class ModCompatibility {
 
     public static void registerModCompat() {
         compatibilities.add(new CompatibilityWaila());
-        compatibilities.add(new CompatibilityBloodMagic());
     }
 
     public static void loadCompat(ICompatibility.InitializationPhase phase) {
