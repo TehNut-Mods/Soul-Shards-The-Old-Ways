@@ -161,24 +161,25 @@ public class ItemSoulShard extends Item implements ISoulShard {
         EntityLiving dead = (EntityLiving) event.entity;
         EntityPlayer player = (EntityPlayer) event.source.getEntity();
         String entName = EntityList.getEntityString(dead);
-        ItemStack shard = Utils.getShardFromInv(player, entName);
-
-        if (shard == null)
-            return;
 
         if (Strings.isNullOrEmpty(entName)) {
             SoulShardsTOW.instance.getLogHelper().severe("Player killed an entity with no mapped name: {}", dead);
             return;
         }
 
+        if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
+            entName = "Wither Skeleton";
+
+        ItemStack shard = Utils.getShardFromInv(player, entName);
+
+        if (shard == null)
+            return;
+
         if (!ConfigHandler.entityList.contains(entName) || SoulShardsAPI.isEntityBlacklisted(dead))
             return;
 
         if (!EntityMapper.isEntityValid(entName))
             return;
-
-        if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
-            entName = "Wither Skeleton";
 
         if (!ShardHelper.isBound(shard))
             ShardHelper.setBoundEntity(shard, entName);
