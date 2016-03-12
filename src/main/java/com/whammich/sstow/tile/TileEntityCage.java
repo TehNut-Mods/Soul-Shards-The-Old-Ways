@@ -148,7 +148,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
                 entityLiving.enablePersistence();
             } while (!canSpawnAtCoords(entityLiving) || attempts >= 5);
 
-            if (!entityLiving.isDead || !hasReachedSpawnCap(entityLiving)) {
+            if (!entityLiving.isDead && !hasReachedSpawnCap(entityLiving)) {
                 CageSpawnEvent event = new CageSpawnEvent(getStackInSlot(0), getTier(), getOwner(), entityLiving);
                 if (MinecraftForge.EVENT_BUS.post(event))
                     continue;
