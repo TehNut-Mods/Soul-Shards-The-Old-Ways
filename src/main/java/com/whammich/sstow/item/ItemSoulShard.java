@@ -83,7 +83,7 @@ public class ItemSoulShard extends Item implements ISoulShard {
 
                 if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
                     if (!world.isRemote)
-                        Utils.increaseShardKillCount(stack, (short) ConfigHandler.spawnerAbsorptionBonus);
+                        Utils.increaseShardKillCount(stack, ConfigHandler.spawnerAbsorptionBonus);
                     world.destroyBlock(pos, false);
                     return true;
                 }
@@ -190,7 +190,7 @@ public class ItemSoulShard extends Item implements ISoulShard {
         if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ISoulWeapon)
             soulStealer += ((ISoulWeapon) player.getHeldItem().getItem()).getBonusSouls(player.getHeldItem());
 
-        Utils.increaseShardKillCount(shard, (short) (1 + soulStealer));
+        Utils.increaseShardKillCount(shard, 1 + soulStealer);
     }
 
     @SubscribeEvent

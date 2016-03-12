@@ -56,8 +56,8 @@ public class CommandSSTOW extends CommandBase {
                     if (((EntityPlayerMP) sender).getHeldItem() != null && ((EntityPlayerMP) sender).getHeldItem().getItem() == ModItems.getItem(ItemSoulShard.class)) {
                         ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
                         for (int i = 1; i <= tierAmount; i++) {
-                            ShardHelper.setTierForShard(shard, (byte) 1);
-                            ShardHelper.setKillsForShard(shard, (short) minKills);
+                            ShardHelper.setTierForShard(shard, 1);
+                            ShardHelper.setKillsForShard(shard, minKills);
                         }
                     }
                 } else {

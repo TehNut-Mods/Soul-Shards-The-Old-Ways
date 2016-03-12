@@ -89,13 +89,8 @@ public final class Utils {
         return TextHelper.localize("entity." + unlocName + ".name");
     }
 
-    private static short getClampedKillCount(int amount) {
-        int value = MathHelper.clamp_int(amount, 0, TierHandler.getMaxKills(TierHandler.tiers.size() - 1));
-
-        if (value > Short.MAX_VALUE)
-            return Short.MAX_VALUE;
-
-        return (short) value;
+    private static int getClampedKillCount(int amount) {
+        return MathHelper.clamp_int(amount, 0, TierHandler.getMaxKills(TierHandler.tiers.size() - 1));
     }
 
     public static boolean isCageBorn(EntityLivingBase living) {
