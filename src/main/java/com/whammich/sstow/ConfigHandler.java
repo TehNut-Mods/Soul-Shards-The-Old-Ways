@@ -1,6 +1,7 @@
 package com.whammich.sstow;
 
 import com.whammich.repack.tehnut.lib.annot.Handler;
+import com.whammich.sstow.compat.CompatibilityType;
 import com.whammich.sstow.util.EntityMapper;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -9,6 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Handler
 public class ConfigHandler {
@@ -33,6 +35,9 @@ public class ConfigHandler {
     public static boolean cooldownUsesSeconds;
 
     public static boolean enableBlacklistedSpawning;
+
+    public static CompatibilityType compatibilityType = CompatibilityType.VANILLA;
+    public static int lpPerMob;
 
     @SubscribeEvent
     public void configChanged(ConfigChangedEvent event) {
@@ -78,6 +83,13 @@ public class ConfigHandler {
 
         config.setCategoryComment("Entity List", "Set an entity to false to disable it's ability to be spawned.");
         categories.add("Entity List");
+
+        category = "Compatibility";
+        categories.add(category);
+        String compatTypeString = config.get(category, "compatibilityType", "VANILLA", "The type of spawning mechanic to use for the Soul Cage.\nValid values:\nVANILLA - The standard spawning mechanic.\nBLOODMAGIC - Requires 100 LP per mob spawned.").setRequiresWorldRestart(true).getString();
+        if (CompatibilityType.valueOf(compatTypeString.toUpperCase(Locale.ENGLISH)) != null)
+            compatibilityType = CompatibilityType.valueOf(compatTypeString.toUpperCase(Locale.ENGLISH));
+        lpPerMob = config.getInt("lpPerMob", category, 250, 0, Integer.MAX_VALUE, "Amount of LP required for each mob spawned.\nIf this amount is not contained in the LP network, a nausea effect will be applied to the player and the Soul Cage will stop functioning.");
 
         if (config.hasChanged())
             config.save();
