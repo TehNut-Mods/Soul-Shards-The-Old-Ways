@@ -1,4 +1,15 @@
 ------------------------------------------------------
+Version 2.2.7
+------------------------------------------------------
+
+- Added compatibility with Blood Magic
+  - Allows requiring use of LP in order for the Soul Cage to function.
+  - Defaults to 250 LP required *per mob* on an individual basis. This means that it will only spawn the amount of mobs available from your current LP count.
+  - Causes a nausea effect when not enough LP is available and the cage is activated. Disallows spawning.
+- Config to disallow Cage Born mobs from counting towards Shard kill count
+- [API] CageSpawnEvent now obtains it's tier value from the Shard instead of manually passing it. Shouldn't affect anybody.
+
+------------------------------------------------------
 Version 2.2.6
 ------------------------------------------------------
 
