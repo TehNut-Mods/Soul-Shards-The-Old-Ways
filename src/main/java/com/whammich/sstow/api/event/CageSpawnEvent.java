@@ -1,5 +1,6 @@
 package com.whammich.sstow.api.event;
 
+import com.whammich.sstow.api.ShardHelper;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
@@ -21,13 +22,12 @@ public class CageSpawnEvent extends Event {
      * If cancelled, the spawn does not occur.
      *
      * @param shard        - The ItemStack inside the SoulCage. Guarenteed to be an {@link com.whammich.sstow.api.ISoulShard}
-     * @param tier         - The tier of the shard
      * @param owner        - The owner of the cage (UUID)
      * @param entityLiving - The entity about to be spawned.
      */
-    public CageSpawnEvent(ItemStack shard, int tier, String owner, EntityLiving entityLiving) {
+    public CageSpawnEvent(ItemStack shard, String owner, EntityLiving entityLiving) {
         this.shard = shard;
-        this.tier = tier;
+        this.tier = ShardHelper.getTierFromShard(shard);
         this.owner = owner;
         this.entityLiving = entityLiving;
     }
