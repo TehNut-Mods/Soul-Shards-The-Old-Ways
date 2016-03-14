@@ -181,6 +181,9 @@ public class ItemSoulShard extends Item implements ISoulShard {
         if (!EntityMapper.isEntityValid(entName))
             return;
 
+        if (!ConfigHandler.countCageBornForShard && Utils.isCageBorn(dead))
+            return;
+
         if (!ShardHelper.isBound(shard))
             ShardHelper.setBoundEntity(shard, entName);
 
