@@ -31,11 +31,6 @@ public final class EntityMapper {
                 continue;
             }
 
-//            if (IBossDisplayData.class.isAssignableFrom(entry.getKey()) && !ConfigHandler.enableBosses) {
-//                SoulShardsTOW.instance.getLogHelper().info("Boss detected, skipping {}", entry.getValue());
-//                continue;
-//            }
-
             if (EntityLiving.class.isAssignableFrom(entry.getKey()))
                 entityList.add(entry.getValue());
         }
