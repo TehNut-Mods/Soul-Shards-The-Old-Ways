@@ -10,7 +10,7 @@ import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.serialization.SerializerBlockPos;
 import com.whammich.sstow.util.serialization.SerializerBlockStack;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 import java.io.File;
 import java.io.FileReader;

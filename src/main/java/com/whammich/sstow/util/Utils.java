@@ -12,11 +12,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.UsernameCache;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -102,12 +103,12 @@ public final class Utils {
     }
 
     public static boolean isOwnerOnline(String owner) {
-        if (MinecraftServer.getServer() == null)
+        if (FMLCommonHandler.instance().getMinecraftServerInstance() == null)
             return false;
 
         String username = UsernameCache.getLastKnownUsername(UUID.fromString(owner));
 
-        for (GameProfile profile : MinecraftServer.getServer().getGameProfiles())
+        for (GameProfile profile : FMLCommonHandler.instance().getMinecraftServerInstance().getGameProfiles())
             if (profile.getName().equals(username))
                 return true;
 

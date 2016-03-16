@@ -1,7 +1,7 @@
 package com.whammich.sstow.util.serialization;
 
 import com.google.gson.*;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 import java.lang.reflect.Type;
 

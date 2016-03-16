@@ -3,6 +3,7 @@ buildscript {
         mavenCentral()
         maven { url "http://files.minecraftforge.net/maven" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+		maven { url "http://maven.modmuss50.me" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
@@ -49,12 +50,13 @@ repositories {
     maven { url "http://dvs1.progwml6.com/files/maven" }
     maven { url "http://mobiusstrip.eu/maven" }
     maven { url "http://tehnut.info/maven" }
+	maven { url "http://maven.modmuss50.me" }
 }
 
 dependencies {
-    deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
-    deobfCompile "mcp.mobius.waila:Waila:${waila_version}_1.8.8"
-    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${bloodmagic_version}:api"
+//    deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
+//    deobfCompile "mcp.mobius.waila:Waila:${waila_version}_1.8.8"
+//    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${bloodmagic_version}:api"
 }
 
 minecraft {
@@ -198,9 +200,7 @@ curseforge {
     project {
         id = "${curse_id}"
         changelog = getChangelogText()
-        releaseType = 'beta'
-
-        addGameVersion '1.8.9'
+        releaseType = 'alpha'
 
         relations curseRelations
 

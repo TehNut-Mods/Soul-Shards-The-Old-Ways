@@ -11,7 +11,9 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
 
 public class CommandSSTOW extends CommandBase {
     @Override
@@ -30,7 +32,7 @@ public class CommandSSTOW extends CommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] params) {
+    public void execute(MinecraftServer server, ICommandSender sender, String[] params) {
 
         if ((params.length > 0) && (params.length <= 7)) {
             if (params[0].equalsIgnoreCase("killall")) {
@@ -44,35 +46,35 @@ public class CommandSSTOW extends CommandBase {
                 }
 
                 if (killCounter == 0) {
-                    sender.addChatMessage(new ChatComponentText(TextHelper.localizeEffect("chat.sstow.command.notfound")));
+                    sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.notfound")));
                 } else {
-                    sender.addChatMessage(new ChatComponentText(TextHelper.localizeEffect("chat.sstow.command.killed", killCounter)));
+                    sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.killed", killCounter)));
                 }
             } else if (params[0].equalsIgnoreCase("settier")) {
 
                 if (params.length == 2) {
                     int tierAmount = Integer.parseInt(params[1]);
                     int minKills = TierHandler.getMinKills(tierAmount);
-                    if (((EntityPlayerMP) sender).getHeldItem() != null && ((EntityPlayerMP) sender).getHeldItem().getItem() == ModItems.getItem(ItemSoulShard.class)) {
-                        ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
+                    if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.getItem(ItemSoulShard.class)) {
+                        ItemStack shard = ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND);
                         for (int i = 1; i <= tierAmount; i++) {
                             ShardHelper.setTierForShard(shard, 1);
                             ShardHelper.setKillsForShard(shard, minKills);
                         }
                     }
                 } else {
-                    sender.addChatMessage(new ChatComponentText(TextHelper.localizeEffect("chat.sstow.command.setwrong")));
+                    sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.setwrong")));
                 }
             } else if (params[0].equalsIgnoreCase("setent") && !Strings.isNullOrEmpty(params[1])) {
-                if (((EntityPlayerMP) sender).getHeldItem() != null && ((EntityPlayerMP) sender).getHeldItem().getItem() == ModItems.getItem(ItemSoulShard.class)) {
-                    ItemStack shard = ((EntityPlayerMP) sender).getHeldItem();
+                if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.getItem(ItemSoulShard.class)) {
+                    ItemStack shard = ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND);
                     String entName = "";
                     for (int i = 1; i < params.length; i++)
                         entName += (entName.length() > 0 ? " " : "") + params[i];
                     ShardHelper.setBoundEntity(shard, entName);
                 }
             } else {
-                sender.addChatMessage(new ChatComponentText(TextHelper.localizeEffect("chat.sstow.command.wrongcommand")));
+                sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.wrongcommand")));
             }
         }
     }

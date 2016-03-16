@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 
 @Getter
 @RequiredArgsConstructor

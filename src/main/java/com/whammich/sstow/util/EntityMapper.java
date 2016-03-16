@@ -7,14 +7,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.boss.IBossDisplayData;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAttackRangedBow;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -32,10 +31,10 @@ public final class EntityMapper {
                 continue;
             }
 
-            if (IBossDisplayData.class.isAssignableFrom(entry.getKey()) && !ConfigHandler.enableBosses) {
-                SoulShardsTOW.instance.getLogHelper().info("Boss detected, skipping {}", entry.getValue());
-                continue;
-            }
+//            if (IBossDisplayData.class.isAssignableFrom(entry.getKey()) && !ConfigHandler.enableBosses) {
+//                SoulShardsTOW.instance.getLogHelper().info("Boss detected, skipping {}", entry.getValue());
+//                continue;
+//            }
 
             if (EntityLiving.class.isAssignableFrom(entry.getKey()))
                 entityList.add(entry.getValue());
@@ -58,17 +57,17 @@ public final class EntityMapper {
         if (ent.equals("Wither Skeleton")) {
             EntitySkeleton skeleton = new EntitySkeleton(world);
             skeleton.setSkeletonType(1);
-            skeleton.tasks.addTask(4, new EntityAIAttackOnCollide(skeleton, EntityPlayer.class, 1.2D, false));
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.stone_sword));
-            skeleton.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+            skeleton.tasks.addTask(4, new EntityAIAttackMelee(skeleton, 1.2D, false));
+            skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.stone_sword));
+            skeleton.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
             return skeleton;
         }
 
         if (ent.equals("Skeleton")) {
             EntitySkeleton skeleton = new EntitySkeleton(world);
             skeleton.setSkeletonType(0);
-            skeleton.tasks.addTask(4, new EntityAIArrowAttack(skeleton, 1.0D, 20, 60, 15.0F));
-            skeleton.setCurrentItemOrArmor(0, new ItemStack(Items.bow));
+            skeleton.tasks.addTask(4, new EntityAIAttackRangedBow(skeleton, 1.0D, 20, 15.0F));
+            skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.bow));
             return skeleton;
         }
 

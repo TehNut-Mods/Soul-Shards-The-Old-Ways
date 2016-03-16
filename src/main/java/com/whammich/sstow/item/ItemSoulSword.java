@@ -6,7 +6,7 @@ import com.whammich.repack.tehnut.lib.iface.IMeshProvider;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulWeapon;
 import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ResourceLocation;

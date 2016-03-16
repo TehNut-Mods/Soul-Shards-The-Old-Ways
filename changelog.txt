@@ -1,4 +1,13 @@
 ------------------------------------------------------
+Version 2.3.0
+------------------------------------------------------
+
+- Initial pre-release for Minecraft 1.9. You still need to wait for Forge to release builds.
+  - Spawning is a bit... iffy. You'll see if you try it. Not sure if it's my fault or Forge's.
+- Direct port. No major changes. Worlds should move just fine.
+- All compatibility has been disabled for now.
+
+------------------------------------------------------
 Version 2.2.7
 ------------------------------------------------------
 

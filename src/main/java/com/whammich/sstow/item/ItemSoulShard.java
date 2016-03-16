@@ -20,8 +20,9 @@ import com.whammich.sstow.util.PosWithStack;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -35,9 +36,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -68,7 +71,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!Utils.hasMaxedKills(stack) && ConfigHandler.allowSpawnerAbsorption) {
             TileEntity tile = world.getTileEntity(pos);
 
@@ -77,10 +80,10 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                 EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
 
                 if (ent == null)
-                    return false;
+                    return EnumActionResult.FAIL;
 
                 if (!EntityMapper.isEntityValid(name) || SoulShardsAPI.isEntityBlacklisted(ent))
-                    return false;
+                    return EnumActionResult.FAIL;
 
                 if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
                     name = "Wither Skeleton";
@@ -89,12 +92,12 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                     if (!world.isRemote)
                         Utils.increaseShardKillCount(stack, ConfigHandler.spawnerAbsorptionBonus);
                     world.destroyBlock(pos, false);
-                    return true;
+                    return EnumActionResult.SUCCESS;
                 }
             }
         }
 
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     @Override
@@ -214,11 +217,11 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (!ShardHelper.isBound(shard))
             ShardHelper.setBoundEntity(shard, entName);
 
-        int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer.effectId, player.getHeldItem());
+        int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer, player.getHeldItemMainhand());
         soulStealer *= ConfigHandler.soulStealerBonus;
 
-        if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ISoulWeapon)
-            soulStealer += ((ISoulWeapon) player.getHeldItem().getItem()).getBonusSouls(player.getHeldItem());
+        if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() instanceof ISoulWeapon)
+            soulStealer += ((ISoulWeapon) player.getHeldItemMainhand().getItem()).getBonusSouls(player.getHeldItemMainhand());
 
         Utils.increaseShardKillCount(shard, 1 + soulStealer);
     }
@@ -231,7 +234,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
             return;
 
-        if (event.entityPlayer.getHeldItem() != null && event.entityPlayer.getHeldItem().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.world, event.pos))) {
+        if (event.entityPlayer.getHeldItemMainhand() != null && event.entityPlayer.getHeldItemMainhand().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.world, event.pos))) {
             for (PosWithStack posWithStack : multiblock) {
                 BlockStack worldStack = BlockStack.getStackFromPos(event.world, event.pos.add(posWithStack.getPos()));
                 if (!posWithStack.getBlock().equals(worldStack))
@@ -246,8 +249,8 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                 event.world.spawnEntityInWorld(invItem);
             }
             if (!event.entityPlayer.capabilities.isCreativeMode)
-                event.entityPlayer.getHeldItem().stackSize--;
-            event.entityPlayer.swingItem();
+                event.entityPlayer.getHeldItemMainhand().stackSize--;
+            event.entityPlayer.swingArm(EnumHand.MAIN_HAND);
         }
     }
 }

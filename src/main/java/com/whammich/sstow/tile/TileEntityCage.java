@@ -15,13 +15,12 @@ import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -159,7 +158,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
     }
 
     private boolean canSpawnAtCoords(EntityLiving ent) {
-        return worldObj.getCollidingBoundingBoxes(ent, ent.getEntityBoundingBox()).isEmpty();
+        return ent.isNotColliding() && ent.getCanSpawnHere();
     }
 
     private boolean isRedstoned() {
@@ -171,11 +170,11 @@ public class TileEntityCage extends TileInventory implements ITickable {
     }
 
     private boolean isPlayerClose() {
-        return getWorld().getClosestPlayer(getPos().getX(), getPos().getY(), getPos().getZ(), 16D) != null;
+        return getWorld().isAnyPlayerWithinRangeAt(getPos().getX(), getPos().getY(), getPos().getZ(), 16D);
     }
 
     private boolean hasReachedSpawnCap(EntityLiving living) {
-        AxisAlignedBB box = AxisAlignedBB.fromBounds(getPos().getX() - 16, getPos().getY() - 16, getPos().getZ() - 16, getPos().getX() + 16, getPos().getY() + 16, getPos().getZ() + 16);
+        AxisAlignedBB box = new AxisAlignedBB(getPos().getX() - 16, getPos().getY() - 16, getPos().getZ() - 16, getPos().getX() + 16, getPos().getY() + 16, getPos().getZ() + 16);
 
         int mobCount = 0;
 

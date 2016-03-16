@@ -11,11 +11,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class TileInventory extends TileEntity implements IInventory {
@@ -77,11 +78,11 @@ public class TileInventory extends TileEntity implements IInventory {
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(getPos(), -999, nbt);
+        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         super.onDataPacket(net, pkt);
         readFromNBT(pkt.getNbtCompound());
     }
@@ -95,14 +96,14 @@ public class TileInventory extends TileEntity implements IInventory {
         InventoryHelper.dropInventoryItems(getWorld(), getPos(), this);
     }
 
-    public boolean insertItem(EntityPlayer player, int slot) {
-        if (getStackInSlot(slot) == null && player.getHeldItem() != null && isItemValidForSlot(slot, player.getHeldItem())) {
-            ItemStack input = player.getHeldItem().copy();
+    public boolean insertItem(EntityPlayer player, EnumHand hand, int slot) {
+        if (getStackInSlot(slot) == null && player.getHeldItem(hand) != null && isItemValidForSlot(slot, player.getHeldItem(hand))) {
+            ItemStack input = player.getHeldItem(hand).copy();
             input.stackSize = 1;
-            player.getHeldItem().stackSize--;
+            player.getHeldItem(hand).stackSize--;
             setInventorySlotContents(slot, input);
             return true;
-        } else if (getStackInSlot(slot) != null && player.getHeldItem() == null) {
+        } else if (getStackInSlot(slot) != null && player.getHeldItem(hand) == null) {
             if (!getWorld().isRemote) {
                 EntityItem invItem = new EntityItem(getWorld(), player.posX, player.posY + 0.25, player.posZ, getStackInSlot(slot));
                 getWorld().spawnEntityInWorld(invItem);
@@ -129,9 +130,6 @@ public class TileInventory extends TileEntity implements IInventory {
     @Override
     public ItemStack decrStackSize(int index, int count) {
         if (inventory[index] != null) {
-            if (!worldObj.isRemote)
-                worldObj.markBlockForUpdate(this.pos);
-
             if (inventory[index].stackSize <= count) {
                 ItemStack itemStack = inventory[index];
                 inventory[index] = null;
@@ -166,8 +164,6 @@ public class TileInventory extends TileEntity implements IInventory {
         if (stack != null && stack.stackSize > getInventoryStackLimit())
             stack.stackSize = getInventoryStackLimit();
         markDirty();
-        if (!worldObj.isRemote)
-            worldObj.markBlockForUpdate(this.pos);
     }
 
     @Override
@@ -228,7 +224,7 @@ public class TileInventory extends TileEntity implements IInventory {
     }
 
     @Override
-    public IChatComponent getDisplayName() {
-        return new ChatComponentText(getName());
+    public ITextComponent getDisplayName() {
+        return new TextComponentString(getName());
     }
 }

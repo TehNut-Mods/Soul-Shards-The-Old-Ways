@@ -1,6 +1,6 @@
 package com.whammich.repack.tehnut.lib.util;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class TextHelper
 
     public static String localize(String input, Object... format)
     {
-        return StatCollector.translateToLocalFormatted(input, format);
+        return I18n.translateToLocalFormatted(input, format);
     }
 
     public static String localizeEffect(String input, Object... format)

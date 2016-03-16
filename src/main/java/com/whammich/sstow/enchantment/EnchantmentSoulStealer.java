@@ -1,14 +1,13 @@
 package com.whammich.sstow.enchantment;
 
-import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class EnchantmentSoulStealer extends Enchantment {
 
-    public EnchantmentSoulStealer(int id, int weight) {
-        super(id, new ResourceLocation(SoulShardsTOW.MODID, "soulStealer"), weight, EnumEnchantmentType.WEAPON);
+    public EnchantmentSoulStealer() {
+        super(Rarity.UNCOMMON, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
 
         setName("soulStealer");
     }

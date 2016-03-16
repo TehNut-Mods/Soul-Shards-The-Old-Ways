@@ -7,8 +7,8 @@ public class CompatibilityWaila implements ICompatibility {
 
     @Override
     public void loadCompatibility(InitializationPhase phase) {
-        if (phase == InitializationPhase.INIT)
-            FMLInterModComms.sendMessage("Waila", "register", WailaCallbackHandler.class.getCanonicalName() + ".callbackRegister");
+//        if (phase == InitializationPhase.INIT)
+//            FMLInterModComms.sendMessage("Waila", "register", WailaCallbackHandler.class.getCanonicalName() + ".callbackRegister");
     }
 
     @Override

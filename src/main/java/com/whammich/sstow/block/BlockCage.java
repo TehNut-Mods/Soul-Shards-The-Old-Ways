@@ -9,15 +9,16 @@ import com.whammich.sstow.tile.TileEntityCage;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -45,8 +46,8 @@ public class BlockCage extends Block implements IVariantProvider {
     }
 
     @Override
-    protected BlockState createBlockState() {
-        return new BlockState(this, ACTIVE);
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, ACTIVE);
     }
 
     @Override
@@ -73,12 +74,12 @@ public class BlockCage extends Block implements IVariantProvider {
     }
 
     @Override
-    public boolean hasComparatorInputOverride() {
+    public boolean hasComparatorInputOverride(IBlockState state) {
         return true;
     }
 
     @Override
-    public int getComparatorInputOverride(World world, BlockPos pos) {
+    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
         TileEntityCage tile = (TileEntityCage) world.getTileEntity(pos);
         if (tile.getStackInSlot(0) != null) {
             ItemStack shard = tile.getStackInSlot(0);
@@ -103,7 +104,7 @@ public class BlockCage extends Block implements IVariantProvider {
     }
 
     @Override
-    public boolean canConnectRedstone(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return true;
     }
 
@@ -117,20 +118,20 @@ public class BlockCage extends Block implements IVariantProvider {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileEntity tile = world.getTileEntity(pos);
 
         if (tile != null && tile instanceof TileEntityCage) {
             TileEntityCage cage = (TileEntityCage) tile;
-            if (player.getHeldItem() != null && cage.getStackInSlot(0) == null && cage.isItemValidForSlot(0, player.getHeldItem()) && !player.isSneaking()) {
-                cage.setInventorySlotContents(0, player.getHeldItem().copy());
-                cage.setTier(ShardHelper.getTierFromShard(player.getHeldItem()));
-                cage.setEntName(ShardHelper.getBoundEntity(player.getHeldItem()));
+            if (player.getHeldItemMainhand() != null && cage.getStackInSlot(0) == null && cage.isItemValidForSlot(0, player.getHeldItemMainhand()) && !player.isSneaking()) {
+                cage.setInventorySlotContents(0, player.getHeldItemMainhand().copy());
+                cage.setTier(ShardHelper.getTierFromShard(player.getHeldItemMainhand()));
+                cage.setEntName(ShardHelper.getBoundEntity(player.getHeldItemMainhand()));
                 if (!world.isRemote)
                     cage.setOwner(player.getGameProfile().getId().toString());
-                player.getHeldItem().stackSize--;
+                player.getHeldItemMainhand().stackSize--;
                 return true;
-            } else if (cage.getStackInSlot(0) != null && player.getHeldItem() == null && player.isSneaking()) {
+            } else if (cage.getStackInSlot(0) != null && player.getHeldItemMainhand() == null && player.isSneaking()) {
                 cage.setTier(0);
                 cage.setEntName("");
                 cage.setActiveTime(0);
@@ -154,7 +155,7 @@ public class BlockCage extends Block implements IVariantProvider {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
@@ -166,8 +167,8 @@ public class BlockCage extends Block implements IVariantProvider {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public EnumWorldBlockLayer getBlockLayer() {
-        return EnumWorldBlockLayer.CUTOUT;
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT;
     }
 
     @Override
