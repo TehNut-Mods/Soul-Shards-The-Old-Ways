@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.repack.tehnut.lib.annot.ModItem;
 import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.iface.IMeshProvider;
 import com.whammich.repack.tehnut.lib.util.BlockStack;
 import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.ConfigHandler;
@@ -18,6 +19,8 @@ import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.PosWithStack;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
@@ -34,6 +37,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -49,7 +53,7 @@ import java.util.List;
 @ModItem(name = "ItemSoulShard")
 @Used
 @Handler
-public class ItemSoulShard extends Item implements ISoulShard {
+public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     public static List<PosWithStack> multiblock = new ArrayList<PosWithStack>();
     public static BlockStack originBlock = new BlockStack(Blocks.glowstone);
@@ -137,6 +141,29 @@ public class ItemSoulShard extends Item implements ISoulShard {
             list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.kills", ShardHelper.getKillsFromShard(stack)));
 
         list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.tier", ShardHelper.getTierFromShard(stack)));
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemMeshDefinition getMeshDefinition() {
+        return new ItemMeshDefinition() {
+            @Override
+            public ModelResourceLocation getModelLocation(ItemStack stack) {
+                if (ShardHelper.isBound(stack))
+                    return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulShard"), "tier=" + ShardHelper.getTierFromShard(stack));
+
+                return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulShard"), "tier=unbound");
+            }
+        };
+    }
+
+    @Override
+    public List<String> getVariants() {
+        List<String> ret = new ArrayList<String>();
+        ret.add("tier=unbound");
+        for (int i = 0; i < TierHandler.tiers.size(); i++)
+            ret.add("tier=" + i);
+        return ret;
     }
 
     private void buildMultiblock() {

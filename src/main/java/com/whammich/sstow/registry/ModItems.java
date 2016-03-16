@@ -5,7 +5,6 @@ import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.item.ItemMaterials;
 import com.whammich.sstow.item.ItemSoulSword;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -27,6 +26,7 @@ public class ModItems {
                 Item modItem = modItemClass.newInstance();
 
                 GameRegistry.registerItem(modItem, name);
+                SoulShardsTOW.proxy.tryHandleItemModel(modItem, name);
                 classToName.put(modItemClass, name);
             } catch (Exception e) {
                 SoulShardsTOW.instance.getLogHelper().error(String.format("Unable to register item for class %s", data.getClassName()));

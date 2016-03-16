@@ -2,15 +2,9 @@ package com.whammich.sstow.proxy;
 
 import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.iface.IVariantProvider;
+import com.whammich.repack.tehnut.lib.iface.IMeshProvider;
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.block.BlockCage;
-import com.whammich.sstow.client.mesh.CustomMeshDefinition;
-import com.whammich.sstow.item.ItemMaterials;
-import com.whammich.sstow.item.ItemSoulShard;
-import com.whammich.sstow.item.ItemSoulSword;
-import com.whammich.sstow.registry.ModBlocks;
-import com.whammich.sstow.registry.ModItems;
-import com.whammich.sstow.util.TierHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -21,6 +15,7 @@ import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.commons.lang3.tuple.Pair;
 
 @Used
 public class ClientProxy extends CommonProxy {
@@ -42,21 +37,6 @@ public class ClientProxy extends CommonProxy {
                 SoulShardsTOW.instance.getLogHelper().error(String.format("Unable to register event handler for class %s", data.getClassName()));
             }
         }
-
-        ModelLoader.setCustomMeshDefinition(ModItems.getItem(ItemSoulSword.class), new CustomMeshDefinition.SoulSword());
-        registerItemVariant(ItemSoulSword.class, "type=vile");
-
-        ModelLoader.setCustomMeshDefinition(ModItems.getItem(ItemSoulShard.class), new CustomMeshDefinition.SoulShard());
-        registerItemVariant(ItemSoulShard.class, "tier=unbound");
-        for (int i = 0; i < TierHandler.tiers.size(); i++)
-            registerItemVariant(ItemSoulShard.class, "tier=" + i);
-
-        registerItemModel(ItemMaterials.class, 0, "type=ingotsoulium");
-        registerItemModel(ItemMaterials.class, 1, "type=dustcorrupted");
-        registerItemModel(ItemMaterials.class, 2, "type=dustvile");
-
-        registerBlockModel(BlockCage.class, 0, "active=false");
-        registerBlockModel(BlockCage.class, 1, "active=true");
     }
 
     @Override
@@ -69,15 +49,26 @@ public class ClientProxy extends CommonProxy {
         super.postInit(event);
     }
 
-    private static void registerBlockModel(Class<? extends Block> blockClass, int meta, String variant) {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.getBlock(blockClass)), meta, new ModelResourceLocation(new ResourceLocation(SoulShardsTOW.MODID, ModBlocks.getName(blockClass)), variant));
+    @Override
+    public void tryHandleBlockModel(Block block, String name) {
+        if (block instanceof IVariantProvider) {
+            IVariantProvider variantProvider = (IVariantProvider) block;
+            for (Pair<Integer, String> variant : variantProvider.getVariants())
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), variant.getLeft(), new ModelResourceLocation(new ResourceLocation(SoulShardsTOW.MODID, name), variant.getRight()));
+        }
     }
 
-    private static void registerItemModel(Class<? extends Item> itemClass, int meta, String variant) {
-        ModelLoader.setCustomModelResourceLocation(ModItems.getItem(itemClass), meta, new ModelResourceLocation(new ResourceLocation(SoulShardsTOW.MODID, "item/" + ModItems.getName(itemClass)), variant));
-    }
-
-    private static void registerItemVariant(Class<? extends Item> itemClass, String variant) {
-        ModelLoader.registerItemVariants(ModItems.getItem(itemClass), new ModelResourceLocation(new ResourceLocation(SoulShardsTOW.MODID, "item/" + ModItems.getName(itemClass)), variant));
+    @Override
+    public void tryHandleItemModel(Item item, String name) {
+        if (item instanceof IMeshProvider) {
+            IMeshProvider meshProvider = (IMeshProvider) item;
+            ModelLoader.setCustomMeshDefinition(item, meshProvider.getMeshDefinition());
+            for (String variant : meshProvider.getVariants())
+                ModelLoader.registerItemVariants(item, new ModelResourceLocation(new ResourceLocation(SoulShardsTOW.MODID, "item/" + name), variant));
+        } else if (item instanceof IVariantProvider) {
+            IVariantProvider variantProvider = (IVariantProvider) item;
+            for (Pair<Integer, String> variant : variantProvider.getVariants())
+                ModelLoader.setCustomModelResourceLocation(item, variant.getLeft(), new ModelResourceLocation(new ResourceLocation(SoulShardsTOW.MODID, "item/" + name), variant.getRight()));
+        }
     }
 }

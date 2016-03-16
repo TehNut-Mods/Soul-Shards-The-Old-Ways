@@ -29,6 +29,7 @@ public class ModBlocks {
 
                 GameRegistry.registerBlock(modBlock, itemBlockClass, name);
                 GameRegistry.registerTileEntity(tileClass, SoulShardsTOW.MODID + ":" + tileClass.getSimpleName());
+                SoulShardsTOW.proxy.tryHandleBlockModel(modBlock, name);
                 classToName.put(modBlockClass, name);
             } catch (Exception e) {
                 SoulShardsTOW.instance.getLogHelper().error(String.format("Unable to register block for class %s", data.getClassName()));

@@ -2,6 +2,7 @@ package com.whammich.sstow.block;
 
 import com.whammich.repack.tehnut.lib.annot.ModBlock;
 import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.iface.IVariantProvider;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.tile.TileEntityCage;
@@ -21,10 +22,15 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ModBlock(name = "BlockCage", tileEntity = TileEntityCage.class)
 @Used
-public class BlockCage extends Block {
+public class BlockCage extends Block implements IVariantProvider {
 
     public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
@@ -172,5 +178,13 @@ public class BlockCage extends Block {
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileEntityCage();
+    }
+
+    @Override
+    public List<Pair<Integer, String>> getVariants() {
+        List<Pair<Integer, String>> ret = new ArrayList<Pair<Integer, String>>();
+        ret.add(new ImmutablePair<Integer, String>(0, "active=false"));
+        ret.add(new ImmutablePair<Integer, String>(1, "active=true"));
+        return ret;
     }
 }

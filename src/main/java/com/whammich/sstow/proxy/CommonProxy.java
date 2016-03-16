@@ -3,6 +3,8 @@ package com.whammich.sstow.proxy;
 import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.repack.tehnut.lib.iface.IProxy;
 import com.whammich.sstow.SoulShardsTOW;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -36,5 +38,13 @@ public class CommonProxy implements IProxy {
     @Override
     public void postInit(FMLPostInitializationEvent event) {
 
+    }
+
+    public void tryHandleBlockModel(Block block, String name) {
+        // NO-OP
+    }
+
+    public void tryHandleItemModel(Item item, String name) {
+        // NO-OP
     }
 }

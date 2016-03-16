@@ -2,15 +2,24 @@ package com.whammich.sstow.item;
 
 import com.whammich.repack.tehnut.lib.annot.ModItem;
 import com.whammich.repack.tehnut.lib.annot.Used;
+import com.whammich.repack.tehnut.lib.iface.IMeshProvider;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulWeapon;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Collections;
+import java.util.List;
 
 @ModItem(name = "ItemSoulSword")
 @Used
-public class ItemSoulSword extends ItemSword implements ISoulWeapon {
+public class ItemSoulSword extends ItemSword implements ISoulWeapon, IMeshProvider {
 
     public static final ToolMaterial MATERIAL_SOUL = EnumHelper.addToolMaterial("SOUL", 2, 250, 6.0F, 2.0F, 14);
 
@@ -24,5 +33,21 @@ public class ItemSoulSword extends ItemSword implements ISoulWeapon {
     @Override
     public int getBonusSouls(ItemStack stack) {
         return 1;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemMeshDefinition getMeshDefinition() {
+        return new ItemMeshDefinition() {
+            @Override
+            public ModelResourceLocation getModelLocation(ItemStack stack) {
+                return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulSword"), "type=vile");
+            }
+        };
+    }
+
+    @Override
+    public List<String> getVariants() {
+        return Collections.singletonList("type=vile");
     }
 }
