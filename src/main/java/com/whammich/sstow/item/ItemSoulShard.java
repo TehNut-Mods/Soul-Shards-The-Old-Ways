@@ -231,7 +231,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (multiblock.isEmpty())
             buildMultiblock();
 
-        if (event.action != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK)
+        if (event.action != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
             return;
 
         if (event.entityPlayer.getHeldItemMainhand() != null && event.entityPlayer.getHeldItemMainhand().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.world, event.pos))) {
