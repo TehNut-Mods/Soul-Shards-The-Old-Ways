@@ -1,11 +1,23 @@
 ------------------------------------------------------
+Version 2.3.1
+------------------------------------------------------
+
+- Re-enabled the JEI plugin
+- Moved to official Forge builds instead of the bootleg ones I was using
+- Re-added the anti-boss config
+  - Shards for bosses can still be obtained, but they will not spawn.
+- Fixed Shard being unobtainable in Survival
+  - Left click on the origin block with a Diamond instead of right click.
+  - PlayerInteractEvent is currently broken as the system that powers it is being re-done. Until then, left click!
+
+------------------------------------------------------
 Version 2.3.0
 ------------------------------------------------------
 
 - Initial pre-release for Minecraft 1.9. You still need to wait for Forge to release builds.
   - Spawning is a bit... iffy. You'll see if you try it. Not sure if it's my fault or Forge's.
-- Direct port. No major changes. Worlds should move just fine.
-- All compatibility has been disabled for now.
+  - Direct port. No major changes. Worlds should move just fine.
+  - All compatibility has been disabled for now.
 
 ------------------------------------------------------
 Version 2.2.7
