@@ -1,6 +1,8 @@
 package com.whammich.sstow.registry;
 
+import com.google.common.base.Strings;
 import com.whammich.repack.tehnut.lib.annot.Handler;
+import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.api.ISoulShard;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.block.BlockCage;
@@ -33,6 +35,10 @@ public class ModRecipes {
             if (ShardHelper.isBound(event.left) && ShardHelper.getKillsFromShard(event.right) > 0) {
                 if (Utils.hasMaxedKills(event.left))
                     return;
+
+                if (ConfigHandler.requireSameEntityForCombining && !Strings.isNullOrEmpty(ShardHelper.getBoundEntity(event.right)))
+                    if (!ShardHelper.getBoundEntity(event.left).equals(ShardHelper.getBoundEntity(event.right)))
+                        return;
 
                 ItemStack output = event.left.copy();
                 Utils.increaseShardKillCount(output, ShardHelper.getKillsFromShard(event.right));
