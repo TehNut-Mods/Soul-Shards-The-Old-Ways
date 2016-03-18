@@ -1,6 +1,7 @@
 package com.whammich.sstow.tile;
 
 import com.whammich.repack.tehnut.lib.util.TextHelper;
+import com.whammich.sstow.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -130,6 +131,8 @@ public class TileInventory extends TileEntity implements IInventory {
     @Override
     public ItemStack decrStackSize(int index, int count) {
         if (inventory[index] != null) {
+            if (!getWorld().isRemote)
+                Utils.notifyUpdateBasic(getWorld(), getPos());
             if (inventory[index].stackSize <= count) {
                 ItemStack itemStack = inventory[index];
                 inventory[index] = null;
@@ -164,6 +167,8 @@ public class TileInventory extends TileEntity implements IInventory {
         if (stack != null && stack.stackSize > getInventoryStackLimit())
             stack.stackSize = getInventoryStackLimit();
         markDirty();
+        if (!getWorld().isRemote)
+            Utils.notifyUpdateBasic(getWorld(), getPos());
     }
 
     @Override

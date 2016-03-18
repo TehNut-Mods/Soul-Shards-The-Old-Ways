@@ -114,4 +114,8 @@ public final class Utils {
 
         return false;
     }
+
+    public static void notifyUpdateBasic(World world, BlockPos pos) {
+        world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
+    }
 }
