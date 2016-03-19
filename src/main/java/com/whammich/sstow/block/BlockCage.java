@@ -5,6 +5,7 @@ import com.whammich.repack.tehnut.lib.annot.Used;
 import com.whammich.repack.tehnut.lib.iface.IVariantProvider;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
+import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.tile.TileEntityCage;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -33,13 +34,11 @@ import java.util.List;
 @Used
 public class BlockCage extends Block implements IVariantProvider {
 
-    public static final PropertyBool ACTIVE = PropertyBool.create("active");
-
     public BlockCage() {
         super(Material.iron);
         setUnlocalizedName(SoulShardsTOW.MODID + ".cage");
         setCreativeTab(SoulShardsTOW.soulShardsTab);
-        setDefaultState(blockState.getBaseState().withProperty(ACTIVE, false));
+        setDefaultState(blockState.getBaseState().withProperty(SoulShardsAPI.ACTIVE, false));
 
         blockHardness = 3.0F;
         blockResistance = 3.0F;
@@ -47,29 +46,29 @@ public class BlockCage extends Block implements IVariantProvider {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, ACTIVE);
+        return new BlockStateContainer(this, SoulShardsAPI.ACTIVE);
     }
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TileEntity tile = worldIn.getTileEntity(pos);
-        return state.withProperty(ACTIVE, ((TileEntityCage) tile).getActiveState());
+        return state.withProperty(SoulShardsAPI.ACTIVE, ((TileEntityCage) tile).getActiveState());
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(ACTIVE) ? 1 : 0;
+        return state.getValue(SoulShardsAPI.ACTIVE) ? 1 : 0;
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
         switch (meta) {
             case 0:
-                return getDefaultState().withProperty(ACTIVE, false);
+                return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, false);
             case 1:
-                return getDefaultState().withProperty(ACTIVE, true);
+                return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, true);
             default:
-                return getDefaultState().withProperty(ACTIVE, false);
+                return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, false);
         }
     }
 
