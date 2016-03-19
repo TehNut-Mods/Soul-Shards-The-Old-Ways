@@ -4,6 +4,9 @@ Version 2.3.2
 
 - Fixed some misunderstandings about block updates
 - Changed checking of light level to the location the entity will spawn at instead of the cage's location
+- Re-balance to place Shard creation just after entering the Nether.
+  - Replaced End Stone with Quartz Block
+  - For existing instances, delete `../config/sstow/Multiblock.json` to get the change.
 - [API] Moved the ACTIVE IProperty to API
 
 ------------------------------------------------------
