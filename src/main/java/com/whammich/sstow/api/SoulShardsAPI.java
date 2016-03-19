@@ -1,11 +1,13 @@
 package com.whammich.sstow.api;
 
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.entity.EntityLiving;
 
 import java.util.ArrayList;
 
 public class SoulShardsAPI {
 
+    public static final PropertyBool ACTIVE = PropertyBool.create("active");
     private static ArrayList<String> entityBlacklist = new ArrayList<String>();
 
     /**

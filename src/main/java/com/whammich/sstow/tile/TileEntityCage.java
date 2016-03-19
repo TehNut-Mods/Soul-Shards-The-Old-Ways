@@ -115,11 +115,11 @@ public class TileEntityCage extends TileInventory implements ITickable {
     }
 
     public boolean getActiveState() {
-        return getWorld().getBlockState(getPos()).getValue(BlockCage.ACTIVE);
+        return getWorld().getBlockState(getPos()).getValue(SoulShardsAPI.ACTIVE);
     }
 
     public void setActiveState(boolean activeState) {
-        getWorld().setBlockState(getPos(), getWorld().getBlockState(getPos()).withProperty(BlockCage.ACTIVE, activeState));
+        getWorld().setBlockState(getPos(), getWorld().getBlockState(getPos()).withProperty(SoulShardsAPI.ACTIVE, activeState));
     }
 
     private void spawnEntities(int amount, String entName) {
