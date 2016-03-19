@@ -87,10 +87,10 @@ public class JsonConfigHandler {
         ArrayList<PosWithStack> ret = new ArrayList<PosWithStack>();
 
         ret.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
-        ret.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.end_stone)));
-        ret.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.end_stone)));
-        ret.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.end_stone)));
-        ret.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.end_stone)));
+        ret.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.quartz_block)));
+        ret.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.quartz_block)));
+        ret.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.quartz_block)));
+        ret.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.quartz_block)));
         ret.add(new PosWithStack(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian)));
         ret.add(new PosWithStack(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian)));
         ret.add(new PosWithStack(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian)));
