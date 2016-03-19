@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.3.2
+------------------------------------------------------
+
+- Fixed some misunderstandings about block updates
+- Changed checking of light level to the location the entity will spawn at instead of the cage's location
+- [API] Moved the ACTIVE IProperty to API
+
+------------------------------------------------------
 Version 2.3.1
 ------------------------------------------------------
 
