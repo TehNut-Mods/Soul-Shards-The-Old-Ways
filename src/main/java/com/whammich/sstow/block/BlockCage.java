@@ -122,13 +122,13 @@ public class BlockCage extends Block implements IVariantProvider {
 
         if (tile != null && tile instanceof TileEntityCage) {
             TileEntityCage cage = (TileEntityCage) tile;
-            if (player.getHeldItemMainhand() != null && cage.getStackInSlot(0) == null && cage.isItemValidForSlot(0, player.getHeldItemMainhand()) && !player.isSneaking()) {
-                cage.setInventorySlotContents(0, player.getHeldItemMainhand().copy());
-                cage.setTier(ShardHelper.getTierFromShard(player.getHeldItemMainhand()));
-                cage.setEntName(ShardHelper.getBoundEntity(player.getHeldItemMainhand()));
+            if (heldItem != null && cage.getStackInSlot(0) == null && cage.isItemValidForSlot(0, heldItem) && !player.isSneaking()) {
+                cage.setInventorySlotContents(0, heldItem.copy());
+                cage.setTier(ShardHelper.getTierFromShard(heldItem));
+                cage.setEntName(ShardHelper.getBoundEntity(heldItem));
                 if (!world.isRemote)
                     cage.setOwner(player.getGameProfile().getId().toString());
-                player.getHeldItemMainhand().stackSize--;
+                heldItem.stackSize--;
                 return true;
             } else if (cage.getStackInSlot(0) != null && player.getHeldItemMainhand() == null && player.isSneaking()) {
                 cage.setTier(0);
