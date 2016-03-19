@@ -131,15 +131,11 @@ public class BlockCage extends Block implements IVariantProvider {
                 heldItem.stackSize--;
                 return true;
             } else if (cage.getStackInSlot(0) != null && player.getHeldItemMainhand() == null && player.isSneaking()) {
-                cage.setTier(0);
-                cage.setEntName("");
-                cage.setActiveTime(0);
-                cage.setOwner("");
                 if (!world.isRemote) {
                     EntityItem invItem = new EntityItem(world, player.posX, player.posY + 0.25, player.posZ, cage.getStackInSlot(0));
                     world.spawnEntityInWorld(invItem);
                 }
-                cage.clear();
+                cage.reset();
                 return true;
             }
         }

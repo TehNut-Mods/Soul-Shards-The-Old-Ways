@@ -113,6 +113,14 @@ public class TileEntityCage extends TileInventory implements ITickable {
         tagCompound.setString(OWNER, owner);
     }
 
+    public void reset() {
+        clear();
+        setTier(0);
+        setEntName("");
+        setActiveTime(0);
+        setOwner("");
+    }
+
     public boolean getActiveState() {
         return getWorld().getBlockState(getPos()).getValue(SoulShardsAPI.ACTIVE);
     }
