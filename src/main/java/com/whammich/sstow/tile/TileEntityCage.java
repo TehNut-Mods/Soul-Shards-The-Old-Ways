@@ -21,6 +21,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
@@ -129,9 +130,6 @@ public class TileEntityCage extends TileInventory implements ITickable {
             if (entityLiving == null)
                 continue;
 
-            if (TierHandler.checksLight(tier) && !canSpawnInLight(entityLiving))
-                break;
-
             do {
                 attempts++;
                 if (attempts >= 5) {
@@ -142,6 +140,9 @@ public class TileEntityCage extends TileInventory implements ITickable {
                 double x = getPos().getX() + (getWorld().rand.nextDouble() - getWorld().rand.nextDouble()) * 4.0D;
                 double y = getPos().getY() + getWorld().rand.nextInt(3) - 1;
                 double z = getPos().getZ() + (getWorld().rand.nextDouble() - getWorld().rand.nextDouble()) * 4.0D;
+                if (TierHandler.checksLight(tier) && !canSpawnInLight(entityLiving, new BlockPos(x, y, z)))
+                    continue;
+
                 entityLiving.setLocationAndAngles(x, y, z, getWorld().rand.nextFloat() * 360.0F, 0.0F);
                 entityLiving.getEntityData().setBoolean(SSTOW, true);
                 entityLiving.forceSpawn = true;
@@ -166,8 +167,8 @@ public class TileEntityCage extends TileInventory implements ITickable {
         return getWorld().isBlockPowered(getPos());
     }
 
-    private boolean canSpawnInLight(EntityLiving entityLiving) {
-        return !(entityLiving instanceof EntityMob || entityLiving instanceof IMob) || Utils.getBlockLightLevel(getWorld(), getPos(), getWorld().isDaytime()) <= 8;
+    private boolean canSpawnInLight(EntityLiving entityLiving, BlockPos pos) {
+        return !(entityLiving instanceof EntityMob || entityLiving instanceof IMob) || Utils.getBlockLightLevel(getWorld(), pos, getWorld().isDaytime()) <= 8;
     }
 
     private boolean isPlayerClose() {
