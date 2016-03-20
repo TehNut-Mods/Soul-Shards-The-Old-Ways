@@ -1,4 +1,16 @@
 ------------------------------------------------------
+Version 2.3.3
+------------------------------------------------------
+
+- Allow offand shards to be inserted into the Soul Cage
+- Ran some minor code cleanup
+- If an origin block does not exist in `Multiblock.json`, everything will be reset to default as a fallback.
+- mcmod.info now dispalys the correct Minecraft version
+- Re-implemented Blood Magic compatibility
+- Lowercased modid from SoulShardsTOW to soulshardstow in order to follow standard Forge convention
+- Fixed spawner consumption crashing
+
+------------------------------------------------------
 Version 2.3.2
 ------------------------------------------------------
 
