@@ -2,20 +2,20 @@
 itemGroup.soulShards=Soul Shards: Die alten Sitten
 
 # Items
-item.SoulShardsTOW.shard.name=Seelen Scherbe
-item.SoulShardsTOW.shard.unbound.name=Ungebundene Seelen Scherbe
-item.SoulShardsTOW.material.ingotCorrupted.name=Verdorbener Barren
-item.SoulShardsTOW.material.dustCorrupted.name=Verdorbene Essenz
-item.SoulShardsTOW.material.dustVile.name=Abscheulicher Staub
-item.SoulShardsTOW.soulSword.name=Abscheuliches Schwert
+item.soulshardstow.shard.name=Seelen Scherbe
+item.soulshardstow.shard.unbound.name=Ungebundene Seelen Scherbe
+item.soulshardstow.material.ingotCorrupted.name=Verdorbener Barren
+item.soulshardstow.material.dustCorrupted.name=Verdorbene Essenz
+item.soulshardstow.material.dustVile.name=Abscheulicher Staub
+item.soulshardstow.soulSword.name=Abscheuliches Schwert
 
 # Blocks
-tile.SoulShardsTOW.cage.name=Seelen Käfig
+tile.soulshardstow.cage.name=Seelen Käfig
 
 # Tooltips
-tooltip.SoulShardsTOW.bound=Gebunden an: %s
-tooltip.SoulShardsTOW.kills=Tötungen: %d
-tooltip.SoulShardsTOW.tier=Stufe: %d
+tooltip.soulshardstow.bound=Gebunden an: %s
+tooltip.soulshardstow.kills=Tötungen: %d
+tooltip.soulshardstow.tier=Stufe: %d
 
 # Enchantment
 enchantment.soulStealer=Seelen Dieb
@@ -30,10 +30,10 @@ chat.sstow.command.setwrong=&cUnzulässiges Argument
 chat.sstow.command.wrongcommand=&cUnzulässiger Befehl
 
 # Waila
-waila.SoulShardsTOW.sneak=&oSchleichen für Details
-waila.SoulShardsTOW.boundTo=Gebunden an: %s
-waila.SoulShardsTOW.tier=Stufe: %d
-waila.SoulShardsTOW.owner=Eigentümer: %s
+waila.soulshardstow.sneak=&oSchleichen für Details
+waila.soulshardstow.boundTo=Gebunden an: %s
+waila.soulshardstow.tier=Stufe: %d
+waila.soulshardstow.owner=Eigentümer: %s
 
 # JEI
 jei.SoulShards.soulshard.desc=Ein Gefäß für die Seelen der Gefallenen.\n\nErhalten durch Erstellung einer Struktur in der Welt und Anwendung eines Diamanten auf den Anfangsblock.

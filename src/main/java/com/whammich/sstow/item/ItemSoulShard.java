@@ -137,12 +137,12 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
         if (ShardHelper.isBound(stack))
-            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.bound", Utils.getEntityNameTranslated(ShardHelper.getBoundEntity(stack))));
+            list.add(TextHelper.localizeEffect("tooltip.soulshardstow.bound", Utils.getEntityNameTranslated(ShardHelper.getBoundEntity(stack))));
 
         if (ShardHelper.getKillsFromShard(stack) >= 0)
-            list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.kills", ShardHelper.getKillsFromShard(stack)));
+            list.add(TextHelper.localizeEffect("tooltip.soulshardstow.kills", ShardHelper.getKillsFromShard(stack)));
 
-        list.add(TextHelper.localizeEffect("tooltip.SoulShardsTOW.tier", ShardHelper.getTierFromShard(stack)));
+        list.add(TextHelper.localizeEffect("tooltip.soulshardstow.tier", ShardHelper.getTierFromShard(stack)));
     }
 
     @Override

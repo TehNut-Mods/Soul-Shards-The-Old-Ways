@@ -2,20 +2,20 @@
 itemGroup.soulShards=Soul Shards: The Old Ways
 
 # Items
-item.SoulShardsTOW.shard.name=Soul Shard
-item.SoulShardsTOW.shard.unbound.name=Unbound Soul Shard
-item.SoulShardsTOW.material.ingotCorrupted.name=Corrupted Ingot
-item.SoulShardsTOW.material.dustCorrupted.name=Corrupted Essence
-item.SoulShardsTOW.material.dustVile.name=Vile Dust
-item.SoulShardsTOW.soulSword.name=Vile Sword
+item.soulshardstow.shard.name=Soul Shard
+item.soulshardstow.shard.unbound.name=Unbound Soul Shard
+item.soulshardstow.material.ingotCorrupted.name=Corrupted Ingot
+item.soulshardstow.material.dustCorrupted.name=Corrupted Essence
+item.soulshardstow.material.dustVile.name=Vile Dust
+item.soulshardstow.soulSword.name=Vile Sword
 
 # Blocks
-tile.SoulShardsTOW.cage.name=Soul Cage
+tile.soulshardstow.cage.name=Soul Cage
 
 # Tooltips
-tooltip.SoulShardsTOW.bound=Bound to: %s
-tooltip.SoulShardsTOW.kills=Kills: %d
-tooltip.SoulShardsTOW.tier=Tier: %d
+tooltip.soulshardstow.bound=Bound to: %s
+tooltip.soulshardstow.kills=Kills: %d
+tooltip.soulshardstow.tier=Tier: %d
 
 # Enchantment
 enchantment.soulStealer=Soul Stealer
@@ -30,10 +30,10 @@ chat.sstow.command.setwrong=&cInvalid arguments
 chat.sstow.command.wrongcommand=&cInvalid command
 
 # Waila
-waila.SoulShardsTOW.sneak=&oSneak for details
-waila.SoulShardsTOW.boundTo=Bound to: %s
-waila.SoulShardsTOW.tier=Tier: %d
-waila.SoulShardsTOW.owner=Owner: %s
+waila.soulshardstow.sneak=&oSneak for details
+waila.soulshardstow.boundTo=Bound to: %s
+waila.soulshardstow.tier=Tier: %d
+waila.soulshardstow.owner=Owner: %s
 
 # JEI
 jei.SoulShards.soulshard.desc=A vessel for the Souls of the slain.\n\nObtained by creating a structure in the world and using a Diamond on the origin block.

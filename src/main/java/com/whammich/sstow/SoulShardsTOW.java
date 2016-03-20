@@ -33,7 +33,7 @@ import java.util.Set;
 @Mod(modid = SoulShardsTOW.MODID, name = SoulShardsTOW.NAME, version = SoulShardsTOW.VERSION, guiFactory = "com.whammich.sstow.client.gui.GuiFactory")
 public class SoulShardsTOW {
 
-    public static final String MODID = "SoulShardsTOW";
+    public static final String MODID = "soulshardstow";
     public static final String NAME = "SoulShardsTOW";
     public static final String VERSION = "@VERSION@";
 
