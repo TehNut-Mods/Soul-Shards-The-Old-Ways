@@ -27,21 +27,19 @@ import java.util.List;
 
 /**
  * Creates a block that has multiple meta-based states.
- * 
+ * <p>
  * These states will be named after the given string array. Somewhere along the
  * way, each value is {@code toLowerCase()}'ed, so the blockstate JSON needs all
  * values to be lowercase.
  */
-public class BlockString extends Block
-{
+public class BlockString extends Block {
     private final int maxMeta;
     private final List<String> values;
     private final PropertyString stringProp;
     private final IUnlistedProperty unlistedStringProp;
     private final BlockStateContainer realBlockState;
 
-    public BlockString(Material material, String[] values, String propName)
-    {
+    public BlockString(Material material, String[] values, String propName) {
         super(material);
 
         this.maxMeta = values.length - 1;
@@ -53,73 +51,61 @@ public class BlockString extends Block
         setupStates();
     }
 
-    public BlockString(Material material, String[] values)
-    {
+    public BlockString(Material material, String[] values) {
         this(material, values, "type");
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getBlockState().getBaseState().withProperty(stringProp, values.get(meta));
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return values.indexOf(String.valueOf(state.getValue(stringProp)));
     }
 
     @Override
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
     }
 
     @Override
-    public BlockStateContainer getBlockState()
-    {
+    public BlockStateContainer getBlockState() {
         return this.realBlockState;
     }
 
     @Override
-    public BlockStateContainer createBlockState()
-    {
+    public BlockStateContainer createBlockState() {
         return Blocks.air.getBlockState();
     }
 
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(this, 1, this.getMetaFromState(world.getBlockState(pos)));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List<ItemStack> list)
-    {
+    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
         for (int i = 0; i < maxMeta + 1; i++)
             list.add(new ItemStack(this, 1, i));
     }
 
-    private void setupStates()
-    {
+    private void setupStates() {
         this.setDefaultState(getExtendedBlockState().withProperty(unlistedStringProp, values.get(0)).withProperty(stringProp, values.get(0)));
     }
 
-    public ExtendedBlockState getBaseExtendedState()
-    {
+    public ExtendedBlockState getBaseExtendedState() {
         return (ExtendedBlockState) this.getBlockState();
     }
 
-    public IExtendedBlockState getExtendedBlockState()
-    {
+    public IExtendedBlockState getExtendedBlockState() {
         return (IExtendedBlockState) this.getBaseExtendedState().getBaseState();
     }
 
-    private BlockStateContainer createRealBlockState()
-    {
-        return new ExtendedBlockState(this, new IProperty[] { stringProp }, new IUnlistedProperty[] { unlistedStringProp });
+    private BlockStateContainer createRealBlockState() {
+        return new ExtendedBlockState(this, new IProperty[]{stringProp}, new IUnlistedProperty[]{unlistedStringProp});
     }
 
     public int getMaxMeta() {

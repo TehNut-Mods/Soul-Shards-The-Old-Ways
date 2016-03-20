@@ -3,14 +3,12 @@ package com.whammich.repack.tehnut.lib.iface;
 /**
  * Implement on all primary compatibility classes.
  */
-public interface ICompatibility
-{
+public interface ICompatibility {
     /**
      * Called during each initialization phase after the given {@link #getModId()}
      * has been verified as loaded.
      *
-     * @param phase
-     *          - The load phase at which this method is being called.
+     * @param phase - The load phase at which this method is being called.
      */
     void loadCompatibility(InitializationPhase phase);
 
@@ -22,7 +20,7 @@ public interface ICompatibility
     /**
      * Whether or not compatibility should be loaded even if the mod were to be
      * found.
-     *
+     * <p>
      * Generally a determined by a config option.
      *
      * @return If Compatibility should load.

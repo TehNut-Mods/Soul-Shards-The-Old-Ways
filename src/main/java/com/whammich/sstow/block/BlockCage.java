@@ -9,7 +9,6 @@ import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.tile.TileEntityCage;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;

@@ -1,12 +1,14 @@
 package com.whammich.sstow.api.event;
 
 import com.whammich.sstow.api.ShardHelper;
+import lombok.Getter;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 @Cancelable
+@Getter
 public class CageSpawnEvent extends Event {
 
     private final ItemStack shard;
@@ -16,9 +18,9 @@ public class CageSpawnEvent extends Event {
 
     /**
      * This event is fired whenever a mob is about to be spawned by a Soul Cage.
-     *
+     * <p>
      * Only called on the server side.
-     *
+     * <p>
      * If cancelled, the spawn does not occur.
      *
      * @param shard        - The ItemStack inside the SoulCage. Guarenteed to be an {@link com.whammich.sstow.api.ISoulShard}
@@ -30,21 +32,5 @@ public class CageSpawnEvent extends Event {
         this.tier = ShardHelper.getTierFromShard(shard);
         this.owner = owner;
         this.entityLiving = entityLiving;
-    }
-
-    public ItemStack getShard() {
-        return shard;
-    }
-
-    public int getTier() {
-        return tier;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public EntityLiving getEntityLiving() {
-        return entityLiving;
     }
 }

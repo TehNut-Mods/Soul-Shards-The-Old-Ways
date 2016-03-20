@@ -2,8 +2,8 @@ package com.whammich.sstow.proxy;
 
 import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.iface.IVariantProvider;
 import com.whammich.repack.tehnut.lib.iface.IMeshProvider;
+import com.whammich.repack.tehnut.lib.iface.IVariantProvider;
 import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

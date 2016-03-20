@@ -3,7 +3,6 @@ package com.whammich.sstow.compat.bloodmagic;
 import com.whammich.repack.tehnut.lib.iface.ICompatibility;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.compat.CompatibilityType;
-import net.minecraftforge.common.MinecraftForge;
 
 public class CompatibilityBloodMagic implements ICompatibility {
 

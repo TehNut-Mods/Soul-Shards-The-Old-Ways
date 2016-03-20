@@ -12,7 +12,7 @@ public class ShardTierChangeEvent extends Event {
 
     /**
      * Fired when a shard changes tier.
-     *
+     * <p>
      * Fired from {@link com.whammich.sstow.util.Utils#checkAndFixShard(ItemStack)}
      */
     public ShardTierChangeEvent(ItemStack shardStack, int newTier) {

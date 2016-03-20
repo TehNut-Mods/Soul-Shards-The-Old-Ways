@@ -6,7 +6,6 @@ import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.CageSpawnEvent;
-import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.EntityMapper;

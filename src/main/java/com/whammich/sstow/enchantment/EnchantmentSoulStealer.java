@@ -7,7 +7,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 public class EnchantmentSoulStealer extends Enchantment {
 
     public EnchantmentSoulStealer() {
-        super(Rarity.UNCOMMON, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 
         setName("soulStealer");
     }

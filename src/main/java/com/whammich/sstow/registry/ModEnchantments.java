@@ -2,7 +2,6 @@ package com.whammich.sstow.registry;
 
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.enchantment.EnchantmentSoulStealer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;

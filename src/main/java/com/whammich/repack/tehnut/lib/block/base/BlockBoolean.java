@@ -27,20 +27,18 @@ import java.util.List;
 
 /**
  * Creates a block that has multiple meta-based states.
- * 
+ * <p>
  * These states will be named true or false. Somewhere along the
  * way, each value is {@code toLowerCase()}'ed, so the blockstate JSON needs all
  * values to be lowercase.
  */
-public class BlockBoolean extends Block
-{
+public class BlockBoolean extends Block {
     private final List<Boolean> values;
     private final PropertyBool boolProp;
     private final IUnlistedProperty unlistedBooleanProp;
     private final BlockStateContainer realBlockState;
 
-    public BlockBoolean(Material material, String propName)
-    {
+    public BlockBoolean(Material material, String propName) {
         super(material);
 
         this.values = Arrays.asList(false, true);
@@ -51,73 +49,61 @@ public class BlockBoolean extends Block
         setupStates();
     }
 
-    public BlockBoolean(Material material)
-    {
+    public BlockBoolean(Material material) {
         this(material, "enabled");
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(boolProp, values.get(meta));
     }
 
     @Override
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         return values.indexOf(state.getValue(boolProp));
     }
 
     @Override
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
     }
 
     @Override
-    public BlockStateContainer getBlockState()
-    {
+    public BlockStateContainer getBlockState() {
         return this.realBlockState;
     }
 
     @Override
-    public BlockStateContainer createBlockState()
-    {
+    public BlockStateContainer createBlockState() {
         return Blocks.air.getBlockState();
     }
 
     @Override
-    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
-    {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         return new ItemStack(this, 1, this.getMetaFromState(world.getBlockState(pos)));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List<ItemStack> list)
-    {
+    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List<ItemStack> list) {
         list.add(new ItemStack(this, 1, 0));
         list.add(new ItemStack(this, 1, 1));
     }
 
-    private void setupStates()
-    {
+    private void setupStates() {
         this.setDefaultState(getExtendedBlockState().withProperty(unlistedBooleanProp, values.get(0)).withProperty(boolProp, values.get(0)));
     }
 
-    public ExtendedBlockState getBaseExtendedState()
-    {
+    public ExtendedBlockState getBaseExtendedState() {
         return (ExtendedBlockState) this.getBlockState();
     }
 
-    public IExtendedBlockState getExtendedBlockState()
-    {
+    public IExtendedBlockState getExtendedBlockState() {
         return (IExtendedBlockState) this.getBaseExtendedState().getBaseState();
     }
 
-    private BlockStateContainer createRealBlockState()
-    {
-        return new ExtendedBlockState(this, new IProperty[] {boolProp}, new IUnlistedProperty[] { unlistedBooleanProp });
+    private BlockStateContainer createRealBlockState() {
+        return new ExtendedBlockState(this, new IProperty[]{boolProp}, new IUnlistedProperty[]{unlistedBooleanProp});
     }
 
     public List<Boolean> getValues() {

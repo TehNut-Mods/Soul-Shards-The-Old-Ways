@@ -57,10 +57,6 @@ public class ItemStackWrapper {
         return result;
     }
 
-    public static ItemStackWrapper getWrapper(ItemStack stack) {
-        return new ItemStackWrapper(stack.getItem(), stack.stackSize, stack.getItemDamage());
-    }
-
     public void setNbtTag(NBTTagCompound nbtTag) {
         this.nbtTag = nbtTag;
     }
@@ -86,5 +82,9 @@ public class ItemStackWrapper {
         result = 31 * result + meta;
         result = 31 * result + (nbtTag != null ? nbtTag.hashCode() : 0);
         return result;
+    }
+
+    public static ItemStackWrapper getWrapper(ItemStack stack) {
+        return new ItemStackWrapper(stack.getItem(), stack.stackSize, stack.getItemDamage());
     }
 }
