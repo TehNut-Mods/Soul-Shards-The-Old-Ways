@@ -12,6 +12,7 @@ public class ModEnchantments {
 
     public static void init() {
         soulStealer = new EnchantmentSoulStealer();
+        // TODO - Change to FML registry
         Enchantment.enchantmentRegistry.register(ConfigHandler.soulStealerID, new ResourceLocation(SoulShardsTOW.MODID, "soulStealer"), soulStealer);
     }
 }

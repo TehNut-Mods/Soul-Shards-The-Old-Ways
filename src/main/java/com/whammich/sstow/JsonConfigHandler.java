@@ -65,6 +65,11 @@ public class JsonConfigHandler {
             for (PosWithStack posWithStack : ItemSoulShard.multiblock)
                 if (posWithStack.getPos().equals(new BlockPos(0, 0, 0)))
                     ItemSoulShard.originBlock = posWithStack.getBlock();
+
+            if (ItemSoulShard.originBlock == null) {
+                ItemSoulShard.buildMultiblock();
+                SoulShardsTOW.instance.getLogHelper().error("Could not find origin block for multiblock. Setting to default structure.");
+            }
         } catch (IOException e) {
             SoulShardsTOW.instance.getLogHelper().severe("Failed to create a default Multiblock configuration file.");
         }

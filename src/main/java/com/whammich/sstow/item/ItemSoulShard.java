@@ -58,7 +58,7 @@ import java.util.List;
 public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     public static List<PosWithStack> multiblock = new ArrayList<PosWithStack>();
-    public static BlockStack originBlock = new BlockStack(Blocks.glowstone);
+    public static BlockStack originBlock = null;
 
     public ItemSoulShard() {
         super();
@@ -168,7 +168,8 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         return ret;
     }
 
-    private void buildMultiblock() {
+    public static void buildMultiblock() {
+        originBlock = new BlockStack(Blocks.glowstone);
         multiblock.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
         multiblock.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.end_stone)));
         multiblock.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.end_stone)));
@@ -181,6 +182,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     }
 
     @SubscribeEvent
+    @Used
     public void onEntityKill(LivingDeathEvent event) {
         World world = event.entity.worldObj;
 
@@ -226,10 +228,12 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     }
 
     @SubscribeEvent
+    @Used
     public void onInteract(PlayerInteractEvent event) {
         if (multiblock.isEmpty())
             buildMultiblock();
 
+        // TODO - Change back to `PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK` when Forge re-implements
         if (event.action != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
             return;
 
