@@ -35,10 +35,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
@@ -75,7 +72,8 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
             TileEntity tile = world.getTileEntity(pos);
 
             if (tile instanceof TileEntityMobSpawner) {
-                String name = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "mobID", "field_98288_a");
+                WeightedSpawnerEntity spawnerEntity = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "randomEntity", "field_98282_f");
+                String name = spawnerEntity.getNbt().getString("id");
                 EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
 
                 if (ent == null)
