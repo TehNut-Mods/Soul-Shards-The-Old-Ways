@@ -170,6 +170,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     public static void buildMultiblock() {
         originBlock = new BlockStack(Blocks.glowstone);
+        multiblock.clear();
         multiblock.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
         multiblock.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.end_stone)));
         multiblock.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.end_stone)));
