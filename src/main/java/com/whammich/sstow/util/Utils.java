@@ -50,8 +50,8 @@ public final class Utils {
 
     public static void checkAndFixShard(ItemStack shard) {
         if (!isShardValid(shard)) {
-            ShardHelper.setTierForShard(shard, getCorrectTier(shard));
-            MinecraftForge.EVENT_BUS.post(new ShardTierChangeEvent(shard, getCorrectTier(shard)));
+            if (!MinecraftForge.EVENT_BUS.post(new ShardTierChangeEvent(shard, getCorrectTier(shard))))
+                ShardHelper.setTierForShard(shard, getCorrectTier(shard));
         }
     }
 
