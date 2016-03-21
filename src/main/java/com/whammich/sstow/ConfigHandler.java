@@ -88,9 +88,12 @@ public class ConfigHandler {
 
         category = "Compatibility";
         categories.add(category);
-        String compatTypeString = config.get(category, "compatibilityType", "VANILLA", "The type of spawning mechanic to use for the Soul Cage.\nValid values:\nVANILLA - The standard spawning mechanic.\nBLOODMAGIC - Requires 100 LP per mob spawned.").setRequiresWorldRestart(true).getString();
-        if (CompatibilityType.valueOf(compatTypeString.toUpperCase(Locale.ENGLISH)) != null)
+        String compatTypeString = config.get(category, "compatibilityType", "VANILLA", "The type of spawning mechanic to use for the Soul Cage.\nValid values:\nVANILLA - The standard spawning mechanic.\nBLOODMAGIC - Requires 100 LP per mob spawned.\nHARDMODE - Reduces the contained souls of the shard by 1 for each mob spawned. Does not reduce tier. Recommended to disable \"countCageBornForShard\".").setRequiresWorldRestart(true).getString();
+        try {
             compatibilityType = CompatibilityType.valueOf(compatTypeString.toUpperCase(Locale.ENGLISH));
+        } catch (IllegalArgumentException e) {
+            SoulShardsTOW.instance.getLogHelper().error("{} is not a valid CompatibilityType. Falling back to VANILLA.", compatTypeString.toUpperCase(Locale.ENGLISH));
+        }
         lpPerMob = config.getInt("lpPerMob", category, 250, 0, Integer.MAX_VALUE, "Amount of LP required for each mob spawned.\nIf this amount is not contained in the LP network, a nausea effect will be applied to the player and the Soul Cage will stop functioning.");
 
         if (config.hasChanged())
