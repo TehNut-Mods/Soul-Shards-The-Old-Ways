@@ -1,4 +1,17 @@
 ------------------------------------------------------
+Version 2.3.4
+------------------------------------------------------
+
+- Implemented Forge's Version Checker system
+  - I think I did it right?
+- Added a "Hard Mode" that turns contained souls into a "fuel source"
+  - For every mob spawned, the amount of souls contained is decreased by 1.
+  - This does not decrease the contained tier.
+    - If you get your shard to Tier 5 and then spawn 1024 (default cap) mobs, your shard will now be a Tier 5 shard with 0 kills. You can then "recharge" it to get more spawns at Tier 5 level.
+  - It's recommended to disable "countCageBornForShard".
+- [API] ShardTierChangeEvent is now cancellable
+
+------------------------------------------------------
 Version 2.3.3
 ------------------------------------------------------
 
