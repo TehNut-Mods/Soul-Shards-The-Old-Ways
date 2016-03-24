@@ -1,10 +1,10 @@
 package com.whammich.sstow.registry;
 
-import com.whammich.repack.tehnut.lib.iface.ICompatibility;
 import com.whammich.sstow.compat.bloodmagic.CompatibilityBloodMagic;
 import com.whammich.sstow.compat.hardmode.CompatibilityHardMode;
 import com.whammich.sstow.compat.waila.CompatibilityWaila;
 import net.minecraftforge.fml.common.Loader;
+import tehnut.lib.iface.ICompatibility;
 
 import java.util.ArrayList;
 import java.util.List;

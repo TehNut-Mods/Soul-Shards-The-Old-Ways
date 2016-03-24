@@ -1,6 +1,5 @@
 package com.whammich.sstow.tile;
 
-import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -19,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import tehnut.lib.util.helper.TextHelper;
 
 public class TileInventory extends TileEntity implements IInventory {
 

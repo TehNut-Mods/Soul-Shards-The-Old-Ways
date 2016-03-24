@@ -1,6 +1,6 @@
 package com.whammich.sstow.compat.waila;
 
-import com.whammich.repack.tehnut.lib.iface.ICompatibility;
+import tehnut.lib.iface.ICompatibility;
 
 public class CompatibilityWaila implements ICompatibility {
 

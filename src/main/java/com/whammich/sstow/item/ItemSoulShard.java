@@ -1,12 +1,6 @@
 package com.whammich.sstow.item;
 
 import com.google.common.base.Strings;
-import com.whammich.repack.tehnut.lib.annot.Handler;
-import com.whammich.repack.tehnut.lib.annot.ModItem;
-import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.iface.IMeshProvider;
-import com.whammich.repack.tehnut.lib.util.BlockStack;
-import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulShard;
@@ -45,7 +39,15 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tehnut.lib.annot.Handler;
+import tehnut.lib.annot.ModItem;
+import tehnut.lib.annot.Used;
+import tehnut.lib.iface.IMeshProvider;
+import tehnut.lib.util.BlockStack;
+import tehnut.lib.util.helper.ItemHelper;
+import tehnut.lib.util.helper.TextHelper;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,6 +168,12 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         return ret;
     }
 
+    @Nullable
+    @Override
+    public ResourceLocation getCustomLocation() {
+        return null;
+    }
+
     public static void buildMultiblock() {
         originBlock = new BlockStack(Blocks.glowstone);
         multiblock.clear();
@@ -247,7 +255,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                 event.world.destroyBlock(event.pos.add(posWithStack.getPos()), false);
 
             if (!event.world.isRemote) {
-                EntityItem invItem = new EntityItem(event.world, event.entityPlayer.posX, event.entityPlayer.posY + 0.25, event.entityPlayer.posZ, new ItemStack(ModItems.getItem(getClass()), 1, 0));
+                EntityItem invItem = new EntityItem(event.world, event.entityPlayer.posX, event.entityPlayer.posY + 0.25, event.entityPlayer.posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
                 event.world.spawnEntityInWorld(invItem);
             }
             if (!event.entityPlayer.capabilities.isCreativeMode)

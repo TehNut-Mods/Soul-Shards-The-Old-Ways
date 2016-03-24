@@ -18,6 +18,11 @@ plugins {
 
 apply plugin: 'maven-publish'
 
+configurations {
+    shade
+    compile.extendsFrom shade
+}
+
 def build_number = 'CUSTOM'
 
 if (System.getenv('BUILD_NUMBER') != null)
@@ -34,7 +39,6 @@ version = "${mc_version}-${mod_version}-${build_number}"
 
 if (project.hasProperty('gitpush'))
     version += "-ss"
-
 
 import net.franz_becker.gradle.lombok.task.DelombokTask
 import org.ajoberstar.grgit.*
@@ -55,6 +59,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
 //    deobfCompile "mcp.mobius.waila:Waila:${waila_version}_1.8.8"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${bloodmagic_version}:api"
+    shade "tehnut.lib:LendingLibrary:${mc_version}-${lendinglibrary_version}"
 }
 
 minecraft {
@@ -106,8 +111,19 @@ task delombok(type: DelombokTask) {
 
 tasks.eclipse.dependsOn installLombok
 
+reobf {
+    jar {
+        extraLines "PK: tehnut/lib com/whammich/sstow/shade/lib"
+    }
+}
+
 jar {
     classifier = ''
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)) {
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
     manifest.mainAttributes(
             "Built-By": System.getProperty('user.name'),
             "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",

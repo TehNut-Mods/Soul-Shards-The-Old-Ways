@@ -1,13 +1,11 @@
 package com.whammich.sstow.tile;
 
 import com.google.common.base.Strings;
-import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.CageSpawnEvent;
 import com.whammich.sstow.item.ItemSoulShard;
-import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
@@ -24,6 +22,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tehnut.lib.annot.Handler;
+import tehnut.lib.util.helper.ItemHelper;
 
 @Getter
 @Setter
@@ -198,7 +198,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return stack.getItem() == ModItems.getItem(ItemSoulShard.class) && ShardHelper.getTierFromShard(stack) > 0 && ShardHelper.isBound(stack);
+        return stack.getItem() == ItemHelper.getItem(ItemSoulShard.class) && ShardHelper.getTierFromShard(stack) > 0 && ShardHelper.isBound(stack);
     }
 
     @SubscribeEvent

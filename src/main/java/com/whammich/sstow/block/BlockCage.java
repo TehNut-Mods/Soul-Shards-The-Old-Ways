@@ -1,8 +1,5 @@
 package com.whammich.sstow.block;
 
-import com.whammich.repack.tehnut.lib.annot.ModBlock;
-import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.iface.IVariantProvider;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
@@ -25,6 +22,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import tehnut.lib.annot.ModBlock;
+import tehnut.lib.annot.Used;
+import tehnut.lib.iface.IVariantProvider;
 
 import java.util.ArrayList;
 import java.util.List;

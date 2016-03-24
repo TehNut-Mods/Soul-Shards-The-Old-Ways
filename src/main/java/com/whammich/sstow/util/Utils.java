@@ -1,12 +1,10 @@
 package com.whammich.sstow.util;
 
 import com.mojang.authlib.GameProfile;
-import com.whammich.repack.tehnut.lib.util.TextHelper;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.event.ShardTierChangeEvent;
 import com.whammich.sstow.item.ItemSoulShard;
-import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.tile.TileEntityCage;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import tehnut.lib.util.helper.ItemHelper;
+import tehnut.lib.util.helper.TextHelper;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -30,7 +30,7 @@ public final class Utils {
         for (int i = 0; i <= 8; i++) {
             ItemStack stack = player.inventory.getStackInSlot(i);
 
-            if (stack != null && stack.getItem() == ModItems.getItem(ItemSoulShard.class) && !hasMaxedKills(stack)) {
+            if (stack != null && stack.getItem() == ItemHelper.getItem(ItemSoulShard.class) && !hasMaxedKills(stack)) {
                 if (!ShardHelper.isBound(stack) && lastResort == null)
                     lastResort = stack;
                 else if (ShardHelper.getBoundEntity(stack).equals(entity))

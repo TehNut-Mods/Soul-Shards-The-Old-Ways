@@ -1,6 +1,5 @@
 package com.whammich.sstow.registry;
 
-import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.sstow.api.ISoulShard;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.block.BlockCage;
@@ -14,6 +13,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import tehnut.lib.annot.Handler;
+import tehnut.lib.util.helper.BlockHelper;
+import tehnut.lib.util.helper.ItemHelper;
 
 @Handler
 public class ModRecipes {
@@ -23,8 +25,8 @@ public class ModRecipes {
 
         GameRegistry.addRecipe(new ShapedOreRecipe(ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED), "EVE", "VIV", "EVE", 'E', "dustCorrupted", 'I', "ingotIron", 'V', "dustVile"));
         GameRegistry.addRecipe(new ShapelessOreRecipe(ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE), "gemLapis", "dustRedstone", Blocks.obsidian, Blocks.obsidian));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.getItem(ItemSoulSword.class)), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.iron_bars));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHelper.getItem(ItemSoulSword.class)), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockHelper.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.iron_bars));
     }
 
     @SubscribeEvent

@@ -3,7 +3,6 @@ package com.whammich.sstow;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.whammich.repack.tehnut.lib.util.BlockStack;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.util.PosWithStack;
 import com.whammich.sstow.util.TierHandler;
@@ -11,6 +10,7 @@ import com.whammich.sstow.util.serialization.SerializerBlockPos;
 import com.whammich.sstow.util.serialization.SerializerBlockStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import tehnut.lib.util.BlockStack;
 
 import java.io.File;
 import java.io.FileReader;

@@ -1,11 +1,5 @@
 package com.whammich.sstow;
 
-import com.whammich.repack.tehnut.lib.annot.Handler;
-import com.whammich.repack.tehnut.lib.annot.ModBlock;
-import com.whammich.repack.tehnut.lib.annot.ModItem;
-import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.iface.ICompatibility;
-import com.whammich.repack.tehnut.lib.util.LogHelper;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
 import com.whammich.sstow.item.ItemSoulShard;
@@ -23,11 +17,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.event.*;
+import tehnut.lib.LendingLibrary;
+import tehnut.lib.annot.Used;
+import tehnut.lib.iface.ICompatibility;
+import tehnut.lib.util.helper.ItemHelper;
+import tehnut.lib.util.helper.LogHelper;
 
 import java.io.File;
-import java.util.Set;
 
 @Getter
 @Mod(modid = SoulShardsTOW.MODID, name = SoulShardsTOW.NAME, version = SoulShardsTOW.VERSION, updateJSON = SoulShardsTOW.JSON_CHECKER, guiFactory = "com.whammich.sstow.client.gui.GuiFactory")
@@ -47,12 +44,12 @@ public class SoulShardsTOW {
     public static CreativeTabs soulShardsTab = new CreativeTabs("soulShards") {
         @Override
         public Item getTabIconItem() {
-            return ModItems.getItem(ItemSoulShard.class);
+            return ItemHelper.getItem(ItemSoulShard.class);
         }
 
         @Override
         public ItemStack getIconItemStack() {
-            ItemStack shard = new ItemStack(ModItems.getItem(ItemSoulShard.class));
+            ItemStack shard = new ItemStack(ItemHelper.getItem(ItemSoulShard.class));
             ShardHelper.setTierForShard(shard, TierHandler.tiers.size() - 1);
             Utils.setMaxedKills(shard);
             ShardHelper.setBoundEntity(shard, "Pig");
@@ -62,9 +59,11 @@ public class SoulShardsTOW {
 
     private File configDir;
     private LogHelper logHelper;
-    private Set<ASMDataTable.ASMData> modItems;
-    private Set<ASMDataTable.ASMData> modBlocks;
-    private Set<ASMDataTable.ASMData> eventHandlers;
+    private final LendingLibrary library;
+
+    public SoulShardsTOW() {
+        this.library = new LendingLibrary(MODID);
+    }
 
     @Mod.EventHandler
     @Used
@@ -75,12 +74,9 @@ public class SoulShardsTOW {
         JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
         JsonConfigHandler.initMultiblock(new File(configDir, "Multiblock.json"));
 
-        modItems = event.getAsmData().getAll(ModItem.class.getCanonicalName());
-        modBlocks = event.getAsmData().getAll(ModBlock.class.getCanonicalName());
-        eventHandlers = event.getAsmData().getAll(Handler.class.getCanonicalName());
+        getLibrary().registerObjects(event);
 
         ModItems.init();
-        ModBlocks.init();
         ModRecipes.init();
         ModEnchantments.init();
         ModCompatibility.registerModCompat();

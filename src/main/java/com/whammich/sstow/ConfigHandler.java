@@ -1,11 +1,11 @@
 package com.whammich.sstow;
 
-import com.whammich.repack.tehnut.lib.annot.Handler;
 import com.whammich.sstow.compat.CompatibilityType;
 import com.whammich.sstow.util.EntityMapper;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import tehnut.lib.annot.Handler;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,17 +1,16 @@
 package com.whammich.sstow.item;
 
-import com.whammich.repack.tehnut.lib.annot.ModItem;
-import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.iface.IVariantProvider;
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.registry.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import tehnut.lib.annot.ModItem;
+import tehnut.lib.annot.Used;
+import tehnut.lib.iface.IVariantProvider;
+import tehnut.lib.util.helper.ItemHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,14 +55,14 @@ public class ItemMaterials extends Item implements IVariantProvider {
     @Override
     public List<Pair<Integer, String>> getVariants() {
         List<Pair<Integer, String>> ret = new ArrayList<Pair<Integer, String>>();
-        ret.add(new ImmutablePair<Integer, String>(0, "type=ingotsoulium"));
-        ret.add(new ImmutablePair<Integer, String>(1, "type=dustcorrupted"));
-        ret.add(new ImmutablePair<Integer, String>(2, "type=dustvile"));
+        ret.add(Pair.of(0, "type=ingotsoulium"));
+        ret.add(Pair.of(1, "type=dustcorrupted"));
+        ret.add(Pair.of(2, "type=dustvile"));
         return ret;
     }
 
     public static ItemStack getStack(String name, int amount) {
-        return new ItemStack(ModItems.getItem(ItemMaterials.class), amount, names.indexOf(name));
+        return new ItemStack(ItemHelper.getItem(ItemMaterials.class), amount, names.indexOf(name));
     }
 
     public static ItemStack getStack(String name) {

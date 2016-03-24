@@ -1,8 +1,8 @@
 package com.whammich.sstow.util.serialization;
 
 import com.google.gson.*;
-import com.whammich.repack.tehnut.lib.util.BlockStack;
 import net.minecraft.block.Block;
+import tehnut.lib.util.BlockStack;
 
 import java.lang.reflect.Type;
 

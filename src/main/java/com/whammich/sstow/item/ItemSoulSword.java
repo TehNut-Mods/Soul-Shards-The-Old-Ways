@@ -1,8 +1,5 @@
 package com.whammich.sstow.item;
 
-import com.whammich.repack.tehnut.lib.annot.ModItem;
-import com.whammich.repack.tehnut.lib.annot.Used;
-import com.whammich.repack.tehnut.lib.iface.IMeshProvider;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulWeapon;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -13,7 +10,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import tehnut.lib.annot.ModItem;
+import tehnut.lib.annot.Used;
+import tehnut.lib.iface.IMeshProvider;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,5 +50,11 @@ public class ItemSoulSword extends ItemSword implements ISoulWeapon, IMeshProvid
     @Override
     public List<String> getVariants() {
         return Collections.singletonList("type=vile");
+    }
+
+    @Nullable
+    @Override
+    public ResourceLocation getCustomLocation() {
+        return null;
     }
 }
