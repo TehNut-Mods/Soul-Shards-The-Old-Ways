@@ -20,7 +20,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.Used;
@@ -178,8 +177,8 @@ public class BlockCage extends Block implements IVariantProvider {
     @Override
     public List<Pair<Integer, String>> getVariants() {
         List<Pair<Integer, String>> ret = new ArrayList<Pair<Integer, String>>();
-        ret.add(new ImmutablePair<Integer, String>(0, "active=false"));
-        ret.add(new ImmutablePair<Integer, String>(1, "active=true"));
+        ret.add(Pair.of(0, "active=false"));
+        ret.add(Pair.of(1, "active=true"));
         return ret;
     }
 }
