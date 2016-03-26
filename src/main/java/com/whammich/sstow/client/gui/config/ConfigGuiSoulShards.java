@@ -14,7 +14,7 @@ import java.util.Locale;
 public class ConfigGuiSoulShards extends GuiConfig {
 
     public ConfigGuiSoulShards(GuiScreen parentScreen) {
-        super(parentScreen, getConfigElements(parentScreen), SoulShardsTOW.MODID, false, false, GuiConfig.getAbridgedConfigPath("/sstow/"));
+        super(parentScreen, getConfigElements(parentScreen), SoulShardsTOW.MODID, false, false, SoulShardsTOW.NAME);
     }
 
     private static List<IConfigElement> getConfigElements(GuiScreen parentScreen) {

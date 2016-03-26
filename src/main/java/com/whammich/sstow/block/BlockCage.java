@@ -16,10 +16,12 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import tehnut.lib.annot.ModBlock;
 import tehnut.lib.annot.Used;
@@ -37,9 +39,8 @@ public class BlockCage extends Block implements IVariantProvider {
         setUnlocalizedName(SoulShardsTOW.MODID + ".cage");
         setCreativeTab(SoulShardsTOW.soulShardsTab);
         setDefaultState(blockState.getBaseState().withProperty(SoulShardsAPI.ACTIVE, false));
-
-        blockHardness = 3.0F;
-        blockResistance = 3.0F;
+        setHardness(3.0F);
+        setResistance(3.0F);
     }
 
     @Override
@@ -60,14 +61,7 @@ public class BlockCage extends Block implements IVariantProvider {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        switch (meta) {
-            case 0:
-                return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, false);
-            case 1:
-                return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, true);
-            default:
-                return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, false);
-        }
+        return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, BooleanUtils.toBoolean(MathHelper.clamp_int(meta, 0, 1)));
     }
 
     @Override

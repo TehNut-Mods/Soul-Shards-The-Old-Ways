@@ -23,7 +23,7 @@ public class CommandSSTOW extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/sstow <help|killall|settier|setent> [tier|entityName]";
+        return "/sstow <killall|settier|setent> [tier|entityName]";
     }
 
     @Override
