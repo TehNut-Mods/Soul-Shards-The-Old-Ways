@@ -1,6 +1,7 @@
 package com.whammich.sstow.registry;
 
 import com.whammich.sstow.compat.bloodmagic.CompatibilityBloodMagic;
+import com.whammich.sstow.compat.enderio.CompatibilityEnderIO;
 import com.whammich.sstow.compat.hardmode.CompatibilityHardMode;
 import com.whammich.sstow.compat.waila.CompatibilityWaila;
 import net.minecraftforge.fml.common.Loader;
@@ -17,6 +18,7 @@ public class ModCompatibility {
         compatibilities.add(new CompatibilityWaila());
         compatibilities.add(new CompatibilityBloodMagic());
         compatibilities.add(new CompatibilityHardMode());
+        compatibilities.add(new CompatibilityEnderIO());
     }
 
     public static void loadCompat(ICompatibility.InitializationPhase phase) {
