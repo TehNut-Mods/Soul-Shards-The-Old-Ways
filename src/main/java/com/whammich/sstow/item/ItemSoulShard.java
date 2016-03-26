@@ -258,8 +258,10 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                 EntityItem invItem = new EntityItem(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
                 event.getWorld().spawnEntityInWorld(invItem);
             }
-            if (!event.getEntityPlayer().capabilities.isCreativeMode)
+            if (!event.getEntityPlayer().capabilities.isCreativeMode) {
                 event.getEntityPlayer().getHeldItemMainhand().stackSize--;
+                event.getEntityPlayer().inventoryContainer.detectAndSendChanges();
+            }
             event.getEntityPlayer().swingArm(EnumHand.MAIN_HAND);
         }
     }
