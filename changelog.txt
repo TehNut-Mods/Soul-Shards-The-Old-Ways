@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.3.5
+------------------------------------------------------
+
+- Updated to newer version of Forge. Make sure you're updated, as well.
+- Added Soul Stealer enchantment to EnderIO's Enchanter
+  - EnderIO *has not* been ported to 1.9, yet, but I figured what the hay.
+
+------------------------------------------------------
 Version 2.3.4
 ------------------------------------------------------
 
