@@ -42,7 +42,7 @@ public class ConfigHandler {
 
     @SubscribeEvent
     public void configChanged(ConfigChangedEvent event) {
-        if (event.modID.equals(SoulShardsTOW.MODID)) {
+        if (event.getModID().equals(SoulShardsTOW.MODID)) {
             syncConfig();
             handleEntityList("Entity List");
         }

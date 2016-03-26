@@ -191,13 +191,13 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     @SubscribeEvent
     @Used
     public void onEntityKill(LivingDeathEvent event) {
-        World world = event.entity.worldObj;
+        World world = event.getEntity().worldObj;
 
-        if (world.isRemote || !(event.entity instanceof EntityLiving) || !(event.source.getEntity() instanceof EntityPlayer) || event.source.getEntity() instanceof FakePlayer)
+        if (world.isRemote || !(event.getEntity() instanceof EntityLiving) || !(event.getSource().getEntity() instanceof EntityPlayer) || event.getSource().getEntity() instanceof FakePlayer)
             return;
 
-        EntityLiving dead = (EntityLiving) event.entity;
-        EntityPlayer player = (EntityPlayer) event.source.getEntity();
+        EntityLiving dead = (EntityLiving) event.getEntity();
+        EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
         String entName = EntityList.getEntityString(dead);
 
         if (Strings.isNullOrEmpty(entName)) {
@@ -241,26 +241,26 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
             buildMultiblock();
 
         // TODO - Change back to `PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK` when Forge re-implements
-        if (event.action != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
+        if (event.getAction() != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
             return;
 
-        if (event.entityPlayer.getHeldItemMainhand() != null && event.entityPlayer.getHeldItemMainhand().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.world, event.pos))) {
+        if (event.getEntityPlayer().getHeldItemMainhand() != null && event.getEntityPlayer().getHeldItemMainhand().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
             for (PosWithStack posWithStack : multiblock) {
-                BlockStack worldStack = BlockStack.getStackFromPos(event.world, event.pos.add(posWithStack.getPos()));
+                BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(posWithStack.getPos()));
                 if (!posWithStack.getBlock().equals(worldStack))
                     return;
             }
 
             for (PosWithStack posWithStack : multiblock)
-                event.world.destroyBlock(event.pos.add(posWithStack.getPos()), false);
+                event.getWorld().destroyBlock(event.getPos().add(posWithStack.getPos()), false);
 
-            if (!event.world.isRemote) {
-                EntityItem invItem = new EntityItem(event.world, event.entityPlayer.posX, event.entityPlayer.posY + 0.25, event.entityPlayer.posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
-                event.world.spawnEntityInWorld(invItem);
+            if (!event.getWorld().isRemote) {
+                EntityItem invItem = new EntityItem(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
+                event.getWorld().spawnEntityInWorld(invItem);
             }
-            if (!event.entityPlayer.capabilities.isCreativeMode)
-                event.entityPlayer.getHeldItemMainhand().stackSize--;
-            event.entityPlayer.swingArm(EnumHand.MAIN_HAND);
+            if (!event.getEntityPlayer().capabilities.isCreativeMode)
+                event.getEntityPlayer().getHeldItemMainhand().stackSize--;
+            event.getEntityPlayer().swingArm(EnumHand.MAIN_HAND);
         }
     }
 }

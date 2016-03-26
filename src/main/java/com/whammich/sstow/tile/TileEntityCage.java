@@ -23,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tehnut.lib.annot.Handler;
+import tehnut.lib.annot.Used;
 import tehnut.lib.util.helper.ItemHelper;
 
 @Getter
@@ -202,8 +203,9 @@ public class TileEntityCage extends TileInventory implements ITickable {
     }
 
     @SubscribeEvent
+    @Used
     public void onDeath(LivingExperienceDropEvent event) {
-        if (!ConfigHandler.enableExperienceDrop && Utils.isCageBorn(event.entityLiving))
+        if (!ConfigHandler.enableExperienceDrop && Utils.isCageBorn(event.getEntityLiving()))
             event.setDroppedExperience(0);
     }
 }

@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import tehnut.lib.annot.Handler;
+import tehnut.lib.annot.Used;
 import tehnut.lib.util.helper.BlockHelper;
 import tehnut.lib.util.helper.ItemHelper;
 
@@ -30,16 +31,17 @@ public class ModRecipes {
     }
 
     @SubscribeEvent
+    @Used
     public void onAnvil(AnvilUpdateEvent event) {
-        if (event.left != null && event.left.getItem() instanceof ISoulShard && event.right != null && event.right.getItem() instanceof ISoulShard) {
-            if (ShardHelper.isBound(event.left) && ShardHelper.getKillsFromShard(event.right) > 0) {
-                if (Utils.hasMaxedKills(event.left))
+        if (event.getLeft() != null && event.getLeft().getItem() instanceof ISoulShard && event.getRight() != null && event.getRight().getItem() instanceof ISoulShard) {
+            if (ShardHelper.isBound(event.getLeft()) && ShardHelper.getKillsFromShard(event.getRight()) > 0) {
+                if (Utils.hasMaxedKills(event.getLeft()))
                     return;
 
-                ItemStack output = event.left.copy();
-                Utils.increaseShardKillCount(output, ShardHelper.getKillsFromShard(event.right));
-                event.output = output;
-                event.cost = ShardHelper.getTierFromShard(output) * 6;
+                ItemStack output = event.getLeft().copy();
+                Utils.increaseShardKillCount(output, ShardHelper.getKillsFromShard(event.getRight()));
+                event.setOutput(output);
+                event.setCost(ShardHelper.getTierFromShard(output) * 6);
             }
         }
     }
