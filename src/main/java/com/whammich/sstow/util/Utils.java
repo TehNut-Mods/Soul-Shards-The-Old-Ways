@@ -2,9 +2,9 @@ package com.whammich.sstow.util;
 
 import com.mojang.authlib.GameProfile;
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.ISoulShard;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.event.ShardTierChangeEvent;
-import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.tile.TileEntityCage;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import tehnut.lib.util.helper.ItemHelper;
 import tehnut.lib.util.helper.TextHelper;
 
 import javax.annotation.Nullable;
@@ -25,19 +24,28 @@ public final class Utils {
 
     @Nullable
     public static ItemStack getShardFromInv(EntityPlayer player, String entity) {
-        ItemStack lastResort = null;
+        ItemStack ret = null;
+
+        ItemStack offhand = player.getHeldItemOffhand();
+        if (offhand != null && offhand.getItem() instanceof ISoulShard) {
+            if (!ShardHelper.isBound(offhand))
+                ret = offhand;
+            else if (ShardHelper.getBoundEntity(offhand).equals(entity))
+                return offhand;
+        }
 
         for (int i = 0; i <= 8; i++) {
             ItemStack stack = player.inventory.getStackInSlot(i);
 
-            if (stack != null && stack.getItem() == ItemHelper.getItem(ItemSoulShard.class) && !hasMaxedKills(stack)) {
-                if (!ShardHelper.isBound(stack) && lastResort == null)
-                    lastResort = stack;
+            if (stack != null && stack.getItem() instanceof ISoulShard && !hasMaxedKills(stack)) {
+                if (!ShardHelper.isBound(stack) && ret == null)
+                    ret = stack;
                 else if (ShardHelper.getBoundEntity(stack).equals(entity))
                     return stack;
             }
         }
-        return lastResort;
+
+        return ret;
     }
 
     public static void increaseShardKillCount(ItemStack shard, int amount) {
