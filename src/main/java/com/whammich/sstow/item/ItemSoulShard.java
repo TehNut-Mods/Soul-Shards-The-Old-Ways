@@ -115,6 +115,19 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     }
 
     @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        if (oldStack.getItem() instanceof ISoulShard && newStack.getItem() instanceof ISoulShard) {
+            if (ShardHelper.getTierFromShard(oldStack) != ShardHelper.getTierFromShard(newStack))
+                return true;
+
+            if (!ShardHelper.getBoundEntity(oldStack).equals(ShardHelper.getBoundEntity(newStack)))
+                return true;
+        }
+
+        return slotChanged;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return Utils.hasMaxedKills(stack);
