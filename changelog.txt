@@ -1,4 +1,14 @@
 ------------------------------------------------------
+Version 2.3.6
+------------------------------------------------------
+
+- Fixed a slight de-sync when the shard is created.
+- Shards now gain kills while in the offhand slot.
+  - This slot is checked first to possibly save some performance by not searching the hotbar.
+- Shards now only cause the re-equip animation if the bound entity or tier has changed.
+  - This was only noticeable before if you were using the shard as a weapon. It became more apparent when used in the offhand slot.
+
+------------------------------------------------------
 Version 2.3.5
 ------------------------------------------------------
 

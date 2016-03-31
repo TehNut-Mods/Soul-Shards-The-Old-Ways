@@ -33,7 +33,7 @@ public class SoulShardsTOW {
     public static final String MODID = "soulshardstow";
     public static final String NAME = "Soul Shards - The Old Ways";
     public static final String VERSION = "@VERSION@";
-    public static final String JSON_CHECKER = "https://gist.githubusercontent.com/TehNut/e8db2be209d32d1ebbc3/raw/4c408d53b6fee1509705fe2e7ce6d827669d373d/VersionChecker-SSTOW.json";
+    public static final String JSON_CHECKER = "https://gist.githubusercontent.com/TehNut/e8db2be209d32d1ebbc3/raw/VersionChecker-SSTOW.json";
 
     @Instance(MODID)
     public static SoulShardsTOW instance;
