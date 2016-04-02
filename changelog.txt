@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.3.7
+------------------------------------------------------
+
+- Fixed de-sync when creating Shard (again)
+- Fixed multiblock fallback not respecting new balancing
+- Updated for new Forge versions
+
+------------------------------------------------------
 Version 2.3.6
 ------------------------------------------------------
 
