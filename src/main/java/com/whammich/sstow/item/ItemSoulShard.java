@@ -8,7 +8,6 @@ import com.whammich.sstow.api.ISoulWeapon;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.registry.ModEnchantments;
-import com.whammich.sstow.registry.ModItems;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.PosWithStack;
 import com.whammich.sstow.util.TierHandler;
@@ -271,10 +270,14 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                 EntityItem invItem = new EntityItem(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
                 event.getWorld().spawnEntityInWorld(invItem);
             }
+
             if (!event.getEntityPlayer().capabilities.isCreativeMode) {
-                event.getEntityPlayer().getHeldItemMainhand().stackSize--;
-                event.getEntityPlayer().inventoryContainer.detectAndSendChanges();
+                if (event.getEntityPlayer().getHeldItemMainhand().stackSize > 1)
+                    event.getEntityPlayer().getHeldItemMainhand().stackSize--;
+                else
+                    event.getEntityPlayer().setHeldItem(EnumHand.MAIN_HAND, null);
             }
+
             event.getEntityPlayer().swingArm(EnumHand.MAIN_HAND);
         }
     }
