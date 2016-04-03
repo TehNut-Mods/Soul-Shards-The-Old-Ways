@@ -12,6 +12,7 @@ public class TierHandler {
 
     public static final Tier BLANK_TIER = new TierHandler.Tier(0, 0, true, false, false, 0, 0);
     public static Map<Integer, Tier> tiers = new HashMap<Integer, Tier>();
+    public static int maxTier = 0;
 
     public static Tier getTier(int tier) {
         return tiers.get(tier) == null ? BLANK_TIER : tiers.get(tier);

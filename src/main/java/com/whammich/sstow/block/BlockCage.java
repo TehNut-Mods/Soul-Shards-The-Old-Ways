@@ -4,6 +4,7 @@ import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.tile.TileEntityCage;
+import com.whammich.sstow.util.TierHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -72,26 +73,8 @@ public class BlockCage extends Block implements IVariantProvider {
     @Override
     public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
         TileEntityCage tile = (TileEntityCage) world.getTileEntity(pos);
-        if (tile.getStackInSlot(0) != null) {
-            ItemStack shard = tile.getStackInSlot(0);
-            int tier = ShardHelper.getTierFromShard(shard);
-            switch (tier) {
-                case 1:
-                    return 2;
-                case 2:
-                    return 5;
-                case 3:
-                    return 7;
-                case 4:
-                    return 10;
-                case 5:
-                    return 15;
-                default:
-                    return 0;
-            }
-        } else {
-            return 0;
-        }
+        // (Current Tier / Max Tiers) * 15
+        return tile.getStackInSlot(0) != null ? (int) (((float) ShardHelper.getTierFromShard(tile.getStackInSlot(0)) / (float) TierHandler.maxTier) * 15) : 0;
     }
 
     @Override

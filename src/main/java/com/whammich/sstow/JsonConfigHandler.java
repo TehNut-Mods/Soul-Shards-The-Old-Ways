@@ -42,8 +42,15 @@ public class JsonConfigHandler {
                 writer.close();
             }
 
-            TierHandler.tiers = gson.fromJson(new FileReader(jsonConfig), new TypeToken<Map<Integer, TierHandler.Tier>>() {
+            Map<Integer, TierHandler.Tier> tempMap = gson.fromJson(new FileReader(jsonConfig), new TypeToken<Map<Integer, TierHandler.Tier>>() {
             }.getType());
+
+            for (Map.Entry<Integer, TierHandler.Tier> tierEntry : tempMap.entrySet()) {
+                TierHandler.tiers.put(tierEntry.getKey(), tierEntry.getValue());
+
+                if (tierEntry.getKey() > TierHandler.maxTier)
+                    TierHandler.maxTier = tierEntry.getKey();
+            }
         } catch (IOException e) {
             SoulShardsTOW.instance.getLogHelper().severe("Failed to create a default Tier configuration file.");
         }
