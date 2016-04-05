@@ -2,6 +2,7 @@ package com.whammich.sstow.tile;
 
 import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
+import com.whammich.sstow.api.ISoulCage;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.CageSpawnEvent;
@@ -29,7 +30,7 @@ import tehnut.lib.util.helper.ItemHelper;
 @Getter
 @Setter
 @Handler
-public class TileEntityCage extends TileInventory implements ITickable {
+public class TileEntityCage extends TileInventory implements ITickable, ISoulCage {
 
     public static final String TIER = "tier";
     public static final String ACTIVE_TIME = "activeTime";
@@ -51,37 +52,7 @@ public class TileEntityCage extends TileInventory implements ITickable {
         if (getWorld().isRemote)
             return;
 
-        if (tier == 0 || Strings.isNullOrEmpty(entName)) {
-            setActiveState(false);
-            return;
-        }
-
-        if (TierHandler.getTier(tier).equals(TierHandler.BLANK_TIER)) {
-            setActiveState(false);
-            return;
-        }
-
-        if (ConfigHandler.requireOwnerOnline && !Utils.isOwnerOnline(owner)) {
-            setActiveState(false);
-            return;
-        }
-
-        if (!ConfigHandler.entityList.contains(entName) && !ConfigHandler.enableBlacklistedSpawning) {
-            setActiveState(false);
-            return;
-        }
-
-        if (TierHandler.checksRedstone(tier) && isRedstoned()) {
-            setActiveState(false);
-            return;
-        }
-
-        if (TierHandler.checksPlayer(tier) && !isPlayerClose()) {
-            setActiveState(false);
-            return;
-        }
-
-        if (SoulShardsAPI.isEntityBlacklisted(EntityMapper.getNewEntityInstance(getWorld(), entName, getPos()))) {
+        if (!canSpawn()) {
             setActiveState(false);
             return;
         }
@@ -89,8 +60,8 @@ public class TileEntityCage extends TileInventory implements ITickable {
         activeTime++;
         setActiveState(true);
 
-        if (activeTime % (TierHandler.getCooldown(tier) * (ConfigHandler.cooldownUsesSeconds ? 20 : 1)) == 0)
-            spawnEntities(TierHandler.getSpawnAmount(tier), getEntName());
+        if (activeTime % getCooldown() == 0)
+            spawnEntities(getSpawnAmount(), getEntName());
     }
 
     @Override
@@ -111,6 +82,42 @@ public class TileEntityCage extends TileInventory implements ITickable {
         tagCompound.setString(ENT_NAME, entName);
         tagCompound.setInteger(ACTIVE_TIME, activeTime);
         tagCompound.setString(OWNER, owner);
+    }
+
+    @Override
+    public boolean canSpawn() {
+        if (tier == 0 || Strings.isNullOrEmpty(entName))
+            return false;
+
+        if (TierHandler.getTier(tier).equals(TierHandler.BLANK_TIER))
+            return false;
+
+        if (ConfigHandler.requireOwnerOnline && !Utils.isOwnerOnline(owner))
+            return false;
+
+        if (!ConfigHandler.entityList.contains(entName) && !ConfigHandler.enableBlacklistedSpawning)
+            return false;
+
+        if (TierHandler.checksRedstone(tier) && isRedstoned())
+            return false;
+
+        if (TierHandler.checksPlayer(tier) && !isPlayerClose())
+            return false;
+
+        if (SoulShardsAPI.isEntityBlacklisted(EntityMapper.getNewEntityInstance(getWorld(), entName, getPos())))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int getCooldown() {
+        return TierHandler.getCooldown(tier) * (ConfigHandler.cooldownUsesSeconds ? 20 : 1);
+    }
+
+    @Override
+    public int getSpawnAmount() {
+        return TierHandler.getSpawnAmount(tier);
     }
 
     public void reset() {
