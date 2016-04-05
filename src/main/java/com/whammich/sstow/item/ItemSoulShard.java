@@ -248,15 +248,11 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     @SubscribeEvent
     @Used
-    public void onInteract(PlayerInteractEvent event) {
+    public void onInteract(PlayerInteractEvent.RightClickBlock event) {
         if (multiblock.isEmpty())
             buildMultiblock();
 
-        // TODO - Change back to `PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK` when Forge re-implements
-        if (event.getAction() != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK)
-            return;
-
-        if (event.getEntityPlayer().getHeldItemMainhand() != null && event.getEntityPlayer().getHeldItemMainhand().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
+        if (event.getItemStack() != null && event.getItemStack().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
             for (PosWithStack posWithStack : multiblock) {
                 BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(posWithStack.getPos()));
                 if (!posWithStack.getBlock().equals(worldStack))
@@ -272,13 +268,13 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
             }
 
             if (!event.getEntityPlayer().capabilities.isCreativeMode) {
-                if (event.getEntityPlayer().getHeldItemMainhand().stackSize > 1)
-                    event.getEntityPlayer().getHeldItemMainhand().stackSize--;
+                if (event.getItemStack().stackSize > 1)
+                    event.getItemStack().stackSize--;
                 else
-                    event.getEntityPlayer().setHeldItem(EnumHand.MAIN_HAND, null);
+                    event.getEntityPlayer().setHeldItem(event.getHand(), null);
             }
 
-            event.getEntityPlayer().swingArm(EnumHand.MAIN_HAND);
+            event.getEntityPlayer().swingArm(event.getHand());
         }
     }
 }

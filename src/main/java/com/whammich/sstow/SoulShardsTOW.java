@@ -33,7 +33,7 @@ public class SoulShardsTOW {
     public static final String MODID = "soulshardstow";
     public static final String NAME = "Soul Shards - The Old Ways";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPEND = "required-after:Forge@[12.16.0.1819,);";
+    public static final String DEPEND = "required-after:Forge@[12.16.0.1840,);";
     public static final String JSON_CHECKER = "https://gist.githubusercontent.com/TehNut/e8db2be209d32d1ebbc3/raw/VersionChecker-SSTOW.json";
 
     @Instance(MODID)
