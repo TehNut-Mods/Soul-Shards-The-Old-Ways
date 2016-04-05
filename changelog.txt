@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.3.8
+------------------------------------------------------
+
+- Moved shard creation back to right click. Should support main/off hand just fine.
+  - Forge requirement is raised to 1840 because of this.
+- [API] Added ISoulCage. Includes documentation for creating a custom Soul Cage.
+
+------------------------------------------------------
 Version 2.3.7
 ------------------------------------------------------
 
