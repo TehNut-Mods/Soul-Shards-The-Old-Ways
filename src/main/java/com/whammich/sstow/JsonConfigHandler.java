@@ -10,6 +10,7 @@ import com.whammich.sstow.util.serialization.SerializerBlockPos;
 import com.whammich.sstow.util.serialization.SerializerBlockStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import org.apache.commons.lang3.tuple.Pair;
 import tehnut.lib.util.BlockStack;
 
 import java.io.File;
@@ -67,11 +68,15 @@ public class JsonConfigHandler {
                 writer.close();
             }
 
-            ItemSoulShard.multiblock = gson.fromJson(new FileReader(jsonConfig), new TypeToken<ArrayList<PosWithStack>>() {
+            ArrayList<PosWithStack> tempList = gson.fromJson(new FileReader(jsonConfig), new TypeToken<ArrayList<PosWithStack>>() {
             }.getType());
-            for (PosWithStack posWithStack : ItemSoulShard.multiblock)
-                if (posWithStack.getPos().equals(new BlockPos(0, 0, 0)))
-                    ItemSoulShard.originBlock = posWithStack.getBlock();
+
+            for (PosWithStack posWithStack : tempList)
+                ItemSoulShard.multiblock.add(Pair.of(posWithStack.getPos(), posWithStack.getBlock()));
+
+            for (Pair<BlockPos, BlockStack> multiblockPair : ItemSoulShard.multiblock)
+                if (multiblockPair.getLeft().equals(new BlockPos(0, 0, 0)))
+                    ItemSoulShard.originBlock = multiblockPair.getRight();
 
             if (ItemSoulShard.originBlock == null) {
                 ItemSoulShard.buildMultiblock();

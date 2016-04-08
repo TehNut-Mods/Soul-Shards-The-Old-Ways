@@ -9,7 +9,6 @@ import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.registry.ModEnchantments;
 import com.whammich.sstow.util.EntityMapper;
-import com.whammich.sstow.util.PosWithStack;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -38,6 +37,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
 import tehnut.lib.annot.Handler;
 import tehnut.lib.annot.ModItem;
 import tehnut.lib.annot.Used;
@@ -55,7 +55,7 @@ import java.util.List;
 @Handler
 public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
-    public static List<PosWithStack> multiblock = new ArrayList<PosWithStack>();
+    public static List<Pair<BlockPos, BlockStack>> multiblock = new ArrayList<Pair<BlockPos, BlockStack>>();
     public static BlockStack originBlock = null;
 
     public ItemSoulShard() {
@@ -189,15 +189,15 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     public static void buildMultiblock() {
         originBlock = new BlockStack(Blocks.glowstone);
         multiblock.clear();
-        multiblock.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
-        multiblock.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(new PosWithStack(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian)));
-        multiblock.add(new PosWithStack(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian)));
-        multiblock.add(new PosWithStack(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian)));
-        multiblock.add(new PosWithStack(new BlockPos(-1, 0, -1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(Pair.of(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
+        multiblock.add(Pair.of(new BlockPos(1, 0, 0), new BlockStack(Blocks.quartz_block)));
+        multiblock.add(Pair.of(new BlockPos(-1, 0, 0), new BlockStack(Blocks.quartz_block)));
+        multiblock.add(Pair.of(new BlockPos(0, 0, 1), new BlockStack(Blocks.quartz_block)));
+        multiblock.add(Pair.of(new BlockPos(0, 0, -1), new BlockStack(Blocks.quartz_block)));
+        multiblock.add(Pair.of(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(Pair.of(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(Pair.of(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(Pair.of(new BlockPos(-1, 0, -1), new BlockStack(Blocks.obsidian)));
     }
 
     @SubscribeEvent
@@ -253,14 +253,14 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
             buildMultiblock();
 
         if (event.getItemStack() != null && event.getItemStack().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
-            for (PosWithStack posWithStack : multiblock) {
-                BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(posWithStack.getPos()));
-                if (!posWithStack.getBlock().equals(worldStack))
+            for (Pair<BlockPos, BlockStack> multiblockPair : multiblock) {
+                BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(multiblockPair.getLeft()));
+                if (!multiblockPair.getRight().equals(worldStack))
                     return;
             }
 
-            for (PosWithStack posWithStack : multiblock)
-                event.getWorld().destroyBlock(event.getPos().add(posWithStack.getPos()), false);
+            for (Pair<BlockPos, BlockStack> multiblockPair : multiblock)
+                event.getWorld().destroyBlock(event.getPos().add(multiblockPair.getLeft()), false);
 
             if (!event.getWorld().isRemote) {
                 EntityItem invItem = new EntityItem(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
