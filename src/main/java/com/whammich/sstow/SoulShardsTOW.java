@@ -69,7 +69,7 @@ public class SoulShardsTOW {
     @Mod.EventHandler
     @Used
     public void preInit(FMLPreInitializationEvent event) {
-        logHelper = new LogHelper(event.getModLog());
+        logHelper = new LogHelper("SoulShardsTOW");
         configDir = new File(event.getModConfigurationDirectory(), "sstow");
         ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
         JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
