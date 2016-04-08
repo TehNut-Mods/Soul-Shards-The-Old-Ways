@@ -29,6 +29,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -148,8 +149,11 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
-        if (ShardHelper.isBound(stack))
-            list.add(TextHelper.localizeEffect("tooltip.soulshardstow.bound", Utils.getEntityNameTranslated(ShardHelper.getBoundEntity(stack))));
+        if (ShardHelper.isBound(stack)) {
+            String boundEnt = ShardHelper.getBoundEntity(stack);
+            boolean disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(boundEnt).getCanonicalName());
+            list.add((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("tooltip.soulshardstow.bound", Utils.getEntityNameTranslated(boundEnt)));
+        }
 
         if (ShardHelper.getKillsFromShard(stack) >= 0)
             list.add(TextHelper.localizeEffect("tooltip.soulshardstow.kills", ShardHelper.getKillsFromShard(stack)));

@@ -1,16 +1,20 @@
 package com.whammich.sstow.compat.waila.provider;
 
+import com.whammich.sstow.ConfigHandler;
+import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.compat.waila.WailaCallbackHandler;
 import com.whammich.sstow.tile.TileEntityCage;
 import com.whammich.sstow.util.Utils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import tehnut.lib.util.helper.TextHelper;
 
@@ -35,7 +39,8 @@ public class DataProviderCage implements IWailaDataProvider {
                 TileEntityCage cage = (TileEntityCage) accessor.getTileEntity();
 
                 if (cage.getStackInSlot(0) != null) {
-                    currenttip.add(TextHelper.localizeEffect("waila.soulshardstow.boundTo", Utils.getEntityNameTranslated(cage.getEntName())));
+                    boolean disabled = !ConfigHandler.entityList.contains(cage.getEntName()) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(cage.getEntName()).getCanonicalName());
+                    currenttip.add((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("waila.soulshardstow.boundTo", Utils.getEntityNameTranslated(cage.getEntName())));
                     currenttip.add(TextHelper.localizeEffect("waila.soulshardstow.tier", cage.getTier()));
 
                     if (config.getConfig(WailaCallbackHandler.CONFIG_OWNER))
