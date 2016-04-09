@@ -78,7 +78,7 @@ public class BlockCage extends Block implements IVariantProvider {
     public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos) {
         TileEntityCage tile = (TileEntityCage) world.getTileEntity(pos);
         // (Current Tier / Max Tiers) * 15
-        return tile.getStackInSlot(0) != null ? (int) (((float) ShardHelper.getTierFromShard(tile.getStackInSlot(0)) / (float) TierHandler.maxTier) * 15) : 0;
+        return (int) ((float) tile.getTier() / (float) TierHandler.maxTier) * 15;
     }
 
     @Override
