@@ -177,7 +177,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     }
 
     private boolean canSpawnAtCoords(EntityLiving ent) {
-        return ent.isNotColliding() && ent.getCanSpawnHere();
+        return ent.isNotColliding();
     }
 
     private boolean isRedstoned() {
