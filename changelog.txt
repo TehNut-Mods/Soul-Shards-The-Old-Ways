@@ -1,4 +1,13 @@
 ------------------------------------------------------
+Version 2.3.9
+------------------------------------------------------
+
+- Re-implement Waila compatibility
+- Fixed mobs following standard spawning rules (#13)
+  - Cage spawning should be back to how it was in 1.8
+- Bound Entity tooltip (Item and Waila) will now display in Red if the entity is disabled.
+
+------------------------------------------------------
 Version 2.3.8
 ------------------------------------------------------
 
