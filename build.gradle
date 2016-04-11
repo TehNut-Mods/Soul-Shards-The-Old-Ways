@@ -205,6 +205,7 @@ String getChangelogText() {
 
 def curseRelations = {
     optionalLibrary 'waila'
+    optionalLibrary 'just-enough-items-jei'
 }
 
 curseforge {
@@ -214,7 +215,7 @@ curseforge {
     project {
         id = "${curse_id}"
         changelog = getChangelogText()
-        releaseType = 'beta'
+        releaseType = 'release'
 
         relations curseRelations
 
