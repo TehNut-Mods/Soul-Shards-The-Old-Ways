@@ -39,7 +39,11 @@ public class DataProviderCage implements IWailaDataProvider {
                 TileEntityCage cage = (TileEntityCage) accessor.getTileEntity();
 
                 if (cage.getStackInSlot(0) != null) {
-                    boolean disabled = !ConfigHandler.entityList.contains(cage.getEntName()) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(cage.getEntName()).getCanonicalName());
+                    boolean disabled;
+                    if (!cage.getEntName().equals("Wither Skeleton"))
+                        disabled = !ConfigHandler.entityList.contains(cage.getEntName()) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(cage.getEntName()).getCanonicalName());
+                    else
+                        disabled = !ConfigHandler.entityList.contains(cage.getEntName());
                     currenttip.add((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("waila.soulshardstow.boundTo", Utils.getEntityNameTranslated(cage.getEntName())));
                     currenttip.add(TextHelper.localizeEffect("waila.soulshardstow.tier", cage.getTier()));
 

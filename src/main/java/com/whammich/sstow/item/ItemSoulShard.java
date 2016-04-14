@@ -151,7 +151,11 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
         if (ShardHelper.isBound(stack)) {
             String boundEnt = ShardHelper.getBoundEntity(stack);
-            boolean disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(boundEnt).getCanonicalName());
+            boolean disabled;
+            if (!boundEnt.equals("Wither Skeleton"))
+                disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(boundEnt).getCanonicalName());
+            else
+                disabled = !ConfigHandler.entityList.contains(boundEnt);
             list.add((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("tooltip.soulshardstow.bound", Utils.getEntityNameTranslated(boundEnt)));
         }
 
