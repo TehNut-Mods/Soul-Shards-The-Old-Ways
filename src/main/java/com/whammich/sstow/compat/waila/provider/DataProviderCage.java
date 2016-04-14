@@ -40,7 +40,7 @@ public class DataProviderCage implements IWailaDataProvider {
 
                 if (cage.getStackInSlot(0) != null) {
                     boolean disabled;
-                    if (!cage.getEntName().equals("Wither Skeleton"))
+                    if (!cage.getEntName().equals(SoulShardsAPI.WITHER_SKELETON) && !cage.getEntName().equals(SoulShardsAPI.WITHER_SKELETON_OLD))
                         disabled = !ConfigHandler.entityList.contains(cage.getEntName()) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(cage.getEntName()).getCanonicalName());
                     else
                         disabled = !ConfigHandler.entityList.contains(cage.getEntName());

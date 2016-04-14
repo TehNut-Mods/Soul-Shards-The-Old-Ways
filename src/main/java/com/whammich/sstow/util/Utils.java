@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulShard;
 import com.whammich.sstow.api.ShardHelper;
+import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.ShardTierChangeEvent;
 import com.whammich.sstow.tile.TileEntityCage;
 import net.minecraft.entity.EntityLivingBase;
@@ -91,7 +92,7 @@ public final class Utils {
     }
 
     public static String getEntityNameTranslated(String unlocName) {
-        if (unlocName.equals("Wither Skeleton"))
+        if (unlocName.equals(SoulShardsAPI.WITHER_SKELETON_OLD))
             return unlocName;
 
         return TextHelper.localize("entity." + unlocName + ".name");

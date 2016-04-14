@@ -85,7 +85,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                     return EnumActionResult.FAIL;
 
                 if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
-                    name = "Wither Skeleton";
+                    name = SoulShardsAPI.WITHER_SKELETON;
 
                 if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
                     if (!world.isRemote)
@@ -152,7 +152,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (ShardHelper.isBound(stack)) {
             String boundEnt = ShardHelper.getBoundEntity(stack);
             boolean disabled;
-            if (!boundEnt.equals("Wither Skeleton"))
+            if (!boundEnt.equals(SoulShardsAPI.WITHER_SKELETON) && !boundEnt.equals(SoulShardsAPI.WITHER_SKELETON_OLD))
                 disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(boundEnt).getCanonicalName());
             else
                 disabled = !ConfigHandler.entityList.contains(boundEnt);
@@ -226,7 +226,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         }
 
         if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
-            entName = "Wither Skeleton";
+            entName = SoulShardsAPI.WITHER_SKELETON;
 
         ItemStack shard = Utils.getShardFromInv(player, entName);
 

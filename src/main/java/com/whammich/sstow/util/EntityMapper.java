@@ -3,6 +3,7 @@ package com.whammich.sstow.util;
 import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.SoulShardsAPI;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -35,7 +36,8 @@ public final class EntityMapper {
                 entityList.add(entry.getValue());
         }
 
-        entityList.add("Wither Skeleton");
+        entityList.add(SoulShardsAPI.WITHER_SKELETON_OLD);
+        entityList.add(SoulShardsAPI.WITHER_SKELETON);
 
         SoulShardsTOW.instance.getLogHelper().info("Finished mapping, entities found: {}", entityList.size());
         ConfigHandler.handleEntityList("Entity List");
@@ -49,7 +51,7 @@ public final class EntityMapper {
         if (Strings.isNullOrEmpty(ent))
             return null;
 
-        if (ent.equals("Wither Skeleton")) {
+        if (ent.equals(SoulShardsAPI.WITHER_SKELETON) || ent.equals(SoulShardsAPI.WITHER_SKELETON_OLD)) {
             EntitySkeleton skeleton = new EntitySkeleton(world);
             skeleton.setSkeletonType(1);
             skeleton.tasks.addTask(4, new EntityAIAttackMelee(skeleton, 1.2D, false));

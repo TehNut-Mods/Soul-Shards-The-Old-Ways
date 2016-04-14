@@ -21,7 +21,7 @@ tooltip.soulshardstow.tier=Tier: %d
 enchantment.soulStealer=Soul Stealer
 
 # Entities
-entity.Wither Skeleton.name=Wither Skeleton
+entity.WitherSkeleton.name=Wither Skeleton
 
 # Chat
 chat.sstow.command.killed=&2Killed %d entities
