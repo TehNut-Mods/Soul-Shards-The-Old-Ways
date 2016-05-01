@@ -153,7 +153,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
             String boundEnt = ShardHelper.getBoundEntity(stack);
             boolean disabled;
             if (!boundEnt.equals(SoulShardsAPI.WITHER_SKELETON) && !boundEnt.equals(SoulShardsAPI.WITHER_SKELETON_OLD))
-                disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.stringToClassMapping.get(boundEnt).getCanonicalName());
+                disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(boundEnt).getCanonicalName());
             else
                 disabled = !ConfigHandler.entityList.contains(boundEnt);
             list.add((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("tooltip.soulshardstow.bound", Utils.getEntityNameTranslated(boundEnt)));
@@ -195,17 +195,17 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     }
 
     public static void buildMultiblock() {
-        originBlock = new BlockStack(Blocks.glowstone);
+        originBlock = new BlockStack(Blocks.GLOWSTONE);
         multiblock.clear();
-        multiblock.add(Pair.of(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
-        multiblock.add(Pair.of(new BlockPos(1, 0, 0), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(Pair.of(new BlockPos(-1, 0, 0), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(Pair.of(new BlockPos(0, 0, 1), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(Pair.of(new BlockPos(0, 0, -1), new BlockStack(Blocks.quartz_block)));
-        multiblock.add(Pair.of(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian)));
-        multiblock.add(Pair.of(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian)));
-        multiblock.add(Pair.of(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian)));
-        multiblock.add(Pair.of(new BlockPos(-1, 0, -1), new BlockStack(Blocks.obsidian)));
+        multiblock.add(Pair.of(new BlockPos(0, 0, 0), new BlockStack(Blocks.GLOWSTONE)));
+        multiblock.add(Pair.of(new BlockPos(1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        multiblock.add(Pair.of(new BlockPos(-1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        multiblock.add(Pair.of(new BlockPos(0, 0, 1), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        multiblock.add(Pair.of(new BlockPos(0, 0, -1), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        multiblock.add(Pair.of(new BlockPos(1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
+        multiblock.add(Pair.of(new BlockPos(1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
+        multiblock.add(Pair.of(new BlockPos(-1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
+        multiblock.add(Pair.of(new BlockPos(-1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
     }
 
     @SubscribeEvent
@@ -260,7 +260,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (multiblock.isEmpty())
             buildMultiblock();
 
-        if (event.getItemStack() != null && event.getItemStack().getItem() == Items.diamond && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
+        if (event.getItemStack() != null && event.getItemStack().getItem() == Items.DIAMOND && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
             for (Pair<BlockPos, BlockStack> multiblockPair : multiblock) {
                 BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(multiblockPair.getLeft()));
                 if (!multiblockPair.getRight().equals(worldStack))

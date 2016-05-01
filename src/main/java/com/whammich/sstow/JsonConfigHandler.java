@@ -103,15 +103,15 @@ public class JsonConfigHandler {
     private static ArrayList<PosWithStack> handleMultiblockDefaults() {
         ArrayList<PosWithStack> ret = new ArrayList<PosWithStack>();
 
-        ret.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.glowstone)));
-        ret.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.quartz_block)));
-        ret.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.quartz_block)));
-        ret.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.quartz_block)));
-        ret.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.quartz_block)));
-        ret.add(new PosWithStack(new BlockPos(1, 0, 1), new BlockStack(Blocks.obsidian)));
-        ret.add(new PosWithStack(new BlockPos(1, 0, -1), new BlockStack(Blocks.obsidian)));
-        ret.add(new PosWithStack(new BlockPos(-1, 0, 1), new BlockStack(Blocks.obsidian)));
-        ret.add(new PosWithStack(new BlockPos(-1, 0, -1), new BlockStack(Blocks.obsidian)));
+        ret.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.GLOWSTONE)));
+        ret.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        ret.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        ret.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        ret.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.QUARTZ_BLOCK)));
+        ret.add(new PosWithStack(new BlockPos(1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
+        ret.add(new PosWithStack(new BlockPos(1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
+        ret.add(new PosWithStack(new BlockPos(-1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
+        ret.add(new PosWithStack(new BlockPos(-1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
 
         return ret;
     }

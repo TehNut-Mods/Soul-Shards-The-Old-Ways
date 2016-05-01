@@ -26,7 +26,7 @@ public final class EntityMapper {
     public static List<String> entityList = new ArrayList<String>();
 
     public static void init() {
-        for (Map.Entry<Class<? extends Entity>, String> entry : EntityList.classToStringMapping.entrySet()) {
+        for (Map.Entry<Class<? extends Entity>, String> entry : EntityList.CLASS_TO_NAME.entrySet()) {
             if (entityList.contains(entry.getValue())) {
                 SoulShardsTOW.instance.getLogHelper().info("Already mapped, skipping {}", entry.getValue());
                 continue;
@@ -55,7 +55,7 @@ public final class EntityMapper {
             EntitySkeleton skeleton = new EntitySkeleton(world);
             skeleton.setSkeletonType(1);
             skeleton.tasks.addTask(4, new EntityAIAttackMelee(skeleton, 1.2D, false));
-            skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.stone_sword));
+            skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
             skeleton.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
             return skeleton;
         }
@@ -64,7 +64,7 @@ public final class EntityMapper {
             EntitySkeleton skeleton = new EntitySkeleton(world);
             skeleton.setSkeletonType(0);
             skeleton.tasks.addTask(4, new EntityAIAttackRangedBow(skeleton, 1.0D, 20, 15.0F));
-            skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.bow));
+            skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BOW));
             return skeleton;
         }
 

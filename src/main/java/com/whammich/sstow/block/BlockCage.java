@@ -40,7 +40,7 @@ import java.util.List;
 public class BlockCage extends Block implements IVariantProvider {
 
     public BlockCage() {
-        super(Material.iron);
+        super(Material.IRON);
         setUnlocalizedName(SoulShardsTOW.MODID + ".cage");
         setCreativeTab(SoulShardsTOW.soulShardsTab);
         setDefaultState(blockState.getBaseState().withProperty(SoulShardsAPI.ACTIVE, false));

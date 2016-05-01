@@ -6,6 +6,7 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tehnut.lib.annot.Handler;
+import tehnut.lib.annot.Used;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class ConfigHandler {
     public static int lpPerMob;
 
     @SubscribeEvent
+    @Used
     public void configChanged(ConfigChangedEvent event) {
         if (event.getModID().equals(SoulShardsTOW.MODID)) {
             syncConfig();

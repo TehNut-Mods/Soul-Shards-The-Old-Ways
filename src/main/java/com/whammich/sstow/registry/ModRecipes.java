@@ -22,12 +22,12 @@ import tehnut.lib.util.helper.ItemHelper;
 public class ModRecipes {
 
     public static void init() {
-        GameRegistry.addSmelting(Blocks.soul_sand, ItemMaterials.getStack(ItemMaterials.DUST_VILE), 0.4F);
+        GameRegistry.addSmelting(Blocks.SOUL_SAND, ItemMaterials.getStack(ItemMaterials.DUST_VILE), 0.4F);
 
         GameRegistry.addRecipe(new ShapedOreRecipe(ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED), "EVE", "VIV", "EVE", 'E', "dustCorrupted", 'I', "ingotIron", 'V', "dustVile"));
-        GameRegistry.addRecipe(new ShapelessOreRecipe(ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE), "gemLapis", "dustRedstone", Blocks.obsidian, Blocks.obsidian));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE), "gemLapis", "dustRedstone", Blocks.OBSIDIAN, Blocks.OBSIDIAN));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHelper.getItem(ItemSoulSword.class)), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockHelper.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.iron_bars));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockHelper.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.IRON_BARS));
     }
 
     @SubscribeEvent
