@@ -8,9 +8,7 @@ import com.whammich.sstow.api.ISoulWeapon;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.registry.ModEnchantments;
-import com.whammich.sstow.util.EntityMapper;
-import com.whammich.sstow.util.TierHandler;
-import com.whammich.sstow.util.Utils;
+import com.whammich.sstow.util.*;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,22 +37,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.annot.ModItem;
-import tehnut.lib.annot.Used;
-import tehnut.lib.iface.IMeshProvider;
-import tehnut.lib.util.BlockStack;
-import tehnut.lib.util.helper.ItemHelper;
-import tehnut.lib.util.helper.TextHelper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@ModItem(name = "ItemSoulShard")
-@Used
-@Handler
-public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
+public class ItemSoulShard extends Item implements ISoulShard {
 
     public static List<Pair<BlockPos, BlockStack>> multiblock = new ArrayList<Pair<BlockPos, BlockStack>>();
     public static BlockStack originBlock = null;
@@ -165,35 +153,6 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         list.add(TextHelper.localizeEffect("tooltip.soulshardstow.tier", ShardHelper.getTierFromShard(stack)));
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public ItemMeshDefinition getMeshDefinition() {
-        return new ItemMeshDefinition() {
-            @Override
-            public ModelResourceLocation getModelLocation(ItemStack stack) {
-                if (ShardHelper.isBound(stack))
-                    return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulShard"), "tier=" + ShardHelper.getTierFromShard(stack));
-
-                return new ModelResourceLocation(new ResourceLocation("soulshardstow:item/ItemSoulShard"), "tier=unbound");
-            }
-        };
-    }
-
-    @Override
-    public List<String> getVariants() {
-        List<String> ret = new ArrayList<String>();
-        ret.add("tier=unbound");
-        for (int i = 0; i < TierHandler.tiers.size(); i++)
-            ret.add("tier=" + i);
-        return ret;
-    }
-
-    @Nullable
-    @Override
-    public ResourceLocation getCustomLocation() {
-        return null;
-    }
-
     public static void buildMultiblock() {
         originBlock = new BlockStack(Blocks.GLOWSTONE);
         multiblock.clear();
@@ -206,83 +165,5 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         multiblock.add(Pair.of(new BlockPos(1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
         multiblock.add(Pair.of(new BlockPos(-1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
         multiblock.add(Pair.of(new BlockPos(-1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
-    }
-
-    @SubscribeEvent
-    @Used
-    public void onEntityKill(LivingDeathEvent event) {
-        World world = event.getEntity().worldObj;
-
-        if (world.isRemote || !(event.getEntity() instanceof EntityLiving) || !(event.getSource().getEntity() instanceof EntityPlayer) || event.getSource().getEntity() instanceof FakePlayer)
-            return;
-
-        EntityLiving dead = (EntityLiving) event.getEntity();
-        EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
-        String entName = EntityList.getEntityString(dead);
-
-        if (Strings.isNullOrEmpty(entName)) {
-            SoulShardsTOW.instance.getLogHelper().severe("Player killed an entity with no mapped name: {}", dead);
-            return;
-        }
-
-        if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
-            entName = SoulShardsAPI.WITHER_SKELETON;
-
-        ItemStack shard = Utils.getShardFromInv(player, entName);
-
-        if (shard == null)
-            return;
-
-        if (!ConfigHandler.entityList.contains(entName) || SoulShardsAPI.isEntityBlacklisted(dead))
-            return;
-
-        if (!EntityMapper.isEntityValid(entName))
-            return;
-
-        if (!ConfigHandler.countCageBornForShard && Utils.isCageBorn(dead))
-            return;
-
-        if (!ShardHelper.isBound(shard))
-            ShardHelper.setBoundEntity(shard, entName);
-
-        int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer, player.getHeldItemMainhand());
-        soulStealer *= ConfigHandler.soulStealerBonus;
-
-        if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() instanceof ISoulWeapon)
-            soulStealer += ((ISoulWeapon) player.getHeldItemMainhand().getItem()).getBonusSouls(player.getHeldItemMainhand());
-
-        Utils.increaseShardKillCount(shard, 1 + soulStealer);
-    }
-
-    @SubscribeEvent
-    @Used
-    public void onInteract(PlayerInteractEvent.RightClickBlock event) {
-        if (multiblock.isEmpty())
-            buildMultiblock();
-
-        if (event.getItemStack() != null && event.getItemStack().getItem() == Items.DIAMOND && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
-            for (Pair<BlockPos, BlockStack> multiblockPair : multiblock) {
-                BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(multiblockPair.getLeft()));
-                if (!multiblockPair.getRight().equals(worldStack))
-                    return;
-            }
-
-            for (Pair<BlockPos, BlockStack> multiblockPair : multiblock)
-                event.getWorld().destroyBlock(event.getPos().add(multiblockPair.getLeft()), false);
-
-            if (!event.getWorld().isRemote) {
-                EntityItem invItem = new EntityItem(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
-                event.getWorld().spawnEntityInWorld(invItem);
-            }
-
-            if (!event.getEntityPlayer().capabilities.isCreativeMode) {
-                if (event.getItemStack().stackSize > 1)
-                    event.getItemStack().stackSize--;
-                else
-                    event.getEntityPlayer().setHeldItem(event.getHand(), null);
-            }
-
-            event.getEntityPlayer().swingArm(event.getHand());
-        }
     }
 }

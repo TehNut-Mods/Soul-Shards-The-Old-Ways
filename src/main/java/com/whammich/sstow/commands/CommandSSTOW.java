@@ -2,7 +2,8 @@ package com.whammich.sstow.commands;
 
 import com.google.common.base.Strings;
 import com.whammich.sstow.api.ShardHelper;
-import com.whammich.sstow.item.ItemSoulShard;
+import com.whammich.sstow.registry.ModObjects;
+import com.whammich.sstow.util.TextHelper;
 import com.whammich.sstow.util.TierHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -12,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
-import tehnut.lib.util.helper.ItemHelper;
-import tehnut.lib.util.helper.TextHelper;
 
 public class CommandSSTOW extends CommandBase {
     @Override
@@ -55,7 +54,7 @@ public class CommandSSTOW extends CommandBase {
                 if (params.length == 2) {
                     int tierAmount = Integer.parseInt(params[1]);
                     int minKills = TierHandler.getMinKills(tierAmount);
-                    if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemHelper.getItem(ItemSoulShard.class)) {
+                    if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() == ModObjects.shard) {
                         ItemStack shard = ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND);
                         for (int i = 1; i <= tierAmount; i++) {
                             ShardHelper.setTierForShard(shard, 1);
@@ -66,7 +65,7 @@ public class CommandSSTOW extends CommandBase {
                     sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.setwrong")));
                 }
             } else if (params[0].equalsIgnoreCase("setent") && !Strings.isNullOrEmpty(params[1])) {
-                if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemHelper.getItem(ItemSoulShard.class)) {
+                if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() == ModObjects.shard) {
                     ItemStack shard = ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND);
                     String entName = "";
                     for (int i = 1; i < params.length; i++)

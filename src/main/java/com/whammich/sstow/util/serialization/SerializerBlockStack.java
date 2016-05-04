@@ -1,10 +1,9 @@
 package com.whammich.sstow.util.serialization;
 
 import com.google.gson.*;
-import net.minecraft.block.Block;
+import com.whammich.sstow.util.BlockStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import tehnut.lib.util.BlockStack;
 
 import java.lang.reflect.Type;
 

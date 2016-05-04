@@ -3,8 +3,8 @@ package com.whammich.sstow.compat.hardmode;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.compat.CompatibilityType;
+import com.whammich.sstow.compat.ICompatibility;
 import net.minecraftforge.common.MinecraftForge;
-import tehnut.lib.iface.ICompatibility;
 
 public class CompatibilityHardMode implements ICompatibility {
 

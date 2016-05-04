@@ -6,7 +6,7 @@ import com.whammich.sstow.api.ISoulCage;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.CageSpawnEvent;
-import com.whammich.sstow.item.ItemSoulShard;
+import com.whammich.sstow.registry.ModObjects;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
@@ -21,15 +21,9 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.annot.Used;
-import tehnut.lib.util.helper.ItemHelper;
 
 @Getter
 @Setter
-@Handler
 public class TileEntityCage extends TileInventory implements ITickable, ISoulCage {
 
     public static final String TIER = "tier";
@@ -206,13 +200,6 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return stack.getItem() == ItemHelper.getItem(ItemSoulShard.class) && ShardHelper.getTierFromShard(stack) > 0 && ShardHelper.isBound(stack);
-    }
-
-    @SubscribeEvent
-    @Used
-    public void onDeath(LivingExperienceDropEvent event) {
-        if (!ConfigHandler.enableExperienceDrop && Utils.isCageBorn(event.getEntityLiving()))
-            event.setDroppedExperience(0);
+        return stack.getItem() == ModObjects.shard && ShardHelper.getTierFromShard(stack) > 0 && ShardHelper.isBound(stack);
     }
 }

@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import tehnut.lib.util.helper.TextHelper;
 
 import javax.annotation.Nullable;
 import java.util.UUID;

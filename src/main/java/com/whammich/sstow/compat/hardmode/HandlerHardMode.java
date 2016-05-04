@@ -4,12 +4,10 @@ import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.event.CageSpawnEvent;
 import com.whammich.sstow.api.event.ShardTierChangeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tehnut.lib.annot.Used;
 
 public class HandlerHardMode {
 
     @SubscribeEvent
-    @Used
     public void onCageSpawn(CageSpawnEvent event) {
         int currentKills = ShardHelper.getKillsFromShard(event.getShard());
         if (currentKills <= 0) {
@@ -21,7 +19,6 @@ public class HandlerHardMode {
     }
 
     @SubscribeEvent
-    @Used
     public void onTierChange(ShardTierChangeEvent event) {
         if (event.getNewTier() < ShardHelper.getTierFromShard(event.getShardStack()))
             event.setCanceled(true);

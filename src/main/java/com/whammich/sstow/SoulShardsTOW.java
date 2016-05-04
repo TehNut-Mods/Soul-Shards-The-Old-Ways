@@ -2,7 +2,7 @@ package com.whammich.sstow;
 
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
-import com.whammich.sstow.item.ItemSoulShard;
+import com.whammich.sstow.compat.ICompatibility;
 import com.whammich.sstow.proxy.CommonProxy;
 import com.whammich.sstow.registry.*;
 import com.whammich.sstow.util.EntityMapper;
@@ -18,11 +18,8 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import tehnut.lib.LendingLibrary;
-import tehnut.lib.annot.Used;
-import tehnut.lib.iface.ICompatibility;
-import tehnut.lib.util.helper.ItemHelper;
-import tehnut.lib.util.helper.LogHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
@@ -45,12 +42,12 @@ public class SoulShardsTOW {
     public static CreativeTabs soulShardsTab = new CreativeTabs("soulShards") {
         @Override
         public Item getTabIconItem() {
-            return ItemHelper.getItem(ItemSoulShard.class);
+            return ModObjects.shard;
         }
 
         @Override
         public ItemStack getIconItemStack() {
-            ItemStack shard = new ItemStack(ItemHelper.getItem(ItemSoulShard.class));
+            ItemStack shard = new ItemStack(ModObjects.shard);
             ShardHelper.setTierForShard(shard, TierHandler.tiers.size() - 1);
             Utils.setMaxedKills(shard);
             ShardHelper.setBoundEntity(shard, "Pig");
@@ -59,25 +56,17 @@ public class SoulShardsTOW {
     };
 
     private File configDir;
-    private LogHelper logHelper;
-    private final LendingLibrary library;
-
-    public SoulShardsTOW() {
-        this.library = new LendingLibrary(MODID);
-    }
+    private Logger logHelper = LogManager.getLogger("SoulShardsTOW");
 
     @Mod.EventHandler
-    @Used
     public void preInit(FMLPreInitializationEvent event) {
-        logHelper = new LogHelper("SoulShardsTOW");
         configDir = new File(event.getModConfigurationDirectory(), "sstow");
         ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
         JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
         JsonConfigHandler.initMultiblock(new File(configDir, "Multiblock.json"));
 
-        getLibrary().registerObjects(event);
-
-        ModItems.init();
+        ModObjects.initItems();
+        ModObjects.initBlocks();
         ModRecipes.init();
         ModEnchantments.init();
         ModCompatibility.registerModCompat();
@@ -87,7 +76,6 @@ public class SoulShardsTOW {
     }
 
     @EventHandler
-    @Used
     public void init(FMLInitializationEvent event) {
         ModCompatibility.loadCompat(ICompatibility.InitializationPhase.INIT);
 
@@ -95,7 +83,6 @@ public class SoulShardsTOW {
     }
 
     @EventHandler
-    @Used
     public void postInit(FMLPostInitializationEvent event) {
         EntityMapper.init();
         ModCompatibility.loadCompat(ICompatibility.InitializationPhase.POST_INIT);
@@ -104,13 +91,11 @@ public class SoulShardsTOW {
     }
 
     @EventHandler
-    @Used
     public void onIMCRecieved(FMLInterModComms.IMCEvent event) {
         IMCHandler.handleIMC(event);
     }
 
     @EventHandler
-    @Used
     public void serverStart(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandSSTOW());
     }

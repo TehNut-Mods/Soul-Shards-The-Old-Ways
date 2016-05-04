@@ -3,17 +3,12 @@ package com.whammich.sstow;
 import com.whammich.sstow.compat.CompatibilityType;
 import com.whammich.sstow.util.EntityMapper;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.annot.Used;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-@Handler
 public class ConfigHandler {
 
     public static Configuration config;
@@ -40,15 +35,6 @@ public class ConfigHandler {
 
     public static CompatibilityType compatibilityType = CompatibilityType.VANILLA;
     public static int lpPerMob;
-
-    @SubscribeEvent
-    @Used
-    public void configChanged(ConfigChangedEvent event) {
-        if (event.getModID().equals(SoulShardsTOW.MODID)) {
-            syncConfig();
-            handleEntityList("Entity List");
-        }
-    }
 
     public static void init(File file) {
         config = new Configuration(file);

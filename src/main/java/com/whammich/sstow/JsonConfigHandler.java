@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.whammich.sstow.item.ItemSoulShard;
+import com.whammich.sstow.util.BlockStack;
 import com.whammich.sstow.util.PosWithStack;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.serialization.SerializerBlockPos;
@@ -11,7 +12,6 @@ import com.whammich.sstow.util.serialization.SerializerBlockStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import org.apache.commons.lang3.tuple.Pair;
-import tehnut.lib.util.BlockStack;
 
 import java.io.File;
 import java.io.FileReader;
@@ -53,7 +53,7 @@ public class JsonConfigHandler {
                     TierHandler.maxTier = tierEntry.getKey();
             }
         } catch (IOException e) {
-            SoulShardsTOW.instance.getLogHelper().severe("Failed to create a default Tier configuration file.");
+            SoulShardsTOW.instance.getLogHelper().error("Failed to create a default Tier configuration file.");
         }
     }
 
@@ -83,7 +83,7 @@ public class JsonConfigHandler {
                 SoulShardsTOW.instance.getLogHelper().error("Could not find origin block for multiblock. Setting to default structure.");
             }
         } catch (IOException e) {
-            SoulShardsTOW.instance.getLogHelper().severe("Failed to create a default Multiblock configuration file.");
+            SoulShardsTOW.instance.getLogHelper().error("Failed to create a default Multiblock configuration file.");
         }
     }
 

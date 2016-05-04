@@ -1,7 +1,7 @@
 package com.whammich.sstow.compat.enderio;
 
+import com.whammich.sstow.compat.ICompatibility;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
-import tehnut.lib.iface.ICompatibility;
 
 public class CompatibilityEnderIO implements ICompatibility {
 

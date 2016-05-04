@@ -3,21 +3,17 @@ package com.whammich.sstow.proxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import tehnut.lib.iface.IProxy;
 
-public class CommonProxy implements IProxy {
+public class CommonProxy {
 
-    @Override
     public void preInit(FMLPreInitializationEvent event) {
 
     }
 
-    @Override
     public void init(FMLInitializationEvent event) {
 
     }
 
-    @Override
     public void postInit(FMLPostInitializationEvent event) {
 
     }
