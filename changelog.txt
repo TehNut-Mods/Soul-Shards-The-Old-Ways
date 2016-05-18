@@ -1,4 +1,14 @@
 ------------------------------------------------------
+Version 2.3.10
+------------------------------------------------------
+
+- Added zh_CN translation (Thank you, 3TUSK)
+- Added information to the debug screen. Active Soul Cages will now display their owner.
+- [API] Changed to use "WitherSkeleton" over "Wither Skeleton" internally.
+  - Previous shards will work just as they did before.
+- Hey look I remembered to do a changelog and increase the version this time!
+
+------------------------------------------------------
 Version 2.3.9
 ------------------------------------------------------
 
