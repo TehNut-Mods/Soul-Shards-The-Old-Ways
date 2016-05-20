@@ -40,6 +40,7 @@ public class ConfigHandler {
 
     public static CompatibilityType compatibilityType = CompatibilityType.VANILLA;
     public static int lpPerMob;
+    public static boolean enableSoulStealerModifier;
 
     @SubscribeEvent
     @Used
@@ -97,6 +98,7 @@ public class ConfigHandler {
             SoulShardsTOW.instance.getLogHelper().error("{} is not a valid CompatibilityType. Falling back to VANILLA.", compatTypeString.toUpperCase(Locale.ENGLISH));
         }
         lpPerMob = config.getInt("lpPerMob", category, 250, 0, Integer.MAX_VALUE, "Amount of LP required for each mob spawned.\nIf this amount is not contained in the LP network, a nausea effect will be applied to the player and the Soul Cage will stop functioning.");
+        enableSoulStealerModifier = config.getBoolean("enableSoulStealerModifier", category, true, "Adds a Tinkers Construct modifier for Soul Stealer.");
 
         if (config.hasChanged())
             config.save();

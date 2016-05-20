@@ -59,7 +59,7 @@ public class TileInventory extends TileEntity implements IInventory {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound tagCompound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
         NBTTagList tags = new NBTTagList();
 
@@ -73,10 +73,11 @@ public class TileInventory extends TileEntity implements IInventory {
         }
 
         tagCompound.setTag("Items", tags);
+        return tagCompound;
     }
 
     @Override
-    public Packet getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);

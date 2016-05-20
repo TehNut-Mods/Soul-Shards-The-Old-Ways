@@ -1,3 +1,5 @@
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 package com.whammich.sstow.shade;
 
 /**
@@ -5,3 +7,6 @@ package com.whammich.sstow.shade;
  *
  * To view the source of the generated code, please see <a href="https://github.com/TehNut/LendingLibrary">here</a>.
  */
+
+import mcp.MethodsReturnNonnullByDefault;
+import javax.annotation.ParametersAreNonnullByDefault;

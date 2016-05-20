@@ -1,8 +1,7 @@
-@API(owner = "SoulShardsTOW", provides = "SoulShardsTOW|API", apiVersion = "0.1.5")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package com.whammich.sstow.api;
+package com.whammich.sstow.item;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraftforge.fml.common.API;
+
 import javax.annotation.ParametersAreNonnullByDefault;

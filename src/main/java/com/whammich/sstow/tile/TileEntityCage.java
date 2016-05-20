@@ -27,6 +27,7 @@ import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tehnut.lib.annot.Handler;
 import tehnut.lib.annot.Used;
+import tehnut.lib.iface.IOwnedTile;
 import tehnut.lib.util.helper.ItemHelper;
 
 import java.util.UUID;
@@ -79,13 +80,14 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound tagCompound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound tagCompound) {
         super.writeToNBT(tagCompound);
 
         tagCompound.setInteger(TIER, tier);
         tagCompound.setString(ENT_NAME, entName);
         tagCompound.setInteger(ACTIVE_TIME, activeTime);
         tagCompound.setString(OWNER, owner);
+        return tagCompound;
     }
 
     @Override
