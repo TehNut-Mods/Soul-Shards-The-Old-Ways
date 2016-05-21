@@ -18,14 +18,18 @@ public class ClientEventHandler {
             return;
 
         RayTraceResult rayTrace = Minecraft.getMinecraft().objectMouseOver;
-        if (!Minecraft.getMinecraft().thePlayer.isSneaking()) {
-            event.getLeft().add(TextFormatting.ITALIC + "Sneak for Ownable information");
+
+        if (rayTrace == null)
             return;
-        }
 
         if (rayTrace.typeOfHit == RayTraceResult.Type.BLOCK) {
             TileEntity tileEntity = Minecraft.getMinecraft().theWorld.getTileEntity(rayTrace.getBlockPos());
             if (tileEntity instanceof IOwnableTile) {
+                if (!Minecraft.getMinecraft().thePlayer.isSneaking()) {
+                    event.getLeft().add(TextFormatting.ITALIC + "Sneak for Ownable information");
+                    return;
+                }
+
                 IOwnableTile ownableTile = (IOwnableTile) tileEntity;
                 if (ownableTile.getOwnerUUID() != null) {
                     event.getLeft().add("Owner UUID: " + ownableTile.getOwnerUUID());
