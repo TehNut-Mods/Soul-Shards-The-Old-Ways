@@ -29,6 +29,10 @@ chat.sstow.command.notfound=&cDid not find any spawned entities
 chat.sstow.command.setwrong=&cInvalid arguments
 chat.sstow.command.wrongcommand=&cInvalid command
 
+# TConstruct
+modifier.soulstealer.name=Soul Stealer
+modifier.soulstealer.desc=Additional souls per kill for your Soul Shards
+
 # Waila
 waila.soulshardstow.sneak=&oSneak for details
 waila.soulshardstow.boundTo=Bound to: %s
