@@ -32,6 +32,9 @@ public final class EntityMapper {
                 continue;
             }
 
+            if (entry.getValue().equals("Mob") || entry.getValue().equals("Monster"))
+                continue;
+
             if (EntityLiving.class.isAssignableFrom(entry.getKey()))
                 entityList.add(entry.getValue());
         }

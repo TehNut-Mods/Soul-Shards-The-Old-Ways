@@ -28,6 +28,7 @@ chat.sstow.command.killed=&2Killed %d entities
 chat.sstow.command.notfound=&cDid not find any spawned entities
 chat.sstow.command.setwrong=&cInvalid arguments
 chat.sstow.command.wrongcommand=&cInvalid command
+chat.sstow.command.noshard=&cHeld item is missing or not a shard
 
 # TConstruct
 modifier.soulstealer.name=Soul Stealer
