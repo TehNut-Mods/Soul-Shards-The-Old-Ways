@@ -53,6 +53,7 @@ repositories {
     maven { url "http://dvs1.progwml6.com/files/maven" }
     maven { url "http://mobiusstrip.eu/maven" }
     maven { url "http://tehnut.info/maven" }
+    maven { url "http://maven.tterrag.com" }
     ivy {
         name "TConstruct"
         artifactPattern "http://addons-origin.cursecdn.com/files/2297/869/[module]-[revision].[ext]"
@@ -67,6 +68,7 @@ dependencies {
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
     deobfCompile "mcp.mobius.waila:Waila:${waila_version}_${mc_version}"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${mc_version}-${bloodmagic_version}:api"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe:1.9.4-1.0.6-17"
     shade "tehnut.lib:LendingLibrary:${mc_version}-${lendinglibrary_version}"
 }
 
