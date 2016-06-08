@@ -6,7 +6,6 @@ import com.whammich.sstow.api.ISoulCage;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.CageSpawnEvent;
-import com.whammich.sstow.iface.IOwnableTile;
 import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.TierHandler;
@@ -22,20 +21,16 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import tehnut.lib.annot.Handler;
 import tehnut.lib.annot.Used;
-import tehnut.lib.iface.IOwnedTile;
 import tehnut.lib.util.helper.ItemHelper;
-
-import java.util.UUID;
 
 @Getter
 @Setter
 @Handler
-public class TileEntityCage extends TileInventory implements ITickable, ISoulCage, IOwnableTile {
+public class TileEntityCage extends TileInventory implements ITickable, ISoulCage {
 
     public static final String TIER = "tier";
     public static final String ACTIVE_TIME = "activeTime";
@@ -220,17 +215,5 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     public void onDeath(LivingExperienceDropEvent event) {
         if (!ConfigHandler.enableExperienceDrop && Utils.isCageBorn(event.getEntityLiving()))
             event.setDroppedExperience(0);
-    }
-
-    // IOwnableTile
-
-    @Override
-    public UUID getOwnerUUID() {
-        return Strings.isNullOrEmpty(getOwner()) ? null : UUID.fromString(getOwner());
-    }
-
-    @Override
-    public String getOwnerDisplayName() {
-        return getWorld().isRemote ? UsernameCache.getLastKnownUsername(getOwnerUUID()) : getOwnerUUID().toString();
     }
 }
