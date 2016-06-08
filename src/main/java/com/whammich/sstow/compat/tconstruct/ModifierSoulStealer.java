@@ -26,7 +26,8 @@ public class ModifierSoulStealer extends ModifierTrait {
                 ItemStack shardStack = Utils.getShardFromInv((EntityPlayer) player, entName);
                 ModifierNBT data = new ModifierNBT(TinkerUtil.getModifierTag(tool, getModifierIdentifier()));
 
-                Utils.increaseShardKillCount(shardStack, data.level);
+                if (shardStack != null)
+                    Utils.increaseShardKillCount(shardStack, data.level);
             }
         }
     }
