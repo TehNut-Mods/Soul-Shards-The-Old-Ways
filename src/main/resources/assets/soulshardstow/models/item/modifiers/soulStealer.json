@@ -1,19 +1,12 @@
 {
   "textures": {
     "battleaxe": "soulshardstow:items/modifiers/soulStealer_battleaxe",
-    "battlesign": "soulshardstow:items/modifiers/soulStealer_battlesign",
     "broadsword": "soulshardstow:items/modifiers/soulStealer_broadsword",
     "rapier": "soulshardstow:items/modifiers/soulStealer_rapier",
     "cleaver": "soulshardstow:items/modifiers/soulStealer_cleaver",
-    "excavator": "soulshardstow:items/modifiers/soulStealer_excavator",
     "frypan": "soulshardstow:items/modifiers/soulStealer_frypan",
     "hammer": "soulshardstow:items/modifiers/soulStealer_hammer",
     "hatchet": "soulshardstow:items/modifiers/soulStealer_hatchet",
-    "longsword": "soulshardstow:items/modifiers/soulStealer_longsword",
-    "lumberaxe": "soulshardstow:items/modifiers/soulStealer_lumberaxe",
-    "mattock": "soulshardstow:items/modifiers/soulStealer_mattock",
-    "pickaxe": "soulshardstow:items/modifiers/soulStealer_pickaxe",
-    "shovel": "soulshardstow:items/modifiers/soulStealer_shovel",
-    "shuriken": "soulshardstow:items/modifiers/soulStealer_shuriken"
+    "longsword": "soulshardstow:items/modifiers/soulStealer_longsword"
   }
 }
