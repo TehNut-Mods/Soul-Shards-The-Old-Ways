@@ -33,6 +33,7 @@ chat.sstow.command.noshard=&cHeld item is missing or not a shard
 # TConstruct
 modifier.soulstealer.name=Soul Stealer
 modifier.soulstealer.desc=Additional souls per kill for your Soul Shards
+modifier.soulstealer.extra=Obtained Souls: +%s
 
 # Waila
 waila.soulshardstow.sneak=&oSneak for details
