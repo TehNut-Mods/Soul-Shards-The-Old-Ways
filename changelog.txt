@@ -1,4 +1,13 @@
 ------------------------------------------------------
+Version 2.4.2
+------------------------------------------------------
+
+- Added a Soul Stealer Tinker's Construct Modifier
+  - Obtained by putting 16 Corrupted Ingots into a Tool Station with a weapon
+  - *Only* usable on tools classed as a Weapon
+  - Caps at Soul Stealer V (Just like the enchantment)
+
+------------------------------------------------------
 Version 2.4.1
 ------------------------------------------------------
 
