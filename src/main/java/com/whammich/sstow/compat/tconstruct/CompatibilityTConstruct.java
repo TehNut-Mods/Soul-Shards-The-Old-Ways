@@ -12,8 +12,8 @@ public class CompatibilityTConstruct implements ICompatibility {
     public void loadCompatibility(InitializationPhase phase) {
         if (phase == InitializationPhase.PRE_INIT) {
             HandlerTConstruct.init();
-//            if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
-//                HandlerTConstruct.initRender();
+            if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+                HandlerTConstruct.initRender();
         }
     }
 
