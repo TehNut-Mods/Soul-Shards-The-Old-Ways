@@ -29,6 +29,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
@@ -70,29 +71,34 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!Utils.hasMaxedKills(stack) && ConfigHandler.allowSpawnerAbsorption) {
-            TileEntity tile = world.getTileEntity(pos);
+        if (!Utils.hasMaxedKills(stack)) {
+            if (ConfigHandler.allowSpawnerAbsorption) {
+                TileEntity tile = world.getTileEntity(pos);
 
-            if (tile instanceof TileEntityMobSpawner) {
-                WeightedSpawnerEntity spawnerEntity = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "randomEntity", "field_98282_f");
-                String name = spawnerEntity.getNbt().getString("id");
-                EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
+                if (tile instanceof TileEntityMobSpawner) {
+                    WeightedSpawnerEntity spawnerEntity = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "randomEntity", "field_98282_f");
+                    String name = spawnerEntity.getNbt().getString("id");
+                    EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
 
-                if (ent == null)
-                    return EnumActionResult.FAIL;
+                    if (ent == null)
+                        return EnumActionResult.FAIL;
 
-                if (!EntityMapper.isEntityValid(name) || SoulShardsAPI.isEntityBlacklisted(ent))
-                    return EnumActionResult.FAIL;
+                    if (!EntityMapper.isEntityValid(name) || SoulShardsAPI.isEntityBlacklisted(ent))
+                        return EnumActionResult.FAIL;
 
-                if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
-                    name = SoulShardsAPI.WITHER_SKELETON;
+                    if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
+                        name = SoulShardsAPI.WITHER_SKELETON;
 
-                if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
-                    if (!world.isRemote)
-                        Utils.increaseShardKillCount(stack, ConfigHandler.spawnerAbsorptionBonus);
-                    world.destroyBlock(pos, false);
-                    return EnumActionResult.SUCCESS;
+                    if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
+                        if (!world.isRemote)
+                            Utils.increaseShardKillCount(stack, ConfigHandler.spawnerAbsorptionBonus);
+                        world.destroyBlock(pos, false);
+                        return EnumActionResult.SUCCESS;
+                    }
                 }
+            } else {
+                if (world.isRemote)
+                    player.addChatComponentMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.absorb.disabled")));
             }
         }
 
