@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.4.3
+------------------------------------------------------
+
+- Added textures for the Soul Stealer modifier
+  - These were provided by https://twitter.com/TristaricJP
+- Feedback for when spawner absorption is disabled
+
+------------------------------------------------------
 Version 2.4.2
 ------------------------------------------------------
 
