@@ -24,6 +24,9 @@ public class ConfigHandler {
     public static int spawnCap;
     public static boolean displayDurabilityBar;
 
+    public static boolean addShardsForAllMobs;
+    public static boolean ignoreBlacklistForTab;
+
     public static int soulStealerID;
     public static int soulStealerWeight;
     public static int soulStealerBonus;
@@ -70,6 +73,11 @@ public class ConfigHandler {
         requireOwnerOnline = config.getBoolean("requireOwnerOnline", category, false, "Requires the player who put the shard into the Soul Cage to be online for it to be active.");
         cooldownUsesSeconds = config.getBoolean("cooldownUsesSeconds", category, true, "The cooldown time set in \"ShardTiers.json\" should use seconds instead of ticks. Allows finer control over tiers.\n1 second = 20 ticks\nI suggest not changing this unless you have edited the configs.");
         countCageBornForShard = config.getBoolean("countCageBornForShard", category, true, "Count mobs spawned by a Soul Cage towards Shard kills.");
+
+        category = "Client";
+        categories.add(category);
+        addShardsForAllMobs = config.getBoolean("addShardsForAllMobs", category, false, "Adds a Shard for each enabled mob to the creative tab.");
+        ignoreBlacklistForTab = config.getBoolean("ignoreBlacklistForTab", category, false, "Adds A shards for mobs even if they are blacklisted");
 
         category = "General";
         categories.add(category);

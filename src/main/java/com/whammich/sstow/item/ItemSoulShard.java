@@ -143,12 +143,28 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
         for (int i = 0; i <= TierHandler.tiers.size() - 1; i++) {
-            ItemStack stack = new ItemStack(item, 1);
+            ItemStack stack = new ItemStack(item);
 
             ShardHelper.setKillsForShard(stack, TierHandler.getMinKills(i));
             ShardHelper.setTierForShard(stack, i);
 
             list.add(stack);
+        }
+
+        if (ConfigHandler.addShardsForAllMobs) {
+            for (String ent : EntityMapper.entityList) {
+                if (ent.equals(SoulShardsAPI.WITHER_SKELETON_OLD))
+                    continue;
+
+                if (!ConfigHandler.ignoreBlacklistForTab && !EntityMapper.isEntityValid(ent))
+                    continue;
+
+                ItemStack stack = new ItemStack(item);
+                Utils.setMaxedKills(stack);
+                ShardHelper.setTierForShard(stack, TierHandler.tiers.size() - 1);
+                ShardHelper.setBoundEntity(stack, ent);
+                list.add(stack);
+            }
         }
     }
 
