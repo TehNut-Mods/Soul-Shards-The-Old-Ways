@@ -1,4 +1,11 @@
 ------------------------------------------------------
+Version 2.4.4
+------------------------------------------------------
+
+- Config option to display a Soul Shard for each entity in the Creative Tab/JEI (false by default)
+- Fixed crash with newer Tinkers Construct versions
+
+------------------------------------------------------
 Version 2.4.3
 ------------------------------------------------------
 

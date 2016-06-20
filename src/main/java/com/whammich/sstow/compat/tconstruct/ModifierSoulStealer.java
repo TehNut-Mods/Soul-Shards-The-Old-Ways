@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import slimeknights.tconstruct.library.Util;
-import slimeknights.tconstruct.library.materials.AbstractMaterialStats;
 import slimeknights.tconstruct.library.modifiers.ModifierAspect;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.modifiers.ModifierTrait;
@@ -42,6 +41,6 @@ public class ModifierSoulStealer extends ModifierTrait {
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
         String loc = String.format(LOC_Extra, getModifierIdentifier());
         float amount = new ModifierNBT(modifierTag).level;
-        return ImmutableList.of(Util.translateFormatted(loc, AbstractMaterialStats.df.format(amount)));
+        return ImmutableList.of(Util.translateFormatted(loc, Util.df.format(amount)));
     }
 }
