@@ -1,4 +1,13 @@
 ------------------------------------------------------
+Version 2.4.5
+------------------------------------------------------
+
+- Added a Corrupted material for Tinkers Construct
+  - Comes with the Vile trait which increases the amount of souls per kill by 1
+  - Identical stats to Iron
+- Exposed Cage inventory to `getCapability()` calls to increase compatibility with other mods
+
+------------------------------------------------------
 Version 2.4.4
 ------------------------------------------------------
 
