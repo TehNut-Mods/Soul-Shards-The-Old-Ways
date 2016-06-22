@@ -35,6 +35,9 @@ chat.sstow.absorb.disabled=&cThe shard seems to refuse the trapped soul...
 modifier.soulstealer.name=Soul Stealer
 modifier.soulstealer.desc=Additional souls per kill for your Soul Shards
 modifier.soulstealer.extra=Obtained Souls: +%s
+modifier.vile.name=Vile
+modifier.vile.desc=Adds an additional soul per kill to your Soul Shard
+material.corrupted.name=Corrupted
 
 # Waila
 waila.soulshardstow.sneak=&oSneak for details
