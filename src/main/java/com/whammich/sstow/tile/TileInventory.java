@@ -5,6 +5,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,11 +14,17 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import tehnut.lib.util.helper.TextHelper;
 
 public class TileInventory extends TileEntity implements IInventory {
@@ -31,6 +38,8 @@ public class TileInventory extends TileEntity implements IInventory {
         this.inventory = new ItemStack[size];
         this.size = size;
         this.name = name;
+
+        setItemHandlers();
     }
 
     private boolean isSyncedSlot(int slot) {
@@ -120,6 +129,61 @@ public class TileInventory extends TileEntity implements IInventory {
         }
 
         return false;
+    }
+
+    // Capability cheat codes
+
+    private IItemHandler handler;
+    private IItemHandler handlerUp;
+    private IItemHandler handlerDown;
+    private IItemHandler handlerNorth;
+    private IItemHandler handlerSouth;
+    private IItemHandler handlerEast;
+    private IItemHandler handlerWest;
+
+    protected void setItemHandlers() {
+        if (this instanceof ISidedInventory) {
+            handlerUp = new SidedInvWrapper((ISidedInventory) this, EnumFacing.UP);
+            handlerDown = new SidedInvWrapper((ISidedInventory) this, EnumFacing.DOWN);
+            handlerNorth = new SidedInvWrapper((ISidedInventory) this, EnumFacing.NORTH);
+            handlerSouth = new SidedInvWrapper((ISidedInventory) this, EnumFacing.SOUTH);
+            handlerEast = new SidedInvWrapper((ISidedInventory) this, EnumFacing.EAST);
+            handlerWest = new SidedInvWrapper((ISidedInventory) this, EnumFacing.WEST);
+        } else {
+            handler = new InvWrapper(this);
+        }
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (this instanceof ISidedInventory && facing != null) {
+                switch (facing) {
+                    case UP:
+                        return (T) handlerUp;
+                    case DOWN:
+                        return (T) handlerDown;
+                    case NORTH:
+                        return (T) handlerNorth;
+                    case SOUTH:
+                        return (T) handlerSouth;
+                    case EAST:
+                        return (T) handlerEast;
+                    case WEST:
+                        return (T) handlerWest;
+                }
+            } else {
+                return (T) handler;
+            }
+        }
+
+        return super.getCapability(capability, facing);
     }
 
     // IInventory
