@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.5.0
+------------------------------------------------------
+
+- Initial actual update for 1.10
+- Husks and Strays should be supported
+- Support for Wawla enchantment description tooltip
+
+------------------------------------------------------
 Version 2.4.5
 ------------------------------------------------------
 
