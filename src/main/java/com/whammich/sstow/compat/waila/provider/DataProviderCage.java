@@ -4,6 +4,7 @@ import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.compat.waila.WailaCallbackHandler;
 import com.whammich.sstow.tile.TileEntityCage;
+import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.Utils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -40,7 +41,7 @@ public class DataProviderCage implements IWailaDataProvider {
 
                 if (cage.getStackInSlot(0) != null) {
                     boolean disabled;
-                    if (!cage.getEntName().equals(SoulShardsAPI.WITHER_SKELETON) && !cage.getEntName().equals(SoulShardsAPI.WITHER_SKELETON_OLD))
+                    if (!EntityMapper.specialCases.contains(cage.getEntName()))
                         disabled = !ConfigHandler.entityList.contains(cage.getEntName()) || SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(cage.getEntName()).getCanonicalName());
                     else
                         disabled = !ConfigHandler.entityList.contains(cage.getEntName());

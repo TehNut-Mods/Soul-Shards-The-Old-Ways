@@ -9,11 +9,13 @@ public class SoulShardsAPI {
 
     /**
      * Old notation for Wither Skeleton saving. To be removed when breaking changes are made in
-     * the 1.10 port.
+     * the 1.11 port.
      */
     @Deprecated
     public static final String WITHER_SKELETON_OLD = "Wither Skeleton";
     public static final String WITHER_SKELETON = "WitherSkeleton";
+    public static final String STRAY = "Stray";
+    public static final String HUSK = "Husk";
 
     public static final PropertyBool ACTIVE = PropertyBool.create("active");
     private static ArrayList<String> entityBlacklist = new ArrayList<String>();

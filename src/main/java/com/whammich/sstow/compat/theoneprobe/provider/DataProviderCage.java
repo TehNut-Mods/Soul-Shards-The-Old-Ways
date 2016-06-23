@@ -5,6 +5,7 @@ import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.tile.TileEntityCage;
+import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.Utils;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
@@ -37,7 +38,7 @@ public class DataProviderCage implements IProbeInfoProvider {
 
                 if (cage.getStackInSlot(0) != null) {
                     boolean disabled;
-                    if (!cage.getEntName().equals(SoulShardsAPI.WITHER_SKELETON) && !cage.getEntName().equals(SoulShardsAPI.WITHER_SKELETON_OLD))
+                    if (!EntityMapper.specialCases.contains(cage.getEntName()))
                         disabled = !ConfigHandler.entityList.contains(cage.getEntName()) || SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(cage.getEntName()).getCanonicalName());
                     else
                         disabled = !ConfigHandler.entityList.contains(cage.getEntName());

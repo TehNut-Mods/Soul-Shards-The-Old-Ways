@@ -19,6 +19,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -86,8 +87,18 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                     if (!EntityMapper.isEntityValid(name) || SoulShardsAPI.isEntityBlacklisted(ent))
                         return EnumActionResult.FAIL;
 
-                    if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1)
-                        name = SoulShardsAPI.WITHER_SKELETON;
+                    if (ent instanceof EntitySkeleton) {
+                        switch (((EntitySkeleton) ent).func_189771_df()) {
+                            case STRAY: name = SoulShardsAPI.HUSK; break;
+                            case WITHER: name = SoulShardsAPI.WITHER_SKELETON; break;
+                        }
+                    }
+
+                    if (ent instanceof EntityZombie) {
+                        switch (((EntityZombie) ent).func_189777_di()) {
+                            case HUSK: name = SoulShardsAPI.HUSK; break;
+                        }
+                    }
 
                     if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
                         if (!world.isRemote)
@@ -174,7 +185,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (ShardHelper.isBound(stack)) {
             String boundEnt = ShardHelper.getBoundEntity(stack);
             boolean disabled;
-            if (!boundEnt.equals(SoulShardsAPI.WITHER_SKELETON) && !boundEnt.equals(SoulShardsAPI.WITHER_SKELETON_OLD))
+            if (!EntityMapper.specialCases.contains(boundEnt))
                 disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(boundEnt).getCanonicalName());
             else
                 disabled = !ConfigHandler.entityList.contains(boundEnt);
@@ -247,8 +258,18 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
             return;
         }
 
-        if (dead instanceof EntitySkeleton && ((EntitySkeleton) dead).getSkeletonType() == 1)
-            entName = SoulShardsAPI.WITHER_SKELETON;
+        if (dead instanceof EntitySkeleton) {
+            switch (((EntitySkeleton) dead).func_189771_df()) {
+                case STRAY: entName = SoulShardsAPI.HUSK; break;
+                case WITHER: entName = SoulShardsAPI.WITHER_SKELETON; break;
+            }
+        }
+
+        if (dead instanceof EntityZombie) {
+            switch (((EntityZombie) dead).func_189777_di()) {
+                case HUSK: entName = SoulShardsAPI.HUSK; break;
+            }
+        }
 
         ItemStack shard = Utils.getShardFromInv(player, entName);
 
