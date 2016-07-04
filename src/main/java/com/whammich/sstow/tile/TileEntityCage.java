@@ -1,7 +1,9 @@
 package com.whammich.sstow.tile;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
+import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulCage;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
@@ -12,6 +14,7 @@ import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
@@ -105,7 +108,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
         if (TierHandler.checksPlayer(tier) && !isPlayerClose())
             return false;
 
-        if (SoulShardsAPI.isEntityBlacklisted(EntityMapper.getNewEntityInstance(getWorld(), entName, getPos())))
+        if (SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(entName).getCanonicalName()))
             return false;
 
         return true;
@@ -138,6 +141,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     }
 
     private void spawnEntities(int amount, String entName) {
+		Stopwatch stopwatch = Stopwatch.createStarted();
         for (int i = 0; i < amount; i++) {
             EntityLiving entityLiving = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
             int attempts = 0;
@@ -175,6 +179,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
                 getWorld().spawnEntityInWorld(entityLiving);
             }
         }
+		SoulShardsTOW.instance.getLogHelper().debug("Spawned {} entities in {}", amount, stopwatch.stop());
     }
 
     private boolean canSpawnAtCoords(EntityLiving ent) {
