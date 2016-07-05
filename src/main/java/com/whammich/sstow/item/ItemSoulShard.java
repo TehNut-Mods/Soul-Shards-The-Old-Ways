@@ -88,14 +88,14 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                         return EnumActionResult.FAIL;
 
                     if (ent instanceof EntitySkeleton) {
-                        switch (((EntitySkeleton) ent).func_189771_df()) {
+                        switch (((EntitySkeleton) ent).getSkeletonType()) {
                             case STRAY: name = SoulShardsAPI.HUSK; break;
                             case WITHER: name = SoulShardsAPI.WITHER_SKELETON; break;
                         }
                     }
 
                     if (ent instanceof EntityZombie) {
-                        switch (((EntityZombie) ent).func_189777_di()) {
+                        switch (((EntityZombie) ent).getZombieType()) {
                             case HUSK: name = SoulShardsAPI.HUSK; break;
                         }
                     }
@@ -259,14 +259,14 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         }
 
         if (dead instanceof EntitySkeleton) {
-            switch (((EntitySkeleton) dead).func_189771_df()) {
+            switch (((EntitySkeleton) dead).getSkeletonType()) {
                 case STRAY: entName = SoulShardsAPI.HUSK; break;
                 case WITHER: entName = SoulShardsAPI.WITHER_SKELETON; break;
             }
         }
 
         if (dead instanceof EntityZombie) {
-            switch (((EntityZombie) dead).func_189777_di()) {
+            switch (((EntityZombie) dead).getZombieType()) {
                 case HUSK: entName = SoulShardsAPI.HUSK; break;
             }
         }

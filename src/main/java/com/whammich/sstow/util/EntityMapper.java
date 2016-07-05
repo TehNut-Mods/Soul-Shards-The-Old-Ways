@@ -69,21 +69,21 @@ public final class EntityMapper {
 
         if (ent.equals(SoulShardsAPI.WITHER_SKELETON) || ent.equals(SoulShardsAPI.WITHER_SKELETON_OLD)) {
             EntitySkeleton skeleton = new EntitySkeleton(world);
-            skeleton.func_189768_a(SkeletonType.WITHER);
+            skeleton.setSkeletonType(SkeletonType.WITHER);
             skeleton.onInitialSpawn(world.getDifficultyForLocation(pos), null);
             return skeleton;
         }
 
         if (ent.equals(SoulShardsAPI.STRAY)) {
             EntitySkeleton skeleton = new EntitySkeleton(world);
-            skeleton.func_189768_a(SkeletonType.STRAY);
+            skeleton.setSkeletonType(SkeletonType.STRAY);
             skeleton.onInitialSpawn(world.getDifficultyForLocation(pos), null);
             return skeleton;
         }
 
         if (ent.equals(SoulShardsAPI.HUSK)) {
             EntityZombie zombie = new EntityZombie(world);
-            zombie.func_189778_a(ZombieType.HUSK);
+            zombie.setZombieType(ZombieType.HUSK);
             zombie.onInitialSpawn(world.getDifficultyForLocation(pos), null);
             return zombie;
         }

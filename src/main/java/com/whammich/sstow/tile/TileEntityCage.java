@@ -108,7 +108,11 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
         if (TierHandler.checksPlayer(tier) && !isPlayerClose())
             return false;
 
-        if (SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(entName).getCanonicalName()))
+		if (!EntityMapper.specialCases.contains(entName))
+			if (SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(entName).getCanonicalName()))
+				return false;
+
+        if (!EntityMapper.isEntityValid(entName))
             return false;
 
         return true;

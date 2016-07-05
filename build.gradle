@@ -63,7 +63,7 @@ dependencies {
     deobfCompile "mcjty.theoneprobe:TheOneProbe:1.9.4-${theoneprobe_version}"
     deobfCompile "slimeknights.mantle:Mantle:1.9.4-${mantle_version}"
     deobfCompile "slimeknights:TConstruct:1.9.4-${tconstruct_version}"
-    shade "tehnut.lib:LendingLibrary:${mc_version}-${lendinglibrary_version}"
+    shade "tehnut.lib:LendingLibrary:1.10-${lendinglibrary_version}"
 }
 
 minecraft {
