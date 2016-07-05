@@ -9,8 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIAttackRangedBow;
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.SkeletonType;
@@ -20,6 +19,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +69,11 @@ public final class EntityMapper {
 
         if (ent.equals(SoulShardsAPI.WITHER_SKELETON) || ent.equals(SoulShardsAPI.WITHER_SKELETON_OLD)) {
             EntitySkeleton skeleton = new EntitySkeleton(world);
+			skeleton.onInitialSpawn(world.getDifficultyForLocation(pos), null);
             skeleton.setSkeletonType(SkeletonType.WITHER);
-            skeleton.onInitialSpawn(world.getDifficultyForLocation(pos), null);
+            skeleton.tasks.addTask(4, (EntityAIBase) ObfuscationReflectionHelper.getPrivateValue(EntitySkeleton.class, skeleton, "aiAttackOnCollide", "field_85038_e"));
+			skeleton.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
+			skeleton.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
             return skeleton;
         }
 
