@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.5.1
+------------------------------------------------------
+
+- Corrupted tool material is now obtainable
+- Reduce the amount of entity objects being created
+- Wither Skeletons now correctly hold swords instead of bows
+
+------------------------------------------------------
 Version 2.5.0
 ------------------------------------------------------
 
