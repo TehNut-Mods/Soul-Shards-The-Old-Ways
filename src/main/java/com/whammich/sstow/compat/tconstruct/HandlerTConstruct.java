@@ -33,7 +33,7 @@ public class HandlerTConstruct {
         materialCorrupted = new Material("corrupted", 0x7A10A7);
         traitVile = new TraitVile();
 
-        materialCorrupted.setCastable(true);
+        materialCorrupted.setCraftable(true);
         materialCorrupted.addTrait(traitVile, HeadMaterialStats.TYPE);
         materialCorrupted.addItem(ItemMaterials.INGOT_CORRUPTED, 1, Material.VALUE_Ingot);
         materialCorrupted.setRepresentativeItem(ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED));
