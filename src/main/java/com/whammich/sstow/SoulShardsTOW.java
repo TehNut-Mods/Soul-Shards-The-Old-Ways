@@ -27,7 +27,7 @@ import tehnut.lib.util.helper.LogHelper;
 import java.io.File;
 
 @Getter
-@Mod(modid = SoulShardsTOW.MODID, name = SoulShardsTOW.NAME, version = SoulShardsTOW.VERSION, dependencies = SoulShardsTOW.DEPEND, updateJSON = SoulShardsTOW.JSON_CHECKER, guiFactory = "com.whammich.sstow.client.gui.GuiFactory")
+@Mod(modid = SoulShardsTOW.MODID, name = SoulShardsTOW.NAME, version = SoulShardsTOW.VERSION, acceptedMinecraftVersions = "[1.10,1.11)", dependencies = SoulShardsTOW.DEPEND, updateJSON = SoulShardsTOW.JSON_CHECKER, guiFactory = "com.whammich.sstow.client.gui.GuiFactory")
 public class SoulShardsTOW {
 
     public static final String MODID = "soulshardstow";
