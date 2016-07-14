@@ -38,6 +38,7 @@ public class ConfigHandler {
     public static boolean requireOwnerOnline;
     public static boolean cooldownUsesSeconds;
     public static boolean countCageBornForShard;
+	public static boolean forceRedstoneRequirement;
 
     public static boolean enableBlacklistedSpawning;
 
@@ -73,6 +74,7 @@ public class ConfigHandler {
         requireOwnerOnline = config.getBoolean("requireOwnerOnline", category, false, "Requires the player who put the shard into the Soul Cage to be online for it to be active.");
         cooldownUsesSeconds = config.getBoolean("cooldownUsesSeconds", category, true, "The cooldown time set in \"ShardTiers.json\" should use seconds instead of ticks. Allows finer control over tiers.\n1 second = 20 ticks\nI suggest not changing this unless you have edited the configs.");
         countCageBornForShard = config.getBoolean("countCageBornForShard", category, true, "Count mobs spawned by a Soul Cage towards Shard kills.");
+		forceRedstoneRequirement = config.getBoolean("forceRedstoneRequirement", category, false, "Forces Soul Cages to require a Redstone signal in order to spawn entities.");
 
         category = "Client";
         categories.add(category);

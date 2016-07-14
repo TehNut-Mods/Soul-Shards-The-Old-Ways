@@ -102,7 +102,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
         if (!ConfigHandler.entityList.contains(entName) && !ConfigHandler.enableBlacklistedSpawning)
             return false;
 
-        if (TierHandler.checksRedstone(tier) && isRedstoned())
+        if (!checkRedstone())
             return false;
 
         if (TierHandler.checksPlayer(tier) && !isPlayerClose())
@@ -201,6 +201,16 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     private boolean isPlayerClose() {
         return getWorld().isAnyPlayerWithinRangeAt(getPos().getX(), getPos().getY(), getPos().getZ(), 16D);
     }
+
+	private boolean checkRedstone() {
+		if (ConfigHandler.forceRedstoneRequirement)
+			return isRedstoned();
+
+		if (TierHandler.checksRedstone(getTier()) && !isRedstoned())
+			return true;
+
+		return false;
+	}
 
     private boolean hasReachedSpawnCap(EntityLiving living) {
         AxisAlignedBB box = new AxisAlignedBB(getPos().getX() - 16, getPos().getY() - 16, getPos().getZ() - 16, getPos().getX() + 16, getPos().getY() + 16, getPos().getZ() + 16);
