@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.5.3
+------------------------------------------------------
+
+- Added a config option to require a Redstone signal for any Soul Cage to function.
+  - Ignores Tier setting for recieving redstone signals.
+  - Primarily for servers
+
+------------------------------------------------------
 Version 2.5.2
 ------------------------------------------------------
 
