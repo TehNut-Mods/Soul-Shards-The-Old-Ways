@@ -221,7 +221,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
             if (Utils.isCageBorn(entity))
                 mobCount++;
 
-        return mobCount > ConfigHandler.spawnCap;
+        return mobCount >= ConfigHandler.spawnCap;
     }
 
     @Override
