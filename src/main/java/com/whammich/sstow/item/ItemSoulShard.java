@@ -73,10 +73,10 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!Utils.hasMaxedKills(stack)) {
-            if (ConfigHandler.allowSpawnerAbsorption) {
-                TileEntity tile = world.getTileEntity(pos);
+            TileEntity tile = world.getTileEntity(pos);
 
-                if (tile instanceof TileEntityMobSpawner) {
+            if (tile instanceof TileEntityMobSpawner) {
+                if (ConfigHandler.allowSpawnerAbsorption) {
                     WeightedSpawnerEntity spawnerEntity = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "randomEntity", "field_98282_f");
                     String name = spawnerEntity.getNbt().getString("id");
                     EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
@@ -106,10 +106,10 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                         world.destroyBlock(pos, false);
                         return EnumActionResult.SUCCESS;
                     }
+                } else {
+                    if (world.isRemote)
+                        player.addChatComponentMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.absorb.disabled")));
                 }
-            } else {
-                if (world.isRemote)
-                    player.addChatComponentMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.absorb.disabled")));
             }
         }
 
