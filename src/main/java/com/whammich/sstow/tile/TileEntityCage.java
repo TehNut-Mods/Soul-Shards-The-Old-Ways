@@ -206,10 +206,10 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
         if (ConfigHandler.forceRedstoneRequirement)
             return isRedstoned();
 
-        if (TierHandler.checksRedstone(getTier()) && !isRedstoned())
-            return true;
+        if (TierHandler.checksRedstone(getTier()) && isRedstoned())
+            return false;
 
-        return false;
+        return true;
     }
 
     private boolean hasReachedSpawnCap(EntityLiving living) {
