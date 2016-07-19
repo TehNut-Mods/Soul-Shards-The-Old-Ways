@@ -3,6 +3,7 @@ Version 2.5.5
 ------------------------------------------------------
 
 - Fixed some inverted redstone logic which broke all but Tier 5 Shards.
+- Fixed shard displaying error when any block is right clicked while enableSpawnerAbsorption was false.
 
 ------------------------------------------------------
 Version 2.5.4
