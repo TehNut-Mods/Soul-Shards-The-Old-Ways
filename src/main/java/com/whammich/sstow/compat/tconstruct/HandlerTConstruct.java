@@ -43,7 +43,7 @@ public class HandlerTConstruct {
                 new HeadMaterialStats(204, 7.00F, 4.00F, HarvestLevels.DIAMOND),
                 new HandleMaterialStats(0.85F, 60),
                 new ExtraMaterialStats(50)
-            );
+        );
     }
 
     @SideOnly(Side.CLIENT)

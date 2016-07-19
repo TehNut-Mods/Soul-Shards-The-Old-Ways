@@ -108,9 +108,9 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
         if (TierHandler.checksPlayer(tier) && !isPlayerClose())
             return false;
 
-		if (!EntityMapper.specialCases.contains(entName))
-			if (SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(entName).getCanonicalName()))
-				return false;
+        if (!EntityMapper.specialCases.contains(entName))
+            if (SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(entName).getCanonicalName()))
+                return false;
 
         if (!EntityMapper.isEntityValid(entName))
             return false;
@@ -145,7 +145,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     }
 
     private void spawnEntities(int amount, String entName) {
-		Stopwatch stopwatch = Stopwatch.createStarted();
+        Stopwatch stopwatch = Stopwatch.createStarted();
         for (int i = 0; i < amount; i++) {
             EntityLiving entityLiving = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
             int attempts = 0;
@@ -183,7 +183,7 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
                 getWorld().spawnEntityInWorld(entityLiving);
             }
         }
-		SoulShardsTOW.instance.getLogHelper().debug("Spawned {} entities in {}", amount, stopwatch.stop());
+        SoulShardsTOW.instance.getLogHelper().debug("Spawned {} entities in {}", amount, stopwatch.stop());
     }
 
     private boolean canSpawnAtCoords(EntityLiving ent) {
@@ -202,15 +202,15 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
         return getWorld().isAnyPlayerWithinRangeAt(getPos().getX(), getPos().getY(), getPos().getZ(), 16D);
     }
 
-	private boolean checkRedstone() {
-		if (ConfigHandler.forceRedstoneRequirement)
-			return isRedstoned();
+    private boolean checkRedstone() {
+        if (ConfigHandler.forceRedstoneRequirement)
+            return isRedstoned();
 
-		if (TierHandler.checksRedstone(getTier()) && !isRedstoned())
-			return true;
+        if (TierHandler.checksRedstone(getTier()) && !isRedstoned())
+            return true;
 
-		return false;
-	}
+        return false;
+    }
 
     private boolean hasReachedSpawnCap(EntityLiving living) {
         AxisAlignedBB box = new AxisAlignedBB(getPos().getX() - 16, getPos().getY() - 16, getPos().getZ() - 16, getPos().getX() + 16, getPos().getY() + 16, getPos().getZ() + 16);

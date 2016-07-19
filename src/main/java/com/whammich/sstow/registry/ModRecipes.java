@@ -30,8 +30,8 @@ public class ModRecipes {
         GameRegistry.addRecipe(new ShapelessOreRecipe(ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE), "gemLapis", "dustRedstone", Blocks.OBSIDIAN, Blocks.OBSIDIAN));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemHelper.getItem(ItemSoulSword.class)), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockHelper.getBlock(BlockCage.class)), "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.IRON_BARS));
-		if (ConfigHandler.convenienceReset)
-			GameRegistry.addRecipe(new ShapelessOreRecipe(ItemHelper.getItem(ItemSoulShard.class), ItemHelper.getItem(ItemSoulShard.class)));
+        if (ConfigHandler.convenienceReset)
+            GameRegistry.addRecipe(new ShapelessOreRecipe(ItemHelper.getItem(ItemSoulShard.class), ItemHelper.getItem(ItemSoulShard.class)));
     }
 
     @SubscribeEvent
