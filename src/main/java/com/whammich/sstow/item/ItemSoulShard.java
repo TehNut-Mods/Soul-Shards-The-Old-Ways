@@ -303,7 +303,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (multiblock.isEmpty())
             buildMultiblock();
 
-        if (event.getItemStack() != null && event.getItemStack().getItem() == Items.DIAMOND && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
+        if (event.getItemStack() != null && ItemStack.areItemsEqual(event.getItemStack(), ConfigHandler.catalystItem) && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
             for (Pair<BlockPos, BlockStack> multiblockPair : multiblock) {
                 BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(multiblockPair.getLeft()));
                 if (!multiblockPair.getRight().equals(worldStack))
@@ -326,6 +326,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
             }
 
             event.getEntityPlayer().swingArm(event.getHand());
+            event.setCanceled(true);
         }
     }
 }

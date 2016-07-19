@@ -49,4 +49,4 @@ waila.soulshardstow.owner=Owner: %s
 description.enchantment.soulStealer=Additional souls per kill for your Soul Shards.
 
 # JEI
-jei.SoulShards.soulshard.desc=A vessel for the Souls of the slain.\n\nObtained by creating a structure in the world and using a Diamond on the origin block.
+jei.SoulShards.soulshard.desc=A vessel for the Souls of the slain.\n\nObtained by creating a structure in the world and using a %s on the origin block.

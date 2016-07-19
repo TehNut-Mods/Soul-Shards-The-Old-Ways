@@ -2,9 +2,14 @@ package com.whammich.sstow;
 
 import com.whammich.sstow.compat.CompatibilityType;
 import com.whammich.sstow.util.EntityMapper;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tehnut.lib.annot.Handler;
 import tehnut.lib.annot.Used;
 
@@ -40,6 +45,7 @@ public class ConfigHandler {
     public static boolean countCageBornForShard;
     public static boolean forceRedstoneRequirement;
     public static boolean convenienceReset;
+    public static ItemStack catalystItem;
 
     public static boolean enableBlacklistedSpawning;
 
@@ -77,6 +83,7 @@ public class ConfigHandler {
         countCageBornForShard = config.getBoolean("countCageBornForShard", category, true, "Count mobs spawned by a Soul Cage towards Shard kills.");
         forceRedstoneRequirement = config.getBoolean("forceRedstoneRequirement", category, false, "Forces Soul Cages to require a Redstone signal in order to spawn entities.");
         convenienceReset = config.getBoolean("convenienceReset", category, true, "Enables a convenience recipe that allows you to reset the stats of a Soul Shard.");
+        handleCatalyst();
 
         category = "Client";
         categories.add(category);
@@ -114,6 +121,24 @@ public class ConfigHandler {
 
         if (config.hasChanged())
             config.save();
+    }
+
+    public static void handleCatalyst() {
+        catalystItem = new ItemStack(Items.DIAMOND);
+        String catalystString = config.getString("catalystItem", "Balancing", "minecraft:diamond:0", "The item used to create a Soul Shard.");
+        if (catalystString.equals("minecraft:diamond:0"))
+            return;
+        String[] catalystCut = catalystString.split(":");
+        try {
+            if (catalystCut.length == 3) {
+                Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(catalystCut[0], catalystCut[1]));
+                catalystItem = new ItemStack(item, 1, Integer.parseInt(catalystCut[2]));
+            } else {
+                throw new IllegalArgumentException("Not enough arguments. Required - " + 3 + "; Found - " + catalystCut.length);
+            }
+        } catch (Exception e) {
+            SoulShardsTOW.instance.getLogHelper().error("Error setting catalyst item from config: {} - {}", e.getClass().getSimpleName(), e.getLocalizedMessage());
+        }
     }
 
     public static void handleEntityList(String category) {
