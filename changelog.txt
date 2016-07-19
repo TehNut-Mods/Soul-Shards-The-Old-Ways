@@ -1,4 +1,13 @@
 ------------------------------------------------------
+Version 2.5.4
+------------------------------------------------------
+
+- Added a convenience recipe to reset the progress of a Soul Shard. (VsnGamer)
+  - Warning: This completely resets the shard. Kills, tier, and Entity.
+  - Can be disabled in the config. (TehNut)
+- Fixed an off-by-one error that caused an extra entity to spawn past the configured limit. (VsnGamer)
+
+------------------------------------------------------
 Version 2.5.3
 ------------------------------------------------------
 
