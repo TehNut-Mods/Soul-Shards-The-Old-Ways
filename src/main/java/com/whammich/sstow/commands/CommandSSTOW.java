@@ -8,6 +8,7 @@ import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.TierHandler;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -42,8 +43,7 @@ public class CommandSSTOW extends CommandBase {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] params) {
-
+    public void execute(MinecraftServer server, ICommandSender sender, String[] params) throws CommandException {
         if ((params.length > 0) && (params.length <= 2)) {
             if (params[0].equalsIgnoreCase("killall")) {
                 int killCounter = 0;
@@ -90,6 +90,8 @@ public class CommandSSTOW extends CommandBase {
             } else {
                 sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.wrongcommand")));
             }
+        } else {
+            throw new CommandException(getCommandUsage(sender));
         }
     }
 
