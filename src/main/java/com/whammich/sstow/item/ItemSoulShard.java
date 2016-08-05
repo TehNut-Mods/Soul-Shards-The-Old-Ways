@@ -260,7 +260,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
         if (dead instanceof EntitySkeleton) {
             switch (((EntitySkeleton) dead).getSkeletonType()) {
-                case STRAY: entName = SoulShardsAPI.HUSK; break;
+                case STRAY: entName = SoulShardsAPI.STRAY; break;
                 case WITHER: entName = SoulShardsAPI.WITHER_SKELETON; break;
             }
         }
