@@ -1,4 +1,18 @@
 ------------------------------------------------------
+Version 2.6.0
+------------------------------------------------------
+
+- Added a config for the "Catalyst" item.
+  - You can now use whatever you want instead of just a Diamond.
+  - The JEI entry will change to whatever is configured.
+- Fixed Strays being counted as Husks. Oops.
+- Fixed "ghost" entities spawning.
+  - Was caused when a Baby Zombie was assigned a Chicken to jockey on. wat
+- Invalid usages of the `/sstow` command will now print the correct usage.
+- Rewrote the spawning system to be a bit cleaner and faster.
+- [API] Added a system to allow mods to provide custom spawn handling for an entity.
+
+------------------------------------------------------
 Version 2.5.5
 ------------------------------------------------------
 
