@@ -48,6 +48,7 @@ public class ConfigHandler {
     public static ItemStack catalystItem;
 
     public static boolean enableBlacklistedSpawning;
+    public static boolean debugLogging;
 
     public static CompatibilityType compatibilityType = CompatibilityType.VANILLA;
     public static int lpPerMob;
@@ -104,6 +105,7 @@ public class ConfigHandler {
         category = "Debug";
         categories.add(category);
         enableBlacklistedSpawning = config.getBoolean("enableBlacklistedSpawning", category, false, "Allows disabled entities to still be spawned by the cage. They are, however, still not obtainable on a shard.");
+        debugLogging = config.getBoolean("debugLogging", category, false, "If enabled, additional information will be logged to console. Mostly timing information.");
 
         config.setCategoryComment("Entity List", "Set an entity to false to disable it's ability to be spawned.");
         categories.add("Entity List");

@@ -117,6 +117,7 @@ public class SoulShardsTOW {
     }
 
     public static void debug(String message, Object... args) {
-        instance.getLogHelper().info("[DEBUG] " + message, args);
+        if (ConfigHandler.debugLogging)
+            instance.getLogHelper().info("[DEBUG] " + message, args);
     }
 }
