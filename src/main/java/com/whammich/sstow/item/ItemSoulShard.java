@@ -79,7 +79,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                 if (ConfigHandler.allowSpawnerAbsorption) {
                     WeightedSpawnerEntity spawnerEntity = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "randomEntity", "field_98282_f");
                     String name = spawnerEntity.getNbt().getString("id");
-                    EntityLiving ent = EntityMapper.getNewEntityInstance(world, name, pos);
+                    EntityLiving ent = (EntityLiving) EntityList.createEntityByName(name, world);
 
                     if (ent == null)
                         return EnumActionResult.FAIL;

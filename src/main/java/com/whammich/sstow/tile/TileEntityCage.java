@@ -4,6 +4,7 @@ import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.api.IEntityHandler;
 import com.whammich.sstow.api.ISoulCage;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
@@ -14,15 +15,19 @@ import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -147,43 +152,44 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     private void spawnEntities(int amount, String entName) {
         Stopwatch stopwatch = Stopwatch.createStarted();
         for (int i = 0; i < amount; i++) {
-            EntityLiving entityLiving = EntityMapper.getNewEntityInstance(getWorld(), entName, getPos());
-            int attempts = 0;
 
-            if (entityLiving == null)
-                continue;
-
-            do {
-                attempts++;
-                if (attempts >= 5) {
-                    entityLiving.setDead();
-                    break;
-                }
+            for (int attempts = 0; attempts < 5; attempts++) {
 
                 double x = getPos().getX() + (getWorld().rand.nextDouble() - getWorld().rand.nextDouble()) * 4.0D;
                 double y = getPos().getY() + getWorld().rand.nextInt(3) - 1;
                 double z = getPos().getZ() + (getWorld().rand.nextDouble() - getWorld().rand.nextDouble()) * 4.0D;
-                if (TierHandler.checksLight(tier) && !canSpawnInLight(entityLiving, new BlockPos(x, y, z)))
+                BlockPos spawnAt = new BlockPos(x, y, z);
+
+                ActionResult<? extends EntityLiving> handlerResult = SoulShardsAPI.getEntityHandler(EntityMapper.getLivingClass(entName)).handleLiving(getWorld(), entName, spawnAt);
+                if (handlerResult.getType() == EnumActionResult.FAIL)
                     continue;
 
-                entityLiving.setLocationAndAngles(x, y, z, getWorld().rand.nextFloat() * 360.0F, 0.0F);
+                EntityLiving entityLiving = handlerResult.getResult();
+
+                if (TierHandler.checksLight(tier) && !canSpawnInLight(entityLiving, entityLiving.getPosition()))
+                    continue;
+
+                entityLiving.setLocationAndAngles(entityLiving.posX, entityLiving.posY, entityLiving.posZ, MathHelper.wrapDegrees(getWorld().rand.nextFloat() * 360F), 0F);
                 entityLiving.getEntityData().setBoolean(SSTOW, true);
                 entityLiving.forceSpawn = true;
                 entityLiving.enablePersistence();
-            } while (!canSpawnAtCoords(entityLiving) || attempts >= 5);
 
-            if (!entityLiving.isDead && !hasReachedSpawnCap(entityLiving)) {
-                if (!ConfigHandler.enableBosses && !entityLiving.isNonBoss())
-                    continue;
+                if (canSpawnAtCoords(entityLiving) && !entityLiving.isDead && !hasReachedSpawnCap(entityLiving)) {
+                    if (!ConfigHandler.enableBosses && !entityLiving.isNonBoss())
+                        continue;
 
-                CageSpawnEvent event = new CageSpawnEvent(getStackInSlot(0), getOwner(), entityLiving);
-                if (MinecraftForge.EVENT_BUS.post(event))
-                    continue;
+                    CageSpawnEvent event = new CageSpawnEvent(getStackInSlot(0), getOwner(), entityLiving);
+                    if (MinecraftForge.EVENT_BUS.post(event))
+                        continue;
 
-                getWorld().spawnEntityInWorld(entityLiving);
+                    getWorld().spawnEntityInWorld(entityLiving);
+                    if (handlerResult.getType() == EnumActionResult.SUCCESS)
+                        entityLiving.onInitialSpawn(getWorld().getDifficultyForLocation(spawnAt), null);
+                    break;
+                }
             }
         }
-        SoulShardsTOW.instance.getLogHelper().debug("Spawned {} entities in {}", amount, stopwatch.stop());
+        SoulShardsTOW.debug("Spawned {} entities in {}", amount, stopwatch.stop());
     }
 
     private boolean canSpawnAtCoords(EntityLiving ent) {

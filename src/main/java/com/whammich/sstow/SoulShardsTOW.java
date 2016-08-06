@@ -97,7 +97,8 @@ public class SoulShardsTOW {
     @EventHandler
     @Used
     public void postInit(FMLPostInitializationEvent event) {
-        EntityMapper.init();
+        EntityMapper.mapEntities();
+        EntityMapper.initHandlers();
         ModCompatibility.loadCompat(ICompatibility.InitializationPhase.POST_INIT);
 
         proxy.postInit(event);
@@ -113,5 +114,9 @@ public class SoulShardsTOW {
     @Used
     public void serverStart(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandSSTOW());
+    }
+
+    public static void debug(String message, Object... args) {
+        instance.getLogHelper().info("[DEBUG] " + message, args);
     }
 }

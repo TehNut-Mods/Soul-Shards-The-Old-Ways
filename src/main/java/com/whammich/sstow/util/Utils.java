@@ -1,5 +1,7 @@
 package com.whammich.sstow.util;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.mojang.authlib.GameProfile;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulShard;
@@ -7,9 +9,13 @@ import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.ShardTierChangeEvent;
 import com.whammich.sstow.tile.TileEntityCage;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
