@@ -35,7 +35,6 @@ public class SoulShardsAPI {
             if (living == null)
                 return null;
             living.setPositionAndRotation(pos.getX(), pos.getY(), pos.getZ(), MathHelper.wrapDegrees(world.rand.nextFloat() * 360F), 0F);
-            living.onInitialSpawn(world.getDifficultyForLocation(pos), null);
             return ActionResult.newResult(EnumActionResult.SUCCESS, living);
         }
     };
