@@ -2,6 +2,13 @@
 Version 2.6.1
 ------------------------------------------------------
 
+- Fixed remaining issues with baby zombies
+  - Hopefully for good this time. We'll see...
+
+------------------------------------------------------
+Version 2.6.1
+------------------------------------------------------
+
 - Added a config option for the new debug logging
   - Forgot to do so when adding it :<
 
