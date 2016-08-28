@@ -4,7 +4,6 @@ import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.api.IEntityHandler;
 import com.whammich.sstow.api.ISoulCage;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
@@ -15,7 +14,6 @@ import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
@@ -59,6 +57,14 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     public void update() {
         if (getWorld().isRemote)
             return;
+
+        if (getStackInSlot(0) != null) {
+            ItemStack shard = getStackInSlot(0);
+            setEntName(ShardHelper.getBoundEntity(shard));
+            setTier(ShardHelper.getTierFromShard(shard));
+        } else {
+            reset();
+        }
 
         if (!canSpawn()) {
             setActiveState(false);

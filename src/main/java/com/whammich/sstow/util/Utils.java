@@ -2,6 +2,7 @@ package com.whammich.sstow.util;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.base.Strings;
 import com.mojang.authlib.GameProfile;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulShard;
@@ -117,7 +118,7 @@ public final class Utils {
     }
 
     public static boolean isOwnerOnline(String owner) {
-        if (FMLCommonHandler.instance().getMinecraftServerInstance() == null)
+        if (Strings.isNullOrEmpty(owner) || FMLCommonHandler.instance().getMinecraftServerInstance() == null)
             return false;
 
         String username = UsernameCache.getLastKnownUsername(UUID.fromString(owner));
