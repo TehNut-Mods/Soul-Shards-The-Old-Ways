@@ -1,5 +1,12 @@
 ------------------------------------------------------
-Version 2.6.1
+Version 2.6.3
+------------------------------------------------------
+
+- Fixed dupe bug with automated insertion/extraction of shards
+  - Note that any automated cages will not have an owner. These cages will not work if the server requires the owner online.
+
+------------------------------------------------------
+Version 2.6.2
 ------------------------------------------------------
 
 - Fixed remaining issues with baby zombies
