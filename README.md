@@ -1,10 +1,13 @@
-# Soul Shards: The Old Ways [![Build Status](http://tehnut.info/jenkins/job/SoulShardsTOW/job/1.8.9/badge/icon)](http://tehnut.info/jenkins/job/SoulShardsTOW/job/1.8.9/)
+# Soul Shards: The Old Ways [![Build Status](http://tehnut.info/jenkins/job/SoulShardsTOW/job/1.10/badge/icon)](http://tehnut.info/jenkins/job/SoulShardsTOW/job/1.10/) [![](http://cf.way2muchnoise.eu/full_soul-shards-the-old-ways_downloads.svg)](https://minecraft.curseforge.com/projects/soul-shards-the-old-ways)
+
+Ever wanted to create your own mob spawners? Now you can!
 
 ## Links
 
 * [CurseForge](http://minecraft.curseforge.com/projects/soul-shards-the-old-ways)
 * [Jenkins](http://tehnut.info/jenkins/job/SoulShardsTOW/job/1.8.9/)
 * [Maven](http://tehnut.info/maven/com/whammich/sstow/SoulShards-TOW/)
+* [Questions](https://webchat.esper.net/?channels=tehnut)
 
 ## Information
 
@@ -47,7 +50,7 @@ Add to your `build.gradle`:
 
 ## License
 
-Soul Shards: The Old Ways for Minecraft 1.8.9 is licensed as [MIT](https://tldrlegal.com/license/mit-license).
+Soul Shards: The Old Ways for Minecraft 1.8.9 and above is licensed as [MIT](https://tldrlegal.com/license/mit-license).
 
 All of the art is property of [BBoldt](https://github.com/BBoldt/). The art is released into the public domain.
 
