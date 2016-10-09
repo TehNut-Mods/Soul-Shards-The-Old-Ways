@@ -151,7 +151,7 @@ public class BlockCage extends Block implements IVariantProvider {
                 cage.setEntName(ShardHelper.getBoundEntity(heldItem));
                 if (!event.getWorld().isRemote)
                     cage.setOwner(player.getGameProfile().getId().toString());
-                heldItem.stackSize--;
+                player.setHeldItem(event.getHand(), null);
                 player.swingArm(event.getHand());
             } else if (cage.getStackInSlot(0) != null && player.getHeldItemMainhand() == null && player.isSneaking()) {
                 if (!event.getWorld().isRemote) {
