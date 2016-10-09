@@ -1,4 +1,12 @@
 ------------------------------------------------------
+Version 2.6.4
+------------------------------------------------------
+
+- Updated zn_CH localization (TartaricAcid)
+- Fixed compatibility with Sponge
+  - To Sponge devs, if you break Forge behavior, don't come crying to me next time.
+
+------------------------------------------------------
 Version 2.6.3
 ------------------------------------------------------
 
@@ -9,7 +17,7 @@ Version 2.6.3
 Version 2.6.2
 ------------------------------------------------------
 
-- Fixed remaining issues with baby zombies
+- Fixed remaining issues with baby zombiesgit
   - Hopefully for good this time. We'll see...
 
 ------------------------------------------------------
