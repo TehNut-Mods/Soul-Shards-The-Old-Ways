@@ -12,8 +12,10 @@ import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
+
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
@@ -148,6 +150,9 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     }
 
     public boolean getActiveState() {
+        Block b = getWorld().getBlockState(getPos()).getBlock();
+        if(!b.getBlockState().getProperties().contains(SoulShardsAPI.ACTIVE))
+            return false;
         return getWorld().getBlockState(getPos()).getValue(SoulShardsAPI.ACTIVE);
     }
 
