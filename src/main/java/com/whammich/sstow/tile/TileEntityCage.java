@@ -14,6 +14,7 @@ import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityMob;
@@ -148,7 +149,10 @@ public class TileEntityCage extends TileInventory implements ITickable, ISoulCag
     }
 
     public boolean getActiveState() {
-        return getWorld().getBlockState(getPos()).getValue(SoulShardsAPI.ACTIVE);
+        IBlockState state = getWorld().getBlockState(getPos());
+        if (!state.getProperties().containsKey(SoulShardsAPI.ACTIVE))
+            return false;
+        return state.getValue(SoulShardsAPI.ACTIVE);
     }
 
     public void setActiveState(boolean activeState) {
