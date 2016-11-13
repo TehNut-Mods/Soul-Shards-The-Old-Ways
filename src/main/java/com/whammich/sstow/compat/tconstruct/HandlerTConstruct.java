@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.tconstruct.common.ModelRegisterUtil;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.MaterialRenderInfo;
@@ -17,8 +18,6 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.HarvestLevels;
-import slimeknights.tconstruct.tools.TinkerTools;
-import slimeknights.tconstruct.tools.ToolClientProxy;
 
 public class HandlerTConstruct {
 
@@ -48,7 +47,7 @@ public class HandlerTConstruct {
 
     @SideOnly(Side.CLIENT)
     public static void initRender() {
-        ((ToolClientProxy) TinkerTools.proxy).registerModifierModel(modSoulStealer, new ResourceLocation(SoulShardsTOW.MODID, "models/item/modifiers/soulStealer"));
+        ModelRegisterUtil.registerModifierModel(modSoulStealer, new ResourceLocation(SoulShardsTOW.MODID, "models/item/modifiers/soulStealer"));
 
         materialCorrupted.setRenderInfo(new MaterialRenderInfo.AbstractMaterialRenderInfo() {
             @Override
