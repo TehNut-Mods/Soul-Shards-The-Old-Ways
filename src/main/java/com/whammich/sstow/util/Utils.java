@@ -1,22 +1,16 @@
 package com.whammich.sstow.util;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.base.Strings;
 import com.mojang.authlib.GameProfile;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulShard;
 import com.whammich.sstow.api.ShardHelper;
-import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.ShardTierChangeEvent;
 import com.whammich.sstow.tile.TileEntityCage;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -25,17 +19,17 @@ import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import tehnut.lib.util.helper.TextHelper;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 
 public final class Utils {
 
-    @Nullable
-    public static ItemStack getShardFromInv(EntityPlayer player, String entity) {
-        ItemStack ret = null;
+    public static final ResourceLocation EMPTY_ENT = new ResourceLocation("blank", "blank");
+
+    public static ItemStack getShardFromInv(EntityPlayer player, ResourceLocation entity) {
+        ItemStack ret = ItemStack.EMPTY;
 
         ItemStack offhand = player.getHeldItemOffhand();
-        if (offhand != null && offhand.getItem() instanceof ISoulShard) {
+        if (!offhand.isEmpty() && offhand.getItem() instanceof ISoulShard) {
             if (!ShardHelper.isBound(offhand))
                 ret = offhand;
             else if (ShardHelper.getBoundEntity(offhand).equals(entity))
@@ -45,8 +39,8 @@ public final class Utils {
         for (int i = 0; i <= 8; i++) {
             ItemStack stack = player.inventory.getStackInSlot(i);
 
-            if (stack != null && stack.getItem() instanceof ISoulShard && !hasMaxedKills(stack)) {
-                if (!ShardHelper.isBound(stack) && ret == null)
+            if (!stack.isEmpty() && stack.getItem() instanceof ISoulShard && !hasMaxedKills(stack)) {
+                if (!ShardHelper.isBound(stack) && ret.isEmpty())
                     ret = stack;
                 else if (ShardHelper.getBoundEntity(stack).equals(entity))
                     return stack;
@@ -98,15 +92,13 @@ public final class Utils {
         return shard;
     }
 
-    public static String getEntityNameTranslated(String unlocName) {
-        if (unlocName.equals(SoulShardsAPI.WITHER_SKELETON_OLD))
-            return unlocName;
-
+    public static String getEntityNameTranslated(ResourceLocation key) {
+        String unlocName = EntityMapper.translationMap.get(key);
         return TextHelper.localize("entity." + unlocName + ".name");
     }
 
     private static int getClampedKillCount(int amount) {
-        return MathHelper.clamp_int(amount, 0, TierHandler.getMaxKills(TierHandler.tiers.size() - 1));
+        return MathHelper.clamp(amount, 0, TierHandler.getMaxKills(TierHandler.tiers.size() - 1));
     }
 
     public static boolean isCageBorn(EntityLivingBase living) {
@@ -123,7 +115,7 @@ public final class Utils {
 
         String username = UsernameCache.getLastKnownUsername(UUID.fromString(owner));
 
-        for (GameProfile profile : FMLCommonHandler.instance().getMinecraftServerInstance().getGameProfiles())
+        for (GameProfile profile : FMLCommonHandler.instance().getMinecraftServerInstance().getOnlinePlayerProfiles())
             if (profile.getName().equals(username))
                 return true;
 

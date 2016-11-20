@@ -1,6 +1,5 @@
 package com.whammich.sstow.item;
 
-import com.google.common.base.Strings;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.ISoulShard;
@@ -18,11 +17,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.MobSpawnerBaseLogic;
@@ -71,34 +67,23 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     }
 
     @Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack stack = player.getHeldItem(hand);
+
         if (!Utils.hasMaxedKills(stack)) {
             TileEntity tile = world.getTileEntity(pos);
 
             if (tile instanceof TileEntityMobSpawner) {
                 if (ConfigHandler.allowSpawnerAbsorption) {
                     WeightedSpawnerEntity spawnerEntity = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "randomEntity", "field_98282_f");
-                    String name = spawnerEntity.getNbt().getString("id");
-                    EntityLiving ent = (EntityLiving) EntityList.createEntityByName(name, world);
+                    ResourceLocation name = new ResourceLocation(spawnerEntity.getNbt().getString("id"));
+                    EntityLiving ent = (EntityLiving) EntityList.createEntityByIDFromName(name, world);
 
                     if (ent == null)
                         return EnumActionResult.FAIL;
 
                     if (!EntityMapper.isEntityValid(name) || SoulShardsAPI.isEntityBlacklisted(ent))
                         return EnumActionResult.FAIL;
-
-                    if (ent instanceof EntitySkeleton) {
-                        switch (((EntitySkeleton) ent).getSkeletonType()) {
-                            case STRAY: name = SoulShardsAPI.HUSK; break;
-                            case WITHER: name = SoulShardsAPI.WITHER_SKELETON; break;
-                        }
-                    }
-
-                    if (ent instanceof EntityZombie) {
-                        switch (((EntityZombie) ent).getZombieType()) {
-                            case HUSK: name = SoulShardsAPI.HUSK; break;
-                        }
-                    }
 
                     if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
                         if (!world.isRemote)
@@ -108,7 +93,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                     }
                 } else {
                     if (world.isRemote)
-                        player.addChatComponentMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.absorb.disabled")));
+                        player.sendStatusMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.absorb.disabled")), false);
                 }
             }
         }
@@ -123,25 +108,13 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     @Override
     public double getDurabilityForDisplay(ItemStack stack) {
-        return 1.0D - ((double) ShardHelper.getKillsFromShard(stack) / (double) TierHandler.getTier(TierHandler.tiers.size() - 1).getMinKills());
+        TierHandler.Tier maxTier = TierHandler.getTier(TierHandler.tiers.size() - 1);
+        return 1.0D - ((double) ShardHelper.getKillsFromShard(stack) / (double) maxTier.getMinKills());
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         return super.getUnlocalizedName(stack) + (ShardHelper.isBound(stack) ? "" : ".unbound");
-    }
-
-    @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        if (oldStack.getItem() instanceof ISoulShard && newStack.getItem() instanceof ISoulShard) {
-            if (ShardHelper.getTierFromShard(oldStack) != ShardHelper.getTierFromShard(newStack))
-                return true;
-
-            if (!ShardHelper.getBoundEntity(oldStack).equals(ShardHelper.getBoundEntity(newStack)))
-                return true;
-        }
-
-        return slotChanged;
     }
 
     @Override
@@ -152,7 +125,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
+    public void getSubItems(Item item, CreativeTabs tabs, NonNullList<ItemStack> list) {
         for (int i = 0; i <= TierHandler.tiers.size() - 1; i++) {
             ItemStack stack = new ItemStack(item);
 
@@ -163,10 +136,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         }
 
         if (ConfigHandler.addShardsForAllMobs) {
-            for (String ent : EntityMapper.entityList) {
-                if (ent.equals(SoulShardsAPI.WITHER_SKELETON_OLD))
-                    continue;
-
+            for (ResourceLocation ent : EntityMapper.entityList) {
                 if (!ConfigHandler.ignoreBlacklistForTab && !EntityMapper.isEntityValid(ent))
                     continue;
 
@@ -181,14 +151,10 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean advanced) {
         if (ShardHelper.isBound(stack)) {
-            String boundEnt = ShardHelper.getBoundEntity(stack);
-            boolean disabled;
-            if (!EntityMapper.specialCases.contains(boundEnt))
-                disabled = !ConfigHandler.entityList.contains(boundEnt) || SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(boundEnt).getCanonicalName());
-            else
-                disabled = !ConfigHandler.entityList.contains(boundEnt);
+            ResourceLocation boundEnt = ShardHelper.getBoundEntity(stack);
+            boolean disabled = !ConfigHandler.entityList.contains(boundEnt);
             list.add((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("tooltip.soulshardstow.bound", Utils.getEntityNameTranslated(boundEnt)));
         }
 
@@ -244,37 +210,21 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
     @SubscribeEvent
     @Used
     public void onEntityKill(LivingDeathEvent event) {
-        World world = event.getEntity().worldObj;
+        World world = event.getEntity().getEntityWorld();
 
         if (world.isRemote || !(event.getEntity() instanceof EntityLiving) || !(event.getSource().getEntity() instanceof EntityPlayer) || event.getSource().getEntity() instanceof FakePlayer)
             return;
 
         EntityLiving dead = (EntityLiving) event.getEntity();
         EntityPlayer player = (EntityPlayer) event.getSource().getEntity();
-        String entName = EntityList.getEntityString(dead);
+        ResourceLocation entName = EntityList.getKey(dead);
 
-        if (Strings.isNullOrEmpty(entName)) {
+        if (entName == null) {
             SoulShardsTOW.instance.getLogHelper().severe("Player killed an entity with no mapped name: {}", dead);
             return;
         }
 
-        if (dead instanceof EntitySkeleton) {
-            switch (((EntitySkeleton) dead).getSkeletonType()) {
-                case STRAY: entName = SoulShardsAPI.STRAY; break;
-                case WITHER: entName = SoulShardsAPI.WITHER_SKELETON; break;
-            }
-        }
-
-        if (dead instanceof EntityZombie) {
-            switch (((EntityZombie) dead).getZombieType()) {
-                case HUSK: entName = SoulShardsAPI.HUSK; break;
-            }
-        }
-
         ItemStack shard = Utils.getShardFromInv(player, entName);
-
-        if (shard == null)
-            return;
 
         if (!ConfigHandler.entityList.contains(entName) || SoulShardsAPI.isEntityBlacklisted(dead))
             return;
@@ -291,7 +241,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.soulStealer, player.getHeldItemMainhand());
         soulStealer *= ConfigHandler.soulStealerBonus;
 
-        if (player.getHeldItemMainhand() != null && player.getHeldItemMainhand().getItem() instanceof ISoulWeapon)
+        if (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() instanceof ISoulWeapon)
             soulStealer += ((ISoulWeapon) player.getHeldItemMainhand().getItem()).getBonusSouls(player.getHeldItemMainhand());
 
         Utils.increaseShardKillCount(shard, 1 + soulStealer);
@@ -303,7 +253,7 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
         if (multiblock.isEmpty())
             buildMultiblock();
 
-        if (event.getItemStack() != null && ItemStack.areItemsEqual(event.getItemStack(), ConfigHandler.catalystItem) && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
+        if (!event.getItemStack().isEmpty() && ItemStack.areItemsEqual(event.getItemStack(), ConfigHandler.catalystItem) && originBlock.equals(BlockStack.getStackFromPos(event.getWorld(), event.getPos()))) {
             for (Pair<BlockPos, BlockStack> multiblockPair : multiblock) {
                 BlockStack worldStack = BlockStack.getStackFromPos(event.getWorld(), event.getPos().add(multiblockPair.getLeft()));
                 if (!multiblockPair.getRight().equals(worldStack))
@@ -315,14 +265,14 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
 
             if (!event.getWorld().isRemote) {
                 EntityItem invItem = new EntityItem(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(ItemHelper.getItem(getClass()), 1, 0));
-                event.getWorld().spawnEntityInWorld(invItem);
+                event.getWorld().spawnEntity(invItem);
             }
 
             if (!event.getEntityPlayer().capabilities.isCreativeMode) {
-                if (event.getItemStack().stackSize > 1)
-                    event.getItemStack().stackSize--;
+                if (event.getItemStack().getCount() > 1)
+                    event.getItemStack().shrink(1);
                 else
-                    event.getEntityPlayer().setHeldItem(event.getHand(), null);
+                    event.getEntityPlayer().setHeldItem(event.getHand(), ItemStack.EMPTY);
             }
 
             event.getEntityPlayer().swingArm(event.getHand());

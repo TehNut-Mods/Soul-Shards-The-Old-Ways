@@ -24,7 +24,7 @@ public class ConfigHandler {
     public static Configuration config;
     public static List<String> categories = new ArrayList<String>();
 
-    public static List<String> entityList = new ArrayList<String>();
+    public static List<ResourceLocation> entityList = new ArrayList<ResourceLocation>();
 
     public static int spawnCap;
     public static boolean displayDurabilityBar;
@@ -146,8 +146,8 @@ public class ConfigHandler {
     public static void handleEntityList(String category) {
         entityList.clear();
 
-        for (String name : EntityMapper.entityList)
-            if (config.get(category, name, true).getBoolean(true))
+        for (ResourceLocation name : EntityMapper.entityList)
+            if (config.get(category, name.toString(), true).getBoolean(true))
                 entityList.add(name);
 
         config.save();

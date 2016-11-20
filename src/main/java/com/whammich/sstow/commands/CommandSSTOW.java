@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import tehnut.lib.util.helper.ItemHelper;
@@ -28,12 +29,12 @@ import java.util.List;
 public class CommandSSTOW extends CommandBase {
 
     @Override
-    public String getCommandName() {
+    public String getName() {
         return "sstow";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender sender) {
+    public String getUsage(ICommandSender sender) {
         return "/sstow <killall|settier|setent> [tier|entityName]";
     }
 
@@ -56,47 +57,47 @@ public class CommandSSTOW extends CommandBase {
                 }
 
                 if (killCounter == 0) {
-                    sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.notfound")));
+                    sender.sendMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.notfound")));
                 } else {
-                    sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.killed", killCounter)));
+                    sender.sendMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.killed", killCounter)));
                 }
             } else if (params[0].equalsIgnoreCase("settier")) {
 
                 if (params.length == 2) {
                     int tierAmount = Integer.parseInt(params[1]);
                     int minKills = TierHandler.getMinKills(tierAmount);
-                    if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ISoulShard) {
+                    if (!((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).isEmpty() && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ISoulShard) {
                         ItemStack shard = ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND);
                         for (int i = 1; i <= tierAmount; i++) {
                             ShardHelper.setTierForShard(shard, 1);
                             ShardHelper.setKillsForShard(shard, minKills);
                         }
                     } else {
-                        sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.noshard")));
+                        sender.sendMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.noshard")));
                     }
                 } else {
-                    sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.setwrong")));
+                    sender.sendMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.setwrong")));
                 }
             } else if (params[0].equalsIgnoreCase("setent") && !Strings.isNullOrEmpty(params[1])) {
-                if (((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ISoulShard) {
+                if (!((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).isEmpty() && ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ISoulShard) {
                     ItemStack shard = ((EntityPlayerMP) sender).getHeldItem(EnumHand.MAIN_HAND);
                     String entName = "";
                     for (int i = 1; i < params.length; i++)
                         entName += (entName.length() > 0 ? " " : "") + params[i];
-                    ShardHelper.setBoundEntity(shard, entName);
+                    ShardHelper.setBoundEntity(shard, new ResourceLocation(entName));
                 } else {
-                    sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.noshard")));
+                    sender.sendMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.noshard")));
                 }
             } else {
-                sender.addChatMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.wrongcommand")));
+                sender.sendMessage(new TextComponentString(TextHelper.localizeEffect("chat.sstow.command.wrongcommand")));
             }
         } else {
-            throw new CommandException(getCommandUsage(sender));
+            throw new CommandException(getUsage(sender));
         }
     }
 
     @Override
-    public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
+    public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos pos) {
         List<String> tabCompletion = new ArrayList<String>();
 
         switch (args.length) {

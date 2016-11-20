@@ -66,7 +66,7 @@ public class BlockCage extends Block implements IVariantProvider {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, BooleanUtils.toBoolean(MathHelper.clamp_int(meta, 0, 1)));
+        return getDefaultState().withProperty(SoulShardsAPI.ACTIVE, BooleanUtils.toBoolean(MathHelper.clamp(meta, 0, 1)));
     }
 
     @Override
@@ -92,6 +92,7 @@ public class BlockCage extends Block implements IVariantProvider {
         if (tileCage != null)
             tileCage.dropItems();
 
+
         super.breakBlock(world, blockPos, blockState);
     }
 
@@ -108,7 +109,7 @@ public class BlockCage extends Block implements IVariantProvider {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean isVisuallyOpaque() {
+    public boolean causesSuffocation(IBlockState state) {
         return false;
     }
 
@@ -145,18 +146,18 @@ public class BlockCage extends Block implements IVariantProvider {
 
         if (tile != null && tile instanceof ISoulCage) {
             TileEntityCage cage = (TileEntityCage) tile;
-            if (heldItem != null && cage.getStackInSlot(0) == null && cage.isItemValidForSlot(0, heldItem) && !player.isSneaking()) {
-                cage.setInventorySlotContents(0, heldItem.copy());
+            if (heldItem != ItemStack.EMPTY && cage.getStackHandler().getStackInSlot(0) == ItemStack.EMPTY && ShardHelper.isBound(heldItem) && !player.isSneaking()) {
+                cage.getStackHandler().setStackInSlot(0, heldItem.copy());
                 cage.setTier(ShardHelper.getTierFromShard(heldItem));
                 cage.setEntName(ShardHelper.getBoundEntity(heldItem));
                 if (!event.getWorld().isRemote)
                     cage.setOwner(player.getGameProfile().getId().toString());
-                player.setHeldItem(event.getHand(), null);
+                player.setHeldItem(event.getHand(), ItemStack.EMPTY);
                 player.swingArm(event.getHand());
-            } else if (cage.getStackInSlot(0) != null && player.getHeldItemMainhand() == null && player.isSneaking()) {
+            } else if (cage.getStackHandler().getStackInSlot(0) != ItemStack.EMPTY && player.getHeldItemMainhand() == ItemStack.EMPTY && player.isSneaking()) {
                 if (!event.getWorld().isRemote) {
-                    EntityItem invItem = new EntityItem(event.getWorld(), player.posX, player.posY + 0.25, player.posZ, cage.getStackInSlot(0));
-                    event.getWorld().spawnEntityInWorld(invItem);
+                    EntityItem invItem = new EntityItem(event.getWorld(), player.posX, player.posY + 0.25, player.posZ, cage.getStackHandler().getStackInSlot(0));
+                    event.getWorld().spawnEntity(invItem);
                 }
                 cage.reset();
                 player.swingArm(event.getHand());

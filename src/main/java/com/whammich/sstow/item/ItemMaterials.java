@@ -4,6 +4,7 @@ import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
@@ -47,7 +48,8 @@ public class ItemMaterials extends Item implements IVariantProvider {
     }
 
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
+    @Override
+    public void getSubItems(Item item, CreativeTabs tabs, NonNullList<ItemStack> list) {
         for (int i = 0; i < names.size(); i++)
             list.add(new ItemStack(this, 1, i));
     }

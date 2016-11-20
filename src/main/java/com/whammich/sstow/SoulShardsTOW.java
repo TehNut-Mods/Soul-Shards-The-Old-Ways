@@ -11,8 +11,8 @@ import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import lombok.Getter;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -27,13 +27,13 @@ import tehnut.lib.util.helper.LogHelper;
 import java.io.File;
 
 @Getter
-@Mod(modid = SoulShardsTOW.MODID, name = SoulShardsTOW.NAME, version = SoulShardsTOW.VERSION, acceptedMinecraftVersions = "[1.10,1.11)", dependencies = SoulShardsTOW.DEPEND, updateJSON = SoulShardsTOW.JSON_CHECKER, guiFactory = "com.whammich.sstow.client.gui.GuiFactory")
+@Mod(modid = SoulShardsTOW.MODID, name = SoulShardsTOW.NAME, version = SoulShardsTOW.VERSION, acceptedMinecraftVersions = "[1.11,1.12)", dependencies = SoulShardsTOW.DEPEND, updateJSON = SoulShardsTOW.JSON_CHECKER, guiFactory = "com.whammich.sstow.client.gui.GuiFactory")
 public class SoulShardsTOW {
 
     public static final String MODID = "soulshardstow";
     public static final String NAME = "Soul Shards - The Old Ways";
     public static final String VERSION = "@VERSION@";
-    public static final String DEPEND = "required-after:Forge@[12.16.0.1840,);";
+    public static final String DEPEND = "";
     public static final String JSON_CHECKER = "https://gist.githubusercontent.com/TehNut/e8db2be209d32d1ebbc3/raw/VersionChecker-SSTOW.json";
 
     @Instance(MODID)
@@ -44,17 +44,17 @@ public class SoulShardsTOW {
 
     public static CreativeTabs soulShardsTab = new CreativeTabs("soulShards") {
         @Override
-        public Item getTabIconItem() {
-            return ItemHelper.getItem(ItemSoulShard.class);
+        public ItemStack getTabIconItem() {
+            ItemStack shard = new ItemStack(ItemHelper.getItem(ItemSoulShard.class));
+            ShardHelper.setTierForShard(shard, TierHandler.tiers.size() - 1);
+            Utils.setMaxedKills(shard);
+            ShardHelper.setBoundEntity(shard, new ResourceLocation("minecraft", "pig"));
+            return shard;
         }
 
         @Override
         public ItemStack getIconItemStack() {
-            ItemStack shard = new ItemStack(ItemHelper.getItem(ItemSoulShard.class));
-            ShardHelper.setTierForShard(shard, TierHandler.tiers.size() - 1);
-            Utils.setMaxedKills(shard);
-            ShardHelper.setBoundEntity(shard, "Pig");
-            return shard;
+            return getTabIconItem(); // TODO - remove
         }
     };
 
@@ -98,7 +98,6 @@ public class SoulShardsTOW {
     @Used
     public void postInit(FMLPostInitializationEvent event) {
         EntityMapper.mapEntities();
-        EntityMapper.initHandlers();
         ModCompatibility.loadCompat(ICompatibility.InitializationPhase.POST_INIT);
 
         proxy.postInit(event);

@@ -36,12 +36,8 @@ public class DataProviderCage implements IProbeInfoProvider {
             if (tile != null && tile instanceof TileEntityCage) {
                 TileEntityCage cage = (TileEntityCage) tile;
 
-                if (cage.getStackInSlot(0) != null) {
-                    boolean disabled;
-                    if (!EntityMapper.specialCases.contains(cage.getEntName()))
-                        disabled = !ConfigHandler.entityList.contains(cage.getEntName()) || SoulShardsAPI.isEntityBlacklisted(EntityList.NAME_TO_CLASS.get(cage.getEntName()).getCanonicalName());
-                    else
-                        disabled = !ConfigHandler.entityList.contains(cage.getEntName());
+                if (!cage.getStackHandler().getStackInSlot(0).isEmpty()) {
+                    boolean disabled = !ConfigHandler.entityList.contains(cage.getEntName());;
                     probeInfo.text((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("waila.soulshardstow.boundTo", Utils.getEntityNameTranslated(cage.getEntName())));
                     probeInfo.text(TextHelper.localizeEffect("waila.soulshardstow.tier", cage.getTier()));
                     if (mode == ProbeMode.DEBUG)
