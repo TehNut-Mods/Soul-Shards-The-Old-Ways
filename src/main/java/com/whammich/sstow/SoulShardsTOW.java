@@ -51,11 +51,6 @@ public class SoulShardsTOW {
             ShardHelper.setBoundEntity(shard, new ResourceLocation("minecraft", "pig"));
             return shard;
         }
-
-        @Override
-        public ItemStack getIconItemStack() {
-            return getTabIconItem(); // TODO - remove
-        }
     };
 
     private File configDir;
