@@ -18,6 +18,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -99,6 +100,9 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                             case HUSK: name = SoulShardsAPI.HUSK; break;
                         }
                     }
+
+                    if (ent instanceof EntityGuardian && ((EntityGuardian) ent).isElder())
+                        name = SoulShardsAPI.ELDER_GUARDIAN;
 
                     if (ShardHelper.isBound(stack) && ShardHelper.getBoundEntity(stack).equals(name)) {
                         if (!world.isRemote)
@@ -270,6 +274,9 @@ public class ItemSoulShard extends Item implements ISoulShard, IMeshProvider {
                 case HUSK: entName = SoulShardsAPI.HUSK; break;
             }
         }
+
+        if (dead instanceof EntityGuardian && ((EntityGuardian) dead).isElder())
+            entName = SoulShardsAPI.ELDER_GUARDIAN;
 
         ItemStack shard = Utils.getShardFromInv(player, entName);
 

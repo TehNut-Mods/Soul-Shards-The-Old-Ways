@@ -26,6 +26,7 @@ public class SoulShardsAPI {
     public static final String WITHER_SKELETON = "WitherSkeleton";
     public static final String STRAY = "Stray";
     public static final String HUSK = "Husk";
+    public static final String ELDER_GUARDIAN = "ElderGuardian";
 
     public static final IEntityHandler DEFAULT_ENTITY_HANDLER = new IEntityHandler() {
         @Nullable

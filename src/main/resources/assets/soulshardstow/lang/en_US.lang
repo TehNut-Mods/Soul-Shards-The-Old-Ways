@@ -22,6 +22,7 @@ enchantment.soulStealer=Soul Stealer
 
 # Entities
 entity.WitherSkeleton.name=Wither Skeleton
+entity.ElderGuardian.name=Elder Guardian
 
 # Chat
 chat.sstow.command.killed=&2Killed %d entities

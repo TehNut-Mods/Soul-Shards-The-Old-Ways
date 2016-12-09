@@ -11,10 +11,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.SkeletonType;
-import net.minecraft.entity.monster.ZombieType;
+import net.minecraft.entity.monster.*;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -55,6 +52,7 @@ public final class EntityMapper {
         addSpecialCase(SoulShardsAPI.WITHER_SKELETON, EntitySkeleton.class);
         addSpecialCase(SoulShardsAPI.STRAY, EntitySkeleton.class);
         addSpecialCase(SoulShardsAPI.HUSK, EntityZombie.class);
+        addSpecialCase(SoulShardsAPI.ELDER_GUARDIAN, EntityGuardian.class);
 
         ConfigHandler.handleEntityList("Entity List");
         SoulShardsTOW.instance.getLogHelper().info("Finished mapping, found {} entities in {}", entityList.size(), stopwatch.stop());
@@ -70,6 +68,21 @@ public final class EntityMapper {
                     zombie.setZombieType(ZombieType.HUSK);
                     zombie.setPosition(pos.getX(), pos.getY(), pos.getZ());
                     return ActionResult.newResult(EnumActionResult.SUCCESS, zombie);
+                }
+
+                return SoulShardsAPI.DEFAULT_ENTITY_HANDLER.handleLiving(world, entityName, pos);
+            }
+        });
+
+        SoulShardsAPI.registerEntityHandler(EntityGuardian.class, new IEntityHandler() {
+            @Nullable
+            @Override
+            public ActionResult<? extends EntityLiving> handleLiving(World world, String entityName, BlockPos pos) {
+                if (entityName.equals(SoulShardsAPI.ELDER_GUARDIAN)) {
+                    EntityGuardian guardian = new EntityGuardian(world);
+                    guardian.setElder();
+                    guardian.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                    return ActionResult.newResult(EnumActionResult.SUCCESS, guardian);
                 }
 
                 return SoulShardsAPI.DEFAULT_ENTITY_HANDLER.handleLiving(world, entityName, pos);
