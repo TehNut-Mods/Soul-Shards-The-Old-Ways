@@ -2,7 +2,6 @@ package com.whammich.sstow;
 
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
-import com.whammich.sstow.proxy.CommonProxy;
 import com.whammich.sstow.registry.*;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.IMCHandler;
@@ -11,10 +10,10 @@ import com.whammich.sstow.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,8 +30,6 @@ public class SoulShardsTOW {
 
     @Instance(MODID)
     public static SoulShardsTOW INSTANCE;
-    @SidedProxy(clientSide = "com.whammich.sstow.proxy.ClientProxy", serverSide = "com.whammich.sstow.proxy.CommonProxy")
-    public static CommonProxy PROXY;
 
     public static final CreativeTabs TAB_SS = new CreativeTabs("soulShards") {
         @Override
@@ -47,28 +44,23 @@ public class SoulShardsTOW {
 
     private File configDir;
 
+    public SoulShardsTOW() {
+        configDir = new File(Loader.instance().getConfigDir(), "sstow");
+        JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
+    }
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        configDir = new File(event.getModConfigurationDirectory(), "sstow");
+
         ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
-        JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
         JsonConfigHandler.initMultiblock(new File(configDir, "Multiblock.json"));
 
         ModRecipes.init(); // TODO - Remove for new Forge stuff
-
-        PROXY.preInit(event);
-    }
-
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
-        PROXY.init(event);
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         EntityMapper.mapEntities();
-
-        PROXY.postInit(event);
     }
 
     @EventHandler
