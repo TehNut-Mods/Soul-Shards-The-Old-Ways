@@ -1,13 +1,13 @@
 package com.whammich.sstow.util;
 
 import com.whammich.sstow.ConfigHandler;
+import com.whammich.sstow.RegistrarSoulShards;
 import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.api.*;
 import com.whammich.sstow.api.event.CageSpawnEvent;
 import com.whammich.sstow.api.event.ShardTierChangeEvent;
 import com.whammich.sstow.compat.CompatibilityType;
 import com.whammich.sstow.item.ItemSoulShard;
-import com.whammich.sstow.RegistrarSoulShards;
 import com.whammich.sstow.tile.TileEntityCage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;

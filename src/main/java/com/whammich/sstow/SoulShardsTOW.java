@@ -2,7 +2,7 @@ package com.whammich.sstow;
 
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
-import com.whammich.sstow.registry.*;
+import com.whammich.sstow.registry.ModRecipes;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.IMCHandler;
 import com.whammich.sstow.util.TierHandler;
@@ -14,7 +14,10 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,10 +30,6 @@ public class SoulShardsTOW {
     public static final String NAME = "Soul Shards - The Old Ways";
     public static final String VERSION = "@VERSION@";
     public static final Logger LOGGER = LogManager.getLogger("Soul Shards");
-
-    @Instance(MODID)
-    public static SoulShardsTOW INSTANCE;
-
     public static final CreativeTabs TAB_SS = new CreativeTabs("soulShards") {
         @Override
         public ItemStack getTabIconItem() {
@@ -41,6 +40,9 @@ public class SoulShardsTOW {
             return shard;
         }
     };
+
+    @Instance(MODID)
+    public static SoulShardsTOW INSTANCE;
 
     private File configDir;
 

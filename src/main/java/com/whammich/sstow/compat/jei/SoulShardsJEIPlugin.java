@@ -1,8 +1,8 @@
 package com.whammich.sstow.compat.jei;
 
 import com.whammich.sstow.ConfigHandler;
-import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.RegistrarSoulShards;
+import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.util.TierHandler;
 import mezz.jei.api.BlankModPlugin;
 import mezz.jei.api.IModRegistry;

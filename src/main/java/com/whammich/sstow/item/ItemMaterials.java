@@ -1,8 +1,8 @@
 package com.whammich.sstow.item;
 
 import com.google.common.collect.Lists;
-import com.whammich.sstow.SoulShardsTOW;
 import com.whammich.sstow.RegistrarSoulShards;
+import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
