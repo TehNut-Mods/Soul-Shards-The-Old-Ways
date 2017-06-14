@@ -1,36 +1,30 @@
 package com.whammich.sstow.item;
 
+import com.google.common.collect.Lists;
 import com.whammich.sstow.SoulShardsTOW;
+import com.whammich.sstow.RegistrarSoulShards;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.commons.lang3.tuple.Pair;
-import tehnut.lib.annot.ModItem;
-import tehnut.lib.annot.Used;
-import tehnut.lib.iface.IVariantProvider;
-import tehnut.lib.util.helper.ItemHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@ModItem(name = "ItemMaterials")
-@Used
-public class ItemMaterials extends Item implements IVariantProvider {
+public class ItemMaterials extends Item {
 
     public static final String INGOT_CORRUPTED = "ingotCorrupted";
     public static final String CORRUPTED_ESSENCE = "dustCorrupted";
     public static final String DUST_VILE = "dustVile";
 
-    private static List<String> names = new ArrayList<String>();
+    private static List<String> names = Lists.newArrayList();
 
     public ItemMaterials() {
         super();
 
         setUnlocalizedName(SoulShardsTOW.MODID + ".material.");
-        setCreativeTab(SoulShardsTOW.soulShardsTab);
+        setCreativeTab(SoulShardsTOW.TAB_SS);
         setHasSubtypes(true);
 
         buildItems();
@@ -49,22 +43,13 @@ public class ItemMaterials extends Item implements IVariantProvider {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(Item item, CreativeTabs tabs, NonNullList<ItemStack> list) {
+    public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
         for (int i = 0; i < names.size(); i++)
             list.add(new ItemStack(this, 1, i));
     }
 
-    @Override
-    public List<Pair<Integer, String>> getVariants() {
-        List<Pair<Integer, String>> ret = new ArrayList<Pair<Integer, String>>();
-        ret.add(Pair.of(0, "type=ingotsoulium"));
-        ret.add(Pair.of(1, "type=dustcorrupted"));
-        ret.add(Pair.of(2, "type=dustvile"));
-        return ret;
-    }
-
     public static ItemStack getStack(String name, int amount) {
-        return new ItemStack(ItemHelper.getItem(ItemMaterials.class), amount, names.indexOf(name));
+        return new ItemStack(RegistrarSoulShards.MATERIALS, amount, names.indexOf(name));
     }
 
     public static ItemStack getStack(String name) {

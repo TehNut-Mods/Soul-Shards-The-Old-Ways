@@ -1,7 +1,7 @@
 package com.whammich.sstow.compat.waila;
 
 import com.whammich.sstow.SoulShardsTOW;
-import com.whammich.sstow.block.BlockCage;
+import com.whammich.sstow.tile.TileEntityCage;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.WailaPlugin;
@@ -13,8 +13,10 @@ public class SoulShardsWailaPlugin implements IWailaPlugin {
 
     @Override
     public void register(IWailaRegistrar registrar) {
-        registrar.registerBodyProvider(new DataProviderCage(), BlockCage.class);
-        registrar.registerNBTProvider(new DataProviderCage(), BlockCage.class);
+        final DataProviderCage providerCage = new DataProviderCage();
+
+        registrar.registerBodyProvider(providerCage, TileEntityCage.class);
+        registrar.registerNBTProvider(providerCage, TileEntityCage.class);
 
         registrar.addConfig(SoulShardsTOW.MODID, CONFIG_OWNER, false);
     }

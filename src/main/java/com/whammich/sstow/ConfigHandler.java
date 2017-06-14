@@ -7,18 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.annot.Used;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-@Handler
+// TODO - @Config
 public class ConfigHandler {
 
     public static Configuration config;
@@ -53,15 +49,6 @@ public class ConfigHandler {
     public static CompatibilityType compatibilityType = CompatibilityType.VANILLA;
     public static int lpPerMob;
     public static boolean enableSoulStealerModifier;
-
-    @SubscribeEvent
-    @Used
-    public void configChanged(ConfigChangedEvent event) {
-        if (event.getModID().equals(SoulShardsTOW.MODID)) {
-            syncConfig();
-            handleEntityList("Entity List");
-        }
-    }
 
     public static void init(File file) {
         config = new Configuration(file);
@@ -116,7 +103,7 @@ public class ConfigHandler {
         try {
             compatibilityType = CompatibilityType.valueOf(compatTypeString.toUpperCase(Locale.ENGLISH));
         } catch (IllegalArgumentException e) {
-            SoulShardsTOW.instance.getLogHelper().error("{} is not a valid CompatibilityType. Falling back to VANILLA.", compatTypeString.toUpperCase(Locale.ENGLISH));
+            SoulShardsTOW.LOGGER.error("{} is not a valid CompatibilityType. Falling back to VANILLA.", compatTypeString.toUpperCase(Locale.ENGLISH));
         }
         lpPerMob = config.getInt("lpPerMob", category, 250, 0, Integer.MAX_VALUE, "Amount of LP required for each mob spawned.\nIf this amount is not contained in the LP network, a nausea effect will be applied to the player and the Soul Cage will stop functioning.");
         enableSoulStealerModifier = config.getBoolean("enableSoulStealerModifier", category, true, "Adds a Tinkers Construct modifier for Soul Stealer.");
@@ -139,7 +126,7 @@ public class ConfigHandler {
                 throw new IllegalArgumentException("Not enough arguments. Required - " + 3 + "; Found - " + catalystCut.length);
             }
         } catch (Exception e) {
-            SoulShardsTOW.instance.getLogHelper().error("Error setting catalyst item from config: {} - {}", e.getClass().getSimpleName(), e.getLocalizedMessage());
+            SoulShardsTOW.LOGGER.error("Error setting catalyst item from config: {} - {}", e.getClass().getSimpleName(), e.getLocalizedMessage());
         }
     }
 

@@ -10,7 +10,6 @@ public class EnchantmentSoulStealer extends Enchantment {
         super(Rarity.UNCOMMON, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 
         setName("soulStealer");
-        setRegistryName("soulStealer");
     }
 
     @Override

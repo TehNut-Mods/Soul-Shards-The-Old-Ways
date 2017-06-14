@@ -11,12 +11,9 @@ import com.whammich.sstow.api.event.CageSpawnEvent;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
-import lombok.Getter;
-import lombok.Setter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.inventory.InventoryHelper;
@@ -32,19 +29,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemStackHandler;
-import tehnut.lib.annot.Handler;
-import tehnut.lib.annot.Used;
 
 import javax.annotation.Nonnull;
 
-@Getter
-@Setter
-@Handler
 public class TileEntityCage extends TileEntity implements ITickable, ISoulCage {
 
     public static final String TIER = "tier";
@@ -284,10 +274,39 @@ public class TileEntityCage extends TileEntity implements ITickable, ISoulCage {
         InventoryHelper.spawnItemStack(getWorld(), getPos().getX() - 0.5D, getPos().getY(), getPos().getZ(), stack);
     }
 
-    @SubscribeEvent
-    @Used
-    public void onDeath(LivingExperienceDropEvent event) {
-        if (!ConfigHandler.enableExperienceDrop && Utils.isCageBorn(event.getEntityLiving()))
-            event.setDroppedExperience(0);
+    public int getActiveTime() {
+        return activeTime;
+    }
+
+    public void setActiveTime(int activeTime) {
+        this.activeTime = activeTime;
+    }
+
+    public int getTier() {
+        return tier;
+    }
+
+    public void setTier(int tier) {
+        this.tier = tier;
+    }
+
+    public ResourceLocation getEntName() {
+        return entName;
+    }
+
+    public void setEntName(ResourceLocation entName) {
+        this.entName = entName;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public ItemStackHandler getStackHandler() {
+        return stackHandler;
     }
 }

@@ -7,11 +7,9 @@ import com.whammich.sstow.item.ItemSoulShard;
 import com.whammich.sstow.util.PosWithStack;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.serialization.SerializerBlockPos;
-import com.whammich.sstow.util.serialization.SerializerBlockStack;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import org.apache.commons.lang3.tuple.Pair;
-import tehnut.lib.util.BlockStack;
 
 import java.io.File;
 import java.io.FileReader;
@@ -28,7 +26,6 @@ public class JsonConfigHandler {
             .setPrettyPrinting()
             .serializeNulls()
             .disableHtmlEscaping()
-            .registerTypeAdapter(BlockStack.class, new SerializerBlockStack())
             .registerTypeAdapter(BlockPos.class, new SerializerBlockPos())
             .create();
 
@@ -53,11 +50,16 @@ public class JsonConfigHandler {
                     TierHandler.maxTier = tierEntry.getKey();
             }
         } catch (IOException e) {
-            SoulShardsTOW.instance.getLogHelper().severe("Failed to create a default Tier configuration file.");
+            SoulShardsTOW.LOGGER.error("Failed to create a default Tier configuration file.");
         }
     }
 
     public static void initMultiblock(File jsonConfig) {
+        ItemSoulShard.buildMultiblock();
+
+        if (true)
+            return;
+
         try {
             if (!jsonConfig.exists() && jsonConfig.createNewFile()) {
                 List<PosWithStack> defaultList = handleMultiblockDefaults();
@@ -74,16 +76,16 @@ public class JsonConfigHandler {
             for (PosWithStack posWithStack : tempList)
                 ItemSoulShard.multiblock.add(Pair.of(posWithStack.getPos(), posWithStack.getBlock()));
 
-            for (Pair<BlockPos, BlockStack> multiblockPair : ItemSoulShard.multiblock)
+            for (Pair<BlockPos, IBlockState> multiblockPair : ItemSoulShard.multiblock)
                 if (multiblockPair.getLeft().equals(new BlockPos(0, 0, 0)))
                     ItemSoulShard.originBlock = multiblockPair.getRight();
 
             if (ItemSoulShard.originBlock == null) {
                 ItemSoulShard.buildMultiblock();
-                SoulShardsTOW.instance.getLogHelper().error("Could not find origin block for multiblock. Setting to default structure.");
+                SoulShardsTOW.LOGGER.error("Could not find origin block for multiblock. Setting to default structure.");
             }
         } catch (IOException e) {
-            SoulShardsTOW.instance.getLogHelper().severe("Failed to create a default Multiblock configuration file.");
+            SoulShardsTOW.LOGGER.error("Failed to create a default Multiblock configuration file.");
         }
     }
 
@@ -103,15 +105,15 @@ public class JsonConfigHandler {
     private static ArrayList<PosWithStack> handleMultiblockDefaults() {
         ArrayList<PosWithStack> ret = new ArrayList<PosWithStack>();
 
-        ret.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.GLOWSTONE)));
-        ret.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
-        ret.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
-        ret.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.QUARTZ_BLOCK)));
-        ret.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.QUARTZ_BLOCK)));
-        ret.add(new PosWithStack(new BlockPos(1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
-        ret.add(new PosWithStack(new BlockPos(1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
-        ret.add(new PosWithStack(new BlockPos(-1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
-        ret.add(new PosWithStack(new BlockPos(-1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
+//        ret.add(new PosWithStack(new BlockPos(0, 0, 0), new BlockStack(Blocks.GLOWSTONE)));
+//        ret.add(new PosWithStack(new BlockPos(1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
+//        ret.add(new PosWithStack(new BlockPos(-1, 0, 0), new BlockStack(Blocks.QUARTZ_BLOCK)));
+//        ret.add(new PosWithStack(new BlockPos(0, 0, 1), new BlockStack(Blocks.QUARTZ_BLOCK)));
+//        ret.add(new PosWithStack(new BlockPos(0, 0, -1), new BlockStack(Blocks.QUARTZ_BLOCK)));
+//        ret.add(new PosWithStack(new BlockPos(1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
+//        ret.add(new PosWithStack(new BlockPos(1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
+//        ret.add(new PosWithStack(new BlockPos(-1, 0, 1), new BlockStack(Blocks.OBSIDIAN)));
+//        ret.add(new PosWithStack(new BlockPos(-1, 0, -1), new BlockStack(Blocks.OBSIDIAN)));
 
         return ret;
     }

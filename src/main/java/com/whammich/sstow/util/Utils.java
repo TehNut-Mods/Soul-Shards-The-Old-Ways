@@ -13,11 +13,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.UsernameCache;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import tehnut.lib.util.helper.TextHelper;
 
 import java.util.UUID;
 
@@ -79,7 +79,7 @@ public final class Utils {
             if (kills >= TierHandler.getMinKills(i) && kills <= TierHandler.getMaxKills(i))
                 return i;
 
-        SoulShardsTOW.instance.getLogHelper().error("Soul shard has an incorrect kill counter of: {}", kills);
+        SoulShardsTOW.LOGGER.error("Soul shard has an incorrect kill counter of: {}", kills);
         return 0;
     }
 
@@ -94,7 +94,7 @@ public final class Utils {
 
     public static String getEntityNameTranslated(ResourceLocation key) {
         String unlocName = EntityMapper.translationMap.get(key);
-        return TextHelper.localize("entity." + unlocName + ".name");
+        return I18n.translateToLocal("entity." + unlocName + ".name");
     }
 
     private static int getClampedKillCount(int amount) {

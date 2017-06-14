@@ -6,6 +6,7 @@ import com.whammich.sstow.util.Utils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import tehnut.lib.util.helper.TextHelper;
 
 import java.util.List;
 
@@ -22,12 +22,12 @@ public class DataProviderCage implements IWailaDataProvider {
 
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return null;
+        return accessor.getStack();
     }
 
     @Override
     public List<String> getWailaHead(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return null;
+        return currenttip;
     }
 
     @Override
@@ -35,23 +35,19 @@ public class DataProviderCage implements IWailaDataProvider {
         if (accessor.getNBTData().getString("entName").equalsIgnoreCase(Utils.EMPTY_ENT.toString()))
             return currenttip;
 
-        if (accessor.getPlayer().isSneaking()) {
-            if (accessor.getTileEntity() != null && accessor.getTileEntity() instanceof TileEntityCage) {
-                if (accessor.getNBTData().hasKey("entName")) {
-                    ResourceLocation entName = new ResourceLocation(accessor.getNBTData().getString("entName"));
-                    boolean disabled = !ConfigHandler.entityList.contains(entName);
-                    int tier = accessor.getNBTData().getInteger("tier");
-                    String owner = accessor.getNBTData().getString("owner");
+        if (accessor.getTileEntity() != null && accessor.getTileEntity() instanceof TileEntityCage) {
+            if (accessor.getNBTData().hasKey("entName")) {
+                ResourceLocation entName = new ResourceLocation(accessor.getNBTData().getString("entName"));
+                boolean disabled = !ConfigHandler.entityList.contains(entName);
+                int tier = accessor.getNBTData().getInteger("tier");
+                String owner = accessor.getNBTData().getString("owner");
 
-                    currenttip.add((disabled ? TextFormatting.RED.toString() : "") + TextHelper.localizeEffect("waila.soulshardstow.boundTo", Utils.getEntityNameTranslated(entName)));
-                    currenttip.add(TextHelper.localizeEffect("waila.soulshardstow.tier", tier));
+                currenttip.add((disabled ? TextFormatting.RED.toString() : "") + I18n.format("waila.soulshardstow.boundTo", Utils.getEntityNameTranslated(entName)));
+                currenttip.add(I18n.format("waila.soulshardstow.tier", tier));
 
-                    if (config.getConfig(SoulShardsWailaPlugin.CONFIG_OWNER))
-                        currenttip.add(TextHelper.localizeEffect("waila.soulshardstow.owner", owner));
-                }
+                if (config.getConfig(SoulShardsWailaPlugin.CONFIG_OWNER))
+                    currenttip.add(I18n.format("waila.soulshardstow.owner", owner));
             }
-        } else {
-            currenttip.add(TextHelper.localizeEffect("waila.soulshardstow.sneak"));
         }
 
         return currenttip;
@@ -59,7 +55,7 @@ public class DataProviderCage implements IWailaDataProvider {
 
     @Override
     public List<String> getWailaTail(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return null;
+        return currenttip;
     }
 
     @Override

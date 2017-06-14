@@ -5,18 +5,16 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-        classpath 'org.ajoberstar:gradle-git:0.10.1'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 
 plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.2"
-    id 'com.matthewprenger.cursegradle' version '1.0.7'
-    id 'net.franz-becker.gradle-lombok' version '1.5'
+    id "com.matthewprenger.cursegradle" version "1.0.7"
+    id "maven-publish"
 }
 
-apply plugin: 'maven-publish'
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 configurations {
     shade
@@ -28,7 +26,7 @@ def build_number = 'CUSTOM'
 if (System.getenv('BUILD_NUMBER') != null)
     build_number = System.getenv('BUILD_NUMBER')
 
-def username = 'SoulShardsDev'
+def username = "${mod_name}"
 
 if (project.hasProperty('dev_username'))
     username = "${dev_username}"
@@ -37,33 +35,15 @@ group = package_group
 archivesBaseName = mod_name
 version = "${mc_version}-${mod_version}-${build_number}"
 
-if (project.hasProperty('gitpush'))
-    version += "-ss"
-
-import net.franz_becker.gradle.lombok.task.DelombokTask
-import org.ajoberstar.grgit.*
-
-ext.repo = Grgit.open(project.file('.'))
-def gitHash = 'unknown'
-
-if (new File(projectDir, '.git').exists())
-    gitHash = repo.log().find().abbreviatedId
-
 repositories {
     maven { url "http://dvs1.progwml6.com/files/maven" }
-    maven { url "http://mobiusstrip.eu/maven" }
     maven { url "http://tehnut.info/maven" }
     maven { url "http://maven.tterrag.com" }
 }
 
 dependencies {
     deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
-    deobfCompile "mcp.mobius.waila:Hwyla:${waila_version}_1.11"
-//    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.9.4-${bloodmagic_version}:api"
-    deobfCompile "mcjty.theoneprobe:TheOneProbe:1.11-${theoneprobe_version}"
-//    deobfCompile "slimeknights.mantle:Mantle:1.10.2-${mantle_version}"
-//    deobfCompile "slimeknights:TConstruct:1.10.2-${tconstruct_version}"
-    shade "tehnut.lib:LendingLibrary:1.11-${lendinglibrary_version}"
+    deobfCompile "mcp.mobius.waila:Hwyla:${waila_version}_1.12"
 }
 
 minecraft {
@@ -104,36 +84,13 @@ if (JavaVersion.current().isJava8Compatible()) {
     }
 }
 
-lombok {
-    version = "1.16.6"
-    sha256 = "e0a471be03e1e6b02bf019480cec7a3ac9801702bf7bf62f15d077ad4df8dd5d"
-}
-
-task delombok(type: DelombokTask) {
-    args("src/main/java", "-d", "build/sources/delomboked/java")
-}
-
-tasks.eclipse.dependsOn installLombok
-
-reobf {
-    jar {
-        extraLines "PK: tehnut/lib com/whammich/sstow/shade/lib"
-    }
-}
-
 jar {
     classifier = ''
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)) {
-            exclude 'META-INF', 'META-INF/**'
-        }
-    }
     manifest.mainAttributes(
             "Built-By": System.getProperty('user.name'),
             "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
             "Implementation-Title": project.name,
             "Implementation-Version": project.version,
-            "Git-Hash": gitHash,
             "Built-On": "${mc_version}-${forge_version}"
     )
 }
@@ -152,11 +109,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
 }
 
-javadoc {
-    source = projectDir.path + "/build/sources/delomboked/java"
-}
-
-tasks.javadoc.dependsOn delombok
 tasks.build.dependsOn javadoc, javadocJar, apiJar
 
 tasks.withType(JavaCompile) { task ->
@@ -208,7 +160,7 @@ String getChangelogText() {
 }
 
 def curseRelations = {
-    optionalLibrary 'waila'
+    optionalLibrary 'hwyla'
     optionalLibrary 'just-enough-items-jei'
 }
 

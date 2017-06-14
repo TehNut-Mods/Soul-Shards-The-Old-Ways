@@ -1,9 +1,6 @@
 package com.whammich.sstow.util;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,10 +43,6 @@ public class TierHandler {
         return getTier(tier).isCheckRedstone();
     }
 
-    @RequiredArgsConstructor
-    @Getter
-    @ToString
-    @EqualsAndHashCode
     public static class Tier {
         private final int minKills;
         private final int maxKills;
@@ -58,5 +51,84 @@ public class TierHandler {
         private final boolean checkRedstone;
         private final int spawnAmount;
         private final int cooldown;
+
+        public Tier(int minKills, int maxKills, boolean checkPlayer, boolean checkLight, boolean checkRedstone, int spawnAmount, int cooldown) {
+            this.minKills = minKills;
+            this.maxKills = maxKills;
+            this.checkPlayer = checkPlayer;
+            this.checkLight = checkLight;
+            this.checkRedstone = checkRedstone;
+            this.spawnAmount = spawnAmount;
+            this.cooldown = cooldown;
+        }
+
+        public int getMinKills() {
+            return minKills;
+        }
+
+        public int getMaxKills() {
+            return maxKills;
+        }
+
+        public boolean isCheckPlayer() {
+            return checkPlayer;
+        }
+
+        public boolean isCheckLight() {
+            return checkLight;
+        }
+
+        public boolean isCheckRedstone() {
+            return checkRedstone;
+        }
+
+        public int getSpawnAmount() {
+            return spawnAmount;
+        }
+
+        public int getCooldown() {
+            return cooldown;
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .append("minKills", minKills)
+                    .append("maxKills", maxKills)
+                    .append("checkPlayer", checkPlayer)
+                    .append("checkLight", checkLight)
+                    .append("checkRedstone", checkRedstone)
+                    .append("spawnAmount", spawnAmount)
+                    .append("cooldown", cooldown)
+                    .toString();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Tier)) return false;
+
+            Tier tier = (Tier) o;
+
+            if (minKills != tier.minKills) return false;
+            if (maxKills != tier.maxKills) return false;
+            if (checkPlayer != tier.checkPlayer) return false;
+            if (checkLight != tier.checkLight) return false;
+            if (checkRedstone != tier.checkRedstone) return false;
+            if (spawnAmount != tier.spawnAmount) return false;
+            return cooldown == tier.cooldown;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = minKills;
+            result = 31 * result + maxKills;
+            result = 31 * result + (checkPlayer ? 1 : 0);
+            result = 31 * result + (checkLight ? 1 : 0);
+            result = 31 * result + (checkRedstone ? 1 : 0);
+            result = 31 * result + spawnAmount;
+            result = 31 * result + cooldown;
+            return result;
+        }
     }
 }

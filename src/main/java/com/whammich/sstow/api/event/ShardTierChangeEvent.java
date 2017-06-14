@@ -1,11 +1,9 @@
 package com.whammich.sstow.api.event;
 
-import lombok.Getter;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-@Getter
 @Cancelable
 public class ShardTierChangeEvent extends Event {
 
@@ -20,5 +18,13 @@ public class ShardTierChangeEvent extends Event {
     public ShardTierChangeEvent(ItemStack shardStack, int newTier) {
         this.shardStack = shardStack;
         this.newTier = newTier;
+    }
+
+    public ItemStack getShardStack() {
+        return shardStack;
+    }
+
+    public int getNewTier() {
+        return newTier;
     }
 }

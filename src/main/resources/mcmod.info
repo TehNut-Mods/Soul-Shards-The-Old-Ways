@@ -4,7 +4,7 @@
   "name": "Soul Shards - The Old Ways",
   "description": "Custom spawners for any mob!",
   "version": "${version}",
-  "mcversion": "1.9",
+  "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": [ "TehNut" ],

@@ -1,6 +1,8 @@
 package com.whammich.sstow.util;
 
 import com.google.common.base.Stopwatch;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.whammich.sstow.ConfigHandler;
 import com.whammich.sstow.SoulShardsTOW;
 import net.minecraft.entity.Entity;
@@ -16,8 +18,8 @@ import java.util.Map;
 
 public final class EntityMapper {
 
-    public static List<ResourceLocation> entityList = new ArrayList<ResourceLocation>();
-    public static Map<ResourceLocation, String> translationMap = new HashMap<ResourceLocation, String>();
+    public static List<ResourceLocation> entityList = Lists.newArrayList();
+    public static Map<ResourceLocation, String> translationMap = Maps.newHashMap();
 
     public static void mapEntities() {
         Stopwatch stopwatch = Stopwatch.createStarted();
@@ -28,7 +30,7 @@ public final class EntityMapper {
                 continue;
 
             if (entityList.contains(entry.getKey())) {
-                SoulShardsTOW.instance.getLogHelper().info("Already mapped, skipping {}", entry);
+                SoulShardsTOW.LOGGER.info("Already mapped, skipping {}", entry);
                 continue;
             }
 
@@ -39,7 +41,7 @@ public final class EntityMapper {
         }
 
         ConfigHandler.handleEntityList("Entity List");
-        SoulShardsTOW.instance.getLogHelper().info("Finished mapping, found {} entities in {}", entityList.size(), stopwatch.stop());
+        SoulShardsTOW.LOGGER.info("Finished mapping, found {} entities in {}", entityList.size(), stopwatch.stop());
     }
 
     public static boolean isEntityValid(ResourceLocation entName) {
