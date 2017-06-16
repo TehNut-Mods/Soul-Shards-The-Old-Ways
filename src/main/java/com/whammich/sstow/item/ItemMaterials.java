@@ -44,6 +44,9 @@ public class ItemMaterials extends Item {
     @SideOnly(Side.CLIENT)
     @Override
     public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
+        if (!isInCreativeTab(tabs))
+            return;
+
         for (int i = 0; i < names.size(); i++)
             list.add(new ItemStack(this, 1, i));
     }

@@ -107,6 +107,9 @@ public class ItemSoulShard extends Item implements ISoulShard {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tabs, NonNullList<ItemStack> list) {
+        if (!isInCreativeTab(tabs))
+            return;
+
         for (int i = 0; i <= TierHandler.tiers.size() - 1; i++) {
             ItemStack stack = new ItemStack(this);
 
