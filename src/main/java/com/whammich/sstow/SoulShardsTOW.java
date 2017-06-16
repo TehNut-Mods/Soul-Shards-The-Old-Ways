@@ -2,7 +2,6 @@ package com.whammich.sstow;
 
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
-import com.whammich.sstow.registry.ModRecipes;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.IMCHandler;
 import com.whammich.sstow.util.TierHandler;
@@ -10,6 +9,7 @@ import com.whammich.sstow.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.PersistentRegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,11 +55,10 @@ public class SoulShardsTOW {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-
         ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
         JsonConfigHandler.initMultiblock(new File(configDir, "Multiblock.json"));
 
-        ModRecipes.init(); // TODO - Remove for new Forge stuff
+        RegistrarSoulShards.registerRecipes(new RegistryEvent.Register<>(PersistentRegistryManager.RECIPES, ForgeRegistries.RECIPES));
     }
 
     @EventHandler
