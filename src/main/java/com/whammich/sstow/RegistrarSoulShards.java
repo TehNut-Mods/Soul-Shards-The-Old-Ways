@@ -105,12 +105,12 @@ public class RegistrarSoulShards {
         event.getRegistry().register(new ShapelessOreRecipe(id, ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE), "gemLapis", "dustRedstone", Blocks.OBSIDIAN, Blocks.OBSIDIAN).setRegistryName(id));
 
         id = new ResourceLocation(SoulShardsTOW.MODID, "vile_sword");
-        event.getRegistry().register(new ShapedOreRecipe(id, ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood").setRegistryName(id));
+        event.getRegistry().register(new ShapedOreRecipe(id, new ItemStack(VILE_SWORD), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood").setRegistryName(id));
 
         id = new ResourceLocation(SoulShardsTOW.MODID, "cage");
         event.getRegistry().register(new ShapedOreRecipe(id, CAGE, "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.IRON_BARS).setRegistryName(id));
 
         id = new ResourceLocation(SoulShardsTOW.MODID, "shard_reset");
-        event.getRegistry().register(new ShapelessOreRecipe(id, SHARD, SHARD));
+        event.getRegistry().register(new ShapelessOreRecipe(id, SHARD, SHARD).setRegistryName(id));
     }
 }
