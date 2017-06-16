@@ -51,6 +51,7 @@ public class JsonConfigHandler {
             }
         } catch (IOException e) {
             SoulShardsTOW.LOGGER.error("Failed to create a default Tier configuration file.");
+            e.printStackTrace();
         }
     }
 

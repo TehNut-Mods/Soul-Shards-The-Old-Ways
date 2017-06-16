@@ -50,6 +50,8 @@ public class SoulShardsTOW {
 
     public SoulShardsTOW() {
         configDir = new File(Loader.instance().getConfigDir(), "sstow");
+        if (!configDir.exists())
+            configDir.mkdirs();
         JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
     }
 
