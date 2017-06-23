@@ -9,8 +9,6 @@ import com.whammich.sstow.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -18,8 +16,6 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.PersistentRegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,24 +44,21 @@ public class SoulShardsTOW {
 
     private File configDir;
 
-    public SoulShardsTOW() {
-        configDir = new File(Loader.instance().getConfigDir(), "sstow");
-        if (!configDir.exists())
-            configDir.mkdirs();
-        JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
-    }
-
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
-        JsonConfigHandler.initMultiblock(new File(configDir, "Multiblock.json"));
+        configDir = new File(event.getModConfigurationDirectory(), "sstow");
+        if (!configDir.exists())
+            configDir.mkdirs();
 
-        RegistrarSoulShards.registerRecipes(new RegistryEvent.Register<>(PersistentRegistryManager.RECIPES, ForgeRegistries.RECIPES));
+        ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
+        JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         EntityMapper.mapEntities();
+
+        JsonConfigHandler.initMultiblock(new File(configDir, "Multiblock.json"));
     }
 
     @EventHandler

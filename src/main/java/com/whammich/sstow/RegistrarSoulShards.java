@@ -96,7 +96,7 @@ public class RegistrarSoulShards {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(CAGE), 1, new ModelResourceLocation(CAGE.getRegistryName(), "active=true"));
     }
 
-//    @SubscribeEvent TODO - Re-enable after forge fucking stops fucking disabling it
+    @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         ResourceLocation id = new ResourceLocation(SoulShardsTOW.MODID, "corrupted_ingot");
         event.getRegistry().register(new ShapedOreRecipe(id, ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED), "CVC", "VIV", "CVC", 'C', "dustCorrupted", 'V', "dustVile", 'I', "ingotIron").setRegistryName(id));
