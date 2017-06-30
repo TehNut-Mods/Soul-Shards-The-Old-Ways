@@ -2,11 +2,13 @@ package com.whammich.sstow;
 
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.commands.CommandSSTOW;
+import com.whammich.sstow.item.ItemMaterials;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.IMCHandler;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +18,7 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -52,6 +55,7 @@ public class SoulShardsTOW {
 
         ConfigHandler.init(new File(configDir, "SoulShards.cfg"));
         JsonConfigHandler.initShard(new File(configDir, "ShardTiers.json"));
+        GameRegistry.addSmelting(Blocks.SOUL_SAND, ItemMaterials.getStack(ItemMaterials.DUST_VILE), 0.4F);
     }
 
     @EventHandler
