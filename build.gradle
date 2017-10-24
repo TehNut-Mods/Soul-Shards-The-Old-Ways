@@ -42,8 +42,8 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}"
-    deobfCompile "mcp.mobius.waila:Hwyla:${waila_version}_1.12"
+    deobfCompile "mezz.jei:jei_1.12.2:${jei_version}"
+    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
 }
 
 minecraft {

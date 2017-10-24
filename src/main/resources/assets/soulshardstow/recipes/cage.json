@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "soulshardstow:cage"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "IBI",
+    "B B",
+    "IBI"
+  ],
+  "key": {
+    "I": {
+      "item": "#INGOT_CORRUPTED"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    }
+  }
+}

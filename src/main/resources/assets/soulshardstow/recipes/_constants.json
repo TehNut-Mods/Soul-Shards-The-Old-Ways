@@ -1,0 +1,51 @@
+[
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "name": "INGOT_IRON"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dustVile"
+    },
+    "name": "DUST_VILE"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dustCorrupted"
+    },
+    "name": "DUST_CORRUPTED"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCorrupted"
+    },
+    "name": "INGOT_CORRUPTED"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    "name": "STICK_WOOD"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "gemLapis"
+    },
+    "name": "GEM_LAPIS"
+  },
+  {
+    "ingredient": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    "name": "DUST_REDSTONE"
+  }
+]

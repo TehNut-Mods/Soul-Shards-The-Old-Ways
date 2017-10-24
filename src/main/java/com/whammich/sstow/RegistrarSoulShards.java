@@ -11,12 +11,8 @@ import com.whammich.sstow.util.TierHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
@@ -27,8 +23,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 @SuppressWarnings("ConstantConditions")
 @Mod.EventBusSubscriber
@@ -94,23 +88,5 @@ public class RegistrarSoulShards {
         // Cage
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(CAGE), 0, new ModelResourceLocation(CAGE.getRegistryName(), "active=false"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(CAGE), 1, new ModelResourceLocation(CAGE.getRegistryName(), "active=true"));
-    }
-
-    @SubscribeEvent
-    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        ResourceLocation id = new ResourceLocation(SoulShardsTOW.MODID, "corrupted_ingot");
-        event.getRegistry().register(new ShapedOreRecipe(id, ItemMaterials.getStack(ItemMaterials.INGOT_CORRUPTED), "CVC", "VIV", "CVC", 'C', "dustCorrupted", 'V', "dustVile", 'I', "ingotIron").setRegistryName(id));
-
-        id = new ResourceLocation(SoulShardsTOW.MODID, "corrupted_essence");
-        event.getRegistry().register(new ShapelessOreRecipe(id, ItemMaterials.getStack(ItemMaterials.CORRUPTED_ESSENCE), "gemLapis", "dustRedstone", Blocks.OBSIDIAN, Blocks.OBSIDIAN).setRegistryName(id));
-
-        id = new ResourceLocation(SoulShardsTOW.MODID, "vile_sword");
-        event.getRegistry().register(new ShapedOreRecipe(id, new ItemStack(VILE_SWORD), "I", "I", "S", 'I', "ingotCorrupted", 'S', "stickWood").setRegistryName(id));
-
-        id = new ResourceLocation(SoulShardsTOW.MODID, "cage");
-        event.getRegistry().register(new ShapedOreRecipe(id, CAGE, "IBI", "B B", "IBI", 'I', "ingotCorrupted", 'B', Blocks.IRON_BARS).setRegistryName(id));
-
-        id = new ResourceLocation(SoulShardsTOW.MODID, "shard_reset");
-        event.getRegistry().register(new ShapelessOreRecipe(id, SHARD, SHARD).setRegistryName(id));
     }
 }

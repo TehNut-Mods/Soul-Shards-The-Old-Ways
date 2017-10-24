@@ -26,18 +26,7 @@ public class GuiFactory implements IModGuiFactory {
     }
 
     @Override
-    public Class<? extends GuiScreen> mainConfigGuiClass() {
-        return ConfigGuiSoulShards.class;
-    }
-
-    @Override
     public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element) {
         return null;
     }
 }

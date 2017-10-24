@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "soulshardstow:materials",
+    "data": 0
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CVC",
+    "VIV",
+    "CVC"
+  ],
+  "key": {
+    "C": {
+      "item": "#DUST_CORRUPTED"
+    },
+    "V": {
+      "item": "#DUST_VILE"
+    },
+    "I": {
+      "item": "#INGOT_IRON"
+    }
+  }
+}
