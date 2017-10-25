@@ -13,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -29,6 +28,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 
 @Mod.EventBusSubscriber
@@ -115,19 +115,16 @@ public class EventHandler {
 
         if (tile != null && tile instanceof ISoulCage) {
             TileEntityCage cage = (TileEntityCage) tile;
-            if (heldItem != ItemStack.EMPTY && cage.getStackHandler().getStackInSlot(0) == ItemStack.EMPTY && ShardHelper.isBound(heldItem) && !player.isSneaking()) {
+            if (!heldItem.isEmpty() && cage.getStackHandler().getStackInSlot(0).isEmpty() && ShardHelper.isBound(heldItem) && !player.isSneaking()) {
                 cage.getStackHandler().setStackInSlot(0, heldItem.copy());
                 cage.setTier(ShardHelper.getTierFromShard(heldItem));
                 cage.setEntName(ShardHelper.getBoundEntity(heldItem));
                 if (!event.getWorld().isRemote)
                     cage.setOwner(player.getGameProfile().getId().toString());
-                player.setHeldItem(event.getHand(), ItemStack.EMPTY);
+                heldItem.shrink(1);
                 player.swingArm(event.getHand());
-            } else if (cage.getStackHandler().getStackInSlot(0) != ItemStack.EMPTY && player.getHeldItemMainhand() == ItemStack.EMPTY && player.isSneaking()) {
-                if (!event.getWorld().isRemote) {
-                    EntityItem invItem = new EntityItem(event.getWorld(), player.posX, player.posY + 0.25, player.posZ, cage.getStackHandler().getStackInSlot(0));
-                    event.getWorld().spawnEntity(invItem);
-                }
+            } else if (!cage.getStackHandler().getStackInSlot(0).isEmpty() && player.getHeldItemMainhand().isEmpty() && player.isSneaking()) {
+                ItemHandlerHelper.giveItemToPlayer(player, cage.getStackHandler().getStackInSlot(0));
                 cage.reset();
                 player.swingArm(event.getHand());
             }
@@ -136,6 +133,9 @@ public class EventHandler {
 
     @SubscribeEvent
     public static void onAnvil(AnvilUpdateEvent event) {
+        if (!ConfigHandler.allowShardCombination)
+            return;
+
         if (!event.getLeft().isEmpty() && event.getLeft().getItem() instanceof ISoulShard && !event.getRight().isEmpty() && event.getRight().getItem() instanceof ISoulShard) {
             if (ShardHelper.isBound(event.getLeft()) && ShardHelper.getKillsFromShard(event.getRight()) > 0) {
                 if (Utils.hasMaxedKills(event.getLeft()))
