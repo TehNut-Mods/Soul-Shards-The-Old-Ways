@@ -141,6 +141,9 @@ public class EventHandler {
                 if (Utils.hasMaxedKills(event.getLeft()))
                     return;
 
+                if (!ShardHelper.getBoundEntity(event.getLeft()).equals(ShardHelper.getBoundEntity(event.getRight())))
+                    return;
+
                 ItemStack output = event.getLeft().copy();
                 Utils.increaseShardKillCount(output, ShardHelper.getKillsFromShard(event.getRight()));
                 event.setOutput(output);
