@@ -175,6 +175,9 @@ curseforge {
 
         relations curseRelations
 
+        addGameVersion '1.12.1'
+        addGameVersion '1.12.2'
+
         addArtifact javadocJar
         addArtifact sourceJar
         addArtifact apiJar
