@@ -27,7 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
@@ -57,7 +57,7 @@ public class ItemSoulShard extends Item implements ISoulShard {
 
             if (tile instanceof TileEntityMobSpawner) {
                 if (ConfigHandler.allowSpawnerAbsorption) {
-                    WeightedSpawnerEntity spawnerEntity = ObfuscationReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "randomEntity", "field_98282_f");
+                    WeightedSpawnerEntity spawnerEntity = ReflectionHelper.getPrivateValue(MobSpawnerBaseLogic.class, ((TileEntityMobSpawner) tile).getSpawnerBaseLogic(), "field_98282_f", "spawnData", "randomEntity");
                     ResourceLocation name = new ResourceLocation(spawnerEntity.getNbt().getString("id"));
                     EntityLiving ent = (EntityLiving) EntityList.createEntityByIDFromName(name, world);
 
