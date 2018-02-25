@@ -1,4 +1,13 @@
 ------------------------------------------------------
+Version 2.7.5
+------------------------------------------------------
+
+- Fixed compatibility with Spawner Control
+    - Spawners can now be absorbed with it installed again
+- Fixed support for Wawla's enchantment descriptions
+- Added a Waila tooltip to mobs spawned via the Soul Cage
+
+------------------------------------------------------
 Version 2.7.4
 ------------------------------------------------------
 
