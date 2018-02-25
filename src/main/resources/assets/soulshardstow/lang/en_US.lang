@@ -43,6 +43,7 @@ material.corrupted.name=Corrupted
 waila.soulshardstow.boundTo=Bound to: %s
 waila.soulshardstow.tier=Tier: %d
 waila.soulshardstow.owner=Owner: %s
+waila.soulshardstow.cageBorn=Cage Born
 
 # Wawla
 enchantment.soulshardstow.soul_stealer.desc=Additional souls per kill for your Soul Shards.
