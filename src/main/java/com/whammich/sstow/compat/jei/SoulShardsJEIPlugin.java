@@ -19,7 +19,7 @@ public class SoulShardsJEIPlugin extends BlankModPlugin {
 
     @Override
     public void register(@Nonnull IModRegistry registry) {
-        ItemStack input = new ItemStack(RegistrarSoulShards.SHARD);
+        ItemStack input = new ItemStack(RegistrarSoulShards.SOUL_SHARD);
         ShardHelper.setTierForShard(input, 1);
         ShardHelper.setKillsForShard(input, TierHandler.getMaxKills(1));
         ShardHelper.setBoundEntity(input, new ResourceLocation("minecraft", "pig"));
@@ -29,6 +29,6 @@ public class SoulShardsJEIPlugin extends BlankModPlugin {
 
         registry.getJeiHelpers().getVanillaRecipeFactory().createAnvilRecipe(input, Collections.singletonList(input), Collections.singletonList(output));
 
-        registry.addIngredientInfo(new ItemStack(RegistrarSoulShards.SHARD), ItemStack.class, I18n.translateToLocalFormatted("jei.SoulShards.soulshard.desc", ConfigHandler.catalystItem.getDisplayName()));
+        registry.addIngredientInfo(new ItemStack(RegistrarSoulShards.SOUL_SHARD), ItemStack.class, I18n.translateToLocalFormatted("jei.SoulShards.soulshard.desc", ConfigHandler.catalystItem.getDisplayName()));
     }
 }

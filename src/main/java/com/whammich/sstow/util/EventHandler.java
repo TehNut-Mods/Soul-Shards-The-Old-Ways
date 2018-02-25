@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.apache.commons.lang3.tuple.Pair;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = SoulShardsTOW.MODID)
 public class EventHandler {
 
     @SubscribeEvent
@@ -97,7 +97,7 @@ public class EventHandler {
                 event.getWorld().destroyBlock(event.getPos().add(multiblockPair.getLeft()), false);
 
             if (!event.getWorld().isRemote)
-                InventoryHelper.spawnItemStack(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(RegistrarSoulShards.SHARD));
+                InventoryHelper.spawnItemStack(event.getWorld(), event.getEntityPlayer().posX, event.getEntityPlayer().posY + 0.25, event.getEntityPlayer().posZ, new ItemStack(RegistrarSoulShards.SOUL_SHARD));
 
             if (!event.getEntityPlayer().capabilities.isCreativeMode)
                 event.getItemStack().shrink(1);
@@ -115,7 +115,8 @@ public class EventHandler {
 
         if (tile != null && tile instanceof ISoulCage) {
             TileEntityCage cage = (TileEntityCage) tile;
-            if (!heldItem.isEmpty() && cage.getStackHandler().getStackInSlot(0).isEmpty() && ShardHelper.isBound(heldItem) && !player.isSneaking()) {
+            ItemStack cageStack = cage.getStackHandler().getStackInSlot(0);
+            if (!heldItem.isEmpty() && cageStack.isEmpty() && ShardHelper.isBound(heldItem) && !player.isSneaking()) {
                 cage.getStackHandler().setStackInSlot(0, heldItem.copy());
                 cage.setTier(ShardHelper.getTierFromShard(heldItem));
                 cage.setEntName(ShardHelper.getBoundEntity(heldItem));
@@ -123,7 +124,7 @@ public class EventHandler {
                     cage.setOwner(player.getGameProfile().getId().toString());
                 heldItem.shrink(1);
                 player.swingArm(event.getHand());
-            } else if (!cage.getStackHandler().getStackInSlot(0).isEmpty() && player.getHeldItemMainhand().isEmpty() && player.isSneaking()) {
+            } else if (!cageStack.isEmpty() && player.getHeldItemMainhand().isEmpty() && player.isSneaking()) {
                 ItemHandlerHelper.giveItemToPlayer(player, cage.getStackHandler().getStackInSlot(0));
                 cage.reset();
                 player.swingArm(event.getHand());
@@ -157,6 +158,7 @@ public class EventHandler {
         if (event.getModID().equals(SoulShardsTOW.MODID)) {
             ConfigHandler.syncConfig();
             ConfigHandler.handleEntityList("Entity List");
+            ConfigHandler.handleCatalyst();
         }
     }
 

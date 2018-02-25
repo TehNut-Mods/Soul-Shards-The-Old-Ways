@@ -9,7 +9,7 @@ import net.minecraft.item.ItemSword;
 public class ItemSoulSword extends ItemSword implements ISoulWeapon {
 
     public ItemSoulSword() {
-        super(RegistrarSoulShards.MATERIAL_SOUL);
+        super(RegistrarSoulShards.getMaterialSoul());
 
         setCreativeTab(SoulShardsTOW.TAB_SS);
         setUnlocalizedName(SoulShardsTOW.MODID + ".soulSword");

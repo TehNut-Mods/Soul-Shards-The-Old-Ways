@@ -73,7 +73,6 @@ public class ConfigHandler {
         forceRedstoneRequirement = config.getBoolean("forceRedstoneRequirement", category, false, "Forces Soul Cages to require a Redstone signal in order to spawn entities.");
         allowShardCombination = config.getBoolean("allowShardCombination", category, true, "Allows shards with the same entity type to be combined in an anvil. It is a direct addition and mainly intended for co-op play.");
         convenienceReset = config.getBoolean("convenienceReset", category, true, "Enables a convenience recipe that allows you to reset the stats of a Soul Shard.");
-        handleCatalyst();
 
         category = "Client";
         categories.add(category);
