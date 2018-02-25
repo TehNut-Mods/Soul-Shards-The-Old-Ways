@@ -161,7 +161,7 @@ String getChangelogText() {
 
 def curseRelations = {
     optionalLibrary 'hwyla'
-    optionalLibrary 'just-enough-items-jei'
+    optionalLibrary 'jei'
 }
 
 curseforge {
