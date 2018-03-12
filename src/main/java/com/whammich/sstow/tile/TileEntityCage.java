@@ -8,6 +8,7 @@ import com.whammich.sstow.api.ISoulShard;
 import com.whammich.sstow.api.ShardHelper;
 import com.whammich.sstow.api.SoulShardsAPI;
 import com.whammich.sstow.api.event.CageSpawnEvent;
+import com.whammich.sstow.block.BlockCage;
 import com.whammich.sstow.util.EntityMapper;
 import com.whammich.sstow.util.TierHandler;
 import com.whammich.sstow.util.Utils;
@@ -180,13 +181,18 @@ public class TileEntityCage extends TileEntity implements ITickable, ISoulCage {
 
     public boolean getActiveState() {
         IBlockState state = getWorld().getBlockState(getPos());
-        if (!state.getProperties().containsKey(SoulShardsAPI.ACTIVE))
+        if (!(state.getBlock() instanceof BlockCage))
             return false;
+
         return state.getValue(SoulShardsAPI.ACTIVE);
     }
 
     public void setActiveState(boolean activeState) {
-        getWorld().setBlockState(getPos(), getWorld().getBlockState(getPos()).withProperty(SoulShardsAPI.ACTIVE, activeState));
+        IBlockState worldState = getWorld().getBlockState(getPos());
+        if (!(worldState.getBlock() instanceof BlockCage))
+            return;
+
+        getWorld().setBlockState(getPos(), worldState.withProperty(SoulShardsAPI.ACTIVE, activeState));
     }
 
     private void spawnEntities(int amount, ResourceLocation entName) {
